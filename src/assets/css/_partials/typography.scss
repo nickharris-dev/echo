@@ -1,0 +1,33 @@
+i {
+  font-style: inherit;
+}
+b {
+  font-weight: inherit;
+}
+html {
+  font-family: 'Whitney SSm A', 'Whitney SSm B';
+}
+body {
+  color: $color-body-copy;
+  font-weight: 400;
+  font-size: $base-font-size+px;
+  font-style: normal;
+  line-height: nth($line-height--narrow, 2);
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Chronicle Display A', 'Chronicle Display B';
+  font-weight: 200;
+  font-style: normal;
+}
+h1 {
+  @include type-scale(6, narrow);
+  text-align: center;
+  i {
+    display: block;
+    font-size: nth($type-scale--narrow, 4);
+  }
+}
+h2 {
+  font-size: nth($type-scale--narrow, 5);
+  text-align: center;
+}

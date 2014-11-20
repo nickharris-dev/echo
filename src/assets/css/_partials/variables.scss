@@ -1,0 +1,46 @@
+$base-font-size: 14;
+
+$type-scale--narrow: (
+  0.714rem,
+  1rem,
+  1.143rem,
+  1.571428571rem,
+  1.857142857rem,
+  2.571428571rem,
+  2.928571429rem,
+  4.071428571rem
+);
+$type-scale--normal: (
+  0.625rem,
+  1rem,
+  1.6rem,
+  2.56rem,
+  4.096rem,
+  6.554rem
+);
+
+$line-height--narrow: (
+  1.6,
+  1.714285714,
+  1.143rem,
+  1.571428571rem,
+  1.857142857rem,
+  2.571428571rem,
+  2.928571429rem,
+  4.071428571rem
+);
+$line-height--normal: (
+  1.1
+);
+
+$color-body-copy: #222;
+
+@mixin type-scale($n, $variation) {
+  @if $variation == "narrow" {
+    font-size: nth($type-scale--narrow, $n);
+    line-height: nth($line-height--narrow, $n);
+  } @else if $variation == "normal" {
+    font-size: nth($type-scale--normal, $n);
+    line-height: nth($line-height--normal, $n);
+  }
+}

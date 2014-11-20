@@ -1,0 +1,9 @@
+default:
+  - 'clean'
+  - 'imagemin'
+  - 'sass'
+  - 'autoprefixer'
+  - 'assemble'
+  - 'copy'
+  - 'connect'
+  - 'watch'
