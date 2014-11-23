@@ -1,7 +1,11 @@
 module.exports = {
+  templates: {
+    files: ['<%= package.src %>/_layouts/*.html','<%= package.src %>/_partials/*.html'],
+    tasks: 'assemble'
+  },
   markup: {
-    files: '<%= package.src %>/**/*.html',
-    tasks: ['newer:assemble']
+    files: '<%= package.src %>/*.html',
+    tasks: 'newer:assemble'
   },
   style: {
     files: '<%= package.src %>/<%= package.assets %>/css/**/*.scss',
