@@ -1,6 +1,6 @@
 module.exports = {
   data: {
-    files: 'data/*.json',
+    files: ['package.json','data/*.json'],
     tasks: 'assemble'
   },
   templates: {
