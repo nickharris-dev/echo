@@ -4,7 +4,7 @@ module.exports = {
     layout: 'master.html',
     layoutdir: '<%= package.src %>/_layouts',
     partials: '<%= package.src %>/_partials/**/*.html',
-    data: 'package.json'
+    data: ['package.json', 'data/*.json']
   },
 
   dev : {

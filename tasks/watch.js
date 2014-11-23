@@ -1,4 +1,8 @@
 module.exports = {
+  data: {
+    files: 'data/*.json',
+    tasks: 'assemble'
+  },
   templates: {
     files: ['<%= package.src %>/_layouts/*.html','<%= package.src %>/_partials/*.html'],
     tasks: 'assemble'
