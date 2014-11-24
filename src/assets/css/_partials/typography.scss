@@ -1,33 +1,170 @@
+$body-copy: 'Vitesse A', 'Vitesse B', Georgia;
+
+// Base
+// ====
+html {
+  font-family: $body-copy;
+  font-size: $base-font-size+px;
+}
+body {
+  @include type-scale(3);
+  color: $color-body-copy;
+  font-weight: 400;
+  font-style: normal;
+  @media (min-width: $typography-break) {
+    @include type-scale(4);
+  }
+}
+
+
+// Headings
+// ========
+h1, h2, h3, h4, h5, h6 {
+  font-style: normal;
+  font-weight: 300;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 35em;
+}
+
+h1 {
+  @include type-scale(7);
+  margin-top: 3*$baseline+rem;
+  margin-bottom: 3*$baseline+rem;
+  @media (min-width: $typography-break) {
+    @include type-scale(11);
+  }
+}
+
+h2 {
+  @include type-scale(6);
+  margin-top: 3*$baseline+rem;
+  margin-bottom: 3*$baseline+rem;
+  @media (min-width: $typography-break){
+    @include type-scale(7);
+  }
+}
+
+h3 {
+  @include type-scale(5);
+  margin-bottom: 0;
+  @media (min-width: $typography-break) {
+    @include type-scale(6);
+  }
+
+  + p {
+    margin-top: 0;
+  }
+}
+
+
+// Paragraphs
+// ==========
+p {
+  margin: 3*$baseline+rem auto;
+  max-width: 35em;
+  min-width: 18em;
+}
+
+
+// Lists
+// =====
+ul,
+ol {
+  list-style: none;
+  margin: 3*$baseline+rem auto;
+  max-width: 35em;
+  padding-left: 0;
+  @media (min-width: $typography-break) {
+    min-width: 18em;
+  }
+}
+li {
+  &:before {
+    margin-left: -0.75rem;
+    position: absolute;
+  }
+}
+ul li:before {
+  content: "•";
+}
+ol {
+  counter-reset: olcounter;
+  li {
+    counter-increment: olcounter;
+    &:before {
+      content: counter(olcounter);
+      font-size: nth($scale-type-size, 2)+rem;
+      line-height: (24/9);
+    }
+  }
+}
+
+
+// Quotes
+// ======
+blockquote {
+  margin: 0; padding: 0;
+
+  > p:first-of-type {
+    position: relative;
+    &:before {
+      content: "“";
+      display: block;
+      font-size: nth($scale-type-size, 5)+rem;
+      font-weight: 100;
+      left: -0.5em;
+      line-height: (24/22);
+      position: absolute;
+    }
+  }
+
+  > p:last-of-type:after {
+    content: "”";
+    display: inline;
+    font-size: nth($scale-type-size, 5)+rem;
+    font-style: normal;
+    font-weight: 100;
+    line-height: (24/22);
+    margin-left: 0.2em;
+    position: absolute;
+  }
+
+  @media (min-width: $typography-break) {
+    > p:first-of-type:before {
+      font-size: nth($scale-type-size, 6)+rem;
+      line-height: (24/26);
+    }
+
+    > p:last-of-type:after {
+      font-size: nth($scale-type-size, 6)+rem;
+      line-height: (24/26);
+    }
+  }
+}
+
+// Elements
+// ========
 i {
   font-style: inherit;
 }
 b {
   font-weight: inherit;
 }
-html {
-  font-family: 'Whitney SSm A', 'Whitney SSm B';
+abbr {
+  cursor: help;
 }
-body {
-  color: $color-body-copy;
-  font-weight: 400;
-  font-size: $base-font-size+px;
-  font-style: normal;
-  line-height: nth($line-height--narrow, 2);
+.acronym {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Chronicle Display A', 'Chronicle Display B';
-  font-weight: 200;
-  font-style: normal;
+
+
+// Links
+// =====
+a {
+  white-space: nowrap;
 }
-h1 {
-  @include type-scale(6, narrow);
-  text-align: center;
-  i {
-    display: block;
-    font-size: nth($type-scale--narrow, 4);
-  }
-}
-h2 {
-  font-size: nth($type-scale--narrow, 5);
-  text-align: center;
-}
+
+// Specials
+// ========
