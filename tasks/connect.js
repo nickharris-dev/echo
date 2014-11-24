@@ -5,7 +5,7 @@ var mountFolder = function(connect, dir) {
 module.exports = {
 	options: {
     port: 8080,
-    hostname: 'localhost'
+    hostname: '0.0.0.0'
   },
   dev: {
     options: {
