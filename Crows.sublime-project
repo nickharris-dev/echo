@@ -1,0 +1,26 @@
+{
+  "folders":
+  [
+    {
+      "follow_symlinks": true,
+      "path": ".",
+      "file_exclude_patterns":[
+        "*.bak",
+        "*.ico",
+        "*.sample",
+        "*.swf",
+        "*.tar",
+        "*.tgz",
+        "wp-*.php",
+        "*.zip",
+        "*.css",
+        "*.min.*",
+        "*.sublime-workspace"
+      ],
+      "folder_exclude_patterns": [
+        ".dev",
+        ".tmp"
+      ]
+    }
+  ]
+}
