@@ -57,7 +57,7 @@ html {
 }
 body {
   @include type-scale(3);
-  color: $color-body-copy;
+  color: palette(copy);
   font-weight: 400;
   font-style: normal;
   @media (min-width: $typography-break) {

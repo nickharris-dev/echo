@@ -1,7 +1,14 @@
 // Palette
 // =====
-$color-body-copy: #444;
-$color-becca: #639;
+$palettes: (
+  copy: (
+    base: #444,
+  ),
+);
+
+@function palette($palette, $tone: 'base') {
+  @return map-get(map-get($palettes, $palette), $tone);
+}
 
 // Stylesheets
 // ===========
