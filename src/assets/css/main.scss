@@ -1,5 +1,11 @@
-@import '_partials/normalize';
-// @import '_partials/extensions';
-// @import '_partials/variables';
+// Palette
+// =====
+$color-body-copy: #444;
+$color-becca: #639;
 
-// @import '_partials/typography';
+// Stylesheets
+// ===========
+@import '_partials/normalize';
+@import '_partials/extensions';
+
+@import '_partials/typography';
