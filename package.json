@@ -18,7 +18,7 @@
   "main": "gruntfile.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:pixelenvy/portfolio.git"
+    "url": "git@github.com:pixelenvy/echo.git"
   },
   "devDependencies": {
     "assemble": "^0.4.42",
