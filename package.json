@@ -9,7 +9,11 @@
 
   "paths": {
     "src": "src",
-    "assets": "assets",
+    "assets": {
+      "dev": "assets",
+      "stage": "assets",
+      "live": "assets"
+      },
     "destination": {
       "dev": ".dev",
       "deploy": "www",

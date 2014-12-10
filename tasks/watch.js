@@ -12,19 +12,19 @@ module.exports = {
     tasks: 'newer:assemble'
   },
   style: {
-    files: '<%= package.paths.src %>/<%= package.paths.assets %>/css/**/*.scss',
+    files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/css/**/*.scss',
     tasks: ['sass', 'newer:autoprefixer']
   },
   scripts: {
-    files: '<%= package.paths.src %>/<%= package.paths.assets %>/js/**/*.js',
+    files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/js/**/*.js',
     tasks: ['newer:jshint:beforeconcat', 'newer:copy:javascript']
   },
   images: {
-    files: '<%= package.paths.src %>/<%= package.paths.assets %>/images/*',
+    files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/images/*',
     tasks: ['newer:imagemin', 'newer:copy:images']
   },
   videos: {
-    files: '<%= package.paths.src %>/<%= package.paths.assets %>/videos/**',
+    files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/videos/**',
     tasks: ['newer:copy:videos']
   },
   livereload: {

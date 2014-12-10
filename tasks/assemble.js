@@ -9,7 +9,7 @@ module.exports = {
 
   dev : {
     options: {
-      assets: '<%= package.paths.destination.dev %>/<%= package.paths.assets %>',
+      assets: '<%= package.paths.destination.dev %>/<%= package.paths.assets.dev %>',
     },
     files: [{
       expand: true,
