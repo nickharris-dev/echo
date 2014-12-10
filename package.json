@@ -10,16 +10,18 @@
   "dest_dev": ".dev",
   "dest_deploy": "Deploy",
   "dest_temp": ".tmp",
+  "main": "gruntfile.js",
+
   "scripts": {
     "test": "node node_modules/argg tests/*.js",
     "cover": "istanbul cover --dir reports/coverage node_modules/argg tests/*.js",
     "plato": "plato -d reports/plato index.js"
   },
-  "main": "gruntfile.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:pixelenvy/echo.git"
   },
+
   "devDependencies": {
     "assemble": "^0.4.42",
     "connect-livereload": "^0.5.2",
