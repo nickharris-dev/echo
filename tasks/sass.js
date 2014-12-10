@@ -4,7 +4,7 @@ module.exports = {
       style: 'expanded'
     },
     files: [{
-      '<%= package.dest_temp %>/<%= package.assets %>/css/web.designer.css': '<%= package.src %>/<%= package.assets %>/css/main.scss'
+      '<%= package.paths.destination.temp %>/<%= package.paths.assets %>/css/web.designer.css': '<%= package.paths.src %>/<%= package.paths.assets %>/css/main.scss'
     }]
   }
 };

@@ -4,31 +4,31 @@ module.exports = {
     tasks: 'assemble'
   },
   templates: {
-    files: ['<%= package.src %>/_layouts/*.html','<%= package.src %>/_partials/*.html'],
+    files: ['<%= package.paths.src %>/_layouts/*.html','<%= package.paths.src %>/_partials/*.html'],
     tasks: 'assemble'
   },
   markup: {
-    files: '<%= package.src %>/*.html',
+    files: '<%= package.paths.src %>/*.html',
     tasks: 'newer:assemble'
   },
   style: {
-    files: '<%= package.src %>/<%= package.assets %>/css/**/*.scss',
+    files: '<%= package.paths.src %>/<%= package.paths.assets %>/css/**/*.scss',
     tasks: ['sass', 'newer:autoprefixer']
   },
   scripts: {
-    files: '<%= package.src %>/<%= package.assets %>/js/**/*.js',
+    files: '<%= package.paths.src %>/<%= package.paths.assets %>/js/**/*.js',
     tasks: ['newer:jshint:beforeconcat', 'newer:copy:javascript']
   },
   images: {
-    files: '<%= package.src %>/<%= package.assets %>/images/*',
+    files: '<%= package.paths.src %>/<%= package.paths.assets %>/images/*',
     tasks: ['newer:imagemin', 'newer:copy:images']
   },
   videos: {
-    files: '<%= package.src %>/<%= package.assets %>/videos/**',
+    files: '<%= package.paths.src %>/<%= package.paths.assets %>/videos/**',
     tasks: ['newer:copy:videos']
   },
   livereload: {
       options: { livereload: true },
-      files: ['<%= package.dest_dev %>/**/*']
+      files: ['<%= package.paths.destination.dev %>/**/*']
   }
 };

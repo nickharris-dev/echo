@@ -2,12 +2,12 @@ module.exports = {
   beforeconcat: {
     files: [{
       expand: true,
-      cwd: '<%= package.src %>/',
+      cwd: '<%= package.paths.src %>/',
       src: ['**/*.js', '!**/front.end.web.developer.js'],
-      dest: '<%= package.dest_dev %>/'
+      dest: '<%= package.paths.destination.dev %>/'
     }]
   },
   beforeconcat: {
-    files: ['<%= package.dest_dev %>/assets/js/front.end.web.developer.js']
+    files: ['<%= package.paths.destination.dev %>/assets/js/front.end.web.developer.js']
   }
 };

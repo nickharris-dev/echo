@@ -6,9 +6,9 @@ module.exports = {
   dist: {
     files: [{
       expand: true,
-      cwd: '<%= package.src %>/',
+      cwd: '<%= package.paths.src %>/',
       src: ['**/*.{png,jpg,jpeg,gif,svg}'],
-      dest: '<%= package.src %>/'
+      dest: '<%= package.paths.src %>/'
     }]
   }
 };
