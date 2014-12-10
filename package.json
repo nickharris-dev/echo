@@ -1,8 +1,8 @@
 {
-  "name": "pixelenvy",
+  "name": "echo",
   "author": "Nick Harris",
-  "description": "Pixel Envy Limited / Nick Harris Portfolio Website",
-  "version": "3.0.0",
+  "description": "Nick Harris's Project Start Point",
+  "version": "0.0.1",
   "shortname": "pxlnv",
   "license": "BSD",
   "src": "src",
