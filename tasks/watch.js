@@ -29,6 +29,6 @@ module.exports = {
   },
   livereload: {
       options: { livereload: true },
-      files: ['<%= package.paths.destination.dev %>/**/*']
+      files: ['<%= package.paths.destinations.dev %>/**/*']
   }
 };

@@ -5,7 +5,7 @@ module.exports = {
   dist: {
     expand: true,
     flatten: true,
-    src: '<%= package.paths.destination.temp %>/<%= package.paths.assets.dev %>/css/*.css',
-    dest: '<%= package.paths.destination.dev %>/<%= package.paths.assets.dev %>/css/'
+    src: '<%= package.paths.destinations.temp %>/<%= package.paths.assets.dev %>/css/*.css',
+    dest: '<%= package.paths.destinations.dev %>/<%= package.paths.assets.dev %>/css/'
   }
 };

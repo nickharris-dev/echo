@@ -4,7 +4,7 @@ module.exports = {
       expand: true,
       cwd: '<%= package.paths.src %>/',
       src: ['**/*.js'],
-      dest: '<%= package.paths.destination.dev %>/'
+      dest: '<%= package.paths.destinations.dev %>/'
     }]
   },
   images: {
@@ -12,7 +12,7 @@ module.exports = {
       expand: true,
       cwd: '<%= package.paths.src %>/',
       src: ['**/*.{png,jpg,jpeg,gif,svg}'],
-      dest: '<%= package.paths.destination.dev %>/'
+      dest: '<%= package.paths.destinations.dev %>/'
     }]
   },
   videos: {
@@ -20,7 +20,7 @@ module.exports = {
       expand: true,
       cwd: '<%= package.paths.src %>/',
       src: ['**/*.{webm,mp4,.ogg.theora}'],
-      dest: '<%= package.paths.destination.dev %>/'
+      dest: '<%= package.paths.destinations.dev %>/'
     }]
   }
 };

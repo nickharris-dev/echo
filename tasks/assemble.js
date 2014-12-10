@@ -9,12 +9,12 @@ module.exports = {
 
   dev : {
     options: {
-      assets: '<%= package.paths.destination.dev %>/<%= package.paths.assets.dev %>',
+      assets: '<%= package.paths.destinations.dev %>/<%= package.paths.assets.dev %>',
     },
     files: [{
       expand: true,
       cwd: '<%= package.paths.src %>/',
-      dest: '<%= package.paths.destination.dev %>',
+      dest: '<%= package.paths.destinations.dev %>',
       src: ['**/*.html', '!_*/**']
     }]
   }
