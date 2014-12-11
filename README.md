@@ -9,4 +9,7 @@ To Do:
 * CSS Linting
 * JS Unit Testing
 * Deployment optimisation
-* Change to Libsass?
+* Switch to Libsass
+
+Questions:
+* Switch to Gulp?
