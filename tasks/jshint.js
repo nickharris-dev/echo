@@ -1,13 +1,12 @@
 module.exports = {
-  beforeconcat: {
-    files: [{
-      expand: true,
-      cwd: '<%= package.paths.src %>/',
-      src: ['**/*.js', '!**/front.end.web.developer.js'],
-      dest: '<%= package.paths.destinations.dev %>/'
-    }]
+  options: {
+    reporter: require('jshint-stylish')
   },
-  beforeconcat: {
-    files: ['<%= package.paths.destinations.dev %>/assets/js/front.end.web.developer.js']
-  }
+  src: [
+    '<%= package.paths.src %>/<%= package.paths.assets.dev %>/js/{,*/}*.js',
+    'tasks/*.js',
+    'package.json',
+    'data/*.json',
+    '!<%= package.paths.src %>/<%= package.paths.assets.dev %>/js/{,*/}*.min.js'
+  ]
 };
