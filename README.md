@@ -9,6 +9,7 @@ To Do:
 * JS Unit Testing
 * Deployment optimisation
 * Switch to Libsass
+* Humans.txt
 
 Questions:
 * Switch to Gulp?
