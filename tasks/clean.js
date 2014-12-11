@@ -1,1 +1,1 @@
-module.exports = ['.dev', '.tmp'];
+module.exports = ['.dev', '.tmp', 'www'];
