@@ -17,7 +17,7 @@ module.exports = {
   },
   scripts: {
     files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/js/**/*.js',
-    tasks: ['newer:jshint:dev', 'newer:copy:javascript']
+    tasks: ['newer:jshint', 'newer:copy:javascript']
   },
   images: {
     files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/images/*',
