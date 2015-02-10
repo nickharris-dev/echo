@@ -40,7 +40,6 @@ $scale-line-height: (
   $lh: nth($scale-line-height, $n);
   font-size: $size+rem;
   line-height: $lh;
-  // transform: translateY(0.5*(($lh*$size)-$size)+rem);
 }
 
 // Grid
@@ -57,7 +56,6 @@ html {
 }
 body {
   @include type-scale(3);
-  color: palette(copy);
   font-weight: 400;
   font-style: normal;
   @media (min-width: $typography-break) {

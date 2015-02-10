@@ -1,10 +1,9 @@
 default:
   - 'clean'
   - 'imagemin'
-  - 'assemble'
-  - 'sass'
+  - 'libsass'
   - 'autoprefixer'
-  - 'jshint'
+  - 'assemble'
   - 'copy'
   - 'connect'
   - 'watch'

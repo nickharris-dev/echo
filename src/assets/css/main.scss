@@ -1,14 +1,12 @@
 // Palette
-// =====
-$palettes: (
-  copy: (
-    base: #444,
-  ),
-);
+// =======
+// http://www.colourlovers.com/palette/455784/Grimm_Fairytale
+// Machinery: 38,37,37
+// Bear grey: 82, 82, 82
+// Well, I don't hate… : 230,221,188
+// Revolution: 130,38,38
+// iam_snortingavin: 105,2,2
 
-@function palette($palette, $tone: 'base') {
-  @return map-get(map-get($palettes, $palette), $tone);
-}
 
 // Stylesheets
 // ===========
