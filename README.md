@@ -4,14 +4,18 @@ echo
 Nick Harris project start point.
 
 To Do:
-* SCSS Linting
+* Switch to browserSync
 * Switch to Libsass
+
+* Validate HTML
+* Minify HTML
+
+* SCSS Linting
+* uncss
 * CSS Linting
 * CSS Minifying
+
+* jshint
 * JS Unit Testing
 * RequireJS optimising
-* Switch to browserSync
 * Humans.txt
-
-Questions:
-* Switch to Gulp?
