@@ -5,5 +5,5 @@ default:
   - 'autoprefixer'
   - 'assemble'
   - 'copy'
-  - 'connect'
+  - 'browserSync'
   - 'watch'

@@ -4,7 +4,7 @@ module.exports = {
       sourcemap: true
     },
     files: [{
-      '<%= package.dest_temp %>/<%= package.assets %>/css/manchester.american.football.css': '<%= package.src %>/<%= package.assets %>/css/main.scss'
+      '<%= package.paths.destinations.temp %>/<%= package.paths.assets.dev %>/css/<%= package.filenames.css %>.css': '<%= package.paths.src %>/<%= package.paths.assets.dev %>/css/main.scss'
     }]
   }
 };

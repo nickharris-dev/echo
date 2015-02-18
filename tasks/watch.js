@@ -26,9 +26,5 @@ module.exports = {
   videos: {
     files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/videos/**',
     tasks: ['newer:copy:videos']
-  },
-  livereload: {
-      options: { livereload: true },
-      files: ['<%= package.paths.destinations.dev %>/**/*']
   }
 };
