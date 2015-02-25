@@ -1,6 +1,7 @@
 default:
   - 'clean'
   - 'imagemin'
+  - 'svgmin'
   - 'libsass'
   - 'autoprefixer'
   - 'assemble'

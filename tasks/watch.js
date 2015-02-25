@@ -20,8 +20,12 @@ module.exports = {
     tasks: ['newer:jshint', 'newer:copy:javascript']
   },
   images: {
-    files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/images/*',
+    files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/images/**/*.{png,jpg,jpeg,gif}',
     tasks: ['newer:imagemin', 'newer:copy:images']
+  },
+  svg: {
+    files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/images/**/*.svg',
+    tasks: ['newer:svgmin', 'newer:copy:svg']
   },
   videos: {
     files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/videos/**',

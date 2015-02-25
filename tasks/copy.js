@@ -11,7 +11,15 @@ module.exports = {
     files: [{
       expand: true,
       cwd: '<%= package.paths.src %>/',
-      src: ['**/*.{png,jpg,jpeg,gif,svg}'],
+      src: ['**/*.{png,jpg,jpeg,gif}'],
+      dest: '<%= package.paths.destinations.dev %>/'
+    }]
+  },
+  svg: {
+    files: [{
+      expand: true,
+      cwd: '<%= package.paths.src %>/',
+      src: ['**/*.svg'],
       dest: '<%= package.paths.destinations.dev %>/'
     }]
   },
