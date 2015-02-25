@@ -4,11 +4,11 @@ module.exports = {
     tasks: 'assemble'
   },
   templates: {
-    files: ['<%= package.paths.src %>/_layouts/*.html','<%= package.paths.src %>/_partials/*.html'],
+    files: ['<%= package.paths.src %>/_layouts/*.hbs','<%= package.paths.src %>/_partials/*.hbs'],
     tasks: 'assemble'
   },
   markup: {
-    files: '<%= package.paths.src %>/*.html',
+    files: '<%= package.paths.src %>/*.hbs',
     tasks: 'newer:assemble'
   },
   style: {
