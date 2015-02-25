@@ -1,9 +1,9 @@
 module.exports = {
   options : {
     helpers: ['helper-moment', 'node_modules/*.js' ],
-    layout: 'master.html',
+    layout: 'master.hbs',
     layoutdir: '<%= package.paths.src %>/_layouts',
-    partials: '<%= package.paths.src %>/_partials/**/*.html',
+    partials: '<%= package.paths.src %>/_partials/**/*.hbs',
     data: ['package.json', 'data/*.json']
   },
 
@@ -15,7 +15,7 @@ module.exports = {
       expand: true,
       cwd: '<%= package.paths.src %>/',
       dest: '<%= package.paths.destinations.dev %>',
-      src: ['**/*.html', '!_*/**']
+      src: ['**/*.hbs', '!_*/**']
     }]
   }
 };
