@@ -4,6 +4,7 @@ default:
   - 'svgmin'
   - 'libsass'
   - 'autoprefixer'
+  - 'jshint'
   - 'assemble'
   - 'copy'
   - 'browserSync'
