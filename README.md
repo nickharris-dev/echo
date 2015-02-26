@@ -5,11 +5,11 @@ Nick Harris project start point.
 
 * Validate HTML
 
-* uncss
 * CSS Linting
 * CSS Minifying
+* uncss - Only for Deployment
 
 * JS Unit Testing
-* RequireJS optimising
+* RequireJS optimising - Only for Deployment
 
 * Humans.txt
