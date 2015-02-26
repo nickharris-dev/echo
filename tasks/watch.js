@@ -1,15 +1,15 @@
 module.exports = {
   data: {
     files: ['package.json','data/*.json'],
-    tasks: 'assemble'
+    tasks: ['assemble', 'htmlmin']
   },
   templates: {
     files: '<%= package.paths.src %>/_*/**/*.hbs',
-    tasks: 'assemble'
+    tasks: ['assemble', 'htmlmin']
   },
   markup: {
     files: ['<%= package.paths.src %>/**/*.hbs', '!<%= package.paths.src %>/_*/**/*.hbs'],
-    tasks: 'newer:assemble'
+    tasks: ['newer:assemble', 'newer:htmlmin']
   },
   style: {
     files: '<%= package.paths.src %>/<%= package.paths.assets.dev %>/css/**/*.scss',
