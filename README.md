@@ -4,7 +4,6 @@ echo
 Nick Harris project start point.
 
 * Validate HTML
-* Minify HTML
 
 * SCSS Linting
 * uncss

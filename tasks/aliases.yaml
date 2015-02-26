@@ -6,6 +6,7 @@ default:
   - 'autoprefixer'
   - 'jshint'
   - 'assemble'
+  - 'htmlmin'
   - 'copy'
   - 'browserSync'
   - 'watch'
