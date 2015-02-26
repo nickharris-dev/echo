@@ -2,6 +2,7 @@ default:
   - 'clean'
   - 'imagemin'
   - 'svgmin'
+  - 'scsslint'
   - 'libsass'
   - 'autoprefixer'
   - 'jshint'

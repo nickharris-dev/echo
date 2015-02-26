@@ -5,7 +5,6 @@ Nick Harris project start point.
 
 * Validate HTML
 
-* SCSS Linting
 * uncss
 * CSS Linting
 * CSS Minifying
