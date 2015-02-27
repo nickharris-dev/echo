@@ -5,7 +5,7 @@ Nick Harris project start point.
 
 * Validate HTML
 
-* CSS Minifying
+* CSS Minifying - Only for Deployment
 * uncss - Only for Deployment
 
 * JS Unit Testing
