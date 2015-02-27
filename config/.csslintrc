@@ -1,6 +1,10 @@
 {
-	"qualified-headings": true,
-	"unique-headings": true,
 	"known-properties": false,
-	"adjoining-classes": true
+  "duplicate-properties": true,
+  "duplicate-background-images": true,
+  "underscore-property-hack": true,
+  "unique-headings": false,
+  "font-sizes": false,
+  "selector-max": 3,
+  "box-sizing": false
 }
