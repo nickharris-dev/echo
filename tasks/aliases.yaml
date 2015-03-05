@@ -5,7 +5,7 @@ default:
   - 'imagemin'
   - 'svgmin'
   - 'scsslint'
-  - 'libsass'
+  - 'sass'
   - 'autoprefixer'
   - 'csslint'
   - 'jshint'
