@@ -3,10 +3,10 @@ module.exports = {
     reporter: require('jshint-stylish')
   },
   src: [
-    '<%= package.paths.src %>/<%= package.paths.assets.dev %>/js/{,*/}*.js',
+    '<%= package.paths.assetsrc %>/js/{,*/}*.js',
     'tasks/*.js',
     'package.json',
     'data/*.json',
-    '!<%= package.paths.src %>/<%= package.paths.assets.dev %>/js/{,*/}*.min.js'
+    '!<%= package.paths.assetsrc %>/js/{,*/}*.min.js'
   ]
 };

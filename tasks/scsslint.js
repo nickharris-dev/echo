@@ -1,8 +1,8 @@
 module.exports = {
     allFiles: [
-        '<%= package.paths.src %>/<%= package.paths.assets.dev %>/css/**/*.scss',
-        '!<%= package.paths.src %>/<%= package.paths.assets.dev %>/css/**/normalize.scss',
-        '!<%= package.paths.src %>/<%= package.paths.assets.dev %>/css/**/type-scale.scss'
+        '<%= package.paths.src %>/**/*.scss',
+        '!<%= package.paths.src %>/**/normalize.scss',
+        '!<%= package.paths.src %>/**/type-scale.scss'
     ],
     options: {
         bundleExec: false,

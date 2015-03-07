@@ -1,5 +1,5 @@
 module.exports = {
-  dist: {
+  build: {
     options: {
       removeComments: true,
       collapseWhitespace: true,
@@ -10,8 +10,8 @@ module.exports = {
     },
     files: [{
       expand: true,
-      cwd: '<%= package.paths.destinations.dev %>/',
-      dest: '<%= package.paths.destinations.dev %>',
+      cwd: '<%= grunt.config.get("dest") %>/',
+      dest: '<%= grunt.config.get("dest") %>',
       src: '**/*.html'
     }]
   }

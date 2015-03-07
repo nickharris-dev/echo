@@ -2,13 +2,13 @@ module.exports = function (grunt) {
   return {
     bsFiles: {
       src: [
-      '<%= package.paths.destinations.dev %>/**/*'
+      '<%= grunt.config.get("dest") %>/**/*'
       ]
     },
     options: {
       open: false,
       server: {
-        baseDir: '<%= package.paths.destinations.dev %>',
+        baseDir: '<%= grunt.config.get("dest") %>',
       },
       watchTask: true
     }

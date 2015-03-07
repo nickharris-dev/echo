@@ -1,14 +1,45 @@
-default:
-  - 'clean'
+markup:
   - 'assemble'
   - 'htmlmin'
+
+media:
   - 'imagemin'
   - 'svgmin'
+  - 'copy:images'
+  - 'copy:svg'
+  - 'copy:videos'
+
+devstyles:
   - 'scsslint'
   - 'sass'
-  - 'autoprefixer'
+  - 'autoprefixer:dev'
+  - 'clean:temp'
   - 'csslint'
-  - 'jshint'
-  - 'copy'
+
+productionstyles:
+  - 'sass'
+  - 'autoprefixer:production'
+  - 'clean:temp'
+
+server:
   - 'browserSync'
   - 'watch'
+
+default:
+  - 'config:dev'
+  - 'clean:build'
+  - 'markup'
+  - 'media'
+  - 'jshint'
+  - 'copy:javascript'
+  - 'devstyles'
+  - 'server'
+
+deploy:
+  - 'config:production'
+  - 'clean:build'
+  - 'markup'
+  - 'media'
+  - 'jshint'
+  - 'copy:javascript'
+  - 'productionstyles'

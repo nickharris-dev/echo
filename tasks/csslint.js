@@ -2,7 +2,10 @@ module.exports = {
   options: {
     csslintrc: 'config/.csslintrc'
   },
-  dist: {
-    src: ['<%= package.paths.destinations.dev %>/<%= package.paths.assets.dev %>/css/*.css']
+  dev: {
+    src: [
+      '<%= package.paths.assets.dev %>/css/*.css',
+      '!<%= package.paths.assets.dev %>/css/*.css.map'
+    ]
   }
 };

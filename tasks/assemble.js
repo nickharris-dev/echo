@@ -1,5 +1,6 @@
 module.exports = {
   options : {
+    assets: '<%= grunt.config.get("assets") %>',
     helpers: ['helper-moment', 'handlebars-helpers', 'helpers/*.js' ],
     layout: 'master.hbs',
     layoutdir: '<%= package.paths.src %>/_layouts',
@@ -7,14 +8,11 @@ module.exports = {
     data: ['package.json', 'data/*.json']
   },
 
-  dev : {
-    options: {
-      assets: '<%= package.paths.destinations.dev %>/<%= package.paths.assets.dev %>',
-    },
+  build : {
     files: [{
       expand: true,
       cwd: '<%= package.paths.src %>/',
-      dest: '<%= package.paths.destinations.dev %>',
+      dest: '<%= grunt.config.get("dest") %>',
       src: ['**/*.hbs', '!_*/**']
     }]
   }

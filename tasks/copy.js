@@ -4,7 +4,7 @@ module.exports = {
       expand: true,
       cwd: '<%= package.paths.src %>/',
       src: ['**/*.js'],
-      dest: '<%= package.paths.destinations.dev %>/'
+      dest: '<%= grunt.config.get("dest") %>/'
     }]
   },
   images: {
@@ -12,7 +12,7 @@ module.exports = {
       expand: true,
       cwd: '<%= package.paths.src %>/',
       src: ['**/*.{png,jpg,jpeg,gif}'],
-      dest: '<%= package.paths.destinations.dev %>/'
+      dest: '<%= grunt.config.get("dest") %>/'
     }]
   },
   svg: {
@@ -20,7 +20,7 @@ module.exports = {
       expand: true,
       cwd: '<%= package.paths.src %>/',
       src: ['**/*.svg'],
-      dest: '<%= package.paths.destinations.dev %>/'
+      dest: '<%= grunt.config.get("dest") %>/'
     }]
   },
   videos: {
@@ -28,7 +28,7 @@ module.exports = {
       expand: true,
       cwd: '<%= package.paths.src %>/',
       src: ['**/*.{webm,mp4,.ogg.theora}'],
-      dest: '<%= package.paths.destinations.dev %>/'
+      dest: '<%= grunt.config.get("dest") %>/'
     }]
   }
 };

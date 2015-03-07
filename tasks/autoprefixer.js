@@ -1,11 +1,18 @@
 module.exports = {
   options: {
-    browsers: ['last 2 versions', 'ie 9']
+    browsers: ['last 2 versions', 'ie 9'],
+    map: true
   },
-  dist: {
+  dev: {
     expand: true,
     flatten: true,
-    src: '<%= package.paths.destinations.temp %>/<%= package.paths.assets.dev %>/css/*.css',
-    dest: '<%= package.paths.destinations.dev %>/<%= package.paths.assets.dev %>/css/'
-  }
+    src: '<%= package.paths.destinations.temp %>/css/*.css',
+    dest: '<%= package.paths.assets.dev %>/css/'
+  },
+  production: {
+    expand: true,
+    flatten: true,
+    src: '<%= package.paths.destinations.temp %>/css/*.css',
+    dest: '<%= package.paths.assets.production %>/css/'
+  },
 };
