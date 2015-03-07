@@ -1,6 +1,6 @@
 module.exports = {
   options : {
-    helpers: ['helper-moment', 'node_modules/*.js' ],
+    helpers: ['helper-moment', 'handlebars-helpers', 'helpers/*.js' ],
     layout: 'master.hbs',
     layoutdir: '<%= package.paths.src %>/_layouts',
     partials: '<%= package.paths.src %>/_partials/**/*.hbs',
