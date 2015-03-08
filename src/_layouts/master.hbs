@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"{{#is '@@environment' 'development'}} class="dev"{{/is}}>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +9,7 @@
     <title>{{ title }}</title>
 
     <link href="{{ assets }}/css/{{{ package.filenames.css }}}.css?v={{{ moment }}}" rel="stylesheet">
+    {{#is '@@environment' 'development'}}<link href="{{ assets }}/css/dev.css?v={{{ moment }}}" rel="stylesheet">{{/is}}
   </head>
   <body>
 

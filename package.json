@@ -12,6 +12,7 @@
   "paths": {
     "src": "src",
     "assetsrc": "src/assets",
+    "temp": ".tmp",
     "assets": {
       "dev": "builds/dev/assets",
       "staging": "builds/www/assets",
@@ -19,8 +20,7 @@
     },
     "destinations": {
       "dev": "builds/dev",
-      "production": "builds/www",
-      "temp": ".tmp"
+      "production": "builds/www"
     }
   },
   "scripts": {
@@ -48,6 +48,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-newer": "^1.0.0",
     "grunt-notify": "^0.3.1",
+    "grunt-replace": "^0.8.0",
     "grunt-sass": "^0.18.1",
     "grunt-scss-lint": "^0.3.4",
     "grunt-svgmin": "^2.0.1",

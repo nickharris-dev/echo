@@ -1,4 +1,4 @@
 module.exports = {
-  temp: '<%= package.paths.destinations.temp %>',
+  temp: '<%= package.paths.temp %>',
   build: '<%= grunt.config.get("dest") %>',
 };

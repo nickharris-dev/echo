@@ -1,4 +1,5 @@
 markup:
+  - 'replace'
   - 'assemble'
   - 'htmlmin'
 
@@ -13,19 +14,17 @@ devstyles:
   - 'scsslint'
   - 'sass'
   - 'autoprefixer:dev'
-  - 'clean:temp'
   - 'csslint'
 
 productionstyles:
   - 'sass'
   - 'autoprefixer:production'
-  - 'clean:temp'
 
 server:
   - 'browserSync'
   - 'watch'
 
-default:
+dev:
   - 'config:dev'
   - 'clean:build'
   - 'markup'
@@ -33,6 +32,7 @@ default:
   - 'jshint'
   - 'copy:javascript'
   - 'devstyles'
+  - 'clean:temp'
   - 'server'
 
 deploy:
@@ -43,3 +43,7 @@ deploy:
   - 'jshint'
   - 'copy:javascript'
   - 'productionstyles'
+  - 'clean:temp'
+
+default:
+  - 'dev'

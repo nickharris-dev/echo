@@ -6,13 +6,16 @@ module.exports = {
   dev: {
     expand: true,
     flatten: true,
-    src: '<%= package.paths.destinations.temp %>/css/*.css',
+    src: '<%= package.paths.temp %>/css/*.css',
     dest: '<%= package.paths.assets.dev %>/css/'
   },
   production: {
     expand: true,
     flatten: true,
-    src: '<%= package.paths.destinations.temp %>/css/*.css',
+    src: [
+      '<%= package.paths.temp %>/css/*.css',
+      '!<%= package.paths.temp %>/css/dev.css'
+    ],
     dest: '<%= package.paths.assets.production %>/css/'
   },
 };
