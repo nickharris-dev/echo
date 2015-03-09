@@ -5,6 +5,6 @@
   "underscore-property-hack": true,
   "unique-headings": false,
   "font-sizes": false,
-  "selector-max": 3,
+  "selector-max": 1,
   "box-sizing": false
 }

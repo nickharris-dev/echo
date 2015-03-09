@@ -62,6 +62,9 @@ linters:
     enabled: true
     convention: BEM # or 'BEM', or a regex pattern
 
+  NestingDepth:
+    enabled: false
+
   PlaceholderInExtend:
     enabled: true
 
