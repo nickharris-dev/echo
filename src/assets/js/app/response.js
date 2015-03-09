@@ -2,8 +2,8 @@
 define(function(require){
   // An Event for when the resize is finished (runs once)
   var resize = new Event('resized');
-  // An Event that runs will the window is resizing (Don't want to add things
-  // directly on the resize event as it runs every 4 pixles or so while the
+  // An Event that runs while the window is resizing (Don't want to add things
+  // directly on the resize event as it runs every 4 pixels or so while the
   // window is resizing, so it can get very slow)
   var dragResize = new Event('debouncedResize');
 
