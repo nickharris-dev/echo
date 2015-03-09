@@ -18,9 +18,8 @@
         "*.sublime-workspace"
       ],
       "folder_exclude_patterns": [
-        ".dev",
         ".tmp",
-        "www"
+        "builds"
       ]
     }
   ]
