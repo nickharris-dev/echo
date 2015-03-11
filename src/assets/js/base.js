@@ -23,8 +23,10 @@ require(['config'], function(config){
   }
   // Add js class to html element
   document.querySelector('html').className = document.querySelector('html').className += config.jsReadyClass;
-  // Development js
-  if (isDev) require(['dev']);
+  // Element Queries
+  if (document.querySelectorAll('[data-eq').length > 0) require(['elementqueries']);
   // Media Handling
   if (document.querySelectorAll('[data-media]').length > 0) require(['media']);
+  // Development js
+  if (isDev) require(['dev']);
 });
