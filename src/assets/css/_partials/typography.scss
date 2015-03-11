@@ -2,8 +2,15 @@ $body-copy: 'Vitesse A', 'Vitesse B', Georgia;
 
 $base-font-size: 16;
 $typography-break: 560/$base-font-size+rem;
-$measure: '1 3 5 7 9 11 14 17 20 23 26 29 32 35 38 41 44 47 50 53 56 59 62 65 68 71 74 77 80';
 
+// Grid
+// ====
+$column: percentage(1/24);
+$baseline: (14/$base-font-size);
+$gutter: (12/$base-font-size)+rem;
+
+// Scale
+// =====
 @import 'type-scale';
 
 @mixin type-scale($n) {
@@ -12,12 +19,6 @@ $measure: '1 3 5 7 9 11 14 17 20 23 26 29 32 35 38 41 44 47 50 53 56 59 62 65 68
   font-size: $size+rem;
   line-height: $lh;
 }
-
-// Grid
-// ====
-$column: percentage(1/24);
-$baseline: (14/$base-font-size);
-$gutter: (12/$base-font-size)+rem;
 
 // Base
 // ====
@@ -177,7 +178,6 @@ i {
 
 b {
   font-weight: inherit;
-
 }
 
 abbr {
