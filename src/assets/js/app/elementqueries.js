@@ -13,7 +13,10 @@ define(['require', 'reflow'], function(require, reflow){
     // Prepare element to broacdcast resize events
     reflow(element,continuous);
     // Listen for those resize events
-    element.addEventListener('reflow', function(e){
+    element.addEventListener('resizeEnd', function(e){
+      console.log(e);
+    });
+    element.addEventListener('debouncedResize', function(e){
       console.log(e);
     });
   }

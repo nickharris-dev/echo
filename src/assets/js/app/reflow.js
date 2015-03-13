@@ -7,7 +7,7 @@ define(function(){
   // Flag for whether the element should emit events whilst it's resizing
   var continuous;
   // An Event for when the resize is finished (runs once)
-  var reflow;
+  var resizeEnd;
   // An Event that runs while the window is resizing (Don't want to add things
   // directly on the resize event as it runs every 4 pixels or so while the
   // window is resizing, so it can get very slow)
@@ -17,7 +17,7 @@ define(function(){
     // Populate the holders
     element = e;
     continuous = c || false;
-    reflow = new Event('reflow');
+    resizeEnd = new Event('resizeEnd');
     debouncedResize = new Event('debouncedResize');
 
     addResizeListener();
@@ -79,11 +79,11 @@ define(function(){
 
   // function that runs when the resize has ended
   function end() {
-    reflow.elementWidth = element.offsetWidth;
-    element.dispatchEvent(reflow);
+    resizeEnd.elementWidth = element.offsetWidth;
+    element.dispatchEvent(resizeEnd);
   }
 
-  // Variables for the reflow event
+  // Variables for the resizeEnd event
   var timer;
   function endCalculator() {
     // Cancel the current running timer
