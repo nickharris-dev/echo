@@ -21,10 +21,26 @@ require(['config'], function(config){
 
     return test;
   }
+
+  function eq (node, continuous) {
+    require(['elementqueries'], function(eq){
+      eq(node, continuous);
+    });
+  }
+
+  function nodeLoop(nodeList, func, arg1) {
+    var i = 0;
+    var n = nodeList.length;
+
+    for (i;i<n;i++) {
+      func(nodeList[i], arg1);
+    }
+  }
+
   // Add js class to html element
   document.querySelector('html').className = document.querySelector('html').className += config.jsReadyClass;
   // Element Queries
-  if (document.querySelectorAll('[data-eq').length > 0) require(['elementqueries']);
+  nodeLoop(document.querySelectorAll('[data-eq'), eq, false);
   // Media Handling
   if (document.querySelectorAll('[data-media]').length > 0) require(['media']);
   // Development js

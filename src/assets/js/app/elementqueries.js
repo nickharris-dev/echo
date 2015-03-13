@@ -1,38 +1,21 @@
-define(['require', 'response'], function(require){
+define(['require', 'reflow'], function(require, reflow){
   // min-width, max-width, min-height, max-height
   // Example value: linear:(min-width:600px) and (max-width:700px),test:(max-height:150px)
 
-  // Get all elements that have element queries
-  var elements = document.querySelectorAll('[data-eq]');
-  // Get all those that haven't already been processed
-  var newElements = getUnprocessed(elements);
+  // Get container for our node
+  var element;
 
-  function getUnprocessed(nodelist) {
-    // Set up the for loop
-    var i = 0;
-    var n = nodelist.length;
+  function init(e, continuous) {
+    element = e;
 
-    // A temporary array for storing objects and returning to the elements
-    // variable
-    var tempArray = [];
-
-    for (i; i<n; i++) {
-      var node = nodelist[i];
-      if (!node.getAttribute('data-eq-processed')) {
-        tempArray.push(elementFactory(node));
-        node.setAttribute('data-eq-processed', '');
-      }
-    }
-
-    return tempArray;
-  }
-
-  function elementFactory(node) {
-    var elem = {};
-    elem.node = node;
-    elem.queries = queryFactory(node.getAttribute('data-eq'));
-
-    return elem;
+    // Attach element queries
+    element.queries = queryFactory(e.getAttribute('data-eq'));
+    // Prepare element to broacdcast resize events
+    reflow(element,continuous);
+    // Listen for those resize events
+    element.addEventListener('reflow', function(e){
+      console.log(e);
+    });
   }
 
   function queryFactory(str) {
@@ -51,8 +34,9 @@ define(['require', 'response'], function(require){
     return(JSON.parse("{"+queries+"}"));
   }
 
-  // Process each of those elements
-    // Get width
-    // Compare width against each state in data-eq
+  // Get width
+  // Compare width against each state in data-eq
   // Fire event when hitting new element query
+
+  return init;
 });
