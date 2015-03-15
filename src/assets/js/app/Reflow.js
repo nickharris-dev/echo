@@ -9,6 +9,9 @@ define(function(){
     // Events
     this.resizeEnd = new Event('resizeEnd');
     this.debouncedResize = new Event('debouncedResize');
+
+    // Initialise
+    this.init();
   };
 
   Reflow.prototype = {

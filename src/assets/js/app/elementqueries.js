@@ -11,7 +11,6 @@ define(['require', 'Reflow'], function(require, Reflow){
     element.queries = queryFactory(e.getAttribute('data-eq'));
     // Prepare element to broacdcast resize events
     element.reflow = new Reflow(e, continuous);
-    element.reflow.init();
     // Listen for those resize events
     element.addEventListener('resizeEnd', function(e){
       console.log(e.height, e.width);
