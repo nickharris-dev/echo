@@ -36,9 +36,37 @@ define(['require', 'Reflow'], function(require, Reflow){
     },
 
     queryFactory: function(str) {
+      var self = this;
+      var obj;
+
       // Wee helper to surround something/anything with quotes
       function quoted(match) {
         return '"'+match+'"';
+      }
+
+      // helper to get px values from px/em/rem values in the string
+      function calculatedValue(rawData) {
+        var num = parseFloat(rawData);
+        var units = rawData.match(/(px|em|rem)/)[0];
+        var modifier, value;
+
+        switch (units) {
+          case 'px':
+            modifier = 1;
+            break;
+          case 'em':
+            modifier = parseFloat(getComputedStyle(self.element).fontSize);
+            break;
+          case 'rem':
+            modifier = parseFloat(getComputedStyle(document.body).fontSize);
+            break;
+          default:
+            throw new Error('Woah, that\'s not a unit I recognise, son. px, em or rem only');
+        }
+
+        value = num*modifier;
+
+        return value;
       }
 
       // Deal with "and"
@@ -48,13 +76,27 @@ define(['require', 'Reflow'], function(require, Reflow){
       // Replace parenthesis with curly braces
       queries = queries.replace(/\(/g,'{').replace(/\)/g,'}');
 
-      return(JSON.parse("{"+queries+"}"));
+      obj = JSON.parse("{"+queries+"}");
+
+      // Convert values
+      // Loop through obj
+      for (var key in obj) {
+        // Loop through each breakpoint
+        for (var val in obj[key]) {
+          obj[key][val] = calculatedValue(obj[key][val]);
+        }
+      }
+
+      return(obj);
     },
 
     sizeChange: function(e){
       var self = this;
 
       // loop through breakpoints
+      for (var key in this.breakpoints) {
+        console.log(key, this.breakpoints[key]);
+      }
       // loop through keys
     }
   };
