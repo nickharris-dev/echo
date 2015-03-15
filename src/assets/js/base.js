@@ -23,8 +23,8 @@ require(['config'], function(config){
   }
 
   function eq (node, continuous) {
-    require(['elementqueries'], function(eq){
-      eq(node, continuous);
+    require(['Elementqueries'], function(Elementquery){
+      node.elementqueries = new Elementquery(node,continuous);
     });
   }
 
