@@ -1,4 +1,4 @@
-define(['require', 'reflow'], function(require, reflow){
+define(['require', 'Reflow'], function(require, Reflow){
   // min-width, max-width, min-height, max-height
   // Example value: linear:(min-width:600px) and (max-width:700px),test:(max-height:150px)
 
@@ -7,17 +7,14 @@ define(['require', 'reflow'], function(require, reflow){
 
   function init(e, continuous) {
     element = e;
-
     // Attach element queries
     element.queries = queryFactory(e.getAttribute('data-eq'));
     // Prepare element to broacdcast resize events
-    reflow(element,continuous);
+    element.reflow = new Reflow(e, continuous);
+    element.reflow.init();
     // Listen for those resize events
     element.addEventListener('resizeEnd', function(e){
-      console.log(e);
-    });
-    element.addEventListener('debouncedResize', function(e){
-      console.log(e);
+      console.log(e.height, e.width);
     });
   }
 
