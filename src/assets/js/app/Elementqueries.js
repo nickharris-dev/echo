@@ -8,15 +8,15 @@ define(['require', 'Reflow'], function(require, Reflow){
     this.element = e;
     this.continuous = c;
 
+    // Starting dimensions
+    this.height = e.offsetHeight;
+    this.width = e.offsetWidth;
+
+    // An identifier to use in the classname later
     this.identifier = e.getAttribute('id') || this.idFactory(e.className);
 
     // Process the named breakpoints from the data-attribute
     this.breakpoints = this.queryFactory(e.getAttribute('data-eq'));
-
-    // Check for initial active states
-    for (var key in this.breakpoints) {
-      this.checkBreakpoint(key);
-    }
 
     // Prepare element to broadcast resize events
     this.reflow = new Reflow(e, c);
@@ -86,12 +86,18 @@ define(['require', 'Reflow'], function(require, Reflow){
       // Convert values
       // Loop through obj
       for (var key in obj) {
-        // Loop through each breakpoint
+        // Convert each breakpoint value to an integer representing it's size
+        // in pixels
         for (var val in obj[key]) {
           obj[key][val] = calculatedValue(obj[key][val]);
         }
+        // Set initial state as inactive
+        obj[key].active = false;
+        // Check breakpoint
+        self.checkBreakpoint(obj[key]);
       }
 
+      // Store the breakpoints for later
       return(obj);
     },
 
@@ -99,22 +105,61 @@ define(['require', 'Reflow'], function(require, Reflow){
       var self = this;
       var key;
 
+      // Update height and width
+      self.height = e.height;
+      self.width = e.width;
+
       // loop through query
       for (key in self.breakpoints) {
-        self.checkBreakpoint(key);
+        self.checkBreakpoint(self.breakpoints[key]);
       }
     },
 
-    checkBreakpoint: function(key) {
+    checkBreakpoint: function(breakpoint) {
       var self = this;
-      var obj = self.breakpoints[key];
+      var minWidth = breakpoint['min-width'] || self.width;
+      var maxWidth = breakpoint['max-width'] || self.width;
+      var minHeight = breakpoint['min-height'] || self.height;
+      var maxHeight = breakpoint['max-height'] || self.height;
+      var widthFlag = false;
+      var heightFlag = false;
+      var active = false;
 
-      self.breakpoints[key].active = self.breakpoints[key].state || false;
-      console.log(self.breakpoints);
+      if (self.width >= minWidth && self.width <= maxWidth) {
+        widthFlag = true;
+      }
+      if (self.height >= minHeight && self.height <= maxHeight) {
+        heightFlag = true;
+      }
+
+      // The breakpoint is active only if all it's tests are true
+      if (widthFlag && heightFlag) {
+        active = true;
+      }
+
+      // Only take any action if the breakpoint's state is changed
+      if (active !== breakpoint.active) {
+        if (active) {
+          self.activate(breakpoint);
+        } else {
+          self.deactivate(breakpoint);
+        }
+      }
+    },
+
+    activate: function(breakpoint) {
+      var self = this;
+
+      breakpoint.active = true;
+    },
+
+    deactivate: function(breakpoint) {
+      var self = this;
+
+      breakpoint.active = false;
     }
   };
 
-  // Get width
   // Compare width against each state in data-eq
   // Fire event when hitting new element query
 
