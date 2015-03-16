@@ -13,6 +13,11 @@ define(['require', 'Reflow'], function(require, Reflow){
     // Process the named breakpoints from the data-attribute
     this.breakpoints = this.queryFactory(e.getAttribute('data-eq'));
 
+    // Check for initial active states
+    for (var key in this.breakpoints) {
+      this.checkBreakpoint(key);
+    }
+
     // Prepare element to broadcast resize events
     this.reflow = new Reflow(e, c);
 
@@ -92,12 +97,20 @@ define(['require', 'Reflow'], function(require, Reflow){
 
     sizeChange: function(e){
       var self = this;
+      var key;
 
-      // loop through breakpoints
-      for (var key in this.breakpoints) {
-        console.log(key, this.breakpoints[key]);
+      // loop through query
+      for (key in self.breakpoints) {
+        self.checkBreakpoint(key);
       }
-      // loop through keys
+    },
+
+    checkBreakpoint: function(key) {
+      var self = this;
+      var obj = self.breakpoints[key];
+
+      self.breakpoints[key].active = self.breakpoints[key].state || false;
+      console.log(self.breakpoints);
     }
   };
 
