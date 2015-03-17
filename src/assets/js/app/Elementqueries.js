@@ -2,7 +2,7 @@ define(['require', 'Reflow'], function(require, Reflow){
   // min-width, max-width, min-height, max-height
   // Example value: linear:(min-width:600px) and (max-width:700px),test:(max-height:150px)
 
-  var Elementquery = function(e, c) {
+  var Elementquery = function(e, b, c) {
     var self = this;
 
     this.element = e;
@@ -15,8 +15,8 @@ define(['require', 'Reflow'], function(require, Reflow){
     // An identifier to use in the classname later
     this.identifier = e.getAttribute('id') || this.idFactory(e.className);
 
-    // Process the named breakpoints from the data-attribute
-    this.breakpoints = this.queryFactory(e.getAttribute('data-eq'));
+    // Process the named breakpoints
+    this.breakpoints = this.queryFactory(b);
 
     // Prepare element to broadcast resize events
     this.reflow = new Reflow(e, c);

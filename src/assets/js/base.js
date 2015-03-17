@@ -24,7 +24,7 @@ require(['config'], function(config){
 
   function eq (node, continuous) {
     require(['Elementqueries'], function(Elementquery){
-      node.elementqueries = new Elementquery(node,continuous);
+      node.elementqueries = new Elementquery(node, node.getAttribute('data-eq'), continuous);
     });
   }
 
