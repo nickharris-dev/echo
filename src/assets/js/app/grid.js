@@ -1,23 +1,38 @@
 define(['require', 'response', 'getStyle'], function(require, response, getStyle) {
   var identifier = 'Devgrid';
-  // Holders for the shapes that will create the grid in the svg;
-  var cols, base;
+  // Holders
+  var overlay, colWidth, baseLineHeight, cols, base;
 
-  var overlay = document.createElement('div');
-  var overlayStyle =  'background-position: 0 1px';
-      overlayStyle += 'display: block;';
-      overlayStyle += 'height: 100%;';
-      overlayStyle += 'left: 0;';
-      overlayStyle += 'pointer-events: none;';
-      overlayStyle += 'position: absolute;';
-      overlayStyle += 'top: 0;';
-      overlayStyle += 'width: 100%;';
-      overlayStyle += 'z-index: 100;';
+  function createOverlay() {
+    var overlayStyle =  'background-position: 0 1px;';
+        overlayStyle += 'display: block;';
+        overlayStyle += 'height: 100%;';
+        overlayStyle += 'left: 0;';
+        overlayStyle += 'pointer-events: none;';
+        overlayStyle += 'position: absolute;';
+        overlayStyle += 'top: 0;';
+        overlayStyle += 'width: 100%;';
+        overlayStyle += 'z-index: 100;';
 
-  overlay.setAttribute('id', identifier);
-  overlay.setAttribute('style', overlayStyle);
+    overlay = document.createElement('div');
+    overlay.setAttribute('id', identifier);
+    overlay.setAttribute('style', overlayStyle);
 
-  document.body.appendChild(overlay);
+    document.body.appendChild(overlay);
+  }
+
+  function calculateDimensions() {
+    var gridUnit = getStyle('.grid-unit');
+
+    // Columns
+    colWidth = parseFloat(gridUnit.match(/width:\s*(\d.*\d*)%;/)[1]);
+    colWidth = response/100*colWidth;
+
+    // Baseline
+    var fontSize = parseFloat(getComputedStyle(overlay).fontSize);
+    baseLineHeight = parseFloat(gridUnit.match(/height:\s*(\d.*\d*);/)[1]);
+    baseLineHeight = fontSize*baseLineHeight;
+  }
 
   function toggleGrid() {
     if(overlay.style.display === 'block') {
@@ -38,4 +53,10 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
   window.baseline = function(){
     toggleGrid();
   };
+
+  // Initialise
+  (function () {
+    createOverlay();
+    calculateDimensions();
+  })();
 });
