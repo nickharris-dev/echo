@@ -44,5 +44,5 @@ require(['config'], function(config){
   // Media Handling
   if (document.querySelectorAll('[data-media]').length > 0) require(['media']);
   // Development js
-  if (isDev) require(['dev']);
+  if (isDev) require(['grid','dev']);
 });
