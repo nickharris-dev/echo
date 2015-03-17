@@ -8,8 +8,11 @@
 
     <title>{{ title }}</title>
 
-    <link href="{{ assets }}/css/{{{ package.filenames.css }}}.css?v={{{ moment }}}" rel="stylesheet">
-    {{#is '@@environment' 'development'}}<link href="{{ assets }}/css/dev.css?v={{{ moment }}}" rel="stylesheet">{{/is}}
+    {{#is '@@environment' 'development'}}
+      <link href="{{ assets }}/css/dev.css?v={{{ moment }}}" rel="stylesheet">
+    {{else}}
+      <link href="{{ assets }}/css/{{{ package.filenames.css }}}.css?v={{{ moment }}}" rel="stylesheet">
+    {{/is}}
   </head>
   <body>
 
