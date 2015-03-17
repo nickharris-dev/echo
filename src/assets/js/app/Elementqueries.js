@@ -1,4 +1,4 @@
-define(['require', 'Reflow'], function(require, Reflow){
+define(['require', 'Reflow', 'classes'], function(require, Reflow, classes){
   // min-width, max-width, min-height, max-height
   // Example value: linear:(min-width:600px) and (max-width:700px),test:(max-height:150px)
 
@@ -93,8 +93,10 @@ define(['require', 'Reflow'], function(require, Reflow){
         }
         // Set initial state as inactive
         obj[key].active = false;
+        // Construct Classname
+        obj[key].className = self.identifier + '--' + key;
         // Check breakpoint
-        self.checkBreakpoint(obj[key]);
+        self.checkBreakpoint(key,obj);
       }
 
       // Store the breakpoints for later
@@ -111,12 +113,14 @@ define(['require', 'Reflow'], function(require, Reflow){
 
       // loop through query
       for (key in self.breakpoints) {
-        self.checkBreakpoint(self.breakpoints[key]);
+        self.checkBreakpoint(key);
       }
     },
 
-    checkBreakpoint: function(breakpoint) {
+    checkBreakpoint: function(key,obj) {
       var self = this;
+      var breakpoints = obj || self.breakpoints;
+      var breakpoint = breakpoints[key];
       var minWidth = breakpoint['min-width'] || self.width;
       var maxWidth = breakpoint['max-width'] || self.width;
       var minHeight = breakpoint['min-height'] || self.height;
@@ -140,23 +144,29 @@ define(['require', 'Reflow'], function(require, Reflow){
       // Only take any action if the breakpoint's state is changed
       if (active !== breakpoint.active) {
         if (active) {
-          self.activate(breakpoint);
+          self.activate(key, obj);
         } else {
-          self.deactivate(breakpoint);
+          self.deactivate(key, obj);
         }
       }
     },
 
-    activate: function(breakpoint) {
+    activate: function(key,obj) {
       var self = this;
+      var breakpoints = obj || self.breakpoints;
+      var breakpoint = breakpoints[key];
 
       breakpoint.active = true;
+      classes.add(self.element, breakpoint.className);
     },
 
-    deactivate: function(breakpoint) {
+    deactivate: function(key,obj) {
       var self = this;
+      var breakpoints = obj || self.breakpoints;
+      var breakpoint = breakpoints[key];
 
       breakpoint.active = false;
+      classes.remove(self.element, breakpoint.className);
     }
   };
 
