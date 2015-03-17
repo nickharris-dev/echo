@@ -12,6 +12,10 @@ define(['require', 'Reflow', 'classes'], function(require, Reflow, classes){
     this.height = e.offsetHeight;
     this.width = e.offsetWidth;
 
+    // Event to be emitted on change of breakpoint
+    this.breakpointEvent = new Event('breakpoint');
+    this.breakpointEvent.queries = this;
+
     // An identifier to use in the classname later
     this.identifier = e.getAttribute('id') || this.idFactory(e.className);
 
@@ -156,8 +160,12 @@ define(['require', 'Reflow', 'classes'], function(require, Reflow, classes){
       var breakpoints = obj || self.breakpoints;
       var breakpoint = breakpoints[key];
 
+      self.breakpointEvent.breakpoint = key;
+      self.breakpointEvent.active = true;
       breakpoint.active = true;
+
       classes.add(self.element, breakpoint.className);
+      self.element.dispatchEvent(self.breakpointEvent);
     },
 
     deactivate: function(key,obj) {
@@ -165,8 +173,12 @@ define(['require', 'Reflow', 'classes'], function(require, Reflow, classes){
       var breakpoints = obj || self.breakpoints;
       var breakpoint = breakpoints[key];
 
+      self.breakpointEvent.breakpoint = key;
+      self.breakpointEvent.active = false;
       breakpoint.active = false;
+
       classes.remove(self.element, breakpoint.className);
+      self.element.dispatchEvent(self.breakpointEvent);
     }
   };
 
