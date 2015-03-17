@@ -1,1 +1,6 @@
 @import 'main';
+
+.grid-unit {
+  height: $baseline+rem;
+  width: $column;
+}
