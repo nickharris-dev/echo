@@ -56,7 +56,7 @@ define(['require', 'Reflow', 'classes'], function(require, Reflow, classes){
       // helper to get px values from px/em/rem values in the string
       function calculatedValue(rawData) {
         var num = parseFloat(rawData);
-        var units = rawData.match(/(px|em|rem)/)[0];
+        var units = rawData.match(/(px|r?em)/)[0];
         var modifier, value;
 
         switch (units) {
