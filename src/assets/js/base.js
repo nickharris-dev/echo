@@ -1,5 +1,8 @@
+var baseUrl = document.getElementById('script').getAttribute('data-main');
+baseUrl = baseUrl.replace(/base/, 'app');
+
 requirejs.config({
-  baseUrl: 'assets/js/app',
+  baseUrl: baseUrl,
   config: {
     'config': {
       jsReadyClass: ' js'
