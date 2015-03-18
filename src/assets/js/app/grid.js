@@ -1,10 +1,16 @@
 define(['require', 'response', 'getStyle'], function(require, response, getStyle) {
   var identifier = 'Devgrid';
+  var windowWidth = response;
+  var store = {
+    columns: 'devGrid__columns',
+    gutters: 'devGrid__gutters',
+    baseline: 'devGrid__baseline'
+  };
   var svgNS = 'http://www.w3.org/2000/svg';
   // Holders
-  var overlay, svg, colWidth, gutterWidth, baseLineHeight, cols, gutters, base;
+  var overlay, colWidth, gutterWidth, baseLineHeight;
 
-  function Shape(w,h,c,x,y) {
+  function Shape(svg,w,h,c,x,y) {
     var rect = document.createElementNS(svgNS,'rect');
     rect.setAttribute('x',x || 0);
     rect.setAttribute('y',y || 0);
@@ -37,36 +43,36 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     var h = baseLineHeight;
     var w = colWidth*2;
 
-    svg = document.createElementNS(svgNS, 'svg');
+    var svg = document.createElementNS(svgNS, 'svg');
     svg.setAttributeNS (null, "viewBox", "0 0 " + w + " " + h);
     svg.setAttributeNS (null, "width", w);
     svg.setAttributeNS (null, "height", h);
 
-    createCols();
-    createGutters();
-    createBaseline();
+    if (localStorage.getItem(store.columns)) createCols(svg);
+    if (localStorage.getItem(store.gutters)) createGutters(svg);
+    if (localStorage.getItem(store.baseline)) createBaseline(svg);
 
     var svgString = new XMLSerializer().serializeToString(svg);
     var svgData = btoa(svgString);
     overlay.style.backgroundImage = 'url("data:image/svg+xml;base64,'+svgData+'")';
   }
 
-  function createCols() {
-    cols = [];
-    cols[0] = new Shape(colWidth,baseLineHeight,'rgba(0,255,255,0.1)');
-    cols[1] = new Shape(colWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth);
+  function createCols(svg) {
+    var cols = [];
+    cols[0] = new Shape(svg,colWidth,baseLineHeight,'rgba(0,255,255,0.1)');
+    cols[1] = new Shape(svg,colWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth);
   }
 
-  function createGutters() {
-    gutters = [];
-    gutters[0] = new Shape(gutterWidth,baseLineHeight,'rgba(0,255,255,0.2)');
-    gutters[1] = new Shape(gutterWidth,baseLineHeight,'rgba(0,255,255,0.2)',colWidth-gutterWidth);
-    gutters[2] = new Shape(gutterWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth);
-    gutters[3] = new Shape(gutterWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth*2-gutterWidth);
+  function createGutters(svg) {
+    var gutters = [];
+    gutters[0] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,255,255,0.2)');
+    gutters[1] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,255,255,0.2)',colWidth-gutterWidth);
+    gutters[2] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth);
+    gutters[3] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth*2-gutterWidth);
   }
 
-  function createBaseline() {
-    base = new Shape(colWidth*2,1,'rgb(255,0,0');
+  function createBaseline(svg) {
+    var base = new Shape(svg,colWidth*2,1,'rgb(255,0,0');
   }
 
   function calculateUnits(x,unit,y) {
@@ -97,7 +103,7 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     var colEx = gridUnit.match(/width:\s*(\d*\.?\d*)(px|r?em|%);/);
     var colU = colEx[2];
     colWidth = parseFloat(colEx[1]);
-    colWidth = calculateUnits(colWidth,colU,response);
+    colWidth = calculateUnits(colWidth,colU,windowWidth);
 
     // Gutters
     var gutterEx = gridUnit.match(/padding-?\w*:\s*(\d*\.?\d*)(px|r?em|%);/);
@@ -112,10 +118,110 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     baseLineHeight = fontSize*baseLineHeight;
   }
 
-  // Initialise
-  (function () {
+  function createGrid() {
     createOverlay();
     calculateDimensions();
     createSVG();
+  }
+
+  function destroyGrid() {
+    document.body.removeChild(overlay);
+
+    if (localStorage.getItem(store.columns)) localStorage.removeItem(store.columns);
+    if (localStorage.getItem(store.gutters)) localStorage.removeItem(store.gutters);
+    if (localStorage.getItem(store.baseline)) localStorage.removeItem(store.baseline);
+  }
+
+  function rebuildGrid() {
+    calculateDimensions();
+    createSVG();
+  }
+
+  function toggleGrid(elem) {
+    var others = [];
+    var message;
+
+    switch(elem) {
+      case 'columns':
+        others[0] = 'gutters';
+        others[1] = 'baseline';
+        break;
+      case 'gutters':
+        others[0] = 'columns';
+        others[1] = 'baseline';
+        break;
+      case 'baseline':
+        others[0] = 'gutters';
+        others[1] = 'columns';
+        break;
+    }
+
+    function add() {
+      localStorage.setItem(store[elem], true);
+      if (localStorage.getItem(store[others[0]]) || localStorage.getItem(store[others[1]])) {
+        rebuildGrid();
+      } else {
+        createGrid();
+      }
+      message = elem+' ON';
+    }
+
+    function remove() {
+      localStorage.removeItem(store[elem]);
+      if (localStorage.getItem(store[others[0]]) || localStorage.getItem(store[others[1]])) {
+        rebuildGrid();
+      } else {
+        destroyGrid();
+      }
+      message = elem+' OFF';
+    }
+
+    if (localStorage.getItem(store[elem])) {
+      remove();
+    } else {
+      add();
+    }
+
+    return message;
+  }
+
+  window.grid = function () {
+    var message;
+    if (localStorage.getItem(store.columns) && localStorage.getItem(store.gutters) && localStorage.getItem(store.baseline)) {
+      destroyGrid();
+      message = "grid OFF";
+    } else {
+      if (document.getElementById(identifier)) destroyGrid();
+      localStorage.setItem(store.columns, true);
+      localStorage.setItem(store.gutters, true);
+      localStorage.setItem(store.baseline, true);
+      createGrid();
+      message = "grid ON";
+    }
+    return message;
+  };
+
+  window.columns = function () {
+    return toggleGrid('columns');
+  };
+
+  window.gutters = function () {
+    return toggleGrid('gutters');
+  };
+
+  window.baseline = function () {
+    return toggleGrid('baseline');
+  };
+
+  // Initialise
+  (function () {
+    if (localStorage.getItem(store.columns) || localStorage.getItem(store.gutters) || localStorage.getItem(store.baseline)) {
+      createGrid();
+    }
+
+    window.addEventListener('resized', function(e){
+      windowWidth = e.viewportSize;
+      rebuildGrid();
+    });
   })();
 });
