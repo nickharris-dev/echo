@@ -17,8 +17,7 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
   }
 
   function createOverlay() {
-    var overlayStyle =  'background-image: url("' + b64() + '");';
-        overlayStyle += 'display: block;';
+    var overlayStyle =  'display: block;';
         overlayStyle += 'height: 100%;';
         overlayStyle += 'left: 0;';
         overlayStyle += 'pointer-events: none;';
@@ -34,10 +33,6 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     document.body.appendChild(overlay);
   }
 
-  function b64() {
-
-  }
-
   function createSVG() {
     var h = baseLineHeight;
     var w = colWidth*2;
@@ -50,6 +45,10 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     createCols();
     createGutters();
     createBaseline();
+
+    var svgString = new XMLSerializer().serializeToString(svg);
+    var svgData = btoa(svgString);
+    overlay.style.backgroundImage = 'url("data:image/svg+xml;base64,'+svgData+'")';
   }
 
   function createCols() {
@@ -107,7 +106,8 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     gutterWidth = calculateUnits(gutterWidth,gutterU,colWidth);
 
     // Baseline
-    var fontSize = parseFloat(getComputedStyle(overlay).fontSize);
+    var fontSize = getComputedStyle(overlay).fontSize;
+    fontSize = parseFloat(fontSize);
     baseLineHeight = parseFloat(gridUnit.match(/height:\s*(\d.*\d*);/)[1]);
     baseLineHeight = fontSize*baseLineHeight;
   }
