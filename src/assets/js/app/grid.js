@@ -4,7 +4,8 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
   var store = {
     columns: 'devGrid__columns',
     gutters: 'devGrid__gutters',
-    baseline: 'devGrid__baseline'
+    baseline: 'devGrid__baseline',
+    opacity: 'devGrid__opacity'
   };
   var svgNS = 'http://www.w3.org/2000/svg';
   // Holders
@@ -26,6 +27,7 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     var overlayStyle =  'display: block;';
         overlayStyle += 'height: 100%;';
         overlayStyle += 'left: 0;';
+        overlayStyle += 'opacity:'+ localStorage.getItem(store.opacity) +';';
         overlayStyle += 'pointer-events: none;';
         overlayStyle += 'position: absolute;';
         overlayStyle += 'top: 0;';
@@ -59,16 +61,16 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
 
   function createCols(svg) {
     var cols = [];
-    cols[0] = new Shape(svg,colWidth,baseLineHeight,'rgba(0,255,255,0.1)');
-    cols[1] = new Shape(svg,colWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth);
+    cols[0] = new Shape(svg,colWidth,baseLineHeight,'rgba(0,255,255,0.5)');
+    cols[1] = new Shape(svg,colWidth,baseLineHeight,'rgba(0,0,0,0.35)',colWidth);
   }
 
   function createGutters(svg) {
     var gutters = [];
-    gutters[0] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,255,255,0.2)');
-    gutters[1] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,255,255,0.2)',colWidth-gutterWidth);
-    gutters[2] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth);
-    gutters[3] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth*2-gutterWidth);
+    gutters[0] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,255,255,0.8)');
+    gutters[1] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,255,255,0.8)',colWidth-gutterWidth);
+    gutters[2] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,0,0,0.35)',colWidth);
+    gutters[3] = new Shape(svg,gutterWidth,baseLineHeight,'rgba(0,0,0,0.35)',colWidth*2-gutterWidth);
   }
 
   function createBaseline(svg) {
@@ -119,6 +121,7 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
   }
 
   function createGrid() {
+    if (!localStorage.getItem(store.opacity)) localStorage.setItem(store.opacity, 0.2);
     createOverlay();
     calculateDimensions();
     createSVG();
@@ -185,12 +188,19 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     return message;
   }
 
-  window.grid = function () {
+  window.grid = function (opacity) {
     var message;
+
     if (localStorage.getItem(store.columns) && localStorage.getItem(store.gutters) && localStorage.getItem(store.baseline)) {
-      destroyGrid();
-      message = "grid OFF";
+      if (opacity) {
+        localStorage.setItem(store.opacity, opacity);
+        overlay.style.opacity = opacity;
+      } else {
+        destroyGrid();
+        message = "grid OFF";
+      }
     } else {
+      if (opacity) localStorage.setItem(store.opacity, opacity);
       if (document.getElementById(identifier)) destroyGrid();
       localStorage.setItem(store.columns, true);
       localStorage.setItem(store.gutters, true);
