@@ -1,10 +1,23 @@
 define(['require', 'response', 'getStyle'], function(require, response, getStyle) {
   var identifier = 'Devgrid';
+  var svgNS = 'http://www.w3.org/2000/svg';
   // Holders
   var overlay, svg, colWidth, gutterWidth, baseLineHeight, cols, gutters, base;
 
+  function Shape(w,h,c,x,y) {
+    var rect = document.createElementNS(svgNS,'rect');
+    rect.setAttribute('x',x || 0);
+    rect.setAttribute('y',y || 0);
+    rect.setAttribute('width',w);
+    rect.setAttribute('height',h);
+    rect.setAttribute('fill',c);
+    svg.appendChild(rect);
+
+    return rect;
+  }
+
   function createOverlay() {
-    var overlayStyle =  'background-position: 0 1px;';
+    var overlayStyle =  'background-image: url("' + b64() + '");';
         overlayStyle += 'display: block;';
         overlayStyle += 'height: 100%;';
         overlayStyle += 'left: 0;';
@@ -21,12 +34,40 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     document.body.appendChild(overlay);
   }
 
-  function createSVG() {
-    svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  function b64() {
+
   }
 
-  function createColumns() {
-    var col;
+  function createSVG() {
+    var h = baseLineHeight;
+    var w = colWidth*2;
+
+    svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttributeNS (null, "viewBox", "0 0 " + w + " " + h);
+    svg.setAttributeNS (null, "width", w);
+    svg.setAttributeNS (null, "height", h);
+
+    createCols();
+    createGutters();
+    createBaseline();
+  }
+
+  function createCols() {
+    cols = [];
+    cols[0] = new Shape(colWidth,baseLineHeight,'rgba(0,255,255,0.1)');
+    cols[1] = new Shape(colWidth,baseLineHeight,'rgba(0,0,0,0.1)',colWidth);
+  }
+
+  function createGutters() {
+    gutters = [];
+    gutters[0] = new Shape(gutterWidth,baseLineHeight,'rgba(255,255,255,0.5)');
+    gutters[1] = new Shape(gutterWidth,baseLineHeight,'rgba(255,255,255,0.5)',colWidth-gutterWidth);
+    gutters[2] = new Shape(gutterWidth,baseLineHeight,'rgba(255,255,255,0.5)',colWidth);
+    gutters[3] = new Shape(gutterWidth,baseLineHeight,'rgba(255,255,255,0.5)',colWidth*2-gutterWidth);
+  }
+
+  function createBaseline() {
+    base = new Shape(colWidth*2,1,'rgba(255,0,0,1');
   }
 
   function calculateUnits(x,unit,y) {
@@ -71,29 +112,10 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     baseLineHeight = fontSize*baseLineHeight;
   }
 
-  function toggleGrid() {
-    if(overlay.style.display === 'block') {
-      overlay.style.display = 'none';
-    } else {
-      overlay.style.display = 'block';
-    }
-  }
-
-  window.grid = function(){
-    toggleGrid();
-  };
-
-  window.columns = function(){
-    toggleGrid();
-  };
-
-  window.baseline = function(){
-    toggleGrid();
-  };
-
   // Initialise
   (function () {
     createOverlay();
     calculateDimensions();
+    createSVG();
   })();
 });
