@@ -25,7 +25,7 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
 
   function createOverlay() {
     var overlayStyle =  'display: block;';
-        overlayStyle += 'height: 100%;';
+        overlayStyle += 'height: '+ document.body.offsetHeight +'px;';
         overlayStyle += 'left: 0;';
         overlayStyle += 'opacity:'+ localStorage.getItem(store.opacity) +';';
         overlayStyle += 'pointer-events: none;';
