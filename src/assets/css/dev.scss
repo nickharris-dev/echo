@@ -2,5 +2,6 @@
 
 .grid-unit {
   height: $baseline+rem;
+  padding: $gutter;
   width: $column;
 }

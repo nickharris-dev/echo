@@ -1,7 +1,7 @@
 define(['require', 'response', 'getStyle'], function(require, response, getStyle) {
   var identifier = 'Devgrid';
   // Holders
-  var overlay, colWidth, baseLineHeight, cols, base;
+  var overlay, svg, colWidth, gutterWidth, baseLineHeight, cols, gutters, base;
 
   function createOverlay() {
     var overlayStyle =  'background-position: 0 1px;';
@@ -21,12 +21,49 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     document.body.appendChild(overlay);
   }
 
+  function createSVG() {
+    svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  }
+
+  function createColumns() {
+    var col;
+  }
+
+  function calculateUnits(x,unit,y) {
+    var result;
+
+    switch (unit){
+      case 'px':
+        result = x;
+        break;
+      case 'em':
+        result = x*parseFloat(getComputedStyle(overlay).fontSize);
+        break;
+      case 'rem':
+        result = x*parseFloat(getComputedStyle(document.body).fontSize);
+        break;
+      case '%':
+        result = y/100*x;
+        break;
+    }
+
+    return result;
+  }
+
   function calculateDimensions() {
     var gridUnit = getStyle('.grid-unit');
 
     // Columns
-    colWidth = parseFloat(gridUnit.match(/width:\s*(\d.*\d*)%;/)[1]);
-    colWidth = response/100*colWidth;
+    var colEx = gridUnit.match(/width:\s*(\d*\.?\d*)(px|r?em|%);/);
+    var colU = colEx[2];
+    colWidth = parseFloat(colEx[1]);
+    colWidth = calculateUnits(colWidth,colU,response);
+
+    // Gutters
+    var gutterEx = gridUnit.match(/padding-?\w*:\s*(\d*\.?\d*)(px|r?em|%);/);
+    var gutterU = gutterEx[2];
+    gutterWidth = parseFloat(gutterEx[1]);
+    gutterWidth = calculateUnits(gutterWidth,gutterU,colWidth);
 
     // Baseline
     var fontSize = parseFloat(getComputedStyle(overlay).fontSize);
