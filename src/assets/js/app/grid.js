@@ -195,6 +195,7 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
       if (opacity) {
         localStorage.setItem(store.opacity, opacity);
         overlay.style.opacity = opacity;
+        message = "grid @ " + localStorage.getItem(store.opacity)*100 + '%';
       } else {
         destroyGrid();
         message = "grid OFF";
@@ -206,7 +207,7 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
       localStorage.setItem(store.gutters, true);
       localStorage.setItem(store.baseline, true);
       createGrid();
-      message = "grid ON";
+      message = "grid @ " + localStorage.getItem(store.opacity)*100 + '%';
     }
     return message;
   };
