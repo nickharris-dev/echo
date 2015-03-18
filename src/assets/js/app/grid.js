@@ -54,19 +54,19 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
   function createCols() {
     cols = [];
     cols[0] = new Shape(colWidth,baseLineHeight,'rgba(0,255,255,0.1)');
-    cols[1] = new Shape(colWidth,baseLineHeight,'rgba(0,0,0,0.1)',colWidth);
+    cols[1] = new Shape(colWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth);
   }
 
   function createGutters() {
     gutters = [];
-    gutters[0] = new Shape(gutterWidth,baseLineHeight,'rgba(255,255,255,0.5)');
-    gutters[1] = new Shape(gutterWidth,baseLineHeight,'rgba(255,255,255,0.5)',colWidth-gutterWidth);
-    gutters[2] = new Shape(gutterWidth,baseLineHeight,'rgba(255,255,255,0.5)',colWidth);
-    gutters[3] = new Shape(gutterWidth,baseLineHeight,'rgba(255,255,255,0.5)',colWidth*2-gutterWidth);
+    gutters[0] = new Shape(gutterWidth,baseLineHeight,'rgba(0,255,255,0.2)');
+    gutters[1] = new Shape(gutterWidth,baseLineHeight,'rgba(0,255,255,0.2)',colWidth-gutterWidth);
+    gutters[2] = new Shape(gutterWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth);
+    gutters[3] = new Shape(gutterWidth,baseLineHeight,'rgba(0,0,0,0.07)',colWidth*2-gutterWidth);
   }
 
   function createBaseline() {
-    base = new Shape(colWidth*2,1,'rgba(255,0,0,1');
+    base = new Shape(colWidth*2,1,'rgb(255,0,0');
   }
 
   function calculateUnits(x,unit,y) {
