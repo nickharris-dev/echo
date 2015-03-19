@@ -231,8 +231,10 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
     }
 
     window.addEventListener('resized', function(e){
-      windowWidth = e.viewportSize;
-      rebuildGrid();
+      if (document.getElementById(identifier)) {
+        windowWidth = e.viewportSize;
+        rebuildGrid();
+      }
     });
   })();
 });
