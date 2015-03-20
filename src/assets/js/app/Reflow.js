@@ -44,21 +44,39 @@ define(function(){
       }
       // Create an object element
       self.obj = document.createElement('object');
-      // styles for the object element
-      var styles =  'display:block;';
-          styles += 'height:100%;';
-          styles += 'left:0;';
-          styles += 'overflow:hidden;';
-          styles += 'pointer-events:none;';
-          styles += 'position:absolute;';
-          styles += 'top:0;';
-          styles += 'width:100%;';
-          styles += 'z-index:-1;';
-      self.obj.setAttribute('style', styles);
+      self.obj.className = 'reflowObject';
+
+      // Tell the browser this obj is a page, so it emits a resize event
       self.obj.resizeElement = self.element;
       self.obj.onload = onObjLoad;
       self.obj.type = 'text/html';
       self.obj.data = 'about:blank';
+
+      // Create styles for the object, if they don't already exist
+      if (!document.getElementById('ReflowStyle')) {
+        var style = document.createElement('style');
+        var head = document.head || document.getElementsByTagName('head')[0];
+        var css =  '.reflowObject {';
+            css += 'display:block;';
+            css += 'height:100%;';
+            css += 'left:0;';
+            css += 'overflow:hidden;';
+            css += 'pointer-events:none;';
+            css += 'position:absolute;';
+            css += 'top:0;';
+            css += 'width:100%;';
+            css += 'z-index:-1;';
+            css += '}';
+
+        style.type = 'text/css';
+        style.setAttribute('id', 'ReflowStyle');
+        if (style.styleSheet){
+          style.styleSheet.cssText = css;
+        } else {
+          style.appendChild(document.createTextNode(css));
+        }
+        head.appendChild(style);
+      }
       // Append the object element to the queried element
       self.element.appendChild(self.obj);
     },
