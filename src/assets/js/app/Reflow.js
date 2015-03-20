@@ -55,7 +55,6 @@ define(function(){
       // Create styles for the object, if they don't already exist
       if (!document.getElementById('ReflowStyle')) {
         var style = document.createElement('style');
-        var head = document.head || document.getElementsByTagName('head')[0];
         var css =  '.reflowObject {';
             css += 'display:block;';
             css += 'height:100%;';
@@ -75,7 +74,7 @@ define(function(){
         } else {
           style.appendChild(document.createTextNode(css));
         }
-        head.appendChild(style);
+        document.head.appendChild(style);
       }
       // Append the object element to the queried element
       self.element.appendChild(self.obj);
