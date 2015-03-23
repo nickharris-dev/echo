@@ -13,7 +13,7 @@ module.exports = {
   },
   style: {
     files: '<%= package.paths.assetsrc %>/css/**/*.scss',
-    tasks: ['config:dev', 'newer:scsslint', 'sass', 'autoprefixer:dev', 'clean:temp', 'csslint']
+    tasks: ['config:dev', 'newer:scsslint', 'sass', 'autoprefixer:dev', 'clean:temp']
   },
   scripts: {
     files: '<%= package.paths.assetsrc %>/js/**/*.js',
