@@ -1,11 +1,21 @@
 var baseUrl = document.getElementById('script').getAttribute('data-main');
 baseUrl = baseUrl.replace(/base/, 'app');
 
+var baseFontSize = parseFloat(getComputedStyle(document.body).fontSize);
+
+var touchEnabled = function(){
+  if (typeof window.ontouchstart !== 'undefined') {
+    return true;
+  }
+  return false;
+};
+
 requirejs.config({
   baseUrl: baseUrl,
   config: {
     'config': {
-      jsReadyClass: ' js'
+      jsReadyClass: ' js',
+      touchEnabled: touchEnabled()
     }
   }
 });
