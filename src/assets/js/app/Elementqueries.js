@@ -1,4 +1,4 @@
-define(['require', 'Reflow', 'classes'], function(require, Reflow, classes){
+define(['require', 'config', 'Reflow', 'classes'], function(require, config, Reflow, classes){
   // min-width, max-width, min-height, max-height
   // Example value: linear:(min-width:600px) and (max-width:700px),test:(max-height:150px)
 
@@ -67,7 +67,7 @@ define(['require', 'Reflow', 'classes'], function(require, Reflow, classes){
             modifier = parseFloat(getComputedStyle(self.element).fontSize);
             break;
           case 'rem':
-            modifier = parseFloat(getComputedStyle(document.body).fontSize);
+            modifier = parseFloat(config.baseFontSize);
             break;
           default:
             throw new Error('Woah, that\'s not a unit I recognise, son. px, em or rem only');

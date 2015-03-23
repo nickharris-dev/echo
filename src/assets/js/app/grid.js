@@ -1,4 +1,4 @@
-define(['require', 'response', 'getStyle'], function(require, response, getStyle) {
+define(['require', 'config', 'response', 'getStyle'], function(require, config, response, getStyle) {
   var identifier = 'Devgrid';
   var windowWidth = response;
   var store = {
@@ -88,7 +88,7 @@ define(['require', 'response', 'getStyle'], function(require, response, getStyle
         result = x*parseFloat(getComputedStyle(overlay).fontSize);
         break;
       case 'rem':
-        result = x*parseFloat(getComputedStyle(document.body).fontSize);
+        result = x*parseFloat(config.baseFontSize);
         break;
       case '%':
         result = y/100*x;
