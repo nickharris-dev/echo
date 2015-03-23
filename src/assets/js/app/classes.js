@@ -3,6 +3,15 @@ define(['require'], function(){
 
   Classes.prototype = {
 
+    contains: function(el, str) {
+      if (el.classList) {
+        return el.classList.contains(str);
+      } else {
+        var tmp = new RegExp('(^| )' + str + '( |$)', 'gi').test(el.className);
+        return tmp;
+      }
+    },
+
     add: function(el, str) {
       if (el.classList)
         el.classList.add(str);
