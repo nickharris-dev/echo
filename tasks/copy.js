@@ -11,7 +11,7 @@ module.exports = {
     files: [{
       expand: true,
       cwd: '<%= package.paths.src %>/',
-      src: ['**/*.{png,jpg,jpeg,gif}'],
+      src: ['**/*.{png,jpg,jpeg,gif,ico}'],
       dest: '<%= grunt.config.get("dest") %>/'
     }]
   },
