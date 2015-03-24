@@ -1,15 +1,16 @@
 define(function(require){
-  function merge(obj1, obj2) {
+  function merge() {
     'use strict';
+    var i = 0;
+    var n = arguments.length;
+    var combined = {};
 
-    var obj3 = {};
-    for (var x in obj1) {
-      obj3[x] = obj1[x];
+    for (i; i<n; i++) {
+      for (var key in arguments[i]) {
+        combined[key] = arguments[i][key];
+      }
     }
-    for (var y in obj2) {
-      obj3[y] = obj2[y];
-    }
-    return obj3;
+    return combined;
   }
 
   return merge;
