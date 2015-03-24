@@ -23,6 +23,10 @@ module.exports = {
     files: '<%= package.paths.assetsrc %>/images/**/*.{png,jpg,jpeg,gif}',
     tasks: ['config:dev', 'newer:imagemin', 'newer:copy:images']
   },
+  icons: {
+    files: '<%= package.paths.src %>/**/*.ico',
+    tasks: ['config:dev', 'newer:copy:images']
+  },
   svg: {
     files: '<%= package.paths.assetsrc %>/images/**/*.svg',
     tasks: ['config:dev', 'newer:svgmin', 'newer:copy:svg']
