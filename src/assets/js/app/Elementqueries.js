@@ -2,35 +2,35 @@ define(['require', 'config', 'Reflow', 'classes', 'idFactory'], function(require
   // min-width, max-width, min-height, max-height
   // Example value: linear:(min-width:600px) and (max-width:700px),test:(max-height:150px)
 
-  var Elementquery = function(e, b, c) {
+  var Elementquery = function(elem, queryString, continuous) {
     var self = this;
 
-    this.element = e;
-    this.continuous = c;
+    this.element = elem;
+    this.continuous = continuous;
 
     // Starting dimensions
-    this.height = e.offsetHeight;
-    this.width = e.offsetWidth;
+    this.height = elem.offsetHeight;
+    this.width = elem.offsetWidth;
 
     // Event to be emitted on change of breakpoint
     this.breakpointEvent = new Event('breakpoint');
     this.breakpointEvent.queries = this;
 
     // An identifier to use in the classname later
-    this.identifier = idFactory(e);
+    this.identifier = idFactory(elem);
 
     // Process the named breakpoints
-    this.breakpoints = this.queryFactory(b);
+    this.breakpoints = this.queryFactory(queryString);
 
     // Prepare element to broadcast resize events
-    this.reflow = new Reflow(e, c);
+    this.reflow = new Reflow(elem, continuous);
 
     // …Listen for those resize events
-    this.element.addEventListener('resizeEnd', function(e){
-      self.sizeChange.call(self,e);
+    this.element.addEventListener('resizeEnd', function(event){
+      self.sizeChange.call(self,event);
     });
-    this.element.addEventListener('debouncedResize', function(e){
-      self.sizeChange.call(self,e);
+    this.element.addEventListener('debouncedResize', function(event){
+      self.sizeChange.call(self,event);
     });
   };
 
@@ -99,13 +99,13 @@ define(['require', 'config', 'Reflow', 'classes', 'idFactory'], function(require
       return(obj);
     },
 
-    sizeChange: function(e){
+    sizeChange: function(event){
       var self = this;
       var key;
 
       // Update height and width
-      self.height = e.height;
-      self.width = e.width;
+      self.height = event.height;
+      self.width = event.width;
 
       // loop through query
       for (key in self.breakpoints) {
