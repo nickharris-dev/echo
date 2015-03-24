@@ -31,6 +31,7 @@ requirejs.config({
   config: {
     'config': {
       baseFontSize: baseFontSize(),
+      elementqueries: {},
       isDev: isDev(),
       jsReadyClass: ' js',
       touchEnabled: touchEnabled()
@@ -41,14 +42,16 @@ requirejs.config({
 // Helpers
 // =======
 function eq (node, continuous) {
-  require(['Elementqueries'], function(Elementquery){
-    node.elementqueries = new Elementquery(node, node.getAttribute('data-eq'), continuous);
+  require(['Elementqueries', 'idFactory', 'config'], function(Elementquery, idFactory, config){
+    var id = idFactory(node);
+    config.elementqueries[id] = new Elementquery(node, node.getAttribute('data-eq'), continuous);
   });
 }
 
 function nodeLoop(nodeList, func, arg1) {
   var i = 0;
   var n = nodeList.length;
+
   for (i;i<n;i++) {
 
     func(nodeList[i], arg1);
