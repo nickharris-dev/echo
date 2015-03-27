@@ -156,12 +156,11 @@ define(['require', 'config', 'Reflow', 'classes', 'idFactory'], function(require
 
       breakpoint.active = true;
 
-      self.breakpointEvent.breakpoint = key;
+      classes.add(self.element, breakpoint.className);
+
       self.breakpointEvent.active = true;
       self.breakpointEvent.breakpoint = breakpoint;
       self.element.dispatchEvent(self.breakpointEvent);
-
-      classes.add(self.element, breakpoint.className);
     },
 
     deactivate: function(key,obj) {
@@ -171,11 +170,11 @@ define(['require', 'config', 'Reflow', 'classes', 'idFactory'], function(require
 
       breakpoint.active = false;
 
+      classes.remove(self.element, breakpoint.className);
+
       self.breakpointEvent.active = false;
       self.breakpointEvent.breakpoint = breakpoint;
       self.element.dispatchEvent(self.breakpointEvent);
-
-      classes.remove(self.element, breakpoint.className);
     }
   };
 
