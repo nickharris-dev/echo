@@ -87,6 +87,8 @@ define(['require', 'config', 'Reflow', 'classes', 'idFactory'], function(require
         for (var val in obj[key]) {
           obj[key][val] = calculatedValue(obj[key][val]);
         }
+        // Store name
+        obj[key].name = key;
         // Set initial state as inactive
         obj[key].active = false;
         // Construct Classname
@@ -152,12 +154,14 @@ define(['require', 'config', 'Reflow', 'classes', 'idFactory'], function(require
       var breakpoints = obj || self.breakpoints;
       var breakpoint = breakpoints[key];
 
-      self.breakpointEvent.breakpoint = key;
-      self.breakpointEvent.active = true;
       breakpoint.active = true;
 
-      classes.add(self.element, breakpoint.className);
+      self.breakpointEvent.breakpoint = key;
+      self.breakpointEvent.active = true;
+      self.breakpointEvent.breakpoint = breakpoint;
       self.element.dispatchEvent(self.breakpointEvent);
+
+      classes.add(self.element, breakpoint.className);
     },
 
     deactivate: function(key,obj) {
@@ -165,12 +169,13 @@ define(['require', 'config', 'Reflow', 'classes', 'idFactory'], function(require
       var breakpoints = obj || self.breakpoints;
       var breakpoint = breakpoints[key];
 
-      self.breakpointEvent.breakpoint = key;
-      self.breakpointEvent.active = false;
       breakpoint.active = false;
 
-      classes.remove(self.element, breakpoint.className);
+      self.breakpointEvent.active = false;
+      self.breakpointEvent.breakpoint = breakpoint;
       self.element.dispatchEvent(self.breakpointEvent);
+
+      classes.remove(self.element, breakpoint.className);
     }
   };
 
