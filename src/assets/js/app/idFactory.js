@@ -4,7 +4,7 @@ define(function(require){
     var str;
 
     if (node.getAttribute('id')) {
-      str = node.getAttribute('id');
+      str = node.getAttribute('id').toLowerCase();
     } else if (node.classList) {
       str = node.classList[0];
     } else {
