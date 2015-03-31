@@ -22,8 +22,18 @@ $gutter: (12/$base-font-size)+rem;
 // Base
 // ====
 html {
+  box-sizing: border-box;
   font-family: $body-copy;
   font-size: $base-font-size+px;
+}
+
+* {
+  box-sizing: inherit;
+
+  &:before,
+  &:after {
+    box-sizing: inherit;
+  }
 }
 
 body {
