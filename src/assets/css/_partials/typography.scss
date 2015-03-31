@@ -1,7 +1,6 @@
 $body-copy: 'Vitesse A', 'Vitesse B', Georgia;
 
 $base-font-size: 16;
-$typography-break: 560/$base-font-size+rem;
 
 // Grid
 // ====
@@ -31,9 +30,6 @@ body {
   @include type-scale(3);
   font-style: normal;
   font-weight: 400;
-  @media (min-width: $typography-break) {
-    @include type-scale(4);
-  }
 }
 
 
@@ -51,26 +47,17 @@ h1 {
   @include type-scale(7);
   margin-bottom: 3*$baseline+rem;
   margin-top: 3*$baseline+rem;
-  @media (min-width: $typography-break) {
-    @include type-scale(11);
-  }
 }
 
 h2 {
   @include type-scale(6);
   margin-bottom: 3*$baseline+rem;
   margin-top: 3*$baseline+rem;
-  @media (min-width: $typography-break){
-    @include type-scale(7);
-  }
 }
 
 h3 {
   @include type-scale(5);
   margin-bottom: 0;
-  @media (min-width: $typography-break) {
-    @include type-scale(6);
-  }
 
   + p {
     margin-top: 0;
@@ -95,9 +82,6 @@ ol {
   margin: 3*$baseline+rem auto;
   max-width: 35em;
   padding-left: 0;
-  @media (min-width: $typography-break) {
-    min-width: 18em;
-  }
 }
 
 li {
@@ -155,18 +139,6 @@ blockquote {
     line-height: (24/22);
     margin-left: .2em;
     position: absolute;
-  }
-
-  @media (min-width: $typography-break) {
-    > p:first-of-type:before {
-      font-size: nth($scale-type-size, 6)+rem;
-      line-height: (24/26);
-    }
-
-    > p:last-of-type:after {
-      font-size: nth($scale-type-size, 6)+rem;
-      line-height: (24/26);
-    }
   }
 }
 
