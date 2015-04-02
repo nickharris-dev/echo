@@ -3,7 +3,7 @@ module.exports = {
     files: [{
       expand: true,
       cwd: '<%= package.paths.src %>/',
-      src: '**/*.svg}',
+      src: '**/*.svg',
       dest: '<%= package.paths.src %>/'
     }]
   }
