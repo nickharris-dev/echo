@@ -1,3 +1,20 @@
+// Functions
+// =========
+@function palette($key1, $key2:null) {
+  @if map-has-key($palette, $key1) {
+    @if $key2 {
+      @return map-get(map-get($palette, $key1), $key2);
+    } @else {
+      @return map-get($palette, $key1);
+    }
+  }
+
+  @warn "Unknown `#{$key1}` in $palette.";
+  @return null;
+}
+
+// Mixins
+// ======
 @mixin background-image($url, $ext) {
   @media (-webkit-max-device-pixel-ratio: 1.9), (max-resolution: 191dpi), (max-resolution: 1.9dppx) {
     background-image: url($url + '.' + $ext);
@@ -14,6 +31,8 @@
   }
 }
 
+// Extensions
+// ==========
 %touch-scrollable {
   -webkit-overflow-scrolling: touch;
   overflow-y: scroll;

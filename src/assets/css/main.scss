@@ -1,7 +1,12 @@
 // Palette
 // =======
-$icewhite: #fff;
-$jetblack: #000;
+$transparent: transparent;
+$palette: (
+  air: $transparent,
+  icewhite: rgb(255, 255, 255),
+  jetblack: rgb(0, 0, 0),
+  neutral: rgb(70 ,70, 70)
+);
 
 
 // Stylesheets
