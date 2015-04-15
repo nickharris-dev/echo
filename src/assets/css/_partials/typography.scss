@@ -87,7 +87,10 @@ p {
 // Lists
 // =====
 ul,
-ol {
+ol,
+dl,
+nav,
+menu {
   list-style: none;
   margin: 3*$baseline+rem auto;
   max-width: 35em;
@@ -166,11 +169,20 @@ abbr {
   cursor: help;
 }
 
+address {
+  margin: $baseline+rem auto;
+  max-width: 38em;
+}
+
+pre {
+  margin: $baseline+rem auto;
+  max-width: 38em;
+}
+
 .acronym {
   letter-spacing: .05em;
   text-transform: uppercase;
 }
-
 
 // Links
 // =====
