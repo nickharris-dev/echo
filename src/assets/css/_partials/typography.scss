@@ -19,6 +19,13 @@ $gutter: (12/$base-font-size)+rem;
   line-height: $lh;
 }
 
+// Helpers
+// =======
+%uppercase {
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
 // Base
 // ====
 html {
@@ -180,8 +187,7 @@ pre {
 }
 
 .acronym {
-  letter-spacing: .05em;
-  text-transform: uppercase;
+  @extend %uppercase;
 }
 
 // Links
