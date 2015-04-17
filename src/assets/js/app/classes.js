@@ -13,8 +13,17 @@ define(['require'], function(){
     },
 
     add: function(el, str) {
-      if (el.classList)
-        el.classList.add(str);
+      if (el.classList) {
+        var i = 0;
+        var n;
+
+        str = str.split(' ');
+        n = str.length;
+
+        for (i; i<n; i++) {
+          el.classList.add(str[i]);
+        }
+      }
       else
         el.className += ' ' + str;
     },
