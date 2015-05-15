@@ -1,29 +1,15 @@
 // Scale
 // http://modularscale.com/scale/?px1=16&px2=14&ra1=1.6&ra2=0
 // =================================================================
-$scale-type-size: (
-  (9/$base-font-size),    // 1
-  (10/$base-font-size),   // 2
-  (14/$base-font-size),   // 3
-  (16/$base-font-size),   // 4
-  (22/$base-font-size),   // 5
-  (26/$base-font-size),   // 6
-  (36/$base-font-size),   // 7
-  (41/$base-font-size),   // 8
-  (58/$base-font-size),   // 9
-  (66/$base-font-size),   // 10
-  (91/$base-font-size)    // 11
-);
-$scale-line-height: (
-  (16/9),    // 1
-  (16/10),   // 2
-  (24/14),   // 3
-  (24/16),   // 4
-  (32/22),   // 5
-  (40/26),   // 6
-  (48/36),   // 7
-  (48/41),   // 8
-  (64/58),   // 9
-  (72/66),   // 10
-  (104/91)    // 11
-);
+$typographic-scale:
+  9 $baseline,
+  10 $baseline,
+  14 2*$baseline,
+  16 2*$baseline,
+  22 2*$baseline,
+  26 2*$baseline,
+  36 3*$baseline,
+  41 3*$baseline,
+  58 5*$baseline,
+  66 5*$baseline,
+  91 8*$baseline;

@@ -1,7 +1,7 @@
 @import 'main';
 
 .grid-unit {
-  height: $baseline+rem;
+  height: rem($baseline);
   padding: $gutter;
   width: $column;
 }

@@ -1,5 +1,21 @@
 // Functions
 // =========
+@function rem($integer) {
+  @if ($rems) {
+    @return ($integer/$base-font-size)+rem;
+  } @else {
+    @return $integer+px;
+  }
+}
+
+@function datauri($name) {
+  @if ($svgs) {
+    @return url(map-get(map-get($datauris, $name), svg));
+  } @else {
+    @return url(map-get(map-get($datauris, $name), png));
+  }
+}
+
 @function palette($key1, $key2:null) {
   @if map-has-key($palette, $key1) {
     @if $key2 {

@@ -5,17 +5,17 @@ $base-font-size: 16;
 // Grid
 // ====
 $column: percentage(1/24);
-$baseline: (14/$base-font-size);
-$gutter: (12/$base-font-size)+rem;
+$baseline: 14;
+$gutter: rem(12);
 
 // Scale
 // =====
 @import 'type-scale';
 
 @mixin type-scale($n) {
-  $size: nth($scale-type-size, $n);
-  $lh: nth($scale-line-height, $n);
-  font-size: $size+rem;
+  $s: nth(nth($typographic-scale, $n), 1);
+  $lh: nth(nth($typographic-scale, $n), 2)/$s;
+  font-size: rem($s);
   line-height: $lh;
 }
 
@@ -62,14 +62,14 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   @include type-scale(7);
-  margin-bottom: 3*$baseline+rem;
-  margin-top: 3*$baseline+rem;
+  margin-bottom: rem(3*$baseline);
+  margin-top: rem(3*$baseline);
 }
 
 h2 {
   @include type-scale(6);
-  margin-bottom: 3*$baseline+rem;
-  margin-top: 3*$baseline+rem;
+  margin-bottom: rem(3*$baseline);
+  margin-top: rem(3*$baseline);
 }
 
 h3 {
@@ -85,7 +85,7 @@ h3 {
 // Paragraphs
 // ==========
 p {
-  margin: 3*$baseline+rem auto;
+  margin: rem(3*$baseline) auto;
   max-width: 35em;
   min-width: 18em;
 }
@@ -99,14 +99,14 @@ dl,
 nav,
 menu {
   list-style: none;
-  margin: 3*$baseline+rem auto;
+  margin: rem(3*$baseline) auto;
   max-width: 35em;
   padding-left: 0;
 }
 
 li {
   &:before {
-    margin-left: -.75rem;
+    margin-left: -.75em;
     position: absolute;
   }
 }
@@ -123,8 +123,8 @@ ol {
 
     &:before {
       content: counter(olcounter);
-      font-size: nth($scale-type-size, 2)+rem;
-      line-height: (24/9);
+      font-size: rem(nth(nth($typographic-scale, 2), 1));
+      line-height: (2*$baseline)/nth(nth($typographic-scale, 2), 1);
     }
   }
 }
@@ -142,10 +142,10 @@ blockquote {
     &:before {
       content: '“';
       display: block;
-      font-size: nth($scale-type-size, 5)+rem;
+      font-size: rem(nth(nth($typographic-scale, 5), 1));
       font-weight: 100;
       left: -.5em;
-      line-height: (24/22);
+      line-height: (2*$baseline)/nth(nth($typographic-scale, 5), 1);
       position: absolute;
     }
   }
@@ -153,10 +153,10 @@ blockquote {
   > p:last-of-type:after {
     content: '”';
     display: inline;
-    font-size: nth($scale-type-size, 5)+rem;
+    font-size: rem(nth(nth($typographic-scale, 5), 1));
     font-style: normal;
     font-weight: 100;
-    line-height: (24/22);
+    line-height: (2*$baseline)/nth(nth($typographic-scale, 5), 1);
     margin-left: .2em;
     position: absolute;
   }
@@ -177,12 +177,12 @@ abbr {
 }
 
 address {
-  margin: $baseline+rem auto;
+  margin: rem($baseline) auto;
   max-width: 38em;
 }
 
 pre {
-  margin: $baseline+rem auto;
+  margin: rem($baseline) auto;
   max-width: 38em;
 }
 

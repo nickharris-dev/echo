@@ -114,10 +114,8 @@ define(['require', 'config', 'response', 'getStyle'], function(require, config, 
     gutterWidth = calculateUnits(gutterWidth,gutterU,colWidth);
 
     // Baseline
-    var fontSize = getComputedStyle(overlay).fontSize;
-    fontSize = parseFloat(fontSize);
     baseLineHeight = parseFloat(gridUnit.match(/height:\s*(\d.*\d*);/)[1]);
-    baseLineHeight = fontSize*baseLineHeight;
+    baseLineHeight = config.baseFontSize*baseLineHeight;
   }
 
   function createGrid() {
