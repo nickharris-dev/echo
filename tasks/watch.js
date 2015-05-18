@@ -3,6 +3,10 @@ module.exports = {
     files: ['package.json','data/*.json'],
     tasks: ['config:dev', 'replace', 'assemble', 'htmlmin', 'clean:temp']
   },
+  helpers: {
+    files: 'helpers/*.js',
+    tasks: ['config:dev', 'replace', 'assemble', 'htmlmin', 'clean:temp']
+  },
   templates: {
     files: '<%= package.paths.src %>/_*/**/*.hbs',
     tasks: ['config:dev', 'replace', 'assemble', 'htmlmin', 'clean:temp']
