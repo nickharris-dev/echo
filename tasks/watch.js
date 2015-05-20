@@ -8,16 +8,20 @@ module.exports = {
     tasks: ['config:dev', 'replace', 'assemble', 'htmlmin', 'clean:temp']
   },
   templates: {
-    files: '<%= package.paths.src %>/_*/**/*.hbs',
+    files: ['<%= package.paths.src %>/_*/**/*.hbs', '<%= package.paths.src %>/_partials/critical-css.hbs'],
     tasks: ['config:dev', 'replace', 'assemble', 'htmlmin', 'clean:temp']
   },
   markup: {
     files: ['<%= package.paths.src %>/**/*.hbs', '!<%= package.paths.src %>/_*/**/*.hbs'],
     tasks: ['config:dev', 'newer:replace', 'newer:assemble', 'newer:htmlmin', 'clean:temp']
   },
-  style: {
-    files: '<%= package.paths.assetsrc %>/css/**/*.scss',
-    tasks: ['config:dev', 'newer:scsslint', 'sass', 'autoprefixer:dev', 'clean:temp']
+  criticalcss: {
+    files: ['<%= package.paths.assetsrc %>/css/**/critical.scss'],
+    tasks: ['config:dev', 'newer:scsslint', 'sass:critical', 'autoprefixer:critical', 'replace', 'assemble', 'htmlmin', 'clean:temp']
+  },
+  css: {
+    files: ['<%= package.paths.assetsrc %>/css/**/*.scss', '!<%= package.paths.assetsrc %>/css/**/critical.scss'],
+    tasks: ['config:dev', 'newer:scsslint', 'sass:build', 'autoprefixer:dev', 'clean:temp']
   },
   scripts: {
     files: '<%= package.paths.assetsrc %>/js/**/*.js',
