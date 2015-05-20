@@ -10,7 +10,7 @@ module.exports = {
     },
     files: [{
       expand: true,
-      cwd: '<%= grunt.config.get("dest") %>/',
+      cwd: '<%= package.paths.temp %>/',
       dest: '<%= grunt.config.get("dest") %>',
       src: '**/*.html'
     }]

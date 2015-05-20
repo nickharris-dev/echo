@@ -16,7 +16,7 @@ module.exports = {
       sourcemap: false
     },
     files: {
-      '<%= package.paths.temp %>/css/critical-css.hbs' : '<%= package.paths.assetsrc %>/css/critical.scss'
+      '<%= package.paths.temp %>/critical-css.hbs' : '<%= package.paths.assetsrc %>/css/critical.scss'
     }
   }
 };

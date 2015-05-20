@@ -1,4 +1,12 @@
 module.exports = {
+  html: {
+    files: [{
+      expand: true,
+      cwd: '<%= package.paths.temp %>/',
+      src: ['**/*.html'],
+      dest: '<%= grunt.config.get("dest") %>/'
+    }]
+  },
   javascript: {
     files: [{
       expand: true,
