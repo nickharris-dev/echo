@@ -26,22 +26,22 @@ server:
 dev:
   - 'config:dev'
   - 'clean:build'
+  - 'devstyles'
   - 'markup'
   - 'media'
   - 'jshint'
   - 'copy:javascript'
-  - 'devstyles'
   - 'clean:temp'
   - 'server'
 
 deploy:
   - 'config:production'
   - 'clean:build'
+  - 'productionstyles'
   - 'markup'
   - 'media'
   - 'jshint'
   - 'copy:javascript'
-  - 'productionstyles'
   - 'clean:temp'
 
 default:
