@@ -8,7 +8,7 @@ module.exports = function (grunt) {
       ]
     },
     options: {
-      open: false,
+      browser: 'google chrome canary',
       server: {
         baseDir: '<%= package.paths.destinations.dev %>',
       },
