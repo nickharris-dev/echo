@@ -6,9 +6,6 @@
   "shortname": "echo",
   "license": "BSD",
   "main": "gruntfile.js",
-  "filenames": {
-    "css": "echo"
-  },
   "paths": {
     "src": "src",
     "assetsrc": "src/assets",
