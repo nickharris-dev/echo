@@ -1,4 +1,8 @@
-@import 'main';
+// Flags
+// =====
+$rems: true;
+$svgs: true;
+@import '_partials/helpers';
 
 .grid-unit {
   height: rem($baseline);

@@ -31,6 +31,13 @@
 
 // Mixins
 // ======
+@mixin type-scale($n) {
+  $s: nth(nth($typographic-scale, $n), 1);
+  $lh: nth(nth($typographic-scale, $n), 2)/$s;
+  font-size: rem($s);
+  line-height: $lh;
+}
+
 @mixin background-image($url, $ext) {
   @media (-webkit-max-device-pixel-ratio: 1.9), (max-resolution: 191dpi), (max-resolution: 1.9dppx) {
     background-image: url($url + '.' + $ext);
@@ -61,3 +68,5 @@
     display: table;
   }
 }
+
+@import 'variables';
