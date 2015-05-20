@@ -13,10 +13,12 @@ media:
 devstyles:
   - 'scsslint'
   - 'sass'
+  - 'autoprefixer:critical'
   - 'autoprefixer:dev'
 
 productionstyles:
   - 'sass'
+  - 'autoprefixer:critical'
   - 'autoprefixer:production'
 
 server:
