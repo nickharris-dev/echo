@@ -14,6 +14,6 @@ module.exports = function(grunt) {
   });
 
   grunt.event.on('watch', function(action, filepath, target) {
-    grunt.log.writeln(target + ': ' + filepath + action);
+    grunt.log.writeln('Watch: ' + target);
   });
 };
