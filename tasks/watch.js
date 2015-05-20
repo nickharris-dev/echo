@@ -5,11 +5,11 @@ module.exports = {
   },
   templates: {
     files: '<%= package.paths.src %>/_*/**/*.hbs',
-    tasks: ['config:dev', 'replace', 'assemble', 'htmlmin', 'clean:temp']
+    tasks: ['config:dev', 'replace', 'assemble', 'htmlmin', 'copy:favicon', 'clean:temp']
   },
   markup: {
     files: ['<%= package.paths.src %>/**/*.hbs', '!<%= package.paths.src %>/_*/**/*.hbs'],
-    tasks: ['config:dev', 'newer:replace', 'newer:assemble', 'newer:htmlmin', 'clean:temp']
+    tasks: ['config:dev', 'newer:replace', 'newer:assemble', 'newer:htmlmin', 'copy:favicon', 'clean:temp']
   },
   criticalcss: {
     files: '<%= package.paths.assetsrc %>/css/**/critical.scss',

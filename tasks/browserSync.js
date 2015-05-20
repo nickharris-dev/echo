@@ -2,7 +2,8 @@ module.exports = function (grunt) {
   return {
     bsFiles: {
       src: [
-        '<%= package.paths.destinations.dev %>/**/*'
+        '<%= package.paths.destinations.dev %>/**/*',
+        '!<%= package.paths.destinations.dev %>/**/*.html'
       ]
     },
     options: {

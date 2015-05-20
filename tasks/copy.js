@@ -1,11 +1,8 @@
 module.exports = {
-  html: {
-    files: [{
-      expand: true,
-      cwd: '<%= package.paths.temp %>/',
-      src: ['**/*.html'],
-      dest: '<%= grunt.config.get("dest") %>/'
-    }]
+  favicon: {
+    files: {
+      '<%= grunt.config.get("dest") %>/favicon.ico': '<%= package.paths.src %>/favicon.ico'
+    }
   },
   javascript: {
     files: [{
