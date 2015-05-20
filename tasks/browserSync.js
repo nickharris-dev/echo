@@ -3,7 +3,8 @@ module.exports = function (grunt) {
     bsFiles: {
       src: [
         '<%= package.paths.destinations.dev %>/**/*',
-        '!<%= package.paths.destinations.dev %>/**/*.html'
+        '!<%= package.paths.destinations.dev %>/**/*.html',
+        '!<%= package.paths.destinations.dev %>/**/critical.css'
       ]
     },
     options: {

@@ -12,11 +12,22 @@ module.exports = {
     tasks: ['config:dev', 'newer:replace', 'newer:assemble', 'newer:htmlmin', 'copy:favicon', 'clean:temp']
   },
   criticalcss: {
-    files: '<%= package.paths.assetsrc %>/css/**/critical.scss',
-    tasks: ['config:dev', 'newer:scsslint', 'sass:critical', 'autoprefixer:critical']
+    files: [
+    '<%= package.paths.assetsrc %>/css/**/critical.scss',
+    '<%= package.paths.assetsrc %>/css/**/variables.scss',
+    '<%= package.paths.assetsrc %>/css/**/helpers.scss',
+    '<%= package.paths.assetsrc %>/css/**/type-scale.scss'
+  ],
+    tasks: ['config:dev', 'newer:scsslint', 'sass', 'autoprefixer:dev', 'autoprefixer:critical']
   },
   css: {
-    files: ['<%= package.paths.assetsrc %>/css/**/*.scss', '!<%= package.paths.assetsrc %>/css/**/critical.scss'],
+    files: [
+      '<%= package.paths.assetsrc %>/css/**/*.scss',
+      '!<%= package.paths.assetsrc %>/css/**/critical.scss',
+      '!<%= package.paths.assetsrc %>/css/**/variables.scss',
+      '!<%= package.paths.assetsrc %>/css/**/helpers.scss',
+      '!<%= package.paths.assetsrc %>/css/**/type-scale.scss'
+    ],
     tasks: ['config:dev', 'newer:scsslint', 'sass:build', 'autoprefixer:dev', 'clean:temp']
   },
   scripts: {

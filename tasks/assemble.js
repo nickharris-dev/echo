@@ -13,7 +13,7 @@ module.exports = {
       expand: true,
       cwd: '<%= package.paths.temp %>/',
       dest: '<%= grunt.config.get("dest") %>',
-      src: ['**/*.hbs', '!_*/**']
+      src: ['**/*.hbs', '!**/critical-css.hbs', '!_*/**']
     }]
   }
 };

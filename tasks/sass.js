@@ -7,7 +7,7 @@ module.exports = {
       expand: true,
       cwd: '<%= package.paths.assetsrc %>/css',
       dest: '<%= package.paths.temp %>/css',
-      src: ['*.scss', '!critical.scss'],
+      src: ['*.scss'],
       ext: '.css'
     }]
   },
