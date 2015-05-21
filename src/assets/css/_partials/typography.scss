@@ -58,6 +58,13 @@ p {
   min-width: 18em;
 }
 
+// Paragraphs
+// ==========
+p {
+  font-feature-settings: 'onum' 1, 'pnum' 1;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
 // Lists
 // =====
 ul,
