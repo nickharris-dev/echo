@@ -11,10 +11,9 @@
     <style>
       {{> critical-css}}
     </style>
+    <link href="{{ assets }}/css/global.css?v={{{ moment }}}" rel="stylesheet">
     {{#is '@@environment' 'development'}}
       <link href="{{ assets }}/css/dev.css?v={{{ moment }}}" rel="stylesheet">
-    {{else}}
-      <link href="{{ assets }}/css/main.css?v={{{ moment }}}" rel="stylesheet">
     {{/is}}
   </head>
   <body>
