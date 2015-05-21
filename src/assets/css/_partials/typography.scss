@@ -21,11 +21,8 @@ body {
 // Headings
 // ========
 h1, h2, h3, h4, h5, h6 {
-  font-style: normal;
-  font-weight: 300;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 35em;
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
+  font-variant-numeric: lining-nums proportional-nums;
 }
 
 h1 {
@@ -106,6 +103,8 @@ ol {
 // Tables
 // ======
 table {
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
+  font-variant-numeric: lining-nums tabular-nums;
   margin: rem(2*$baseline) auto;
   max-width: 38em;
   min-width: 21em;
