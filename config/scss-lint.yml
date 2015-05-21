@@ -73,7 +73,11 @@ linters:
 
   PropertySpelling:
     enabled: true
-    extra_properties: ['*text-indent','*zoom']
+    extra_properties: [
+      'font-variant-numeric',
+      '*text-indent',
+      '*zoom'
+    ]
 
   SelectorDepth:
     enabled: true
