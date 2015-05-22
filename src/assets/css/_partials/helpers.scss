@@ -31,11 +31,12 @@
 
 // Mixins
 // ======
-@mixin type-scale($n) {
-  $s: nth(nth($typographic-scale, $n), 1);
-  $lh: nth(nth($typographic-scale, $n), 2)/$s;
-  font-size: rem($s);
-  line-height: $lh;
+@mixin type-scale($fontsize, $lineheight: null) {
+  $size: nth($typographic-scale, $fontsize);
+  font-size: rem($size);
+  @if ($lineheight) {
+    line-height: ($lineheight*$baseline)/$size;
+  }
 }
 
 @mixin background-image($url, $ext) {

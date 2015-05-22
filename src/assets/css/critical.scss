@@ -10,9 +10,9 @@ html {
 }
 
 body {
-  @include type-scale(3);
+  @include type-scale(4, 1);
   margin: 0;
-  padding-top: rem(6*$baseline);
+  padding: 0;
 }
 
 // Headings
@@ -22,6 +22,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: auto;
   margin-right: auto;
   max-width: 22em;
+}
+
+h1 {
+  @include type-scale(7, 2);
 }
 
 // Paragraphs

@@ -25,34 +25,12 @@ h1, h2, h3, h4, h5, h6 {
   font-variant-numeric: lining-nums proportional-nums;
 }
 
-h1 {
-  @include type-scale(7);
-  margin-bottom: rem(3*$baseline);
-  margin-top: rem(3*$baseline);
-}
-
-h2 {
-  @include type-scale(6);
-  margin-bottom: rem(3*$baseline);
-  margin-top: rem(3*$baseline);
-}
-
-h3 {
-  @include type-scale(5);
-  margin-bottom: 0;
-
-  + p {
-    margin-top: 0;
-  }
-}
-
-
 // Paragraphs
 // ==========
 p {
-  margin: rem(3*$baseline) auto;
-  max-width: 35em;
-  min-width: 18em;
+  margin: rem($baseline) auto;
+  max-width: 38em;
+  min-width: 22em;
 }
 
 // Paragraphs
@@ -70,8 +48,8 @@ dl,
 nav,
 menu {
   list-style: none;
-  margin: rem(3*$baseline) auto;
-  max-width: 35em;
+  margin: rem($baseline) auto;
+  max-width: 38em;
   padding-left: 0;
 }
 
@@ -105,9 +83,9 @@ ol {
 table {
   font-feature-settings: 'lnum' 1, 'tnum' 1;
   font-variant-numeric: lining-nums tabular-nums;
-  margin: rem(2*$baseline) auto;
+  margin: rem($baseline) auto;
   max-width: 38em;
-  min-width: 21em;
+  min-width: 22em;
   width: 100%;
 }
 
