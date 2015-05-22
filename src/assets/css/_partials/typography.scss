@@ -58,6 +58,15 @@ li {
     margin-left: -.75em;
     position: absolute;
   }
+
+  ul,
+  ol {
+    margin: 0;
+  }
+
+  li {
+    margin-left: 2em;
+  }
 }
 
 ul li:before {
@@ -100,23 +109,21 @@ blockquote {
     position: relative;
 
     &:before {
+      @include type-scale(5, 1);
       content: '“';
       display: block;
-      font-size: rem(nth(nth($typographic-scale, 5), 1));
       font-weight: 100;
       left: -.5em;
-      line-height: (2*$baseline)/nth(nth($typographic-scale, 5), 1);
       position: absolute;
     }
   }
 
   > p:last-of-type:after {
+    @include type-scale(5, 1);
     content: '”';
     display: inline;
-    font-size: rem(nth(nth($typographic-scale, 5), 1));
     font-style: normal;
     font-weight: 100;
-    line-height: (2*$baseline)/nth(nth($typographic-scale, 5), 1);
     margin-left: .2em;
     position: absolute;
   }
