@@ -102,10 +102,12 @@ table {
 // Quotes
 // ======
 blockquote {
-  margin: 0;
+  margin: rem($baseline) auto;
+  max-width: 38rem;
   padding: 0;
 
   > p:first-of-type {
+    margin-top: 0;
     position: relative;
 
     &:before {
@@ -118,14 +120,18 @@ blockquote {
     }
   }
 
-  > p:last-of-type:after {
-    @include type-scale(5, 1);
-    content: '”';
-    display: inline;
-    font-style: normal;
-    font-weight: 100;
-    margin-left: .2em;
-    position: absolute;
+  > p:last-of-type {
+    margin-bottom: 0;
+
+    &:after {
+      @include type-scale(5, 1);
+      content: '”';
+      display: inline;
+      font-style: normal;
+      font-weight: 100;
+      margin-left: .2em;
+      position: absolute;
+    }
   }
 }
 
