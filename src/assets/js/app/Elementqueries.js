@@ -17,7 +17,9 @@ define(['require', 'config', 'Reflow', 'classes', 'idFactory'], function(require
     this.breakpointEvent.queries = this;
 
     // An identifier to use in the classname later
-    this.identifier = idFactory(elem);
+    if (elem.className || elem.getAttribute('id')) {
+      this.identifier = idFactory(elem);
+    }
 
     // Process the named breakpoints
     this.breakpoints = this.queryFactory(queryString);
@@ -92,7 +94,11 @@ define(['require', 'config', 'Reflow', 'classes', 'idFactory'], function(require
         // Set initial state as inactive
         obj[key].active = false;
         // Construct Classname
-        obj[key].className = self.identifier + '--' + key;
+        if (self.identifier) {
+          obj[key].className = self.identifier + '--' + key;
+        } else {
+          obj[key].className = key;
+        }
         // Check breakpoint
         self.checkBreakpoint(key,obj);
       }

@@ -48,6 +48,14 @@ function eq (node, continuous) {
   });
 }
 
+function typography (node) {
+  require(['Elementqueries', 'config'], function(Elementquery, config){
+    var str = 'type-break:(min-width:' + node.getAttribute('data-type-break') + ')';
+    config.elementqueries.typography = config.elementqueries.typography || [];
+    config.elementqueries.typography.push(new Elementquery(node, str, false));
+  });
+}
+
 function nodeLoop(nodeList, func, arg1) {
   var i = 0;
   var n = nodeList.length;
@@ -69,6 +77,7 @@ require(['config'], function(config){
 
 // Element Queries
 // ===============
+nodeLoop(document.querySelectorAll('[data-type-break]'), typography);
 nodeLoop(document.querySelectorAll('[data-eq]'), eq, false);
 
 // Media Handling
