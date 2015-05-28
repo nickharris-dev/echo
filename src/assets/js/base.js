@@ -33,7 +33,6 @@ requirejs.config({
       baseFontSize: baseFontSize(),
       elementqueries: {},
       isDev: isDev(),
-      jsReadyClass: ' js',
       touchEnabled: touchEnabled()
     }
   }
@@ -67,9 +66,6 @@ function nodeLoop(nodeList, func, arg1) {
 }
 
 require(['config'], function(config){
-  // Add js class to html element
-  // ============================
-  document.querySelector('html').className = document.querySelector('html').className += config.jsReadyClass;
   // Development js
   // ==============
   if (config.isDev) require(['grid','dev']);
