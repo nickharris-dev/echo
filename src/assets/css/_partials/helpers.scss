@@ -1,15 +1,19 @@
+$norems: false !default;
+$nosvgs: false !default;
+$nomediaqueries: false !default;
+
 // Functions
 // =========
 @function rem($integer) {
-  @if ($rems) {
-    @return ($integer/$base-font-size)+rem;
-  } @else {
+  @if $norems {
     @return $integer+px;
+  } @else {
+    @return ($integer/$base-font-size)+rem;
   }
 }
 
 @function datauri($name) {
-  @if ($svgs) {
+  @if ($nosvgs) {
     @return url(map-get(map-get($datauris, $name), svg));
   } @else {
     @return url(map-get(map-get($datauris, $name), png));
@@ -40,11 +44,40 @@
 }
 
 @mixin background-image($url, $ext) {
-  @media (-webkit-max-device-pixel-ratio: 1.9), (max-resolution: 191dpi), (max-resolution: 1.9dppx) {
-    background-image: url($url + '.' + $ext);
+  @if $ext == 'svg' {
+    @if $nosvgs {
+      background-image: url($url + '.png');
+    } @else {
+      background-image: url($url + '.' + $ext);
+    }
+  } @else {
+    @if $nomediaqueries {
+      background-image: url($url + '.' + $ext);
+    } @else {
+      @media (-webkit-max-device-pixel-ratio: 1.9), (max-resolution: 191dpi), (max-resolution: 1.9dppx) {
+        background-image: url($url + '.' + $ext);
+      }
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+        background-image: url($url + '@2x.' + $ext);
+      }
+    }
   }
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-    background-image: url($url + '@2x.' + $ext);
+
+}
+
+@mixin breakpoint($point) {
+  @if $nomediaqueries {
+    @content;
+  } @else {
+    @if $point == empire {
+      @media #{$bp__empire} {@content;}
+    } @else if $point == kingdom {
+      @media #{$bp__kingdom} {@content;}
+    } @else if $point == country {
+      @media #{$bp__country} {@content;}
+    } @else if $point == city {
+      @media #{$bp__city} {@content;}
+    }
   }
 }
 

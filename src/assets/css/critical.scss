@@ -1,16 +1,24 @@
-// Flags
-// =====
-$rems: true;
-$svgs: true;
 @import '_partials/helpers';
 
 html {
+  box-sizing: border-box;
   font-family: $body-copy;
   font-size: $base-font-size+px;
+
+  * {
+    box-sizing: inherit;
+
+    &:before,
+    &:after {
+      box-sizing: inherit;
+    }
+  }
 }
 
 body {
   @include type-scale(4, 1);
+  font-style: normal;
+  font-weight: 400;
   padding: 0;
 }
 
