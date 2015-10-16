@@ -1,0 +1,46 @@
+@import '_partials/helpers';
+
+html {
+  box-sizing: border-box;
+  font-family: $body-copy;
+  font-size: $base-font-size+px;
+
+  * {
+    box-sizing: inherit;
+
+    &:before,
+    &:after {
+      box-sizing: inherit;
+    }
+  }
+}
+
+body {
+  @include type-scale(4, 1);
+  font-style: normal;
+  font-weight: 400;
+  padding: 0;
+}
+
+// Headings
+// ========
+h1, h2, h3, h4, h5, h6 {
+  font-family: $heading;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 22em;
+}
+
+h1 {
+  @include type-scale(7, 2);
+}
+
+// Paragraphs
+// ==========
+p {
+  margin: rem(2*$baseline) auto;
+  max-width: 38em;
+  min-width: 21em;
+}
+
+@import '_partials/header';
