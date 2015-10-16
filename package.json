@@ -1,12 +1,12 @@
 {
-  "name": "helen",
+  "name": "echo",
   "author": "Nick Harris",
-  "shortname": "helenstephens",
-  "description": "Helen Stephens Portfolio Site",
+  "shortname": "echo",
+  "description": "Nick Harris Project Start",
   "version": "2.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/pixelenvy/helen.git"
+    "url": "git@github.com:pixelenvy/echo.git"
   },
   "devDependencies": {
     "browser-sync": "^2.9.10",
