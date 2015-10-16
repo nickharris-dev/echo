@@ -37,16 +37,15 @@
     <link href="<?php echo assets_url(); ?>/css/global.css?v=2.0.0" rel="stylesheet">
     <?php
       $url = site_url();
-      if ($url != 'helenstephens.com') : ?>
+      if ($url == 'http://local.wordpress.dev') : ?>
       <link href="<?php echo assets_url(); ?>/css/dev.css" rel="stylesheet">
     <?php endif; ?>
 	</head>
 
 	<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
-
+  <?php echo assets_url(); ?>
 		<div id="container">
-
-			<header class="header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
+      <header class="header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 
 				<div id="inner-header" class="wrap cf">
 
