@@ -233,10 +233,10 @@ function bones_comments( $comment, $args, $depth ) {
 
 function assets_url() {
   $url = site_url();
-  if ($url == 'helenstephens.com') {
-    echo 'http://assets.helenstephens.com';
+  if ($url == 'http://local.wordpress.dev') {
+    return '//localhost:3002';
   } else {
-    echo 'http://localhost:3002';
+    return $url;
   }
 }
 
