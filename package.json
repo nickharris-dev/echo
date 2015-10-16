@@ -1,12 +1,12 @@
 {
-  "name": "helen",
+  "name": "crows",
   "author": "Nick Harris",
-  "shortname": "helenstephens",
-  "description": "Helen Stephens Portfolio Site",
+  "shortname": "crowsfootball",
+  "description": "Manchester Crows Website",
   "version": "2.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/pixelenvy/helen.git"
+    "url": "git@github.com:pixelenvy/Crows.git"
   },
   "devDependencies": {
     "browser-sync": "^2.9.10",

@@ -44,7 +44,7 @@
     dest: {
       images: './www/assets/images/',
       style: './www/assets/css/',
-      theme: './www/wordpress-default/wp-content/themes/helenstephens/'
+      theme: './www/wordpress-default/wp-content/themes/crowsfootball/'
     }
   }
 // Files
