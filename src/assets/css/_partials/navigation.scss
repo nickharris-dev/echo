@@ -1,7 +1,7 @@
 .primary-nav {
   @include type-scale(5, 1);
   background-color: palette(claret);
-  background-image: url('{{assets}}/images/logomark.svg');
+  background-image: url('<?php echo assets_url(); ?>/images/logomark.svg');
   background-position: 50% rem($baseline);
   background-repeat: no-repeat;
   background-size: rem(100) rem(3*$baseline);
