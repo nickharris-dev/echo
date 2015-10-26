@@ -100,7 +100,7 @@
         notify().write(err);
       }))
       .pipe(autoprefixer())
-      .pipe(cssmin())
+      .pipe(production(cssmin()))
       .pipe(rename(renameOptions))
       .pipe(gulp.dest(paths.src.theme));
   });
