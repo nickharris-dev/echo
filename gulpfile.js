@@ -53,7 +53,9 @@
     sassvariables: paths.src.style + '**/variables.scss',
     sasshelpers: paths.src.style + '**/helpers.scss',
     criticalstyles: paths.src.style + 'critical.scss',
-    headerstyles: paths.src.style + '**/header.scss'
+    headerstyles: paths.src.style + '**/header.scss',
+    navstyles: paths.src.style + '**/navigation.scss',
+    herostyles: paths.src.style + '**/hero.scss'
   }
 
 // Markup
@@ -166,14 +168,18 @@
       '!' + srcfiles.sassvariables,
       '!' + srcfiles.sasshelpers,
       '!' + srcfiles.criticalstyles,
-      '!' + srcfiles.headerstyles
+      '!' + srcfiles.headerstyles,
+      '!' + srcfiles.navstyles,
+      '!' + srcfiles.herostyles
     ], gulp.parallel('style'));
     // Critical Styles
     gulp.watch([
       srcfiles.sassvariables,
       srcfiles.sasshelpers,
       srcfiles.criticalstyles,
-      srcfiles.headerstyles
+      srcfiles.headerstyles,
+      srcfiles.navstyles,
+      srcfiles.herostyles
     ], gulp.parallel('theme', 'style'));
     // Images
     gulp.watch(paths.src.images + '**/*', gulp.parallel('images'));
