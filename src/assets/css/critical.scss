@@ -1,25 +1,19 @@
+// Flags
+// =====
+$rems: true;
+$svgs: true;
 @import '_partials/helpers';
 
 html {
-  box-sizing: border-box;
   font-family: $body-copy;
   font-size: $base-font-size+px;
-
-  * {
-    box-sizing: inherit;
-
-    &:before,
-    &:after {
-      box-sizing: inherit;
-    }
-  }
 }
 
 body {
-  @include type-scale(4, 1);
-  font-style: normal;
-  font-weight: 400;
-  padding: 0;
+  @include type-scale(3, 1);
+  color: palette(neutral, copy);
+  margin: 0;
+  padding-top: rem(3*$baseline);
 }
 
 // Headings
@@ -32,15 +26,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  @include type-scale(7, 2);
+  @include type-scale(7, 1.5);
+  margin-bottom: rem(1.5*$baseline);
+  margin-top: 0;
+  max-width: 16.625em;
+
+  + * {
+    margin-top: 0;
+  }
 }
 
 // Paragraphs
 // ==========
 p {
-  margin: rem(2*$baseline) auto;
+  margin: rem($baseline) auto;
   max-width: 38em;
   min-width: 21em;
 }
 
 @import '_partials/header';
+@import '_partials/navigation';
+@import '_partials/hero';

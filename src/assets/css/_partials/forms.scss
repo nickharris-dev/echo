@@ -1,0 +1,19 @@
+button,
+.button {
+  background-color: palette(claret);
+  border: 0 solid palette(claret);
+  box-sizing: border-box;
+  color: palette(icewhite);
+  overflow: hidden;
+  padding: rem($baseline/2) 0;
+  transition: background-color 150ms, border 150ms, color 150ms;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: palette(icewhite);
+    border: 1px solid palette(claret);
+    color: palette(claret);
+    outline: none;
+  }
+}

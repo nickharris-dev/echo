@@ -1,8 +1,77 @@
+// Base
+// ====
+html {
+  box-sizing: border-box;
+
+  * {
+    box-sizing: inherit;
+
+    &:before,
+    &:after {
+      box-sizing: inherit;
+    }
+  }
+}
+
+main {
+  padding: 0 $column;
+}
+
+.type-break {
+  @include type-scale(4, 1);
+}
+
 // Headings
 // ========
 h1, h2, h3, h4, h5, h6 {
+  @extend %override-margin-after;
   font-feature-settings: 'lnum' 1, 'pnum' 1;
+  font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+h1 {
+  .type-break & {
+    @include type-scale(8, 1.5);
+    max-width: 16.888888889em;
+  }
+}
+
+h2 {
+  @include type-scale(6, 1);
+  margin-bottom: rem($baseline/2);
+  margin-top: rem($baseline);
+  max-width: 22.166666667em;
+
+  .type-break & {
+    @include type-scale(7, 1.5);
+    max-width: 19em;
+  }
+}
+
+h3 {
+  @include type-scale(5, 1);
+  margin-bottom: 0;
+  max-width: 25.333333333em;
+
+  .type-break & {
+    @include type-scale(6, 1);
+    max-width: 25.333333333em;
+  }
+}
+
+h4 {
+  @include type-scale(4, 1);
+  margin-bottom: 0;
+  max-width: 33.25em;
+
+  .type-break & {
+    @include type-scale(5, 1);
+    max-width: 28.952380952em;
+  }
 }
 
 // Paragraphs
@@ -10,9 +79,6 @@ h1, h2, h3, h4, h5, h6 {
 p {
   font-feature-settings: 'onum' 1, 'pnum' 1;
   font-variant-numeric: oldstyle-nums proportional-nums;
-  margin: rem($baseline) auto;
-  max-width: 38em;
-  min-width: 22em;
 }
 
 // Lists
@@ -30,7 +96,6 @@ menu {
 
 li {
   &:before {
-    margin-left: -.75em;
     position: absolute;
   }
 
@@ -46,6 +111,7 @@ li {
 
 ul li:before {
   content: '•';
+  margin-left: -.75em;
 }
 
 ol {
@@ -55,11 +121,24 @@ ol {
     counter-increment: olcounter;
 
     &:before {
+      @include type-scale(2, 1);
       content: counter(olcounter);
-      font-size: rem(nth(nth($typographic-scale, 2), 1));
-      line-height: (2*$baseline)/nth(nth($typographic-scale, 2), 1);
+      margin-left: -1em;
     }
   }
+}
+
+dt {
+  font-feature-settings: 'lnum' 1, 'pnum' 1;
+  font-style: normal;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+dd {
+  margin-left: 2em;
 }
 
 // Tables
@@ -69,10 +148,13 @@ table {
   font-variant-numeric: lining-nums tabular-nums;
   margin: rem($baseline) auto;
   max-width: 38em;
-  min-width: 22em;
+  min-width: 19em;
   width: 100%;
 }
 
+td {
+  text-align: center;
+}
 
 // Quotes
 // ======
@@ -122,6 +204,10 @@ b {
 
 abbr {
   cursor: help;
+
+  &[title] {
+    border-bottom-width: 0;
+  }
 }
 
 address {
@@ -134,14 +220,37 @@ pre {
   max-width: 38em;
 }
 
-.acronym {
-  @extend %uppercase;
+.acronym,
+.hour,
+.postcode {
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 // Links
 // =====
 a {
+  box-shadow: inset 0 0 0 palette(claret);
+  text-decoration: none;
+  transition: box-shadow $transitionduration, color $transitionduration;
   white-space: nowrap;
+
+  &:link {
+    color: palette(claret);
+  }
+
+  &:visited {
+    color: palette(jetblack);
+  }
+
+  &:active,
+  &:focus,
+  &:hover {
+    box-shadow: inset 0 -1.2em 0 palette(claret);
+    color: palette(icewhite);
+  }
+
 }
 
 // Specials

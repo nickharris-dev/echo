@@ -1,0 +1,101 @@
+// Flags
+// =====
+$rems: true;
+$svgs: true;
+@import '_partials/helpers';
+
+.fixtures {
+  display: block;
+  flex-direction: column;
+  position: relative;
+
+  &__fixture {
+    position: relative;
+
+    &--mini {
+      box-sizing: border-box;
+      color: palette(icewhite);
+      overflow: hidden;
+
+      a {
+        background-color: palette(neutral);
+        background-position: 90% 50%;
+        background-repeat: no-repeat;
+        background-size: auto rem(4*$baseline);
+        box-shadow: none;
+        box-sizing: border-box;
+        color: inherit;
+        display: block;
+        padding: rem($baseline) $gutter;
+        white-space: normal;
+      }
+
+      .fixtures {
+        &__fixture {
+          &--pale {
+            color: palette(neutral);
+          }
+        }
+
+        &__host {
+          @include type-scale(4, 1);
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  &--linear {
+    display: flex;
+    flex-direction: row;
+    height: rem(8*$baseline);
+    justify-content: center;
+    max-height: 1000em;
+    overflow: visible;
+    padding: 0 2*$column;
+
+    .fixtures {
+      &__fixture {
+        &--mini {
+          height: rem($baseline*8);
+          min-width: rem(150);
+          width: rem(150);
+
+          a {
+            background-position: 160% rem(-.5*$baseline);
+            background-size: auto rem(4*$baseline);
+            bottom: 0;
+            left: $gutter;
+            padding-top: rem(5*$baseline);
+            position: absolute;
+            width: rem(136);
+          }
+        }
+      }
+    }
+
+    .slider {
+      &__button {
+        display: none;
+        height: 100%;
+        opacity: .5;
+        position: absolute;
+        top: 0;
+        width: rem(50);
+
+        &--active {
+          display: block;
+        }
+
+        &--next {
+          right: 0;
+        }
+
+        &--prev {
+          left: 0;
+          transform: scaleX(-1);
+        }
+      }
+    }
+  }
+}

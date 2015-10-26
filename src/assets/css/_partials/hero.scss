@@ -1,0 +1,17 @@
+.hero {
+  background-color: palette(jetblack);
+  background-size: cover;
+  color: palette(icewhite);
+  overflow: hidden;
+  padding-top: rem(8*$baseline);
+  text-align: center;
+
+  @media (min-width: rem(500)) {
+    padding-top: rem(14*$baseline);
+  }
+
+  em {
+    position: absolute;
+    top: -999em;
+  }
+}

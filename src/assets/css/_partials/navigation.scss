@@ -1,0 +1,67 @@
+.primary-nav {
+  @include type-scale(5, 1);
+  background-color: palette(claret);
+  background-image: url('{{assets}}/images/logomark.svg');
+  background-position: 50% rem($baseline);
+  background-repeat: no-repeat;
+  background-size: rem(100) rem(3*$baseline);
+  border-bottom: rem(1/$base-font-size) solid palette(claret);
+  margin: 0 0 rem(-1);
+  max-width: 100%;
+  padding-top: rem(4*$baseline);
+
+  a {
+    display: block;
+    padding: rem($baseline) $gutter;
+    transition: background-color $transitionduration, color $transitionduration;
+
+    &:link,
+    &:visited {
+      color: palette(icewhite);
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: palette(icewhite);
+      box-shadow: none;
+      color: palette(claret);
+    }
+  }
+
+  @media (min-width: $nav-break) {
+    @include type-scale(4, 1);
+    background-color: palette(air);
+    background-image: none;
+    left: 0;
+    letter-spacing: .1em;
+    padding-top: 0;
+    position: fixed;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+
+    li {
+      display: inline-block;
+      width: rem(150);
+
+      &:nth-of-type(2) {
+        margin-right: rem(150);
+      }
+    }
+
+    a {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &__home {
+    @media (min-width: $nav-break) {
+      position: absolute;
+      top: -9999em;
+    }
+  }
+}

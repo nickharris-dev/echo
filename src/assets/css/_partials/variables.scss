@@ -7,10 +7,15 @@ $base-font-size: 16;
 // Grid
 // ====
 $column: percentage(1/24);
-$baseline: 21;
+$baseline: 24;
 $gutter: rem(7);
 
 @import 'type-scale';
+
+// Media Queries
+// =============
+$nav-break: 768px;
+
 
 // Palette
 // =======
@@ -19,7 +24,10 @@ $palette: (
   air: $transparent,
   icewhite: rgb(255, 255, 255),
   jetblack: rgb(0, 0, 0),
-  neutral: rgb(70, 70, 70),
+  neutral: (
+    light: rgb(200, 200, 200),
+    copy: rgb(70, 70, 70)
+  ),
 
   claret: rgb(92, 4, 37),
 );

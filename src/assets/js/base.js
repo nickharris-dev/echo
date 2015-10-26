@@ -2,7 +2,7 @@ var baseUrl = document.getElementById('script').getAttribute('data-main');
 baseUrl = baseUrl.replace(/base/, 'app');
 
 function baseFontSize(){
-  return parseFloat(getComputedStyle(document.body).fontSize);
+  return parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
 
 function touchEnabled(){
@@ -30,6 +30,7 @@ requirejs.config({
   baseUrl: baseUrl,
   config: {
     'config': {
+      baseline: 24,
       baseFontSize: baseFontSize(),
       elementqueries: {},
       isDev: isDev(),
@@ -41,9 +42,14 @@ requirejs.config({
 // Helpers
 // =======
 function eq (node, continuous) {
-  require(['Elementqueries', 'idFactory', 'config'], function(Elementquery, idFactory, config){
+  require(['Elementqueries', 'idFactory', 'config', 'merge'], function(Elementquery, idFactory, config, merge){
     var id = idFactory(node);
-    config.elementqueries[id] = new Elementquery(node, node.getAttribute('data-eq'), continuous);
+    var query = new Elementquery(node, node.getAttribute('data-eq'), continuous);
+    if (config.elementqueries[id]) {
+      config.elementqueries[id] = merge(config.elementqueries[id], query);
+    } else {
+      config.elementqueries[id] = query;
+    }
   });
 }
 
@@ -60,14 +66,12 @@ function nodeLoop(nodeList, func, arg1) {
   var n = nodeList.length;
 
   for (i;i<n;i++) {
-
     func(nodeList[i], arg1);
   }
 }
 
 require(['config'], function(config){
   // Development js
-  // ==============
   if (config.isDev) require(['grid','dev']);
 });
 
@@ -76,6 +80,6 @@ require(['config'], function(config){
 nodeLoop(document.querySelectorAll('[data-type-break]'), typography);
 nodeLoop(document.querySelectorAll('[data-eq]'), eq, false);
 
-// Media Handling
-// ==============
-if (document.querySelectorAll('[data-media]').length > 0) require(['media']);
+// Training
+// ========
+if (document.getElementById('Training')) require(['training']);
