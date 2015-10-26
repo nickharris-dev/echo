@@ -1,9 +1,11 @@
 .hero {
-  padding-top: rem($baseline);
+  padding: rem($baseline) $gutter 0;
   text-align: center;
 
   @media (min-width: rem(500)) {
     background-color: palette(jetblack);
+    background-image: url('<?php echo assets_url(); ?>/images/hero-2024.jpg');
+    background-position: 50% 100%;
     background-size: cover;
     color: palette(icewhite);
     overflow: hidden;

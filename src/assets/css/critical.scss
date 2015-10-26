@@ -44,6 +44,12 @@ p {
   min-width: 21em;
 }
 
+// Intro
+// =====
+.intro {
+  padding: 0 $gutter;
+}
+
 @import '_partials/header';
 @import '_partials/navigation';
 @import '_partials/hero';

@@ -31,6 +31,7 @@
     <script type="text/javascript">
       document.documentElement.className += ' js';
     </script>
+    <link rel="stylesheet" type="text/css" href="//cloud.typography.com/7396032/681826/css/fonts.css">
     <style>
       <?php include 'critical.php'; ?>
     </style>
