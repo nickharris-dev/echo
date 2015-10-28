@@ -31,4 +31,6 @@
 	</article>
 <?php endif; ?>
 
+<?php include 'training.php'; ?>
+
 <?php get_footer(); ?>
