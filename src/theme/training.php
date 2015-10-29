@@ -20,7 +20,7 @@
 
     ?>
 
-    <article class="training__session training__session--weekend" data-lat="<?php echo $venue_lat; ?>" data-lng="venue_lng" id="<?php echo $day; ?>Map">
+    <article class="training__session training__session--weekend" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="<?php echo $day; ?>Map">
         <?php
           $session_date = new DateTime();
           $session_date->add(DateInterval::createFromDateString('yesterday'));
@@ -99,7 +99,7 @@
 
               <li data-locations="
               <?php for ($i = 0; $i < count($trains); $i++): ?>
-                <?php $trainstation = $trams[$i];
+                <?php $trainstation = $trains[$i];
                   if ($i > 0): ?>,<?php endif; ?>
                 {
                   'name': '<?php print_r ($trainstation->name); ?>',
@@ -113,7 +113,7 @@
 
               <li data-locations="
               <?php for ($i = 0; $i < count($buses); $i++): ?>
-                <?php $busstop = $trams[$i];
+                <?php $busstop = $buses[$i];
                   if ($i > 0): ?>,<?php endif; ?>
                 {
                   'name': '<?php print_r ($busstop->name); ?>',
