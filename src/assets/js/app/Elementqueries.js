@@ -1,4 +1,4 @@
-define(['require', 'config', 'Reflow', 'classes', 'idFactory'], function(require, config, Reflow, classes, idFactory){
+define(['require', 'config', 'Reflow', 'classes'], function(require, config, Reflow, classes){
   // min-width, max-width, min-height, max-height
   // Example value: linear:(min-width:600px) and (max-width:700px),test:(max-height:150px)
 
@@ -17,9 +17,19 @@ define(['require', 'config', 'Reflow', 'classes', 'idFactory'], function(require
     this.breakpointEvent.queries = this;
 
     // An identifier to use in the classname later
-    if (elem.className || elem.getAttribute('id')) {
-      this.identifier = idFactory(elem);
+    // Unlike idFactory, use classname by default, for better BEM
+    if (elem.className) {
+      if (elem.classList) {
+        this.identifier = elem.classList[0];
+      } else {
+        this.identifier = elem.className;
+        this.identifier = this.identifier.split(' ')[0];
+      }
+    } else if (elem.getAttribute('id')) {
+      this.identifier = elem.getAttribute('id').toLowerCase();;
     }
+    this.identifier = this.identifier.match(/(\w+)-?/);
+    this.identifier = this.identifier[1];
 
     // Process the named breakpoints
     this.breakpoints = this.queryFactory(queryString);
