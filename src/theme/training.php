@@ -91,7 +91,7 @@
                   'lat': '<?php print_r ($tramstop->lat); ?>',
                   'lng': '<?php print_r ($tramstop->lng); ?>'
                 }
-              <?php endfor; ?>" data-type="tram">Nearest Tram Stops</li>
+              <?php endfor; ?>" data-type="tram">Nearest Tram Stop<?php if (count($trams) > 1): ?>s<?php endif; ?></li>
 
             <?php endif;
               if (sizeof($trains) > 0): ?>
@@ -105,7 +105,7 @@
                   'lat': '<?php print_r ($trainstation->lat); ?>',
                   'lng': '<?php print_r ($trainstation->lng); ?>'
                 }
-              <?php endfor; ?>" data-type="train">Nearest Train Stations</li>
+              <?php endfor; ?>" data-type="train">Nearest Train Station<?php if (count($trains) > 1): ?>s<?php endif; ?></li>
 
             <?php endif;
               if (sizeof($buses) > 0): ?>
@@ -119,7 +119,7 @@
                   'lat': '<?php print_r ($busstop->lat); ?>',
                   'lng': '<?php print_r ($busstop->lng); ?>'
                 }
-              <?php endfor; ?>" data-type="bus">Nearest Bus Stops</li>
+              <?php endfor; ?>" data-type="bus">Nearest Bus Stop<?php if (count($buses) > 1): ?>s<?php endif; ?></li>
 
             <?php endif; ?>
             <li data-type="postcode">
