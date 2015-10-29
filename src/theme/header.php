@@ -1,6 +1,9 @@
 <!doctype html>
-
-<html <?php language_attributes(); ?>>
+<?php
+  $is_dev = false;
+  $url = site_url();
+  if ($url == 'http://local.wordpress.dev') $is_dev = true; ?>
+<html <?php language_attributes(); if ($is_dev) :?> class="dev"<?php endif; ?>>
 
 	<head>
 		<meta charset="utf-8">
@@ -36,11 +39,7 @@
       <?php include 'critical.php'; ?>
     </style>
     <link href="<?php echo assets_url(); ?>/css/global.css?v=2.0.0" rel="stylesheet">
-    <?php
-      $url = site_url();
-      if ($url == 'http://local.wordpress.dev') : ?>
-      <link href="<?php echo assets_url(); ?>/css/dev.css" rel="stylesheet">
-    <?php endif; ?>
+    <?php if ($is_dev): ?><link href="<?php echo assets_url(); ?>/css/dev.css" rel="stylesheet"><?php endif; ?>
 	</head>
 
 	<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
