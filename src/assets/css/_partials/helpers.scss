@@ -55,14 +55,12 @@
   }
 }
 
-// Extensions
-// ==========
-%touch-scrollable {
+@mixin touch-scrollable() {
   -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
 }
 
-%clearfix {
+@mixin clearfix() {
   &:after {
     clear: both;
     content: '';
@@ -70,7 +68,7 @@
   }
 }
 
-%override-margin-after {
+@mixin override-margin-after() {
   + p,
   + ul,
   + ol,

@@ -24,7 +24,7 @@ main {
 // Headings
 // ========
 h1, h2, h3, h4, h5, h6 {
-  @extend %override-margin-after;
+  @include override-margin-after();
   font-feature-settings: 'lnum' 1, 'pnum' 1;
   font-style: normal;
   font-variant-numeric: lining-nums proportional-nums;
