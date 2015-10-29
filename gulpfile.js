@@ -126,7 +126,7 @@
     return gulp.src(paths.src.javascript + '**/*')
       .pipe(changed(paths.dest.javascript))
       .pipe(gulp.dest(paths.dest.javascript))
-      .pipe(dev(proxy.stream({match: '**/js/*'})));
+      .pipe(dev(proxy.stream({match: '**/*'})));;
   });
 
 // Utilities
