@@ -50,7 +50,7 @@
   }
 
   &__session {
-    border-bottom: rem(1) solid palette(icewhite);
+    border-bottom: rem(3) solid palette(icewhite);
     padding: rem($baseline) $column rem(12*$baseline);
     position: relative;
 
@@ -77,7 +77,7 @@
       flex: 1 auto;
 
       &:nth-of-type(even) {
-        border-left: 1px solid palette(icewhite);
+        border-left: rem(3) solid palette(icewhite);
       }
 
       &:nth-of-type(2) {
