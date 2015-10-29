@@ -1,46 +1,45 @@
 <?php
   $page_id = 2;
   if( have_rows('training', $page_id) ): ?>
-  <section class="training" id="Training" data-eq="stacked:(min-width: 50rem)">
+  <section class="training" id="Training">
     <h1>
       Train with us
     </h1>
-  <?php while( have_rows('training') ): the_row();
+    <div class="training__wrapper">
+      <?php while( have_rows('training') ): the_row();
+        // vars
+        $day = get_sub_field('regular_day');
+        $start = get_sub_field('start_time');
+        $end = get_sub_field('end_time');
+        $next = get_sub_field('next_session');
+        $venue_name = get_sub_field('venue_name');
+        $venue_address = get_sub_field('venue_address');
+        $venue_postcode = get_sub_field('venue_code');
+        $venue_lat = get_sub_field('venue_lat');
+        $venue_lng = get_sub_field('venue_lng');
+      ?>
 
-    // vars
-    $day = get_sub_field('regular_day');
-    $start = get_sub_field('start_time');
-    $end = get_sub_field('end_time');
-    $next = get_sub_field('next_session');
-    $venue_name = get_sub_field('venue_name');
-    $venue_address = get_sub_field('venue_address');
-    $venue_postcode = get_sub_field('venue_code');
-    $venue_lat = get_sub_field('venue_lat');
-    $venue_lng = get_sub_field('venue_lng');
-
-    ?>
-
-    <article class="training__session training__session--weekend" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="<?php echo $day; ?>Map">
-        <?php
-          $session_date = new DateTime();
-          $session_date->add(DateInterval::createFromDateString('yesterday'));
-          $today = new DateTime();
-
-          if ($next) $session_date = DateTime::createFromFormat('Ymd', $next);
-          if ($day == 'Weekend') $day = 'Sunday';
-
-          if ($session_date >= $today) {
-            $next_session = $session_date->format('l jS F');
-          } else {
-            $next_session = date('l jS F', strtotime($day));
-          }
-         ?>
+      <article class="training__session" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="<?php echo $day; ?>Map" data-eq="stacked:(min-width: 40rem)">
         <div class="training__info">
           <h1>
 
-            <?php echo $day; ?>
+            <?php echo $day; ?>s
 
           </h1>
+          <?php
+            $session_date = new DateTime();
+            $session_date->add(DateInterval::createFromDateString('yesterday'));
+            $today = new DateTime();
+
+            if ($next) $session_date = DateTime::createFromFormat('Ymd', $next);
+            if ($day == 'Weekend') $day = 'Sunday';
+
+            if ($session_date >= $today) {
+              $next_session = $session_date->format('l jS F');
+            } else {
+              $next_session = date('l jS F', strtotime($day));
+            }
+          ?>
           <p>
 
             Next session: <?php echo $next_session; ?>,
@@ -133,7 +132,7 @@
         </div>
         <div class="training__map"></div>
       </article>
-
-  <?php endwhile; ?>
+    <?php endwhile; ?>
+    </div>
   </section>
 <?php endif; ?>

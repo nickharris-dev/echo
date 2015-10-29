@@ -1,9 +1,11 @@
 .training {
+  @include clearfix();
   box-sizing: border-box;
+  margin-top: 4rem;
   position: relative;
 
   h1 {
-    color: palette(icewhite);
+    @include type-scale(9, 2);
     margin: 0 auto;
     min-width: 0;
     position: relative;
@@ -13,21 +15,6 @@
 
   address {
     margin: 0;
-  }
-
-  &__session {
-    padding: rem($baseline) $column rem(12*$baseline);
-    position: relative;
-
-    &:first-of-type {
-      margin-top: rem(-4*$baseline);
-      padding-top: rem(5*$baseline);
-    }
-
-    h1 {
-      color: palette(neutral);
-      text-align: left;
-    }
   }
 
   &__info {
@@ -55,14 +42,47 @@
     width: 100%;
   }
 
-  &--stacked {
-    .training {
-      &__session {
-        padding-bottom: rem(2*$baseline);
+  @media (min-width: rem(1024)) {
+    &__wrapper {
+      display: flex;
+      flex-flow: row wrap;
+    }
+  }
+
+  &__session {
+    border-bottom: rem(1) solid palette(icewhite);
+    padding: rem($baseline) $column rem(12*$baseline);
+    position: relative;
+
+    &:first-of-type {
+      margin-top: rem(-4*$baseline);
+      padding-top: rem(5*$baseline);
+    }
+
+    h1 {
+      @include type-scale(7, 1.5);
+      color: palette(neutral);
+      text-align: left;
+    }
+
+    &--stacked {
+      padding-bottom: rem(2*$baseline);
+
+      .training__info {
+        width: 10*$column;
+      }
+    }
+
+    @media (min-width: rem(1024)) {
+      flex: 1 auto;
+
+      &:nth-of-type(even) {
+        border-left: 1px solid palette(icewhite);
       }
 
-      &__info {
-        width: 10*$column;
+      &:nth-of-type(2) {
+        margin-top: rem(-4*$baseline);
+        padding-top: rem(5*$baseline);
       }
     }
   }

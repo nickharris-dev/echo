@@ -98,7 +98,7 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
       map.setZoom(zoom);
 
       // Depending on what element query is active
-      if (config.elementqueries.training.breakpoints.stacked.active) {
+      if (config.elementqueries[ID].breakpoints.stacked.active) {
         offsetx = Math.floor((paddingLeft + width)/2);
         offsety = Math.floor((paddingTop - paddingBottom)/2);
       } else {
