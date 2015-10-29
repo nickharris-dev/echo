@@ -8,6 +8,7 @@
       <p>Copyright© <?php echo date('Y'); ?> <a href="http://www.pixelenvy.co.uk">Pixel Envy Limited</a></p>
     </footer>
 
+    <script data-main="<?php echo assets_url(); ?>/js/base" id="script" src="<?php echo assets_url(); ?>/js/libs/require.min.js"></script>
   </body>
 
 </html>

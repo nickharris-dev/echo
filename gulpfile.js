@@ -38,11 +38,13 @@
   var paths = {
     src: {
       images: './src/assets/images/',
+      javascript: './src/assets/js/',
       style: './src/assets/css/',
       theme: './src/theme/'
     },
     dest: {
       images: './www/assets/images/',
+      javascript: './www/assets/js/',
       style: './www/assets/css/',
       theme: './www/wordpress-default/wp-content/themes/crowsfootball/'
     }
@@ -118,6 +120,14 @@
       .pipe(dev(proxy.stream({match: '**/images/*'})));
   });
 
+// Javascript
+// ==========
+  gulp.task('javascript', function(){
+    return gulp.src(paths.src.javascript + '**/*')
+      .pipe(changed(paths.dest.javascript))
+      .pipe(gulp.dest(paths.dest.javascript))
+      .pipe(dev(proxy.stream({match: '**/js/*'})));
+  });
 
 // Utilities
 // =========
@@ -183,10 +193,12 @@
     ], gulp.parallel('theme', 'style'));
     // Images
     gulp.watch(paths.src.images + '**/*', gulp.parallel('images'));
+    // Javascript
+    gulp.watch(paths.src.javascript + '**/*', gulp.parallel('javascript'));
   });
 
 gulp.task('theme', gulp.series('criticalstyle', 'templates'), function(){});
-gulp.task('build', gulp.parallel('theme', 'style', 'images'), function(){});
+gulp.task('build', gulp.parallel('theme', 'style', 'javascript', 'images'), function(){});
 gulp.task('serve', gulp.parallel('watch', 'server'), function(){});
 
 gulp.task('default', gulp.series('vagrant', 'clean', 'build', 'serve'), function(){});
