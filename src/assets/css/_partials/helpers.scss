@@ -106,8 +106,31 @@ $nomediaqueries: false !default;
   + ul,
   + ol,
   + dl,
+  + menu,
   + table {
     margin-top: 0;
+  }
+}
+
+@mixin style-as-link() {
+  box-shadow: inset 0 0 0 palette(claret);
+  text-decoration: none;
+  transition: box-shadow $transitionduration, color $transitionduration;
+  white-space: nowrap;
+
+  &:link {
+    color: palette(claret);
+  }
+
+  &:visited {
+    color: palette(jetblack);
+  }
+
+  &:active,
+  &:focus,
+  &:hover {
+    box-shadow: inset 0 -1.2em 0 palette(claret);
+    color: palette(icewhite);
   }
 }
 

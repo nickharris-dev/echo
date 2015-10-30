@@ -220,6 +220,14 @@ pre {
   max-width: 38em;
 }
 
+img {
+  max-width: 100%;
+}
+
+figure {
+  margin: rem($baseline) 0;
+}
+
 .acronym,
 .hour,
 .postcode {
@@ -231,26 +239,7 @@ pre {
 // Links
 // =====
 a {
-  box-shadow: inset 0 0 0 palette(claret);
-  text-decoration: none;
-  transition: box-shadow $transitionduration, color $transitionduration;
-  white-space: nowrap;
-
-  &:link {
-    color: palette(claret);
-  }
-
-  &:visited {
-    color: palette(jetblack);
-  }
-
-  &:active,
-  &:focus,
-  &:hover {
-    box-shadow: inset 0 -1.2em 0 palette(claret);
-    color: palette(icewhite);
-  }
-
+  @include style-as-link();
 }
 
 // Specials

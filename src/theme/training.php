@@ -3,7 +3,7 @@
   if( have_rows('training', $page_id) ): ?>
   <section class="training" id="Training">
     <h1>
-      Train with us
+      Play with us
     </h1>
     <div class="training__wrapper">
       <?php while( have_rows('training') ): the_row();
@@ -13,13 +13,14 @@
         $end = get_sub_field('end_time');
         $next = get_sub_field('next_session');
         $venue_name = get_sub_field('venue_name');
+        $venue_picture_url = get_sub_field('venue_picture')['sizes'];
         $venue_address = get_sub_field('venue_address');
-        $venue_postcode = get_sub_field('venue_code');
+        $venue_postcode = get_sub_field('venue_postcode');
         $venue_lat = get_sub_field('venue_lat');
         $venue_lng = get_sub_field('venue_lng');
       ?>
 
-      <article class="training__session" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="<?php echo $day; ?>Map" data-eq="stacked:(min-width: 40rem)">
+      <article class="training__session" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="<?php echo $day; ?>Map" data-eq="stacked:(min-width: 50rem)">
         <div class="training__info">
           <h1>
 
@@ -42,23 +43,20 @@
           ?>
           <p>
 
-            Next session: <?php echo $next_session; ?>,
-            <time><i class="hour"><?php echo $start; ?></i> to <i class="hour"><?php echo $end; ?></i></time>
+            Next training:<br>
+            <time><?php echo $next_session; ?>, <i class="hour"><?php echo $start; ?></i> to <i class="hour"><?php echo $end; ?></i></time><br>
 
           </p>
+          <h2 class="training__venue"><?php echo $venue_name; ?></h2>
           <address>
-            <?php echo $venue_name; ?><br>
-            <?php echo $venue_address; ?>
+            <?php echo $venue_address; ?>,
             <i class="postcode"><?php echo $venue_postcode; ?></i>
           </address>
 
-          <h2>
 
-            Directions
-
-          </h2>
+          <h3>Directions</h3>
           <menu class="training__directions">
-            <li data-type="geo">From where you are</li>
+            <li class="training__trigger" data-type="geo">From where you are</li>
             <?php
               $trams = [];
               $trains = [];
@@ -82,7 +80,7 @@
             endif; ?>
             <?php if (sizeof($trams) > 0): ?>
 
-              <li data-locations="
+              <li class="training__trigger" data-locations="
               <?php for ($i = 0; $i < count($trams); $i++): ?>
                 <?php $tramstop = $trams[$i];
                   if ($i > 0): ?>,<?php endif; ?>
@@ -91,12 +89,12 @@
                   'lat': '<?php print_r ($tramstop->lat); ?>',
                   'lng': '<?php print_r ($tramstop->lng); ?>'
                 }
-              <?php endfor; ?>" data-type="tram">Nearest Tram Stop<?php if (count($trams) > 1): ?>s<?php endif; ?></li>
+              <?php endfor; ?>" data-type="tram">From the Nearest Tram Stop<?php if (count($trams) > 1): ?>s<?php endif; ?></li>
 
             <?php endif;
               if (sizeof($trains) > 0): ?>
 
-              <li data-locations="
+              <li class="training__trigger" data-locations="
               <?php for ($i = 0; $i < count($trains); $i++): ?>
                 <?php $trainstation = $trains[$i];
                   if ($i > 0): ?>,<?php endif; ?>
@@ -105,12 +103,12 @@
                   'lat': '<?php print_r ($trainstation->lat); ?>',
                   'lng': '<?php print_r ($trainstation->lng); ?>'
                 }
-              <?php endfor; ?>" data-type="train">Nearest Train Station<?php if (count($trains) > 1): ?>s<?php endif; ?></li>
+              <?php endfor; ?>" data-type="train">From the Nearest Train Station<?php if (count($trains) > 1): ?>s<?php endif; ?></li>
 
             <?php endif;
               if (sizeof($buses) > 0): ?>
 
-              <li data-locations="
+              <li class="training__trigger" data-locations="
               <?php for ($i = 0; $i < count($buses); $i++): ?>
                 <?php $busstop = $buses[$i];
                   if ($i > 0): ?>,<?php endif; ?>
@@ -119,12 +117,12 @@
                   'lat': '<?php print_r ($busstop->lat); ?>',
                   'lng': '<?php print_r ($busstop->lng); ?>'
                 }
-              <?php endfor; ?>" data-type="bus">Nearest Bus Stop<?php if (count($buses) > 1): ?>s<?php endif; ?></li>
+              <?php endfor; ?>" data-type="bus">From the Nearest Bus Stop<?php if (count($buses) > 1): ?>s<?php endif; ?></li>
 
             <?php endif; ?>
-            <li data-type="postcode">
+            <li class="training__postcode" data-type="postcode">
               <form>
-                <input placeholder="From Postcode" type="text">
+                <input id="PostcodeInput" placeholder="From Postcode" type="text">
                 <button>&gt;</button>
               </form>
             </li>

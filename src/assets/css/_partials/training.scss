@@ -1,7 +1,6 @@
 .training {
   @include clearfix();
-  box-sizing: border-box;
-  margin-top: 4rem;
+  margin-top: rem(3*$baseline);
   position: relative;
 
   h1 {
@@ -13,24 +12,139 @@
     z-index: 1;
   }
 
-  address {
+  h2 {
+    @include override-margin-after();
     margin: 0;
+  }
+
+  address {
+    margin: 0 0 rem($baseline);
+    font-style: normal;
   }
 
   &__info {
     background-color: palette(icewhite);
-    padding: rem($baseline) $gutter;
+    min-width: 23em;
+    padding: $gutter;
     position: relative;
     z-index: 1;
   }
 
-  &__directions {
-    &--active {
-      font-weight: 700;
+  &__venue {
+    display: inline;
+  }
+
+  &__trigger {
+    @include type-scale(3, 1.5);
+    @include style-as-link();
+    background-color: palette(icewhite);
+    cursor: pointer;
+    padding: 0 $gutter;
+    position: relative;
+
+    &:after {
+      background-image: url(../images/training_process.gif);
+      background-position: 1% 50%;
+      background-size: 30px 30px;
+      content: ' ';
+      display: block;
+      height: 30px;
+      position: absolute;
+      right: $gutter;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      z-index: -1;
+    }
+
+    &:active,
+    &:focus,
+    &:hover,
+    &--active,
+    &--processing {
+      box-shadow: inset 0 rem(-1.5*$baseline) 0 palette(claret);
+      color: palette(icewhite);
     }
 
     &--processing {
-      color: palette(claret);
+      &:after {
+        z-index: 1;
+      }
+    }
+  }
+
+  &__postcode {
+    margin-top: rem($baseline/2);
+    position: relative;
+
+    button {
+      background-color: palette(neutral, light);
+      border: 0;
+      border-radius: rem($baseline/2);
+      color: palette(icewhite);
+      content: '>';
+      display: block;
+      height: rem(18);
+      left: rem(151);
+      line-height: rem(18);
+      padding: 0;
+      position: absolute;
+      text-align: center;
+      text-indent: .1em;
+      transform: translateY(-50%);
+      top: 50%;
+      width: rem(18);
+      z-index: 3;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: palette(claret);
+        outline: none;
+      }
+    }
+
+    [type="text"] {
+      border: 1px solid palette(neutral, light);
+      border-radius: 0;
+      box-sizing: content-box;
+      height: rem($baseline);
+      line-height: rem($baseline);
+      padding-left: $gutter;
+      padding-right: $gutter;
+      position: relative;
+      -webkit-appearance: none;
+      width: rem(160);
+      z-index: 2;
+
+      &:active,
+      &:focus,
+      &:hover {
+        border-color: palette(claret);
+        outline: none;
+
+        & + button {
+          background-color: palette(claret);
+        }
+      }
+    }
+  }
+
+  &__message {
+    @include type-scale(3, 1);
+    background-color: palette(claret);
+    border-radius: 0 0 rem(3) rem(3);
+    color: palette(icewhite);
+    left: 0;
+    padding: rem(2) $gutter 0;
+    position: absolute;
+    top: 0;
+    transform: translate3d(0,0,0);
+    transition: transform 500ms;
+    z-index: 1;
+
+    &--error {
+      transform: translate3d(0,rem($baseline),0);
     }
   }
 
@@ -55,8 +169,8 @@
     position: relative;
 
     &:first-of-type {
-      margin-top: rem(-4*$baseline);
-      padding-top: rem(5*$baseline);
+      margin-top: rem(-3*$baseline);
+      padding-top: rem(4*$baseline);
     }
 
     h1 {
@@ -81,8 +195,8 @@
       }
 
       &:nth-of-type(2) {
-        margin-top: rem(-4*$baseline);
-        padding-top: rem(5*$baseline);
+        margin-top: rem(-3*$baseline);
+        padding-top: rem(4*$baseline);
       }
     }
   }
