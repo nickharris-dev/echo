@@ -1,6 +1,6 @@
 define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRffT8sStG1kBc5v9u0QE10hcEAvK7dk'], function(require, config, idFactory, classes){
-  var activeClass = 'training__directions--active';
-  var processingClass = 'training__directions--processing';
+  var activeClass = 'training__trigger--active';
+  var processingClass = 'training__trigger--processing';
   var training = document.getElementById('Training');
   var directionsService = new google.maps.DirectionsService();
   var maps = {};
@@ -54,7 +54,8 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
       map: map
     });
 
-    training.addEventListener('resizeEnd', function(){
+    // Re-render map on resize
+    session.addEventListener('resizeEnd', function(){
       google.maps.event.trigger(map, 'resize');
     });
     google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
@@ -156,6 +157,12 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
       menuItems[i].addEventListener('click', processClick);
     }
     if (postCodeForm) {
+      var label = document.createElement('label');
+      label.setAttribute('id', 'PostcodeMessage');
+      label.setAttribute('for', 'PostcodeInput');
+      label.setAttribute('class', 'training__message');
+      postCodeForm.appendChild(label);
+
       postCodeForm.addEventListener('submit', function(event){
         event.preventDefault();
         calculatePostcode(session, postCodeForm.querySelectorAll('input')[0].value);
@@ -246,8 +253,11 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
     }
 
     function bad(str) {
-      var message = str || 'Enter a Valid Postcode';
-      console.log(message);
+      var message = document.createTextNode(str || 'Enter a Valid Postcode');
+      var label = session.querySelectorAll('.training__directions .training__message')[0];
+
+      label.appendChild(message);
+      classes.add(label, 'training__message--error');
     }
 
     function good() {
@@ -340,7 +350,6 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
         });
         storage.markers.origins.push(marker);
 
-
         // Do it
         renderer.setDirections(response);
         // Store it
@@ -361,6 +370,7 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
       mapFactory(sessions[i]);
       directionsListeners(sessions[i]);
     }
+
   }
 
   return init();
