@@ -47,8 +47,7 @@
         ?>
         <p>
 
-          Next:<br>
-          <time><?php echo $next_session; ?>, <i class="hour"><?php echo $start; ?></i> to <i class="hour"><?php echo $end; ?></i></time><br>
+          Next: <time><?php echo $next_session; ?>, <i class="hour"><?php echo $start; ?></i> to <i class="hour"><?php echo $end; ?></i></time>
 
         </p>
         <h2 class="training__venue"><?php echo $venue_name; ?></h2>

@@ -3,6 +3,7 @@
 @import '_partials/helpers';
 
 .grid-unit {
+  display: block;
   height: rem($baseline);
   padding: $gutter;
   width: $column;

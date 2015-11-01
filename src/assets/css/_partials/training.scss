@@ -18,7 +18,12 @@
   }
 
   h1, h2, h3, p, li {
+    max-width: 100%;
     min-width: 0;
+  }
+
+  time {
+    white-space: nowrap;
   }
 
   address {
@@ -182,7 +187,7 @@
   &__session {
     border-bottom: rem(3) solid palette(icewhite);
     height: rem(36*$baseline);
-    padding: rem($baseline) $column;
+    padding: rem($baseline);
     position: relative;
 
     &:first-of-type {
@@ -197,11 +202,11 @@
     }
 
     &--stacked {
-      height: auto;
       height: rem(28*$baseline);
 
       .training__info {
-        width: 10*$column;
+        max-width: 50%;
+        width: 25rem;
       }
     }
 
@@ -221,10 +226,6 @@
       &:last-of-type {
         clear: left;
         width: 100%;
-
-        .training__info {
-          width: 5*$column;
-        }
       }
     }
   }
