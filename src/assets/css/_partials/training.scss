@@ -17,15 +17,39 @@
     margin: 0;
   }
 
+  h1, h2, h3, p, li {
+    min-width: 0;
+  }
+
   address {
     margin: 0 0 rem($baseline);
     font-style: normal;
   }
 
+  &__google {
+    @include style-as-link();
+    border: 0;
+    background-color: palette(air);
+    bottom: 0;
+    padding: rem($baseline/2) 2em;
+    position: absolute;
+    right: 0;
+
+    &:visited {
+      color: palette(claret);
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      box-shadow: inset 0 rem(-2*$baseline) 0 palette(claret);
+      outline: none;
+    }
+  }
+
   &__info {
-    background-color: palette(icewhite);
-    min-width: 23em;
-    padding: $gutter;
+    background-color: rgba(palette(icewhite),.8);
+    padding: $gutter $gutter rem(1.5*$baseline);
     position: relative;
     z-index: 1;
   }
@@ -37,24 +61,23 @@
   &__trigger {
     @include type-scale(3, 1.5);
     @include style-as-link();
-    background-color: palette(icewhite);
     cursor: pointer;
+    overflow: hidden;
     padding: 0 $gutter;
     position: relative;
 
     &:after {
       background-image: url(../images/training_process.gif);
       background-position: 1% 50%;
-      background-size: 30px 30px;
+      background-size: 20px 20px;
       content: ' ';
       display: block;
-      height: 30px;
+      height: 20px;
       position: absolute;
-      right: $gutter;
+      right: -100em;
       top: 50%;
       transform: translateY(-50%);
-      width: 30px;
-      z-index: -1;
+      width: 20px;
     }
 
     &:active,
@@ -68,7 +91,7 @@
 
     &--processing {
       &:after {
-        z-index: 1;
+        right: 1em;
       }
     }
   }

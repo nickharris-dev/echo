@@ -13,14 +13,13 @@
         $end = get_sub_field('end_time');
         $next = get_sub_field('next_session');
         $venue_name = get_sub_field('venue_name');
-        $venue_picture_url = get_sub_field('venue_picture')['sizes'];
         $venue_address = get_sub_field('venue_address');
         $venue_postcode = get_sub_field('venue_postcode');
         $venue_lat = get_sub_field('venue_lat');
         $venue_lng = get_sub_field('venue_lng');
       ?>
 
-      <article class="training__session" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="<?php echo $day; ?>Map" data-eq="stacked:(min-width: 50rem)">
+      <article class="training__session" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="<?php echo $day; ?>Map" data-eq="stacked:(min-width: 40rem)">
         <div class="training__info">
           <h1>
 
@@ -127,6 +126,7 @@
               </form>
             </li>
           </menu>
+          <button class="training__google">Open in Google Maps</button>
         </div>
         <div class="training__map"></div>
       </article>

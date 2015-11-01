@@ -134,6 +134,8 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
     var i = 0;
     var n = menuItems.length;
 
+    // Geo Location Detection
+    // ======================
     if (!navigator.geolocation && session.querySelectorAll('.training__directions [data-type="geo"]').length > 0) {
       var geo = session.querySelectorAll('.training__directions [data-type="geo"]')[0];
       geo.parentNode.removeChild(geo);
@@ -156,6 +158,7 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
     for (i; i<n; i++) {
       menuItems[i].addEventListener('click', processClick);
     }
+
     if (postCodeForm) {
       var label = document.createElement('label');
       label.setAttribute('id', 'PostcodeMessage');
@@ -203,6 +206,7 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
       for (i; i<n; i++) {
         requestFactory(locations[i]);
       }
+      googleLinkFactory(session);
     }
   }
 
@@ -225,12 +229,14 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
 
     function bad() {
       classes.remove(menuItem, processingClass);
+      googleLinkFactory(session);
       throw new Error('Bum');
     }
 
     function good(position) {
       clearRoute(ID);
       requestFactory(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+      googleLinkFactory(session, {lat: position.coords.latitude, lng: position.coords.longitude});
     }
 
     navigator.geolocation.getCurrentPosition(good, bad);
@@ -256,15 +262,23 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
       var message = document.createTextNode(str || 'Enter a Valid Postcode');
       var label = session.querySelectorAll('.training__directions .training__message')[0];
 
+      label.innerHTML = '';
+
       label.appendChild(message);
       classes.add(label, 'training__message--error');
+      googleLinkFactory(session);
     }
 
     function good() {
       var geocoder = new google.maps.Geocoder();
+
       geocoder.geocode({'address': value}, function(results, status){
+        var location;
+
         if (status == google.maps.GeocoderStatus.OK) {
-          requestFactory(results[0].geometry.location);
+          location = results[0].geometry.location;
+          requestFactory(location);
+          googleLinkFactory(session, {lat: location.lat(), lng: location.lng()} );
         } else {
           bad(status);
         }
@@ -361,6 +375,31 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
     });
   }
 
+  function googleButtonListener(session) {
+    var button = session.querySelectorAll('.training__google')[0];
+
+    function openGoogle(event) {
+      event.preventDefault();
+      window.open(this.getAttribute('data-url'));
+    }
+    button.addEventListener('click', openGoogle);
+  }
+
+  function googleLinkFactory(session, from, travelMode) {
+    var button = session.querySelectorAll('.training__google')[0];
+    var daddrLat = session.getAttribute('data-lat');
+    var daddrLng = session.getAttribute('data-lng');
+    var daddr = 'daddr=' + daddrLat + ',' + daddrLng;
+    var url = 'https://maps.google.com?';
+    var saddr = '';
+    var str;
+
+    if (from) saddr = 'saddr=' + from.lat + ',' + from.lng + '&';
+    str = url + saddr + daddr;
+
+    button.setAttribute('data-url', str);
+  }
+
   function init(){
     var sessions = training.querySelectorAll('.training__session');
     var i = 0;
@@ -368,6 +407,8 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
 
     for (i; i<n; i++) {
       mapFactory(sessions[i]);
+      googleLinkFactory(sessions[i]);
+      googleButtonListener(sessions[i]);
       directionsListeners(sessions[i]);
     }
 
