@@ -99,23 +99,14 @@ define(['require', 'config', 'response', 'getStyle'], function(require, config, 
   }
 
   function calculateDimensions() {
-    var gridUnit = getStyle('.grid-unit');
-
     // Columns
-    var colEx = gridUnit.match(/width:\s*(\d*\.?\d*)(px|r?em|%);/);
-    var colU = colEx[2];
-    colWidth = parseFloat(colEx[1]);
-    colWidth = calculateUnits(colWidth,colU,windowWidth);
+    colWidth = parseFloat(getStyle('.grid-unit', 'width'));
 
     // Gutters
-    var gutterEx = gridUnit.match(/padding-?\w*:\s*(\d*\.?\d*)(px|r?em|%);/);
-    var gutterU = gutterEx[2];
-    gutterWidth = parseFloat(gutterEx[1]);
-    gutterWidth = calculateUnits(gutterWidth,gutterU,colWidth);
+    gutterWidth = parseFloat(getStyle('.grid-unit', 'padding'));
 
     // Baseline
-    baseLineHeight = parseFloat(gridUnit.match(/height:\s*(\d.*\d*);/)[1]);
-    baseLineHeight = config.baseFontSize*baseLineHeight;
+    baseLineHeight = parseFloat(getStyle('.grid-unit', 'height'));
   }
 
   function createGrid() {
