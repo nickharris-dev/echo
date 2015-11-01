@@ -1,81 +1,85 @@
 <?php
   $page_id = 2;
-  if( have_rows('training', $page_id) ): ?>
-  <section class="training" id="Training">
+  if( have_rows('training', $page_id) ):
+    $rowCount = count(get_field('training'));
+    if ($rowCount % 2 == 0) {
+      $count = 'even';
+    } else {
+      $count = 'odd';
+    } ?>
+  <section class="training training--<?php echo $count; ?>" id="Training">
     <h1>
-      Play with us
+      Train with us
     </h1>
-    <div class="training__wrapper">
-      <?php while( have_rows('training') ): the_row();
-        // vars
-        $day = get_sub_field('regular_day');
-        $start = get_sub_field('start_time');
-        $end = get_sub_field('end_time');
-        $next = get_sub_field('next_session');
-        $venue_name = get_sub_field('venue_name');
-        $venue_address = get_sub_field('venue_address');
-        $venue_postcode = get_sub_field('venue_postcode');
-        $venue_lat = get_sub_field('venue_lat');
-        $venue_lng = get_sub_field('venue_lng');
-      ?>
+    <?php while( have_rows('training') ): the_row();
+      // vars
+      $day = get_sub_field('regular_day');
+      $start = get_sub_field('start_time');
+      $end = get_sub_field('end_time');
+      $next = get_sub_field('next_session');
+      $venue_name = get_sub_field('venue_name');
+      $venue_address = get_sub_field('venue_address');
+      $venue_postcode = get_sub_field('venue_postcode');
+      $venue_lat = get_sub_field('venue_lat');
+      $venue_lng = get_sub_field('venue_lng');
+    ?>
 
-      <article class="training__session" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="<?php echo $day; ?>Map" data-eq="stacked:(min-width: 40rem)">
-        <div class="training__info">
-          <h1>
+    <article class="training__session" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="<?php echo $day; ?>Map" data-eq="stacked:(min-width: 40rem)">
+      <div class="training__info">
+        <h1>
 
-            <?php echo $day; ?>s
+          <?php echo $day; ?>s
 
-          </h1>
+        </h1>
+        <?php
+          $session_date = new DateTime();
+          $session_date->add(DateInterval::createFromDateString('yesterday'));
+          $today = new DateTime();
+
+          if ($next) $session_date = DateTime::createFromFormat('Ymd', $next);
+          if ($day == 'Weekend') $day = 'Sunday';
+
+          if ($session_date >= $today) {
+            $next_session = $session_date->format('l jS F');
+          } else {
+            $next_session = date('l jS F', strtotime($day));
+          }
+        ?>
+        <p>
+
+          Next:<br>
+          <time><?php echo $next_session; ?>, <i class="hour"><?php echo $start; ?></i> to <i class="hour"><?php echo $end; ?></i></time><br>
+
+        </p>
+        <h2 class="training__venue"><?php echo $venue_name; ?></h2>
+        <address>
+          <?php echo $venue_address; ?>,
+          <i class="postcode"><?php echo $venue_postcode; ?></i>
+        </address>
+
+        <h3>Directions</h3>
+        <menu class="training__directions">
+          <li class="training__trigger" data-type="geo">From where you are</li>
           <?php
-            $session_date = new DateTime();
-            $session_date->add(DateInterval::createFromDateString('yesterday'));
-            $today = new DateTime();
+            $trams = [];
+            $trains = [];
+            $buses = [];
 
-            if ($next) $session_date = DateTime::createFromFormat('Ymd', $next);
-            if ($day == 'Weekend') $day = 'Sunday';
+            if( have_rows('public_transport_links') ):
+              while ( have_rows('public_transport_links') ) : the_row();
+                $obj = new stdClass();
+                $obj->name = get_sub_field('name');
+                $obj->lat = get_sub_field('lat');
+                $obj->lng = get_sub_field('lng');
 
-            if ($session_date >= $today) {
-              $next_session = $session_date->format('l jS F');
-            } else {
-              $next_session = date('l jS F', strtotime($day));
-            }
-          ?>
-          <p>
-
-            Next training:<br>
-            <time><?php echo $next_session; ?>, <i class="hour"><?php echo $start; ?></i> to <i class="hour"><?php echo $end; ?></i></time><br>
-
-          </p>
-          <h2 class="training__venue"><?php echo $venue_name; ?></h2>
-          <address>
-            <?php echo $venue_address; ?>,
-            <i class="postcode"><?php echo $venue_postcode; ?></i>
-          </address>
-
-
-          <h3>Directions</h3>
-          <menu class="training__directions">
-            <li class="training__trigger" data-type="geo">From where you are</li>
-            <?php
-              $trams = [];
-              $trains = [];
-              $buses = [];
-
-              if( have_rows('public_transport_links') ):
-                while ( have_rows('public_transport_links') ) : the_row();
-                  $obj = new stdClass();
-                  $obj->name = get_sub_field('name');
-                  $obj->lat = get_sub_field('lat');
-                  $obj->lng = get_sub_field('lng');
-
-                  if( get_row_layout() == 'tram' ):
-                    array_push($trams, $obj);
-                  elseif( get_row_layout() == 'train' ):
-                    array_push($trains, $obj);
-                  elseif( get_row_layout() == 'bus' ):
-                    array_push($buses, $obj);
-                  endif;
-                endwhile;
+                if( get_row_layout() == 'tram' ):
+                  array_push($trams, $obj);
+                elseif( get_row_layout() == 'train' ):
+                  array_push($trains, $obj);
+                elseif( get_row_layout() == 'bus' ):
+                  array_push($buses, $obj);
+                endif;
+              endwhile;
             endif; ?>
             <?php if (sizeof($trams) > 0): ?>
 
@@ -131,6 +135,5 @@
         <div class="training__map"></div>
       </article>
     <?php endwhile; ?>
-    </div>
   </section>
 <?php endif; ?>

@@ -179,16 +179,10 @@
     width: 100%;
   }
 
-  @media (min-width: rem(1024)) {
-    &__wrapper {
-      display: flex;
-      flex-flow: row wrap;
-    }
-  }
-
   &__session {
     border-bottom: rem(3) solid palette(icewhite);
-    padding: rem($baseline) $column rem(12*$baseline);
+    height: rem(36*$baseline);
+    padding: rem($baseline) $column;
     position: relative;
 
     &:first-of-type {
@@ -203,7 +197,8 @@
     }
 
     &--stacked {
-      padding-bottom: rem(2*$baseline);
+      height: auto;
+      height: rem(28*$baseline);
 
       .training__info {
         width: 10*$column;
@@ -211,7 +206,8 @@
     }
 
     @media (min-width: rem(1024)) {
-      flex: 1 auto;
+      float: left;
+      width: 50%;
 
       &:nth-of-type(even) {
         border-left: rem(3) solid palette(icewhite);
@@ -220,6 +216,15 @@
       &:nth-of-type(2) {
         margin-top: rem(-3*$baseline);
         padding-top: rem(4*$baseline);
+      }
+
+      &:last-of-type {
+        clear: left;
+        width: 100%;
+
+        .training__info {
+          width: 5*$column;
+        }
       }
     }
   }
