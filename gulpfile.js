@@ -159,7 +159,11 @@
     var assetsOptions = {
       server: {
         baseDir: './www/assets',
-        directory: true
+        directory: true,
+        middleware: function (req, res, next) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          next();
+        }
       },
       open: false
     };
