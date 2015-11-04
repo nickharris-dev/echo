@@ -1,6 +1,15 @@
 // Flags
 // =====
 @import '_partials/helpers';
+@mixin bgSprite() {
+  background-image: url('<?php echo assets_url(); ?>/images/sprite.png');
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    background-image: url('<?php echo assets_url(); ?>/images/sprite@2x.png');
+    background-size: 79px 35px;
+  }
+}
+
 
 html {
   font-family: $body-copy;

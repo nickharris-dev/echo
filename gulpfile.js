@@ -10,12 +10,14 @@
   var environments = require('gulp-environments');
   var filter = require('gulp-filter');
   var gulp = require('gulp');
+  var gulpif = require('gulp-if');
   var imagemin = require('gulp-imagemin');
   var notify = require('gulp-notify');
   var rename = require('gulp-rename');
   var sass = require('gulp-sass');
   var shell = require('gulp-shell');
   var sourcemaps = require('gulp-sourcemaps');
+  var sprity = require('sprity');
 
 // Universal Settings
 // ==================
@@ -38,6 +40,7 @@
   var paths = {
     src: {
       images: './src/assets/images/',
+      sprite: './src/assets/sprite/',
       javascript: './src/assets/js/',
       style: './src/assets/css/',
       theme: './src/theme/'
@@ -119,6 +122,21 @@
       .pipe(gulp.dest(paths.dest.images))
       .pipe(dev(proxy.stream({match: '**/images/*'})));
   });
+  gulp.task('sprite', function(){
+    return sprity.src({
+      'dimension': [{
+        ratio: 1, dpi: 72
+      }, {
+        ratio: 2, dpi: 192
+      }],
+      src: paths.src.sprite + '*.png',
+      style: './sprite.scss',
+      processor: 'sass',
+      'style-type': 'scss'
+    })
+    .pipe(imagemin())
+    .pipe(gulpif('*.png', gulp.dest(paths.dest.images), gulp.dest(paths.src.style + '_partials/')));
+  });
 
 // Javascript
 // ==========
@@ -197,12 +215,14 @@
     ], gulp.parallel('theme', 'style'));
     // Images
     gulp.watch(paths.src.images + '**/*', gulp.parallel('images'));
+    // Sprite
+    gulp.watch(paths.src.sprite + '*.png', gulp.series('theme', 'style'));
     // Javascript
     gulp.watch(paths.src.javascript + '**/*', gulp.parallel('javascript'));
   });
 
-gulp.task('theme', gulp.series('criticalstyle', 'templates'), function(){});
-gulp.task('build', gulp.parallel('theme', 'style', 'javascript', 'images'), function(){});
+gulp.task('theme', gulp.series('sprite', 'criticalstyle', 'templates'), function(){});
+gulp.task('build', gulp.parallel('theme', 'style', 'javascript', 'images', 'fonts'), function(){});
 gulp.task('serve', gulp.parallel('watch', 'server'), function(){});
 
 gulp.task('default', gulp.series('vagrant', 'clean', 'build', 'serve'), function(){});

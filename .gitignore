@@ -1,7 +1,8 @@
 .vagrant
 
-www/assets/
+build/
 
+www/assets/
 www/default/database-admin/
 www/default/memcached-admin/
 www/default/opcache-status/
@@ -17,3 +18,5 @@ database/backups/wordpress_trunk.sql
 
 critical.php
 critical-css.hbs
+
+sprite.scss
