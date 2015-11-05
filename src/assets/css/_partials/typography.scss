@@ -244,3 +244,11 @@ a {
 
 // Specials
 // ========
+.important {
+  background-color: adjust-color(palette(warning), $lightness: 46%);
+  border: 1px solid palette(warning);
+  border-radius: 5px;
+  color: palette(jetblack);
+  margin: rem($baseline/4) 0;
+  padding: rem($baseline/4) $gutter;
+}
