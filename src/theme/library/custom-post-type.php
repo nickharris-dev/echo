@@ -90,7 +90,7 @@ function custom_posts() {
 			'capability_type' => 'post',
 			'hierarchical' => false,
 			/* the next one is important, it tells what's enabled in the post editor */
-			'supports' => array( 'title', 'thumbnail', 'revisions')
+			'supports' => array( 'title', 'revisions')
 		) /* end of options */
 	); /* end of register post type */
 

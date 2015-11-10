@@ -6,87 +6,58 @@
 
 <?php get_header(); ?>
 
-			<div id="content">
+	<section class="hero hero--roster" id="Hero">
+	  <h1>
+	    <?php the_title(); ?>
+	  </h1>
+	</section>
 
-				<div id="inner-content" class="wrap cf">
+	<?php
+		$post_type = 'player';
+		$terms = get_terms( 'Team' );
 
-						<main id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+		foreach( $terms as $term ) :
+	?>
+		<section class="team team--<?php print_r($term->slug); ?>">
+			<?php $c = count($terms);
+				if ($c > 1) :?>
+				<h1><?php print_r($term->name); ?></h1>
+			<?php endif; ?>
+			<?php
+				$posts = new WP_Query( "taxonomy=Team&term=$term->slug&posts_per_page=2" );
+				if( $posts->have_posts() ):
+					while( $posts->have_posts() ):
+						$posts->the_post();
+						$pic = get_field('photo');
+						$tz  = new DateTimeZone('Europe/Brussels');
+						$age = DateTime::createFromFormat('Ymd', get_field('date_of_birth'), $tz)
+				  	  ->diff(new DateTime('now', $tz))
+			    	  ->y;
+			?>
+				<article class="player">
+					<img class="player__pic" src="<?php echo $pic['url']; ?>">
+					<div class="player__details">
+						<h1 class="player__name"><?php the_title(); ?></h1>
+						<table>
+							<tr>
+								<th scope="row">Number</th>
+								<td><?php the_field('shirt_number'); ?></td>
+							</tr>
+							<tr>
+								<th scope="row">Position</th>
+								<td><?php echo strip_tags( get_the_term_list($post->ID, 'Position', '', ', ') ) ?></td>
+							</tr>
+							<tr>
+								<th scope="row">Age</th>
+								<td><?php echo $age ?></td>
+							</tr>
+						</table>
+					</div>
+				</article>
+	    <?php endwhile; endif; ?>
+		</section>
+	<?php endforeach; ?>
 
-							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-
-							<article id="post-<?php the_ID(); ?>" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
-
-								<header class="article-header">
-
-									<h1 class="page-title"><?php the_title(); ?></h1>
-
-									<p class="byline vcard">
-										<?php printf( __( 'Posted <time class="updated" datetime="%1$s" itemprop="datePublished">%2$s</time> by <span class="author">%3$s</span>', 'bonestheme' ), get_the_time('Y-m-j'), get_the_time(get_option('date_format')), get_the_author_link( get_the_author_meta( 'ID' ) )); ?>
-									</p>
-
-
-								</header>
-
-								<section class="entry-content cf" itemprop="articleBody">
-									<?php
-										// the content (pretty self explanatory huh)
-										the_content();
-
-										/*
-										 * Link Pages is used in case you have posts that are set to break into
-										 * multiple pages. You can remove this if you don't plan on doing that.
-										 *
-										 * Also, breaking content up into multiple pages is a horrible experience,
-										 * so don't do it. While there are SOME edge cases where this is useful, it's
-										 * mostly used for people to get more ad views. It's up to you but if you want
-										 * to do it, you're wrong and I hate you. (Ok, I still love you but just not as much)
-										 *
-										 * http://gizmodo.com/5841121/google-wants-to-help-you-avoid-stupid-annoying-multiple-page-articles
-										 *
-										*/
-										wp_link_pages( array(
-											'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'bonestheme' ) . '</span>',
-											'after'       => '</div>',
-											'link_before' => '<span>',
-											'link_after'  => '</span>',
-										) );
-									?>
-								</section>
-
-
-								<footer class="article-footer">
-
-                  <?php the_tags( '<p class="tags"><span class="tags-title">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '</p>' ); ?>
-
-								</footer>
-
-								<?php comments_template(); ?>
-
-							</article>
-
-							<?php endwhile; else : ?>
-
-									<article id="post-not-found" class="hentry cf">
-											<header class="article-header">
-												<h1><?php _e( 'Oops, Post Not Found!', 'bonestheme' ); ?></h1>
-										</header>
-											<section class="entry-content">
-												<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'bonestheme' ); ?></p>
-										</section>
-										<footer class="article-footer">
-												<p><?php _e( 'This is the error message in the page-custom.php template.', 'bonestheme' ); ?></p>
-										</footer>
-									</article>
-
-							<?php endif; ?>
-
-						</main>
-
-						<?php get_sidebar(); ?>
-
-				</div>
-
-			</div>
-
+<?php include 'training.php'; ?>
 
 <?php get_footer(); ?>

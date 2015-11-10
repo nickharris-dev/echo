@@ -7,7 +7,7 @@
 <?php get_header(); ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-	<section class="hero" id="Hero">
+	<section class="hero hero--front" id="Hero">
 	  <h1>
 	    <?php the_title(); ?>
 	  </h1>

@@ -1,122 +1,37 @@
+.team {
+  display: flex;
+}
+
 .player {
-  background: palette(neutral, light);
-  margin: rem($baseline) $gutter;
+  background: palette(claret);
+  color: palette(icewhite);
+  margin: rem($baseline) auto;
+  max-width: rem(150);
+
+  table {
+    margin: 0;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  th {
+    font-weight: normal;
+    text-align: left;
+  }
 
   &__details {
-    padding: rem($baseline/2) $gutter;
+    padding: 0 $gutter;
     position: relative;
   }
 
   &__name {
-    @include type-scale(4, 1);
-    margin: 0 0 rem($baseline/2) 40%;
+    @include type-scale(5, 1);
+    margin: 0;
     max-width: 100%;
     min-width: 0;
-    width: 60%;
-  }
-
-  &__position {
-    @include type-scale(3, 1);
-    white-space: nowrap;
   }
 
   &__pic {
-    background: palette(jetblack);
-    height: 100%;
-    left: 0;
-    margin: 0;
-    position: absolute;
-    top: 0;
-    width: 40%;
-  }
-
-  &__vitals {
-    @include type-scale(3, 1);
-    margin: 0 0 0 40%;
-    max-width: 100%;
-    min-width: 0;
-    width: 60%;
-
-    &__stat {
-      padding: 0 .5em;
-    }
-  }
-
-  .tabs {
-    @include type-scale(4, 1);
-    display: flex;
-    margin: 0 0 0 40%;
-    width: 60%;
-
-    &__tab {
-      background-color: palette(claret);
-      border: 0;
-      color: palette(icewhite);
-      display: block;
-      width: 50%;
-
-      &:focus,
-      &:hover {
-        background-color: palette(icewhite);
-        color: palette(claret);
-        outline: none;
-      }
-
-      &--active {
-        background-color: palette(icewhite);
-        color: palette(claret);
-        cursor: default;
-      }
-    }
-  }
-
-  .stats {
-    @include type-scale(3, 1);
-    border-bottom: rem(1) solid palette(neutral, light);
-    border-top: rem(1) solid palette(claret);
-    margin: rem(-16) 0 0;
-
-    &--career {
-      display: none;
-    }
-
-    &__heading {
-      background-color: palette(jetblack);
-      color: palette(icewhite);
-      letter-spacing: .2em;
-      text-transform: uppercase;
-
-      &--o {
-        border-right: rem(1) solid palette(neutral, mid);
-      }
-    }
-
-    &__label {
-      background-color: palette(icewhite);
-
-      &:first-of-type {
-        border-left: rem(1) solid palette(neutral, light);
-      }
-
-      &--tdt,
-      &--tfl {
-        border-right: rem(1) solid palette(neutral, light);
-      }
-    }
-
-    &__stat {
-      @include type-scale(4, 1);
-      background-color: palette(icewhite);
-      padding: rem($baseline/4) 1em;
-
-      &:first-of-type {
-        border-left: rem(1) solid palette(neutral, light);
-      }
-
-      &--tdt,
-      &--tfl {
-        border-right: rem(1) solid palette(neutral, light);
-      }
-    }
+    width: 100%;
   }
 }
