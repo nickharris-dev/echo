@@ -13,7 +13,7 @@
       Train with us
     </h1>
     <div class="training__wrapper">
-      <?php while( have_rows('training') ): the_row();
+      <?php while( have_rows('training', $page_id) ): the_row();
         // vars
         $venue_name = get_sub_field('venue_name');
         $venue_address = get_sub_field('venue_address');
