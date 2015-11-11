@@ -1,15 +1,70 @@
-.hero {
-  padding: rem($baseline) $gutter 0;
-  text-align: center;
+@mixin hero($name) {
+  @media (-webkit-max-device-pixel-ratio: 1.9), (max-resolution: 191dpi), (max-resolution: 1.9dppx) {
+    background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-640.jpg');
 
-  @media (min-width: rem(500)) {
-    background-color: palette(jetblack);
-    background-image: url('<?php echo assets_url(); ?>/images/hero-2024.jpg');
-    background-position: 50% 100%;
-    background-size: cover;
-    color: palette(icewhite);
-    overflow: hidden;
+    @media (min-width: 800px) {
+      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-1000.jpg');
+    }
+
+    @media (min-width: 1300px) {
+      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-1500.jpg');
+    }
+
+    @media (min-width: 1600px) {
+      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-2000.jpg');
+    }
+
+    @media (min-width: 2500px) {
+      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-2718.jpg');
+    }
+  }
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+    background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-640.jpg');
+
+    @media (min-width: 500px) {
+      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-1000.jpg');
+    }
+
+    @media (min-width: 1000px) {
+      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-1500.jpg');
+    }
+
+    @media (min-width: 1250px) {
+      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-2000.jpg');
+    }
+
+    @media (min-width: 1800px) {
+      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-2718.jpg');
+    }
+  }
+}
+
+.hero {
+  background-color: palette(jetblack);
+  background-position: 50% 0;
+  background-size: cover;
+  padding: rem(7*$baseline) $gutter 0;
+  color: palette(icewhite);
+  overflow: hidden;
+  text-align: center;
+  text-shadow: 0 0 5px rgba(palette(jetblack), .5);
+
+  @media (min-width: rem(768)) {
     padding-top: rem(14*$baseline);
+  }
+
+  &--front {
+    @include hero('hero');
+    background-position: 50% 100%;
+  }
+
+  &--roster {
+    @include hero('roster');
+  }
+
+  h1 {
+    @include type-scale(9, 2);
+    max-width: 16.888888889em;
   }
 
   em {

@@ -44,6 +44,6 @@
 
 	<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
     <header class="masthead" id="Header" role="banner">
-      <a href="/"><img class="masthead__logo" src="<?php echo assets_url(); ?>/images/logotype.svg" alt="Manchester Crows" id="Logotype"></a>
+      <a class="masthead__home" href="/"><img class="masthead__logo" src="<?php echo assets_url(); ?>/images/logotype.svg" alt="Manchester Crows" id="Logotype"></a>
       <a class="masthead__jump" href="#PrimaryNav">Jump to Navigation</a>
     </header>

@@ -4,12 +4,16 @@
   position: relative;
 
   h1 {
-    @include type-scale(9, 2);
+    @include type-scale(8, 2);
     margin: 0 auto;
     min-width: 0;
     position: relative;
     text-align: center;
     z-index: 1;
+
+    @media (min-width: rem(400)) {
+      @include type-scale(9, 2);
+    }
   }
 
   h2 {
