@@ -29,7 +29,7 @@
 					if( $posts->have_posts() ):
 						while( $posts->have_posts() ):
 							$posts->the_post();
-							$pic = get_field('photo');
+							$pic = get_field('photo')['sizes'];
 							$tz  = new DateTimeZone('Europe/Brussels');
 							$age = DateTime::createFromFormat('Ymd', get_field('date_of_birth'), $tz)
 					  	  ->diff(new DateTime('now', $tz))
@@ -38,7 +38,22 @@
 					<article class="player">
 						<div class="player__wrapper">
 							<div class="player__details">
-								<img class="player__pic" src="<?php echo $pic['url']; ?>">
+								<img class="player__pic"
+									alt="A photo of <?php the_title(); ?>"
+									src="<?php print_r($pic['roster-300']); ?>"
+									srcset="
+										<?php print_r($pic['roster-210']); ?> <?php print_r($pic['roster-210-width']); ?>w,
+										<?php print_r($pic['roster-300']); ?> <?php print_r($pic['roster-300-width']); ?>w,
+										<?php print_r($pic['roster-420']); ?> <?php print_r($pic['roster-420-width']); ?>w,
+										<?php print_r($pic['roster-600']); ?> <?php print_r($pic['roster-600-width']); ?>w"
+									sizes="(min-width: 225rem) 4.166666667vw,
+										(min-width: 112.5rem) 8.333333333vw,
+										(min-width: 200rem) 12.5vw,
+										(min-width: 56.25rem) 16.667vw,
+										(min-width: 37.5rem) 25vw,
+										(min-width: 28.0625rem) 33.333vw,
+										50vw"
+								>
 								<h1 class="player__name">
 									<span class="player__number"><i>#</i><?php the_field('shirt_number'); ?></span>
 									<?php the_title(); ?>

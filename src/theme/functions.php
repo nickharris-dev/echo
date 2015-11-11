@@ -75,6 +75,11 @@ if ( ! isset( $content_width ) ) {
 // Thumbnail sizes
 add_image_size( 'bones-thumb-600', 600, 150, true );
 add_image_size( 'bones-thumb-300', 300, 100, true );
+// Roster Photo sizes
+add_image_size( 'roster-210', 210 );
+add_image_size( 'roster-300', 300 );
+add_image_size( 'roster-420', 420 );
+add_image_size( 'roster-600', 600 );
 
 /*
 to add more sizes, simply copy a line from above
