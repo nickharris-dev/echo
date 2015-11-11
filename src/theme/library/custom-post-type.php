@@ -69,7 +69,7 @@ function custom_posts() {
 			'add_new' => __( 'Add New Player', 'bonestheme' ), /* The add new menu item */
 			'add_new_item' => __( 'Add New Player', 'bonestheme' ), /* Add New Display Title */
 			'edit' => __( 'Edit', 'bonestheme' ), /* Edit Dialog */
-			'edit_item' => __( 'Edit Playerss', 'bonestheme' ), /* Edit Display Title */
+			'edit_item' => __( 'Edit Players', 'bonestheme' ), /* Edit Display Title */
 			'new_item' => __( 'New Player', 'bonestheme' ), /* New Display Title */
 			'view_item' => __( 'View Player', 'bonestheme' ), /* View Display Title */
 			'search_items' => __( 'Search Players', 'bonestheme' ), /* Search Custom Type Title */

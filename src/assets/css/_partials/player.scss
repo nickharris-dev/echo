@@ -1,17 +1,46 @@
 .team {
-  display: flex;
+  padding: 0 $gutter;
+
+  h1 {
+    margin: 0;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin: 0 -$gutter;
+  }
 }
 
 .player {
-  background: palette(claret);
   color: palette(icewhite);
-  margin: rem($baseline) auto;
-  max-width: rem(150);
+  margin: rem($baseline/2) auto;
+  padding: 0 $gutter;
+  width: 12*$column;
 
-  table {
-    margin: 0;
-    max-width: 100%;
-    min-width: 0;
+  @media (min-width: rem(450)) {
+    width: 8*$column;
+  }
+
+  @media (min-width: rem(600)) {
+    width: 6*$column;
+  }
+
+  @media (min-width: rem(900)) {
+    width: 4*$column;
+  }
+
+  @media (min-width: rem(1200)) {
+    width: 3*$column;
+  }
+
+  @media (min-width: rem(1800)) {
+    width: 2*$column;
+  }
+
+  @media (min-width: rem(3600)) {
+    width: $column;
   }
 
   th {
@@ -19,19 +48,45 @@
     text-align: left;
   }
 
-  &__details {
-    padding: 0 $gutter;
-    position: relative;
+  &__wrapper {
+    background: palette(claret);
+    min-height: 100%;
+    padding: 0 $gutter rem($baseline/2);
   }
 
-  &__name {
-    @include type-scale(5, 1);
+  &__vitals {
     margin: 0;
-    max-width: 100%;
     min-width: 0;
   }
 
+  &__details {
+    margin: 0 -$gutter;
+    position: relative;
+  }
+
+  &__number {
+    @include type-scale(5, 1);
+    display: block;
+
+    i {
+      @include type-scale(3);
+    }
+  }
+
+  &__name {
+    @include type-scale(6, 1);
+    bottom: rem($baseline/2);
+    left: 0;
+    margin: 0;
+    max-width: 100%;
+    min-width: 0;
+    padding: 0 $gutter;
+    position: absolute;
+    text-shadow: 0 0 5px rgba(palette(jetblack), .5);
+  }
+
   &__pic {
+    margin: 0;
     width: 100%;
   }
 }
