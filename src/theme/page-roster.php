@@ -13,9 +13,7 @@
 	</section>
 
 	<?php
-		$post_type = 'player';
 		$terms = get_terms( 'Team' );
-
 		foreach( $terms as $term ) :
 	?>
 		<section class="team team--<?php print_r($term->slug); ?>">
@@ -25,7 +23,20 @@
 			<?php endif; ?>
 			<div class="team__wrapper">
 				<?php
-					$posts = new WP_Query( "taxonomy=Team&term=$term->slug" );
+					$args = array(
+						'post_type' => 'player',
+						'meta_key' => 'shirt_number',
+						'orderby' => 'meta_value_num',
+						'order' => 'ASC',
+						'tax_query' => array(
+							array(
+								'taxonomy' => 'Team',
+								'field' => 'slug',
+								'terms' => $term->slug,
+							),
+						),
+					);
+					$posts = new WP_Query( $args );
 					if( $posts->have_posts() ):
 						while( $posts->have_posts() ):
 							$posts->the_post();
