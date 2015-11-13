@@ -55,7 +55,7 @@
   }
 
   &__vitals {
-    margin: 0;
+    margin: 0 0 rem($baseline/2);
     min-width: 0;
   }
 
@@ -88,5 +88,38 @@
   &__pic {
     margin: 0;
     width: 100%;
+  }
+
+  &__stats {
+    &__heading {
+      @include type-scale(4, 1);
+      margin: 0;
+    }
+
+    &__tabs {
+      display: flex;
+      margin: 0 -$gutter;
+    }
+
+    &__tab {
+      background-color: palette(neutral, light);
+      color: palette(claret);
+      cursor: pointer;
+      flex: 1 auto;
+      text-align: center;
+
+      &--active {
+        background-color: palette(claret);
+        color: palette(icewhite);
+        cursor: default;
+      }
+    }
+
+    &__details {
+      table {
+        margin: 0;
+        min-width: 0;
+      }
+    }
   }
 }

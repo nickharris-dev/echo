@@ -56,14 +56,21 @@
   &--front {
     @include hero('hero');
     background-position: 50% 100%;
+
+    h1 {
+      font-size: 7vw;
+    }
   }
 
   &--roster {
     @include hero('roster');
+
+    h1 {
+      font-size: 15vw;
+    }
   }
 
   h1 {
-    @include type-scale(9, 2);
     max-width: 16.888888889em;
   }
 
