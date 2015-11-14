@@ -1,13 +1,11 @@
 .training {
   @include clearfix();
-  margin-top: rem(3*$baseline);
   position: relative;
 
   h1 {
     @include type-scale(8, 2);
     margin: 0 auto;
     min-width: 0;
-    position: relative;
     text-align: center;
     z-index: 1;
 
@@ -32,6 +30,13 @@
   address {
     margin: 0 0 rem($baseline/2);
     font-style: normal;
+  }
+
+  &__heading {
+    left: 0;
+    position: absolute;
+    top: rem($baseline);
+    width: 100%;
   }
 
   &__google {
@@ -207,7 +212,6 @@
   &__wrapper {
     &:first-of-type {
       .training__session:first-of-type {
-        margin-top: rem(-3*$baseline);
         padding-top: rem(4*$baseline);
       }
     }
@@ -218,7 +222,6 @@
 
       &:first-of-type {
         .training__session {
-          margin-top: rem(-3*$baseline);
           padding-top: rem(4*$baseline);
         }
       }

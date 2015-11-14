@@ -1,3 +1,83 @@
+.roster {
+  background-color: palette(neutral, copy);
+  background-position: 50% 0;
+  background-size: contain;
+  padding-bottom: 56.25%;
+  position: relative;
+  text-align: center;
+
+  @media (-webkit-max-device-pixel-ratio: 1.9), (max-resolution: 191dpi), (max-resolution: 1.9dppx) {
+    background-image: url('../images/front-page-roster-640.jpg');
+
+    @media (min-width: 800px) {
+      background-image: url('../images/front-page-roster-1000.jpg');
+    }
+
+    @media (min-width: 1300px) {
+      background-image: url('../images/front-page-roster-1500.jpg');
+    }
+
+    @media (min-width: 1600px) {
+      background-image: url('../images/front-page-roster-2000.jpg');
+    }
+
+    @media (min-width: 2500px) {
+      background-image: url('../images/front-page-roster-3000.jpg');
+    }
+  }
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+    background-image: url('../images/front-page-roster-640.jpg');
+
+    @media (min-width: 500px) {
+      background-image: url('../images/front-page-roster-1000.jpg');
+    }
+
+    @media (min-width: 1000px) {
+      background-image: url('../images/front-page-roster-1500.jpg');
+    }
+
+    @media (min-width: 1250px) {
+      background-image: url('../images/front-page-roster-2000.jpg');
+    }
+
+    @media (min-width: 1800px) {
+      background-image: url('../images/front-page-roster-3000.jpg');
+    }
+  }
+
+  &__link {
+    font-size: 12vw;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    @media (min-width: rem(1200)) {
+      font-size: 10vw;
+    }
+
+    &:link,
+    &:visited {
+      color: palette(icewhite);
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      box-shadow: inset 0 -1.3em 0 palette(claret);
+      color: palette(icewhite);
+    }
+  }
+
+  &__title {
+    border: 1vw solid palette(icewhite);
+    font-size: 1em;
+    margin: 0;
+    max-width: 100%;
+    padding: 0 2vw 0 3vw;
+  }
+}
+
 .team {
   padding: 0 $gutter;
 

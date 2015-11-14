@@ -9,7 +9,7 @@
     }
     $count = 0; ?>
   <section class="training training--<?php echo $rowis; ?>" id="Training">
-    <h1>
+    <h1 class="training__heading">
       Train with us
     </h1>
     <div class="training__wrapper">

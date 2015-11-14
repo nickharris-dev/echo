@@ -71,7 +71,9 @@
   }
 
   h1 {
-    max-width: 16.888888889em;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
   }
 
   em {

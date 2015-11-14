@@ -26,10 +26,16 @@
 				<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'bonestheme' ); ?></p>
 		</section>
 		<footer class="article-footer">
-				<p><?php _e( 'This is the error message in the page-custom.php template.', 'bonestheme' ); ?></p>
+				<p><?php _e( 'This is the error message in the page-font.php template.', 'bonestheme' ); ?></p>
 		</footer>
 	</article>
 <?php endif; ?>
+
+<?php include 'posts.php'; ?>
+
+<section class="roster">
+	<a class="roster__link" href="roster"><h1 class="roster__title">Roster</h1></a>
+</section>
 
 <?php include 'training.php'; ?>
 
