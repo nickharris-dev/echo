@@ -242,6 +242,34 @@ a {
   @include style-as-link();
 }
 
+.button {
+  @include type-scale(4, 1);
+  background: palette(claret);
+  border: rem(3) solid palette(claret);
+  display: block;
+  font-family: $heading;
+  letter-spacing: .1em;
+  padding: rem($baseline/4) 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  transition: none;
+  white-space: nowrap;
+
+  &:link,
+  &:visited {
+    box-shadow: none;
+    color: palette(icewhite);
+  }
+
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: palette(icewhite);
+    box-shadow: none;
+    color: palette(claret);
+  }
+}
+
 // Specials
 // ========
 .important {
