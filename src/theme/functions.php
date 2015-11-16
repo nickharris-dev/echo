@@ -75,11 +75,26 @@ if ( ! isset( $content_width ) ) {
 // Thumbnail sizes
 add_image_size( 'bones-thumb-600', 600, 150, true );
 add_image_size( 'bones-thumb-300', 300, 100, true );
+// Square Thumbs
+add_image_size( 'square-150', 150, 150, true );
+add_image_size( 'square-300', 300, 300, true );
+add_image_size( 'square-450', 450, 450, true );
+add_image_size( 'square-600', 600, 600, true );
+add_image_size( 'square-750', 750, 750, true );
+add_image_size( 'square-900', 900, 900, true );
+add_image_size( 'square-1050', 1050, 1050, true );
+add_image_size( 'square-1200', 1200, 1200, true );
 // Roster Photo sizes
 add_image_size( 'roster-210', 210 );
 add_image_size( 'roster-300', 300 );
 add_image_size( 'roster-420', 420 );
 add_image_size( 'roster-600', 600 );
+// Hero style image sizes
+add_image_size( 'hero-640', 640 );
+add_image_size( 'hero-1000', 1000 );
+add_image_size( 'hero-1500', 1500 );
+add_image_size( 'hero-2000', 2000 );
+add_image_size( 'hero-3000', 3000 );
 
 /*
 to add more sizes, simply copy a line from above
@@ -244,5 +259,6 @@ function assets_url() {
     return $url;
   }
 }
+
 
 /* DON'T DELETE THIS CLOSING TAG */ ?>
