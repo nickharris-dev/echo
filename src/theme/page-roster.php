@@ -2,6 +2,7 @@
 /*
 	Template Name: Roster
 */
+
 ?>
 
 <?php get_header(); ?>
@@ -114,6 +115,7 @@
 									<td><?php echo $experience; ?></td>
 								</tr>
 							</table>
+							<!--
 							<h2 class="player__stats__heading">Stats</h2>
 							<menu class="player__stats__tabs">
 								<li class="player__stats__tab player__stats__tab--active">Quick</li>
@@ -136,7 +138,7 @@
 										</tr>
 									</table>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</article>
 		    <?php endwhile; endif; ?>
