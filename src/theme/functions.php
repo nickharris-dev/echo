@@ -90,11 +90,11 @@ add_image_size( 'roster-300', 300 );
 add_image_size( 'roster-420', 420 );
 add_image_size( 'roster-600', 600 );
 // Hero style image sizes
-add_image_size( 'hero-640', 640 );
-add_image_size( 'hero-1000', 1000 );
-add_image_size( 'hero-1500', 1500 );
-add_image_size( 'hero-2000', 2000 );
-add_image_size( 'hero-3000', 3000 );
+add_image_size( 'hero-640', 640, 360, true );
+add_image_size( 'hero-1000', 1000, 563, true );
+add_image_size( 'hero-1500', 1500, 844, true );
+add_image_size( 'hero-2000', 2000, 1125, true );
+add_image_size( 'hero-3000', 3000, 1688, true );
 
 /*
 to add more sizes, simply copy a line from above
@@ -254,7 +254,7 @@ function bones_comments( $comment, $args, $depth ) {
 function assets_url() {
   $url = site_url();
   if ($url == 'http://local.wordpress.dev') {
-    return '//sirius.local:3002';
+    return '//192.168.1.7:3002';
   } else {
     return $url;
   }

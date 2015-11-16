@@ -40,7 +40,7 @@
   $posts = new WP_Query( $the_array );
   if( $posts->have_posts() ):
   	$counter = 0; ?>
-    <section class="posts">
+    <section class="posts posts--front">
     <?php while( $posts->have_posts() ):
       $posts->the_post();
       $pic = get_field('image')['sizes']; ?>
@@ -54,7 +54,6 @@
           </h1>
           <p>
           	<?php the_field('excerpt'); ?>
-          	<a href="<?php the_permalink(); ?>">Read More &raquo;</a>
           </p>
         </div>
         <figure class="posts__post__pic">

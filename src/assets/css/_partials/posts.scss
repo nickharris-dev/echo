@@ -2,12 +2,22 @@ $layoutbreak1: rem(600);
 $layoutbreak2: rem(900);
 
 .posts {
-  @include clearfix();
   margin-bottom: rem(1.5*$baseline);
 
   @media(min-width: $layoutbreak2) {
     display: flex;
     flex-flow: row wrap;
+  }
+
+  h1, h2, p {
+    margin: 0 auto;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  img {
+    display: block;
+    vertical-align: baseline;
   }
 
   .button {
@@ -20,35 +30,27 @@ $layoutbreak2: rem(900);
     }
   }
 
-  h1, h2, p {
-    margin: 0 auto;
-    min-width: 0;
-  }
-
-  img {
-    display: block;
-    vertical-align: baseline;
-  }
-
   &__wrapper {
     width: 100%;
 
     @media(min-width: $layoutbreak1) {
       display: flex;
-    }
-
-    @media(min-width: $layoutbreak2) {
-      &:first-of-type {
-        flex-flow: column;
-        justify-content: space-between;
-        width: 8*$column;
-      }
+      flex-flow: row wrap;
+      justify-content: space-around;
     }
   }
 
   &__post {
     display: flex;
     margin-bottom: rem($baseline/2);
+
+     @media(min-width: $layoutbreak1) {
+      width: percentage(1/2);
+    }
+
+     @media(min-width: $layoutbreak2) {
+      width: percentage(1/3);
+    }
 
     &__copy {
       order: 2;
@@ -58,8 +60,11 @@ $layoutbreak2: rem(900);
 
     &__heading {
       @include type-scale(5, 1);
+      max-width: 100%;
 
       a {
+        white-space: normal;
+
         &:link,
         &:visited {
           box-shadow: inset 0 0 0 palette(claret);
@@ -91,11 +96,6 @@ $layoutbreak2: rem(900);
     text-shadow: 0 0 5px rgba(palette(jetblack), .5);
     width: 100%;
 
-    @media(min-width: $layoutbreak2) {
-      padding-right: $gutter;
-      width: 16*$column;
-    }
-
     .posts__post {
       &__copy {
         background: rgba(palette(jetblack), .5);
@@ -104,10 +104,6 @@ $layoutbreak2: rem(900);
         position: absolute;
         right: 0;
         width: 100%;
-
-        @media(min-width: $layoutbreak2) {
-          right: $gutter;
-        }
       }
 
       &__heading {
@@ -158,6 +154,28 @@ $layoutbreak2: rem(900);
         color: palette(claret);
         box-shadow: inset 0 -1.2em 0 palette(icewhite);
         text-shadow: none;
+      }
+    }
+  }
+
+  &--front {
+    .posts {
+      &__wrapper:first-of-type {
+        @media(min-width: $layoutbreak2) {
+          flex-flow: column;
+          justify-content: space-between;
+          width: 8*$column;
+
+          .posts__post {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    > .posts__post {
+      @media(min-width: $layoutbreak2) {
+        width: 16*$column;
       }
     }
   }
