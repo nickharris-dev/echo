@@ -180,3 +180,25 @@ $layoutbreak2: rem(900);
     }
   }
 }
+
+.post {
+  &__pic {
+    margin-top: 0;
+  }
+
+  &__hgroup {
+    padding: 0 $column;
+  }
+
+  &__content {
+    padding: 0 $column;
+  }
+
+  &__footer {
+    padding: 0 $column;
+  }
+
+  &__title {
+    margin-bottom: 0;
+  }
+}

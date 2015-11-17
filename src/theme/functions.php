@@ -260,5 +260,4 @@ function assets_url() {
   }
 }
 
-
 /* DON'T DELETE THIS CLOSING TAG */ ?>

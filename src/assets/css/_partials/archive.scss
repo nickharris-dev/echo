@@ -1,0 +1,36 @@
+.archives {
+  margin: 0 $column;
+
+  &__wrapper {
+    display: flex;
+    margin: 0 auto;
+    max-width: 38em;
+  }
+}
+
+.archive {
+  flex: 1 auto;
+  margin-top: rem($baseline/2);
+  margin-bottom: rem(2.5*$baseline);
+
+  &__heading {
+    @include type-scale(4, 1);
+    margin-bottom: rem($baseline/4);
+    max-width: 100%;
+  }
+
+  &__list {
+    margin-bottom: 0;
+    margin-top: 0;
+
+    li {
+      margin-bottom: rem($baseline/4);
+      min-width: 0;
+      max-width: 100%;
+
+      &:before {
+        display: none;
+      }
+    }
+  }
+}

@@ -14,7 +14,8 @@ html {
 }
 
 main {
-  padding: 0 $column;
+  margin: 0;
+  padding: 0;
 }
 
 .type-break {
@@ -152,8 +153,8 @@ table {
   width: 100%;
 }
 
-td {
-  text-align: center;
+td, th {
+  text-align: left;
 }
 
 // Quotes

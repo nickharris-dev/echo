@@ -111,7 +111,7 @@
 									<td><?php echo $age; ?></td>
 								</tr>
 								<tr>
-									<th scope="row">Experience</th>
+									<th scope="row"><abbr title="Experience">Exp.</abbr></th>
 									<td><?php echo $experience; ?></td>
 								</tr>
 							</table>

@@ -40,7 +40,7 @@
                 <?php print_r($pic['hero-640']); ?> <?php print_r($pic['hero-640-width']); ?>w,
                 <?php print_r($pic['hero-1000']); ?> <?php print_r($pic['hero-1000-width']); ?>w,
                 <?php print_r($pic['hero-1500']); ?> <?php print_r($pic['hero-1500-width']); ?>w,
-                <?php print_r($pic['hero-2000']); ?> <?php print_r($pic['hero-2000-width']); ?>w",
+                <?php print_r($pic['hero-2000']); ?> <?php print_r($pic['hero-2000-width']); ?>w,
                 <?php print_r($pic['hero-3000']); ?> <?php print_r($pic['hero-3000-width']); ?>w"
             >
            <?php else: ?>
@@ -57,7 +57,7 @@
                 <?php print_r($pic['square-1050']); ?> <?php print_r($pic['square-1050-width']); ?>w,
                 <?php print_r($pic['square-1200']); ?> <?php print_r($pic['square-1200-width']); ?>w
                 "
-              sizes="(min-width: 37.5rem) 16.666666667vw, 33.3vw"
+              sizes="33.3vw, (min-width: 37.5rem) 16.65vw, (min-width: 56.25rem) 11.1vw"
             ></a>
            <?php endif; ?>
          </figure>

@@ -40,7 +40,7 @@
   $posts = new WP_Query( $the_array );
   if( $posts->have_posts() ):
   	$counter = 0; ?>
-    <section class="posts posts--front">
+    <section class="posts posts--front" id="Posts" data-posts="<?php echo $posts->found_posts; ?>">
     <?php while( $posts->have_posts() ):
       $posts->the_post();
       $pic = get_field('image')['sizes']; ?>
@@ -65,7 +65,7 @@
                 <?php print_r($pic['hero-640']); ?> <?php print_r($pic['hero-640-width']); ?>w,
                 <?php print_r($pic['hero-1000']); ?> <?php print_r($pic['hero-1000-width']); ?>w,
                 <?php print_r($pic['hero-1500']); ?> <?php print_r($pic['hero-1500-width']); ?>w,
-                <?php print_r($pic['hero-2000']); ?> <?php print_r($pic['hero-2000-width']); ?>w",
+                <?php print_r($pic['hero-2000']); ?> <?php print_r($pic['hero-2000-width']); ?>w,
                 <?php print_r($pic['hero-3000']); ?> <?php print_r($pic['hero-3000-width']); ?>w"
             >
            <?php else: ?>
@@ -82,7 +82,7 @@
                 <?php print_r($pic['square-1050']); ?> <?php print_r($pic['square-1050-width']); ?>w,
                 <?php print_r($pic['square-1200']); ?> <?php print_r($pic['square-1200-width']); ?>w
                 "
-              sizes="(min-width: 37.5rem) 16.666666667vw, 33.3vw"
+              sizes="33.3vw, (min-width: 37.5rem) 16.65vw, (min-width: 56.25rem) 11.1vw"
             ></a>
            <?php endif; ?>
          </figure>
