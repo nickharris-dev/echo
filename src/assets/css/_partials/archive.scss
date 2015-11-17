@@ -13,6 +13,16 @@
   margin-top: rem($baseline/2);
   margin-bottom: rem(2.5*$baseline);
 
+  &__title {
+    font-size: 10vw;
+    line-height: 1;
+    text-align: center;
+
+    @media (min-width: rem(600)) {
+      font-size: 6vw;
+    }
+  }
+
   &__heading {
     @include type-scale(4, 1);
     margin-bottom: rem($baseline/4);

@@ -260,4 +260,15 @@ function assets_url() {
   }
 }
 
+add_filter( 'get_the_archive_title', function ( $title ) {
+
+  if ( is_category() ) {
+    $title = single_cat_title( '', false );
+  } elseif ( is_year() ) {
+    $title = get_the_date( _x( 'Y', 'yearly archives date format' ) );
+  }
+  return $title;
+
+});
+
 /* DON'T DELETE THIS CLOSING TAG */ ?>
