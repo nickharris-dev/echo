@@ -18,19 +18,7 @@
 		<?php the_content();?>
 	</section>
 
-<?php endwhile; else : ?>
-	<article id="post-not-found" class="hentry cf">
-			<header class="article-header">
-				<h1><?php _e( 'Oops, Post Not Found!', 'bonestheme' ); ?></h1>
-		</header>
-			<section class="entry-content">
-				<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'bonestheme' ); ?></p>
-		</section>
-		<footer class="article-footer">
-				<p><?php _e( 'This is the error message in the page-font.php template.', 'bonestheme' ); ?></p>
-		</footer>
-	</article>
-<?php endif; ?>
+<?php endwhile; endif; ?>
 
 <?php
   $the_array = array(
@@ -40,7 +28,7 @@
   $posts = new WP_Query( $the_array );
   if( $posts->have_posts() ):
   	$counter = 0; ?>
-    <section class="posts posts--front" id="Posts" data-posts="<?php echo $posts->found_posts; ?>">
+    <section class="posts posts--front" id="News" data-posts="<?php echo $posts->found_posts; ?>">
     <?php while( $posts->have_posts() ):
       $posts->the_post();
       $pic = get_field('image')['sizes']; ?>
@@ -93,7 +81,7 @@
     <?php $counter++;
     	endwhile; ?>
     	<?php if ($posts->found_posts > 3): ?>
-	    	<a class="button"href="/news">More news</a>
+	    	<a class="button button--more-news" href="/news">More news</a>
 	    <?php endif; ?>
     </section>
 <?php endif; ?>

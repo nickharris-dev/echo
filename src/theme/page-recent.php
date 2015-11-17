@@ -15,7 +15,7 @@
   $posts = new WP_Query( $the_array );
   if( $posts->have_posts() ):
     $counter = 0; ?>
-    <section class="posts">
+    <section class="posts" id="RecentNews">
     <?php while( $posts->have_posts() ):
       $posts->the_post();
       $pic = get_field('image')['sizes']; ?>
