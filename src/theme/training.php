@@ -22,7 +22,7 @@
         $venue_lng = get_sub_field('venue_lng');
       ?>
 
-      <article class="training__session" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="Map<?php echo $count; ?>" data-eq="stacked:(min-width: 40rem)">
+      <article class="training__session" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="Map<?php echo $count; ?>" data-eq="stacked:(min-width: 45rem)">
         <div class="training__info">
           <?php if (have_rows('team')):
             while( have_rows('team') ): the_row();

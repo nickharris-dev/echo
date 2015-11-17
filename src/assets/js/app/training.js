@@ -1,4 +1,4 @@
-define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRffT8sStG1kBc5v9u0QE10hcEAvK7dk'], function(require, config, idFactory, classes){
+define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRffT8sStG1kBc5v9u0QE10hcEAvK7dk'], function(require, config, idFactory, classes, findAncestor){
   var activeClass = 'training__trigger--active';
   var processingClass = 'training__trigger--processing';
   var training = document.getElementById('Training');
@@ -174,7 +174,7 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
   }
 
   function calculateByFoot(menuItem) {
-    var session = menuItem.parentNode.parentNode.parentNode;
+    var session = findAncestor(menuItem, 'training__session');
     var ID = idFactory(session);
 
     var locationData = menuItem.getAttribute('data-locations').replace(/'/g,'"');
@@ -211,7 +211,7 @@ define(['require', 'config', 'idFactory', 'classes', 'async!https://maps.googlea
   }
 
   function calculateGeo(menuItem)  {
-    var session = menuItem.parentNode.parentNode.parentNode;
+    var session = findAncestor(menuItem, 'training__session');
     var ID = idFactory(session);
 
     classes.add(menuItem, processingClass);
