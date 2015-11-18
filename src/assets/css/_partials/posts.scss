@@ -2,7 +2,7 @@ $layoutbreak1: rem(600);
 $layoutbreak2: rem(900);
 
 .posts {
-  margin-bottom: rem(1.5*$baseline);
+  margin-bottom: 0;
 
   @media(min-width: $layoutbreak2) {
     display: flex;
@@ -22,7 +22,7 @@ $layoutbreak2: rem(900);
 
   .button {
     clear: left;
-    margin: rem($baseline) auto;
+    margin: rem($baseline) auto rem(2*$baseline);
     width: 8*$column;
 
     @media(min-width: $layoutbreak2) {

@@ -1,5 +1,6 @@
 define(['require', 'config', 'classes', 'ajax', 'response'], function(require, config, classes, ajax, response){
   var news = document.getElementById('News');
+  var numberOfPosts = news.getAttribute('data-posts');
   var moreButton = news.querySelectorAll('.button--more-news')[0]
   var moreLink = moreButton.getAttribute('href');
   var existingWrapper = news.querySelectorAll('.posts__wrapper')[0];
@@ -8,8 +9,14 @@ define(['require', 'config', 'classes', 'ajax', 'response'], function(require, c
   var newWrapper, remotePosts;
 
   function createDummyPosts() {
-    i = 0;
-    n = 4;
+    var i = 0;
+    var n;
+
+    if (numberOfPosts > 4) {
+      n = 4;
+    } else {
+      n = 1;
+    }
 
     for (i; i<n; i++) {
       var article = document.createElement('article');
@@ -40,7 +47,7 @@ define(['require', 'config', 'classes', 'ajax', 'response'], function(require, c
 
     news.removeChild(moreButton);
     news.appendChild(newWrapper);
-    news.appendChild(moreButton);
+    if (numberOfPosts > 7) news.appendChild(moreButton);
   }
 
   function success(xhr) {
@@ -53,8 +60,7 @@ define(['require', 'config', 'classes', 'ajax', 'response'], function(require, c
     var i = 4;
     var n = 8;
 
-    existingWrapper.removeChild(dummyPosts[0]);
-    existingWrapper.appendChild(remotePosts[3]);
+    dummyPosts[0].innerHTML = remotePosts[3].innerHTML;
 
     for (i; i<n; i++) {
       if (remotePosts[i]) {

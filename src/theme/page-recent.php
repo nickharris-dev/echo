@@ -10,7 +10,7 @@
 <?php
   $the_array = array(
     'post_type' => 'post',
-    'posts_per_page' => 15
+    'posts_per_page' => 16
   );
   $posts = new WP_Query( $the_array );
   if( $posts->have_posts() ):
