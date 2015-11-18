@@ -212,6 +212,8 @@
   }
 
   &__wrapper {
+    background: palette(neutral, verylight);
+
     &:first-of-type {
       .training__session:first-of-type {
         padding-top: rem(4*$baseline);
