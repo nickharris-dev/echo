@@ -23,11 +23,7 @@ $layoutbreak2: rem(900);
   .button {
     clear: left;
     margin: rem($baseline) auto rem(2*$baseline);
-    width: 8*$column;
-
-    @media(min-width: $layoutbreak2) {
-      width: 4*$column;
-    }
+    width: 4*$column;
   }
 
   &__wrapper {
