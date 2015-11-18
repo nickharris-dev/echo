@@ -66,9 +66,19 @@ define(['require', 'config', 'classes', 'ajax', 'response'], function(require, c
     }
   }
 
-  if (response >= breakPoint) {
+  function hereWeGoMagic() {
     createDummyPosts();
     populateDummyPosts();
     ajax(moreLink, success);
   }
+
+  if (response >= breakPoint) hereWeGoMagic();
+
+  window.addEventListener('resized', function(event){
+    if (newWrapper || event.viewportSize < breakPoint) {
+      return false;
+    } else {
+      hereWeGoMagic();
+    }
+  });
 });
