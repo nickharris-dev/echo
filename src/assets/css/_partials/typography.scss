@@ -245,29 +245,25 @@ a {
 
 .button {
   @include type-scale(4, 1);
-  background: palette(claret);
   border: rem(3) solid palette(claret);
+  box-shadow: inset 0 0 0 palette(claret);
   display: block;
   font-family: $heading;
   letter-spacing: .1em;
   padding: rem($baseline/4) 1rem;
   text-align: center;
   text-transform: uppercase;
-  transition: none;
   white-space: nowrap;
 
-  &:link,
   &:visited {
-    box-shadow: none;
-    color: palette(icewhite);
+    color: palette(claret);
   }
 
   &:active,
   &:focus,
   &:hover {
-    background-color: palette(icewhite);
-    box-shadow: none;
-    color: palette(claret);
+    box-shadow: inset 0 -2.4em 0 palette(claret);
+    color: palette(icewhite);
   }
 }
 
