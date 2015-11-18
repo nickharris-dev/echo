@@ -38,6 +38,12 @@ $layoutbreak2: rem(900);
       flex-flow: row wrap;
       justify-content: flex-start;
     }
+
+    & + & {
+      @media(max-width: rem(899)) {
+        display: none;
+      }
+    }
   }
 
   &__post {
@@ -194,6 +200,12 @@ $layoutbreak2: rem(900);
             width: 100%;
           }
         }
+      }
+    }
+
+    .posts__post:nth-of-type(3) {
+      @media(max-width: rem(899)) {
+        display: none;
       }
     }
 

@@ -7,12 +7,6 @@ define(['require', 'config', 'classes', 'ajax', 'response'], function(require, c
   var dummyPosts = [];
   var newWrapper, remotePosts;
 
-  if (response >= breakPoint) {
-    createDummyPosts();
-    populateDummyPosts();
-    ajax(moreLink, success);
-  }
-
   function createDummyPosts() {
     i = 0;
     n = 4;
@@ -70,5 +64,11 @@ define(['require', 'config', 'classes', 'ajax', 'response'], function(require, c
         dummyPost.innerHTML = html;
       }
     }
+  }
+
+  if (response >= breakPoint) {
+    createDummyPosts();
+    populateDummyPosts();
+    ajax(moreLink, success);
   }
 });
