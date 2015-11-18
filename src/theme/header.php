@@ -23,7 +23,7 @@
 		<link rel="apple-touch-icon" href="<?php echo assets_url(); ?>/images/apple-touch-icon.png">
 		<link rel="icon" href="<?php echo assets_url(); ?>/images/favicon.png">
 		<!--[if IE]>
-			<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">
+			<link rel="shortcut icon" href="<?php echo assets_url(); ?>/images/favicon.ico">
 		<![endif]-->
 		<?php // or, set /favicon.ico for IE10 win ?>
 		<meta name="msapplication-TileColor" content="#f01d4f">
