@@ -277,3 +277,14 @@ a {
   margin: rem($baseline/4) 0;
   padding: rem($baseline/4) $gutter;
 }
+
+.intro {
+  color: palette(claret);
+  margin: rem(2*$baseline) 0;
+  text-align: center;
+
+  @media (min-width: rem(700)) {
+    @include type-scale(5, 1);
+    margin: rem(4*$baseline) 0;
+  }
+}
