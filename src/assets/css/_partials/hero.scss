@@ -1,53 +1,13 @@
-@mixin hero($name) {
-  @media (-webkit-max-device-pixel-ratio: 1.9), (max-resolution: 191dpi), (max-resolution: 1.9dppx) {
-    background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-640.jpg');
-
-    @media (min-width: 800px) {
-      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-1000.jpg');
-    }
-
-    @media (min-width: 1300px) {
-      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-1500.jpg');
-    }
-
-    @media (min-width: 1600px) {
-      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-2000.jpg');
-    }
-
-    @media (min-width: 2500px) {
-      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-2718.jpg');
-    }
-  }
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-    background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-640.jpg');
-
-    @media (min-width: 500px) {
-      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-1000.jpg');
-    }
-
-    @media (min-width: 1000px) {
-      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-1500.jpg');
-    }
-
-    @media (min-width: 1250px) {
-      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-2000.jpg');
-    }
-
-    @media (min-width: 1800px) {
-      background-image: url('<?php echo assets_url(); ?>/images/' + $name + '-2718.jpg');
-    }
-  }
-}
-
 .hero {
   background-color: palette(jetblack);
   background-position: 50% 0;
   background-size: cover;
-  padding: 0 $gutter;
   color: palette(icewhite);
   display: flex;
   height: 100-12vh;
   overflow: hidden;
+  padding: 0 $gutter;
+  position: relative;
   text-align: center;
   text-shadow: 0 0 15px palette(jetblack);
 
@@ -64,32 +24,39 @@
     height: 100-4vh;
   }
 
-  &--front {
-    @include hero('hero');
-    background-position: 50% 100%;
-
-    h1 {
-      font-size: 7vw;
-    }
-  }
-
-  &--roster {
-    @include hero('roster');
-
-    h1 {
-      font-size: 15vw;
-    }
+  &__pic {
+    left: 50%;
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    top: 50%;
+    speak: none;
+    transform: translate(-50%,-50%);
   }
 
   h1 {
     margin: auto;
     max-width: 100%;
     min-width: 0;
+    position: relative;
     width: 100%;
+    z-index: 1;
   }
 
   em {
     position: absolute;
     top: -999em;
+  }
+
+  &--front {
+    h1 {
+      font-size: 7vw;
+    }
+  }
+
+  &--roster {
+    h1 {
+      font-size: 15vw;
+    }
   }
 }

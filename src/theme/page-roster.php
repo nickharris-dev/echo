@@ -7,11 +7,34 @@
 
 <?php get_header(); ?>
 
-	<section class="hero hero--roster" id="Hero">
-	  <h1>
-	    <?php the_title(); ?>
-	  </h1>
+<?php if ( have_rows('hero') ) :
+  while ( have_rows('hero') ) : the_row(); ?>
+	<section class="hero hero--front" id="Hero">
+
+    <?php if( get_row_layout() === 'image'):
+      $pic = get_sub_field('image')['sizes']; ?>
+        <img
+          alt=""
+          src="<?php print_r($pic['hero-1000']); ?>"
+          srcset="
+            <?php print_r($pic['hero-640']); ?> <?php print_r($pic['hero-640-width']); ?>w,
+            <?php print_r($pic['hero-1000']); ?> <?php print_r($pic['hero-1000-width']); ?>w,
+            <?php print_r($pic['hero-1500']); ?> <?php print_r($pic['hero-1500-width']); ?>w,
+            <?php print_r($pic['hero-2000']); ?> <?php print_r($pic['hero-2000-width']); ?>w,
+            <?php print_r($pic['hero-3000']); ?> <?php print_r($pic['hero-3000-width']); ?>w"
+        >
+    <?php endif; ?>
+
+    <h1>
+      <?php the_title(); ?>
+    </h1>
 	</section>
+<?php endwhile;
+ else: ?>
+ 	<h1 class="no-hero">
+    <?php the_title(); ?>
+  </h1>
+ <?php endif; ?>
 
 	<?php
 		$terms = get_terms( 'Team' );

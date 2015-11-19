@@ -1,80 +1,24 @@
 .roster {
   background-color: palette(neutral, copy);
-  background-position: 50% 0;
-  background-size: cover;
-  display: flex;
-  height: 100-12vh;
+  display: block;
   position: relative;
-  text-align: center;
 
-  @media (min-height: rem(400)) {
-    height: 100-10vh;
-  }
-  @media (min-height: rem(600)) {
-    height: 100-8vh;
-  }
-  @media (min-height: rem(800)) {
-    height: 100-6vh;
-  }
-  @media (min-height: rem(1000)) {
-    height: 100-4vh;
-  }
-
-  @media (-webkit-max-device-pixel-ratio: 1.9), (max-resolution: 191dpi), (max-resolution: 1.9dppx) {
-    background-image: url('../images/front-page-roster-640.jpg');
-
-    @media (min-width: 800px) {
-      background-image: url('../images/front-page-roster-1000.jpg');
-    }
-
-    @media (min-width: 1300px) {
-      background-image: url('../images/front-page-roster-1500.jpg');
-    }
-
-    @media (min-width: 1600px) {
-      background-image: url('../images/front-page-roster-2000.jpg');
-    }
-
-    @media (min-width: 2500px) {
-      background-image: url('../images/front-page-roster-3000.jpg');
-    }
-  }
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-    background-image: url('../images/front-page-roster-640.jpg');
-
-    @media (min-width: 500px) {
-      background-image: url('../images/front-page-roster-1000.jpg');
-    }
-
-    @media (min-width: 1000px) {
-      background-image: url('../images/front-page-roster-1500.jpg');
-    }
-
-    @media (min-width: 1250px) {
-      background-image: url('../images/front-page-roster-2000.jpg');
-    }
-
-    @media (min-width: 1800px) {
-      background-image: url('../images/front-page-roster-3000.jpg');
-    }
+  &__pic {
+    display: block;
+    speak: none;
+    vertical-align: baseline;
   }
 
   &__link {
     font-size: 12vw;
-    margin: auto;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 
     @media (min-width: rem(1200)) {
       font-size: 10vw;
-    }
-
-    &:before {
-      content: ' ';
-      display: block;
-      height: 100%;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 100%;
     }
 
     &:link,

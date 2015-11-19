@@ -9,9 +9,28 @@
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 	<section class="hero hero--front" id="Hero">
-	  <h1>
-	    <?php the_title(); ?>
-	  </h1>
+    <?php if ( have_rows('hero') ) :
+      while ( have_rows('hero') ) : the_row(); ?>
+
+      <?php if( get_row_layout() === 'image'):
+        $pic = get_sub_field('image')['sizes']; ?>
+          <img
+            alt=""
+            class="hero__pic"
+            src="<?php print_r($pic['hero-1000']); ?>"
+            srcset="
+              <?php print_r($pic['hero-640']); ?> <?php print_r($pic['hero-640-width']); ?>w,
+              <?php print_r($pic['hero-1000']); ?> <?php print_r($pic['hero-1000-width']); ?>w,
+              <?php print_r($pic['hero-1500']); ?> <?php print_r($pic['hero-1500-width']); ?>w,
+              <?php print_r($pic['hero-2000']); ?> <?php print_r($pic['hero-2000-width']); ?>w,
+              <?php print_r($pic['hero-3000']); ?> <?php print_r($pic['hero-3000-width']); ?>w"
+          >
+      <?php endif; ?>
+
+    <?php endwhile; endif; ?>
+    <h1>
+      <?php the_title(); ?>
+    </h1>
 	</section>
 
 	<section class="intro" itemprop="articleBody">
@@ -85,11 +104,25 @@
 	    	<a class="button button--more-news" href="/news">More news</a>
 	    <?php endif; ?>
     </section>
-<?php endif; ?>
+<?php endif; wp_reset_query(); ?>
 
-<section class="roster">
-	<a class="roster__link" href="roster"><h1 class="roster__title">Roster</h1></a>
-</section>
+<?php if( get_field('roster_image') ):
+  $pic = get_field('roster_image')['sizes']; ?>
+  <section class="roster">
+    <a class="roster__link" href="roster"><h1 class="roster__title">The Team</h1></a>
+    <img
+      class="roster__pic"
+      alt=""
+      src="<?php print_r($pic['hero-1000']); ?>"
+      srcset="
+        <?php print_r($pic['hero-640']); ?> <?php print_r($pic['hero-640-width']); ?>w,
+        <?php print_r($pic['hero-1000']); ?> <?php print_r($pic['hero-1000-width']); ?>w,
+        <?php print_r($pic['hero-1500']); ?> <?php print_r($pic['hero-1500-width']); ?>w,
+        <?php print_r($pic['hero-2000']); ?> <?php print_r($pic['hero-2000-width']); ?>w,
+        <?php print_r($pic['hero-3000']); ?> <?php print_r($pic['hero-3000-width']); ?>w"
+    >
+  </section>
+<?php endif; ?>
 
 <?php include 'training.php'; ?>
 

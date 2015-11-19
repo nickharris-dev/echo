@@ -53,6 +53,15 @@ h1 {
   + * {
     margin-top: 0;
   }
+
+  &.no-hero {
+    margin-top: rem(1.5*$baseline);
+    text-align: center;
+  }
+
+  &.no-feature {
+    margin-top: rem(1.5*$baseline);
+  }
 }
 
 // Paragraphs

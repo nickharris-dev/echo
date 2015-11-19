@@ -1,67 +1,52 @@
 <?php get_header(); ?>
 
-			<div id="content">
 
-				<div id="inner-content" class="wrap cf">
+	<main id="main" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
 
-						<main id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+		<article id="post-<?php the_ID(); ?>" class="post" role="article" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
 
-							<article id="post-<?php the_ID(); ?>" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
+      <header class="post__header">
 
-								<header class="article-header">
+      	<?php if ( have_rows('hero') ) :
+		      while ( have_rows('hero') ) : the_row(); ?>
 
-									<h1 class="page-title" itemprop="headline"><?php the_title(); ?></h1>
+		      <?php if( get_row_layout() === 'image'):
+		        $pic = get_sub_field('image')['sizes']; ?>
+		        <figure class="post__pic"><img
+		          alt="<?php print_r(get_field('image')['alt']); ?>"
+		          src="<?php print_r($pic['news-feature-1000']); ?>"
+		          srcset="
+		            <?php print_r($pic['news-feature-640']); ?> <?php print_r($pic['news-feature-640-width']); ?>w,
+		            <?php print_r($pic['news-feature-1000']); ?> <?php print_r($pic['news-feature-1000-width']); ?>w,
+		            <?php print_r($pic['news-feature-1500']); ?> <?php print_r($pic['news-feature-1500-width']); ?>w,
+		            <?php print_r($pic['news-feature-2000']); ?> <?php print_r($pic['news-feature-2000-width']); ?>w,
+		            <?php print_r($pic['news-feature-3000']); ?> <?php print_r($pic['news-feature-3000-width']); ?>w"
+		        ></figure>
+		      <?php endif; ?>
 
-									<p class="byline vcard">
-										<?php printf( __( 'Posted', 'bonestheme').' <time class="updated" datetime="%1$s" itemprop="datePublished">%2$s</time> '.__( 'by',  'bonestheme').' <span class="author">%3$s</span>', get_the_time('Y-m-j'), get_the_time(get_option('date_format')), get_the_author_link( get_the_author_meta( 'ID' ) )); ?>
-									</p>
+		    <?php endwhile; endif; ?>
 
-								</header> <?php // end article header ?>
+		    <div class="post__hgroup">
+	        <h1<?php if ( !have_rows('hero') ) :?> class="no-feature"<?php endif; ?> itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
+        </div>
 
-								<section class="entry-content cf" itemprop="articleBody">
-									<?php
-										// the content (pretty self explanatory huh)
-										the_content();
+      </header> <?php // end article header ?>
 
-										/*
-										 * Link Pages is used in case you have posts that are set to break into
-										 * multiple pages. You can remove this if you don't plan on doing that.
-										 *
-										 * Also, breaking content up into multiple pages is a horrible experience,
-										 * so don't do it. While there are SOME edge cases where this is useful, it's
-										 * mostly used for people to get more ad views. It's up to you but if you want
-										 * to do it, you're wrong and I hate you. (Ok, I still love you but just not as much)
-										 *
-										 * http://gizmodo.com/5841121/google-wants-to-help-you-avoid-stupid-annoying-multiple-page-articles
-										 *
-										*/
-										wp_link_pages( array(
-											'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'bonestheme' ) . '</span>',
-											'after'       => '</div>',
-											'link_before' => '<span>',
-											'link_after'  => '</span>',
-										) );
-									?>
-								</section> <?php // end article section ?>
+      <section class="post__content" itemprop="articleBody">
+        <?php
+          // the content (pretty self explanatory huh)
+          the_content();
+        ?>
+      </section>
 
-								<footer class="article-footer cf">
+    </article>
 
-								</footer>
+		<?php endwhile; endif; ?>
 
-								<?php comments_template(); ?>
+	</main>
 
-							</article>
-
-							<?php endwhile; endif; ?>
-
-						</main>
-
-						<?php get_sidebar(); ?>
-
-				</div>
-
-			</div>
+<?php include 'training.php'; ?>
 
 <?php get_footer(); ?>
