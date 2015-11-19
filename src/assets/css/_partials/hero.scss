@@ -43,14 +43,25 @@
   background-color: palette(jetblack);
   background-position: 50% 0;
   background-size: cover;
-  padding: rem(7*$baseline) $gutter 0;
+  padding: 0 $gutter;
   color: palette(icewhite);
+  display: flex;
+  height: 100-12vh;
   overflow: hidden;
   text-align: center;
-  text-shadow: 0 0 5px rgba(palette(jetblack), .5);
+  text-shadow: 0 0 15px palette(jetblack);
 
-  @media (min-width: rem(768)) {
-    padding-top: rem(14*$baseline);
+  @media (min-height: rem(400)) {
+    height: 100-10vh;
+  }
+  @media (min-height: rem(600)) {
+    height: 100-8vh;
+  }
+  @media (min-height: rem(800)) {
+    height: 100-6vh;
+  }
+  @media (min-height: rem(1000)) {
+    height: 100-4vh;
   }
 
   &--front {
@@ -71,6 +82,7 @@
   }
 
   h1 {
+    margin: auto;
     max-width: 100%;
     min-width: 0;
     width: 100%;

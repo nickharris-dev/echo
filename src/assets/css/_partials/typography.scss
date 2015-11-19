@@ -278,13 +278,39 @@ a {
   padding: rem($baseline/4) $gutter;
 }
 
+// Intro
+// =====
 .intro {
   color: palette(claret);
-  margin: rem(2*$baseline) 0;
+  display: flex;
+  flex-flow: column;
+  height: 85vh;
+  justify-content: center;
+  padding: 0 $column;
   text-align: center;
 
-  @media (min-width: rem(700)) {
-    @include type-scale(5, 1);
-    margin: rem(4*$baseline) 0;
+  @media (min-width: rem(600)) {
+    @include type-scale(4, 1);
+  }
+
+  @media (min-height: rem(550)) {
+    height: 50vh;
+  }
+
+  @media (min-width: rem(800)) {
+    @include type-scale(5, 1.5);
+  }
+
+  @media (min-width: rem(1000)) {
+    @include type-scale(6, 1.5);
+  }
+
+  p {
+    margin: rem($baseline/2) auto;
+    min-width: 0;
+  }
+
+  .button {
+    display: inline;
   }
 }

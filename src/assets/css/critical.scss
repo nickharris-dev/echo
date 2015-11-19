@@ -19,7 +19,20 @@ body {
   @include type-scale(3, 1);
   color: palette(neutral, copy);
   margin: 0;
-  padding-top: rem(3*$baseline);
+  padding: 12vh 0 0 0;
+
+  @media (min-height: rem(400)) {
+    padding-top: 10vh;
+  }
+  @media (min-height: rem(600)) {
+    padding-top: 8vh;
+  }
+  @media (min-height: rem(800)) {
+    padding-top: 6vh;
+  }
+  @media (min-height: rem(1000)) {
+    padding-top: 4vh;
+  }
 }
 
 // Headings
@@ -48,12 +61,6 @@ p {
   margin: rem($baseline) auto;
   max-width: 38em;
   min-width: 21em;
-}
-
-// Intro
-// =====
-.intro {
-  padding: 0 $gutter;
 }
 
 @import '_partials/header';

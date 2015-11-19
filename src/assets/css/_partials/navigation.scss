@@ -1,3 +1,5 @@
+$nav-break: rem(600);
+
 .primary-nav {
   @include type-scale(5, 1);
   background-color: palette(claret);
@@ -32,11 +34,11 @@
   }
 
   @media (min-width: $nav-break) {
-    @include type-scale(4, 1);
     background-color: palette(air);
     background-image: none;
     left: 0;
     letter-spacing: .1em;
+    margin: 0;
     padding-top: 0;
     position: fixed;
     text-align: center;
@@ -47,6 +49,8 @@
 
     li {
       display: inline-block;
+      margin: 0;
+      padding: 0;
       width: rem(150);
 
       &:nth-of-type(2) {
@@ -55,8 +59,32 @@
     }
 
     a {
-      padding-left: 0;
-      padding-right: 0;
+      display: block;
+      font-size: 4vh;
+      height: 12vh;
+      line-height: 1;
+      padding: 4vh 0;
+
+      @media (min-height: rem(400)) {
+        font-size: 3vh;
+        height: 10vh;
+        padding: 3.5vh 0;
+      }
+      @media (min-height: rem(600)) {
+        font-size: 2.5vh;
+        height: 8vh;
+        padding: 2.75vh 0;
+      }
+      @media (min-height: rem(800)) {
+        font-size: 2vh;
+        height: 6vh;
+        padding: 2vh 0;
+      }
+      @media (min-height: rem(1000)) {
+        font-size: 1.5vh;
+        height: 4vh;
+        padding: 1.25vh 0;
+      }
     }
   }
 
