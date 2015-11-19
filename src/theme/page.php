@@ -15,22 +15,26 @@
 		      <?php if( get_row_layout() === 'image'):
 		        $pic = get_sub_field('image')['sizes']; ?>
 		        <figure class="post__pic"><img
-		          alt="<?php print_r(get_field('image')['alt']); ?>"
-		          src="<?php print_r($pic['news-feature-1000']); ?>"
+		          alt="<?php print_r(get_sub_field('image')['alt']); ?>"
+		          src="<?php print_r($pic['news_feature-1000']); ?>"
 		          srcset="
-		            <?php print_r($pic['news-feature-640']); ?> <?php print_r($pic['news-feature-640-width']); ?>w,
-		            <?php print_r($pic['news-feature-1000']); ?> <?php print_r($pic['news-feature-1000-width']); ?>w,
-		            <?php print_r($pic['news-feature-1500']); ?> <?php print_r($pic['news-feature-1500-width']); ?>w,
-		            <?php print_r($pic['news-feature-2000']); ?> <?php print_r($pic['news-feature-2000-width']); ?>w,
-		            <?php print_r($pic['news-feature-3000']); ?> <?php print_r($pic['news-feature-3000-width']); ?>w"
+		            <?php print_r($pic['news_feature-640']); ?> <?php print_r($pic['news_feature-640-width']); ?>w,
+		            <?php print_r($pic['news_feature-1000']); ?> <?php print_r($pic['news_feature-1000-width']); ?>w,
+		            <?php print_r($pic['news_feature-1500']); ?> <?php print_r($pic['news_feature-1500-width']); ?>w,
+		            <?php print_r($pic['news_feature-2000']); ?> <?php print_r($pic['news_feature-2000-width']); ?>w,
+		            <?php print_r($pic['news_feature-3000']); ?> <?php print_r($pic['news_feature-3000-width']); ?>w"
 		        ></figure>
+
+				    <div class="post__hgroup">
+			        <h1 itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
+		        </div>
 		      <?php endif; ?>
 
-		    <?php endwhile; endif; ?>
-
-		    <div class="post__hgroup">
-	        <h1<?php if ( !have_rows('hero') ) :?> class="no-feature"<?php endif; ?> itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
-        </div>
+		    <?php endwhile; else: ?>
+			    <div class="post__hgroup">
+		        <h1 class="no-feature" itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
+	        </div>
+		    <?php endif; ?>
 
       </header> <?php // end article header ?>
 
