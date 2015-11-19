@@ -3,21 +3,21 @@
   background-position: 50% 0;
   background-size: cover;
   display: flex;
-  height: 85vh;
+  height: 100-12vh;
   position: relative;
   text-align: center;
 
   @media (min-height: rem(400)) {
-    height: 100-12vh;
-  }
-  @media (min-height: rem(600)) {
     height: 100-10vh;
   }
-  @media (min-height: rem(800)) {
+  @media (min-height: rem(600)) {
     height: 100-8vh;
   }
-  @media (min-height: rem(1000)) {
+  @media (min-height: rem(800)) {
     height: 100-6vh;
+  }
+  @media (min-height: rem(1000)) {
+    height: 100-4vh;
   }
 
   @media (-webkit-max-device-pixel-ratio: 1.9), (max-resolution: 191dpi), (max-resolution: 1.9dppx) {
@@ -80,6 +80,7 @@
     &:link,
     &:visited {
       color: palette(icewhite);
+      text-shadow: 0 0 15px palette(jetblack);
     }
 
     &:active,
@@ -87,11 +88,13 @@
     &:hover {
       box-shadow: inset 0 -1.3em 0 palette(claret);
       color: palette(icewhite);
+      text-shadow: none;
     }
   }
 
   &__title {
     border: 1vw solid palette(icewhite);
+    box-shadow: 0 0 15px palette(jetblack);
     font-size: 1em;
     margin: 0;
     max-width: 100%;

@@ -35,13 +35,14 @@
           <?php if($counter < 1) : ?>
             <img
               alt="<?php print_r(get_field('image')['alt']); ?>"
-              src="<?php print_r($pic['hero-1000']); ?>"
+              src="<?php print_r($pic['news_feature-1000']); ?>"
               srcset="
-                <?php print_r($pic['hero-640']); ?> <?php print_r($pic['hero-640-width']); ?>w,
-                <?php print_r($pic['hero-1000']); ?> <?php print_r($pic['hero-1000-width']); ?>w,
-                <?php print_r($pic['hero-1500']); ?> <?php print_r($pic['hero-1500-width']); ?>w,
-                <?php print_r($pic['hero-2000']); ?> <?php print_r($pic['hero-2000-width']); ?>w,
-                <?php print_r($pic['hero-3000']); ?> <?php print_r($pic['hero-3000-width']); ?>w"
+                <?php print_r($pic['news_feature-640']); ?> <?php print_r($pic['news_feature-640-width']); ?>w,
+                <?php print_r($pic['news_feature-1000']); ?> <?php print_r($pic['news_feature-1000-width']); ?>w,
+                <?php print_r($pic['news_feature-1500']); ?> <?php print_r($pic['news_feature-1500-width']); ?>w,
+                <?php print_r($pic['news_feature-2000']); ?> <?php print_r($pic['news_feature-2000-width']); ?>w,
+                <?php print_r($pic['news_feature-3000']); ?> <?php print_r($pic['news_feature-3000-width']); ?>w"
+              sizes="(min-width: 56.25rem) 66.666vw, 100vw"
             >
            <?php else: ?>
             <a href="<?php the_permalink(); ?>"><img
@@ -57,7 +58,7 @@
                 <?php print_r($pic['square-1050']); ?> <?php print_r($pic['square-1050-width']); ?>w,
                 <?php print_r($pic['square-1200']); ?> <?php print_r($pic['square-1200-width']); ?>w
                 "
-              sizes="33.3vw, (min-width: 37.5rem) 16.65vw, (min-width: 56.25rem) 11.1vw"
+              sizes="(min-width: 56.25rem) 11.111vw, (min-width: 37.5rem) 16.65vw, 33.333vw"
             ></a>
            <?php endif; ?>
          </figure>

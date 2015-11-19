@@ -27,7 +27,7 @@
           </p>
         </div>
         <figure class="posts__post__pic">
-            <a href="<?php the_permalink(); ?>"><img
+          <a href="<?php the_permalink(); ?>"><img
               alt="<?php print_r(get_field('image')['alt']); ?>"
               src="<?php print_r($pic['square-300']); ?>"
               srcset="
@@ -40,7 +40,7 @@
                 <?php print_r($pic['square-1050']); ?> <?php print_r($pic['square-1050-width']); ?>w,
                 <?php print_r($pic['square-1200']); ?> <?php print_r($pic['square-1200-width']); ?>w
                 "
-              sizes="33.3vw, (min-width: 37.5rem) 16.65vw, (min-width: 56.25rem) 11.1vw"
+              sizes="(min-width: 56.25rem) 11.111vw, (min-width: 37.5rem) 16.65vw, 33.333vw"
             ></a>
          </figure>
       </article>
