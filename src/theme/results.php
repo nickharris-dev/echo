@@ -1,25 +1,28 @@
 <?php
   $the_array = array(
-    'post_type' => 'fixture'
+    'post_type' => 'fixture',
+    'order' => 'ASC'
     );
   $posts = new WP_Query( $the_array );
   if( $posts->have_posts() ): ?>
-  <section class="results">
+  <section class="results" id="Results"><div class="results__wrapper">
     <?php while( $posts->have_posts() ):
       $posts->the_post();
-      $today = new DateTime('now');
+      $today = strtotime('now');
+      $aYearAgo = strtotime('-1 year');
       $pic = get_field('logo')['sizes'];
-      $date = DateTime::createFromFormat('Ymd', get_field('date'));
+      $date = strtotime(get_field('date'));
       $home = null;
       $away = null;
       $home_score = null;
       $away_score = null;
       $video = null;
-      if ($date < $today) :
+      if ($date < $today && $date > $aYearAgo) :
         if ( have_rows('games') ) :
           while ( have_rows('games') ) : the_row();
             $weare = get_sub_field('responsibility');
               if ( $weare == 'the Home Team' ) :
+
                 global $home;
                 $home = '<abbr title="Manchester Crows">mnc</abbr>';
                 $opponents = get_sub_field('away_team');
@@ -37,6 +40,27 @@
                     $video = get_sub_field('video_link');
                   endwhile; // have_rows('post_game')
                 endif; // have_rows('post_game')
+
+              elseif ( $weare == 'the Away Team' ):
+
+                global $away;
+                $away = '<abbr title="Manchester Crows">mnc</abbr>';
+                $opponents = get_sub_field('home_team');
+                if ( $opponents ):
+                  foreach($opponents as $o):
+                    global $home;
+                    $home = '<abbr title="' . get_the_title($o->ID) . '">' . get_field('abbreviation', $o->ID) . '</abbr>';
+                  endforeach; // $opponents as $o
+                endif; // $opponent
+                if ( have_rows('post_game') ) :
+                  while (have_rows('post_game')) : the_row();
+                    global $home_score, $away_score, $video;
+                    $home_score = get_sub_field('opponents_score');
+                    $away_score = get_sub_field('our_score');
+                    $video = get_sub_field('video_link');
+                  endwhile; // have_rows('post_game')
+                endif; // have_rows('post_game')
+
               endif; // $weare
               if ( $home_score && $away_score ): ?>
 
@@ -44,10 +68,16 @@
                   <?php if ($video) {
                     echo '<a class="game__video-link" href="'. $video .'">';
                   } ?>
-                  <span class="game__team game__team--home"><?php echo $home; ?></span>
-                  <span class="game__score game__score--home"><?php echo $home_score; ?></span>
-                  <span class="game__team game__team--away"><?php echo( $away ); ?></span>
-                  <span class="game__score game__score--away"><?php echo $away_score; ?></span>
+                  <table class="game__results" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <th scope="row" class="game__team game__team--home"><?php echo $home; ?></th>
+                      <td class="game__score game__score--home"><?php echo $home_score; ?></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="game__team game__team--away"><?php echo( $away ); ?></th>
+                      <td class="game__score game__score--away"><?php echo $away_score; ?></td>
+                    </tr>
+                  </table>
                   <?php if ($video) {
                     echo '</a>';
                   } ?>
@@ -58,5 +88,5 @@
         endif; // have_rows('games')
       endif; // Date < Today
     endwhile; // have_posts ?>
-  </section>
+  </div></section>
 <?php endif; wp_reset_query(); ?>
