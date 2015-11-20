@@ -42,8 +42,6 @@
                 <?php print_r($pic['news_feature-1500']); ?> <?php print_r($pic['news_feature-1500-width']); ?>w,
                 <?php print_r($pic['news_feature-2000']); ?> <?php print_r($pic['news_feature-2000-width']); ?>w,
                 <?php print_r($pic['news_feature-3000']); ?> <?php print_r($pic['news_feature-3000-width']); ?>w"
-              sizes="(min-width: 56.25em) 66.666vw,
-                     100vw"
             >
            <?php else: ?>
             <a href="<?php the_permalink(); ?>"><img

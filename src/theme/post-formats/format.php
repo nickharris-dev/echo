@@ -21,13 +21,13 @@
                   <figure class="post__pic"><img
                     <?php $pic = get_field('image')['sizes']; ?>
                     alt="<?php print_r(get_field('image')['alt']); ?>"
-                    src="<?php print_r($pic['news-feature-1000']); ?>"
+                    src="<?php print_r($pic['news_feature-1000']); ?>"
                     srcset="
-                      <?php print_r($pic['news-feature-640']); ?> <?php print_r($pic['news-feature-640-width']); ?>w,
-                      <?php print_r($pic['news-feature-1000']); ?> <?php print_r($pic['news-feature-1000-width']); ?>w,
-                      <?php print_r($pic['news-feature-1500']); ?> <?php print_r($pic['news-feature-1500-width']); ?>w,
-                      <?php print_r($pic['news-feature-2000']); ?> <?php print_r($pic['news-feature-2000-width']); ?>w,
-                      <?php print_r($pic['news-feature-3000']); ?> <?php print_r($pic['news-feature-3000-width']); ?>w"
+                      <?php print_r($pic['news_feature-640']); ?> <?php print_r($pic['news_feature-640-width']); ?>w,
+                      <?php print_r($pic['news_feature-1000']); ?> <?php print_r($pic['news_feature-1000-width']); ?>w,
+                      <?php print_r($pic['news_feature-1500']); ?> <?php print_r($pic['news_feature-1500-width']); ?>w,
+                      <?php print_r($pic['news_feature-2000']); ?> <?php print_r($pic['news_feature-2000-width']); ?>w,
+                      <?php print_r($pic['news_feature-3000']); ?> <?php print_r($pic['news_feature-3000-width']); ?>w"
                   ></figure>
 
                   <div class="post__hgroup">
