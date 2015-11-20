@@ -70,7 +70,7 @@ function nodeLoop(nodeList, func, arg1) {
   }
 }
 
-require(['config'], function(config){
+require(['config', 'fancylinks'], function(config){
   // Development js
   if (config.isDev) require(['grid','dev']);
 });

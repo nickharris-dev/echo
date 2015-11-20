@@ -1,0 +1,70 @@
+.results {
+  background: rgba(palette(icewhite), .3);
+  height: rem(44);
+  left: 0;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 12vh;
+  width: 100%;
+
+  @media (min-height: rem(400)) {
+    top: 10vh;
+  }
+  @media (min-height: rem(600)) {
+    top: 8vh;
+  }
+  @media (min-height: rem(800)) {
+    top: 6vh;
+  }
+
+  &__wrapper {
+    &--slide {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+.game {
+  background: rgba(palette(icewhite), .8);
+  border-left: 1px solid palette(neutral, light);
+  float: left;
+
+  &__results {
+    @include type-scale(2, .7);
+    margin: 0;
+    max-width: 100%;
+    min-width: 0;
+    width: 4.5rem;
+  }
+
+  &__team {
+    font-weight: 400;
+    padding: rem(3) 0 rem(3) $gutter;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  &__score {
+    font-weight: 700;
+    padding: rem(3) $gutter rem(3) 0;
+    text-align: right;
+  }
+
+  &__video-link {
+    &:link,
+    &:visited {
+      box-shadow: none;
+      color: palette(claret);
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      box-shadow: none;
+      color: palette(claret);
+    }
+  }
+}

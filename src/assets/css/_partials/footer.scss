@@ -1,6 +1,10 @@
 [role="contentinfo"] {
   @include type-scale(1, 1);
+  bottom: 0;
+  left: 0;
   letter-spacing: .5em;
+  position: absolute;
   text-align: center;
   text-transform: uppercase;
+  width: 100%;
 }
