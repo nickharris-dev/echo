@@ -42,7 +42,8 @@
                 <?php print_r($pic['news_feature-1500']); ?> <?php print_r($pic['news_feature-1500-width']); ?>w,
                 <?php print_r($pic['news_feature-2000']); ?> <?php print_r($pic['news_feature-2000-width']); ?>w,
                 <?php print_r($pic['news_feature-3000']); ?> <?php print_r($pic['news_feature-3000-width']); ?>w"
-              sizes="(min-width: 56.25rem) 66.666vw, 100vw"
+              sizes="(min-width: 56.25em) 66.666vw,
+                     100vw"
             >
            <?php else: ?>
             <a href="<?php the_permalink(); ?>"><img
@@ -58,7 +59,9 @@
                 <?php print_r($pic['square-1050']); ?> <?php print_r($pic['square-1050-width']); ?>w,
                 <?php print_r($pic['square-1200']); ?> <?php print_r($pic['square-1200-width']); ?>w
                 "
-              sizes="(min-width: 56.25rem) 11.111vw, (min-width: 37.5rem) 16.65vw, 33.333vw"
+              sizes="(min-width: 56.25em) 11.111vw,
+                     (min-width: 37.5em) 16.65vw,
+                     33.333vw"
             ></a>
            <?php endif; ?>
          </figure>

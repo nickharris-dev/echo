@@ -111,12 +111,12 @@
 										<?php print_r($pic['roster-300']); ?> <?php print_r($pic['roster-300-width']); ?>w,
 										<?php print_r($pic['roster-420']); ?> <?php print_r($pic['roster-420-width']); ?>w,
 										<?php print_r($pic['roster-600']); ?> <?php print_r($pic['roster-600-width']); ?>w"
-									sizes="(min-width: 225rem) 4.166666667vw,
-										(min-width: 112.5rem) 8.333333333vw,
-										(min-width: 200rem) 12.5vw,
-										(min-width: 56.25rem) 16.667vw,
-										(min-width: 37.5rem) 25vw,
-										(min-width: 28.0625rem) 33.333vw,
+									sizes="(min-width: 225em) 4.166666667vw,
+										(min-width: 112.5em) 8.333333333vw,
+										(min-width: 200em) 12.5vw,
+										(min-width: 56.25em) 16.667vw,
+										(min-width: 37.5em) 25vw,
+										(min-width: 28.0625em) 33.333vw,
 										50vw"
 								>
 								<h1 class="player__name">
