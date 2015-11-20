@@ -9,12 +9,13 @@
 
 <?php if ( have_rows('hero') ) :
   while ( have_rows('hero') ) : the_row(); ?>
-	<section class="hero hero--front" id="Hero">
+	<section class="hero hero--roster" id="Hero">
 
     <?php if( get_row_layout() === 'image'):
       $pic = get_sub_field('image')['sizes']; ?>
         <img
           alt=""
+          class="hero__pic"
           src="<?php print_r($pic['hero-1000']); ?>"
           srcset="
             <?php print_r($pic['hero-640']); ?> <?php print_r($pic['hero-640-width']); ?>w,
@@ -34,7 +35,7 @@
  	<h1 class="no-hero">
     <?php the_title(); ?>
   </h1>
- <?php endif; ?>
+<?php endif; ?>
 
 	<?php
 		$terms = get_terms( 'Team' );

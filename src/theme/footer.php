@@ -1,7 +1,7 @@
     <nav class="primary-nav" id="PrimaryNav">
       <li class="primary-nav__home"><a href="/">Home</a></li>
       <li><a href="/news">News</a></li>
-      <li><a href="/roster">Roster</a></li>
+      <li><a href="/roster">The Team</a></li>
     </nav>
 
 		<footer role="contentinfo">
