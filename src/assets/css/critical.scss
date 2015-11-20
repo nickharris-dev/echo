@@ -30,9 +30,6 @@ body {
   @media (min-height: rem(800)) {
     padding-top: 6vh;
   }
-  @media (min-height: rem(1000)) {
-    padding-top: 4vh;
-  }
 }
 
 // Headings
@@ -75,3 +72,4 @@ p {
 @import '_partials/header';
 @import '_partials/navigation';
 @import '_partials/hero';
+@import '_partials/results';

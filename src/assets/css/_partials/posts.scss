@@ -189,6 +189,8 @@ $layoutbreak2: rem(900);
   }
 
   &--front {
+    margin-bottom: rem($baseline/2);
+
     .posts {
       &__wrapper:first-of-type {
         @media(min-width: $layoutbreak2) {

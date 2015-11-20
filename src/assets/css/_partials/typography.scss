@@ -281,20 +281,28 @@ a {
 // Intro
 // =====
 .intro {
-  color: palette(claret);
+  background-color: palette(claret);
+  color: palette(icewhite);
   display: flex;
   flex-flow: column;
-  height: 85vh;
+  height: 100-12vh;
   justify-content: center;
+  margin-bottom: rem($baseline);
   padding: 0 $column;
   text-align: center;
 
-  @media (min-width: rem(600)) {
-    @include type-scale(4, 1);
+  @media (min-height: rem(400)) {
+    height: 100-10vh;
+  }
+  @media (min-height: rem(600)) {
+    height: 100-8vh;
+  }
+  @media (min-height: rem(800)) {
+    height: 100-6vh;
   }
 
-  @media (min-height: rem(550)) {
-    height: 50vh;
+  @media (min-width: rem(600)) {
+    @include type-scale(4, 1);
   }
 
   @media (min-width: rem(800)) {
@@ -311,6 +319,20 @@ a {
   }
 
   .button {
+    border: rem(3) solid palette(icewhite);
     display: inline;
+
+    &:link,
+    &:visited {
+      box-shadow: inset 0 0 0 palette(icewhite);
+      color: palette(icewhite);
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      box-shadow: inset 0 -2.4em 0 palette(icewhite);
+      color: palette(claret);
+    }
   }
 }

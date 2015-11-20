@@ -9,7 +9,6 @@
   padding: 0 $gutter;
   position: relative;
   text-align: center;
-  text-shadow: 0 0 15px palette(jetblack);
 
   @media (min-height: rem(400)) {
     height: 100-10vh;
@@ -19,9 +18,6 @@
   }
   @media (min-height: rem(800)) {
     height: 100-6vh;
-  }
-  @media (min-height: rem(1000)) {
-    height: 100-4vh;
   }
 
   &__pic {
@@ -39,6 +35,7 @@
     max-width: 100%;
     min-width: 0;
     position: relative;
+    text-shadow: 0 0 15px palette(jetblack);
     width: 100%;
     z-index: 1;
   }
