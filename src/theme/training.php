@@ -1,5 +1,5 @@
 <?php
-  $page_id = 2;
+  $page_id = 537;
   if( have_rows('training', $page_id) ):
     $rowCount = count(get_field('training'));
     if ($rowCount % 2 == 0) {
@@ -28,7 +28,7 @@
             while( have_rows('team') ): the_row();
           ?>
             <section class="training__team">
-              <h1><?php $team = get_sub_field('team'); echo $team; ?></h1>
+              <h1><?php $team = get_sub_field('team'); echo $team->name; ?></h1>
               <?php if (have_rows('sessions')):
                 while( have_rows('sessions') ): the_row();
                 // vars
@@ -56,7 +56,7 @@
                 <time><i class="hour"><?php echo $start; ?></i> to <i class="hour"><?php echo $end; ?></i></time><br>
 
                 <?php if ($next_session || $next_start || $next_end) : ?>
-                  <p class="important">The next <?php echo $day; ?> <?php echo $team; ?> session is
+                  <p class="important">The next <?php echo $day; ?> <?php echo $team->name; ?> session is
                   <?php if ($next_session): ?>
                     on <?php if($next_day != $day):?><strong><?php echo $next_day; ?></strong><?php endif; ?>
                     <?php echo $next_session; ?><?php endif;
