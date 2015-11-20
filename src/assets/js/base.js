@@ -86,3 +86,6 @@ if (document.getElementById('Training')) require(['training']);
 
 // Frontpage News
 if (document.getElementById('News') && parseFloat(document.getElementById('News').getAttribute('data-posts')) > 3) require(['frontpagenews']);
+
+// Results
+if (document.getElementById('Results')) require(['results']);

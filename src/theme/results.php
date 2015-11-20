@@ -1,6 +1,8 @@
 <?php
   $the_array = array(
     'post_type' => 'fixture',
+    'meta_key' => 'date',
+    'orderby' => 'meta_value_num',
     'order' => 'ASC'
     );
   $posts = new WP_Query( $the_array );
@@ -17,13 +19,16 @@
       $home_score = null;
       $away_score = null;
       $video = null;
+      $role = null;
+      $flag = false;
       if ($date < $today && $date > $aYearAgo) :
         if ( have_rows('games') ) :
           while ( have_rows('games') ) : the_row();
             $weare = get_sub_field('responsibility');
               if ( $weare == 'the Home Team' ) :
 
-                global $home;
+                global $home, $role;
+                $role = 'home';
                 $home = '<abbr title="Manchester Crows">mnc</abbr>';
                 $opponents = get_sub_field('away_team');
                 if ( $opponents ):
@@ -34,7 +39,8 @@
                 endif; // $opponent
                 if ( have_rows('post_game') ) :
                   while (have_rows('post_game')) : the_row();
-                    global $home_score, $away_score, $video;
+                    global $flag, $home_score, $away_score, $video;
+                    $flag = true;
                     $home_score = get_sub_field('our_score');
                     $away_score = get_sub_field('opponents_score');
                     $video = get_sub_field('video_link');
@@ -43,8 +49,9 @@
 
               elseif ( $weare == 'the Away Team' ):
 
-                global $away;
+                global $away, $role;
                 $away = '<abbr title="Manchester Crows">mnc</abbr>';
+                $role = 'away';
                 $opponents = get_sub_field('home_team');
                 if ( $opponents ):
                   foreach($opponents as $o):
@@ -54,17 +61,18 @@
                 endif; // $opponent
                 if ( have_rows('post_game') ) :
                   while (have_rows('post_game')) : the_row();
-                    global $home_score, $away_score, $video;
+                    global $flag, $home_score, $away_score, $video;
                     $home_score = get_sub_field('opponents_score');
                     $away_score = get_sub_field('our_score');
                     $video = get_sub_field('video_link');
+                    $flag = true;
                   endwhile; // have_rows('post_game')
                 endif; // have_rows('post_game')
 
               endif; // $weare
-              if ( $home_score && $away_score ): ?>
+              if ( $flag ): ?>
 
-                <article class="game game--home">
+                <article class="game game--<?php echo $role; ?>">
                   <?php if ($video) {
                     echo '<a class="game__video-link" href="'. $video .'">';
                   } ?>

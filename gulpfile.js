@@ -60,7 +60,8 @@
     criticalstyles: paths.src.style + 'critical.scss',
     headerstyles: paths.src.style + '**/header.scss',
     navstyles: paths.src.style + '**/navigation.scss',
-    herostyles: paths.src.style + '**/hero.scss'
+    herostyles: paths.src.style + '**/hero.scss',
+    resultsstyles: paths.src.style + '**/results.scss',
   }
 
 // Markup
@@ -202,7 +203,8 @@
       '!' + srcfiles.criticalstyles,
       '!' + srcfiles.headerstyles,
       '!' + srcfiles.navstyles,
-      '!' + srcfiles.herostyles
+      '!' + srcfiles.herostyles,
+      '!' + srcfiles.resultsstyles
     ], gulp.parallel('style'));
     // Critical Styles
     gulp.watch([
@@ -211,7 +213,8 @@
       srcfiles.criticalstyles,
       srcfiles.headerstyles,
       srcfiles.navstyles,
-      srcfiles.herostyles
+      srcfiles.herostyles,
+      srcfiles.resultsstyles
     ], gulp.parallel('theme', 'style'));
     // Images
     gulp.watch(paths.src.images + '**/*', gulp.parallel('images'));
