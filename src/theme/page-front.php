@@ -39,6 +39,8 @@
 
 <?php endwhile; endif; ?>
 
+<?php include 'results.php'; ?>
+
 <?php
   $the_array = array(
     'post_type' => 'post',

@@ -165,7 +165,7 @@
 							</div> -->
 						</div>
 					</article>
-		    <?php endwhile; endif; ?>
+		    <?php endwhile; endif; wp_reset_query(); ?>
 			</div>
 		</section>
 	<?php endforeach; ?>
