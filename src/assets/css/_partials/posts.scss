@@ -48,7 +48,7 @@ $layoutbreak2: rem(900);
 
   &__post {
     display: flex;
-    margin-bottom: rem($baseline/2);
+    margin-bottom: rem($baseline);
 
      @media(min-width: $layoutbreak1) {
       width: percentage(1/2);
@@ -213,7 +213,16 @@ $layoutbreak2: rem(900);
 
     > .posts__post {
       @media(min-width: $layoutbreak2) {
+        padding: 0 $gutter;
         width: 16*$column;
+      }
+
+      .posts__post__copy {
+        @media(min-width: $layoutbreak2) {
+          left: $gutter;
+          right: $gutter;
+          width: auto;
+        }
       }
     }
   }

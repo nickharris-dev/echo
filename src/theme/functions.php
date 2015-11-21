@@ -89,12 +89,12 @@ add_image_size( 'roster-210', 210 );
 add_image_size( 'roster-300', 300 );
 add_image_size( 'roster-420', 420 );
 add_image_size( 'roster-600', 600 );
-// News Feature image sizes (2.127659574:1)
-add_image_size( 'news_feature-640', 640, 301, true );
-add_image_size( 'news_feature-1000', 1000, 470, true );
-add_image_size( 'news_feature-1500', 1500, 705, true );
-add_image_size( 'news_feature-2000', 2000, 940, true );
-add_image_size( 'news_feature-3000', 3000, 1410, true );
+// News Feature image sizes (2.03957768:1)
+add_image_size( 'news_feature-640', 640, 314, true );
+add_image_size( 'news_feature-1000', 1000, 490, true );
+add_image_size( 'news_feature-1500', 1500, 735, true );
+add_image_size( 'news_feature-2000', 2000, 981, true );
+add_image_size( 'news_feature-3000', 3000, 1471, true );
 // hero image sizes (2.127659574:1)
 add_image_size( 'hero-640', 640 );
 add_image_size( 'hero-1000', 1000 );

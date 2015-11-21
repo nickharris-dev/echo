@@ -304,7 +304,7 @@ a {
   flex-flow: column;
   height: 100-12vh;
   justify-content: center;
-  margin-bottom: rem(3);
+  margin-bottom: rem($baseline);
   padding: 0 $column;
   text-align: center;
 
