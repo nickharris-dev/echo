@@ -224,7 +224,7 @@
     gulp.watch(paths.src.javascript + '**/*', gulp.parallel('javascript'));
   });
 
-gulp.task('theme', gulp.series('criticalstyle', 'templates'), function(){});
+gulp.task('theme', gulp.series('sprite', 'criticalstyle', 'templates'), function(){});
 gulp.task('build', gulp.parallel('theme', 'style', 'javascript', 'images'), function(){});
 gulp.task('serve', gulp.parallel('watch', 'server'), function(){});
 

@@ -7,4 +7,64 @@
   text-align: center;
   text-transform: uppercase;
   width: 100%;
+
+  p {
+    margin: rem($baseline/2) auto;
+  }
+
+  .email {
+    @include type-scale(2, 1);
+    max-width: 100%;
+
+    @media (min-width: rem(600)) {
+      @include type-scale(4, 1);
+    }
+  }
+
+  .copyright {
+    margin: rem(2*$baseline) auto;
+  }
+
+  .social {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+
+    &__link {
+      &--twitter {
+        margin-left: rem(2*$baseline);
+        margin-right: rem(2*$baseline);
+      }
+
+      &:before {
+        display: none;
+      }
+
+      a {
+        @include bgSprite();
+        box-shadow: none;
+        overflow: hidden;
+        padding-top: 100%;
+      }
+
+      &--facebook {
+        a {
+          @include sprite($facebook);
+        }
+      }
+
+      &--twitter {
+        a {
+          @include sprite($twitter);
+        }
+      }
+
+      &--instagram {
+        a {
+          @include sprite($instagram);
+        }
+      }
+
+    }
+  }
 }

@@ -19,7 +19,7 @@ body {
   @include type-scale(3, 1);
   color: palette(neutral, copy);
   margin: 0;
-  padding: 12vh 0 rem(3*$baseline) 0;
+  padding: 12vh 0 rem(11*$baseline) 0;
   position: relative;
 
   @media (min-height: rem(400)) {
