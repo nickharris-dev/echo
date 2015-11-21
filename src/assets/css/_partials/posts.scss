@@ -25,7 +25,7 @@ $layoutbreak2: rem(900);
     margin: rem($baseline) auto rem(2*$baseline);
     width: 8*$column;
 
-    @media (min-width: $layoutbreak1) {
+    @media (min-width: $layoutbreak2) {
       width: 4*$column;
     }
   }

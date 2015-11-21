@@ -114,7 +114,8 @@
   &__wrapper {
     background: palette(claret);
     min-height: 100%;
-    padding: 0 $gutter rem($baseline/2);
+    overflow: hidden;
+    padding: 0 rem(6) rem($baseline/2);
   }
 
   &__vitals {
@@ -123,7 +124,7 @@
   }
 
   &__details {
-    margin: 0 -$gutter;
+    margin: 0 rem(-6);
     position: relative;
   }
 

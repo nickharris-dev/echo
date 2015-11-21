@@ -344,6 +344,6 @@ a {
 
   .button {
     margin: rem($baseline/2) rem($baseline);
-    width: rem(250);
+    min-width: rem(250);
   }
 }
