@@ -13,7 +13,7 @@
     font-size: 12vw;
     left: 50%;
     position: absolute;
-    top: 50%;
+    top: 40%;
     transform: translate(-50%, -50%);
     z-index: 1;
 
@@ -43,6 +43,21 @@
     margin: 0;
     max-width: 100%;
     padding: 0 2vw 0 3vw;
+  }
+
+  .button {
+    border-width: 1vw;
+    font-size: 7vw;
+    left: 50%;
+    line-height: 1;
+    position: absolute;
+    top: 65%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+
+    @media (min-width: rem(1200)) {
+      font-size: 5vw;
+    }
   }
 }
 

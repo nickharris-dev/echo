@@ -189,7 +189,7 @@ $layoutbreak2: rem(900);
   }
 
   &--front {
-    margin-bottom: rem($baseline/2);
+    margin-bottom: 0;
 
     .posts {
       &__wrapper:first-of-type {

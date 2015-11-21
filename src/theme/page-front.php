@@ -115,6 +115,7 @@
   $pic = get_field('roster_image')['sizes']; ?>
   <section class="roster">
     <a class="roster__link" href="roster"><h1 class="roster__title">The Team</h1></a>
+    <a class="button button--light" href="/join-us/">Join us</a>
     <img
       class="roster__pic"
       alt=""
