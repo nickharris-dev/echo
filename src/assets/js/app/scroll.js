@@ -26,8 +26,10 @@ define(['require'], function(){
     ticking = false;
 
     debouncedScroll.position.y = lastKnownY;
-    document.dispatchEvent(debouncedScroll);
+    window.dispatchEvent(debouncedScroll);
   }
 
   window.addEventListener('scroll', onScroll, false);
+
+  return document.body.scrollTop;
 });
