@@ -15,6 +15,7 @@
   .email {
     @include type-scale(2, 1);
     max-width: 100%;
+    overflow: hidden;
 
     @media (min-width: rem(600)) {
       @include type-scale(4, 1);
