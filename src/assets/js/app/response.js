@@ -11,8 +11,8 @@ define(function(require){
     resize = new CustomEvent('resized');
     dragResize = new CustomEvent('debouncedResize');
   } else { // IE
-    resize = document.createEvent('Event');
-    dragResize = document.createEvent('Event');
+    resize = document.createEvent('CustomEvent');
+    dragResize = document.createEvent('CustomEvent');
     resize.initEvent('resized');
     dragResize.initEvent('debouncedResize');
   }
