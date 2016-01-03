@@ -70,13 +70,13 @@ define(function(){
             css += 'overflow:hidden;';
             css += 'pointer-events:none;';
             css += 'position:absolute;';
-            css += 'top:0;';
+            css += 'top:100%;';
             css += 'width:100%;';
             css += 'z-index:-1;';
             css += '}';
 
-        style.type = 'text/css';
         style.setAttribute('id', 'ReflowStyle');
+        style.type = 'text/css';
         if (style.styleSheet){
           style.styleSheet.cssText = css;
         } else {
