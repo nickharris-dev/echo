@@ -4,44 +4,53 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
 
   var Elementquery = function(elem, queryString, continuous) {
     var t = this;
+    var eventDetail = {
+      queries: t
+    };
 
-    this.element = elem;
-    this.continuous = continuous;
+    t.element = elem;
+    t.continuous = continuous;
 
     // Starting dimensions
-    this.height = elem.offsetHeight;
-    this.width = elem.offsetWidth;
+    t.height = elem.offsetHeight;
+    t.width = elem.offsetWidth;
 
     // Event to be emitted on change of breakpoint
-    this.breakpointEvent = new Event('breakpoint');
-    this.breakpointEvent.queries = this;
+    if (typeof CustomEvent === 'function') { // Good Browsers
+      t.breakpointEvent = new CustomEvent('breakpoint', {
+        detail: eventDetail
+      });
+    } else {
+      t.breakpointEvent = document.createEvent('CustomEvent');
+      t.breakpointEvent.initCustomEvent('breakpoint', true, true, eventDetail);
+    }
 
     // An identifier to use in the classname later
     // Unlike idFactory, use classname by default, for better BEM
     if (elem.className) {
       if (elem.classList) {
-        this.identifier = elem.classList[0];
+        t.identifier = elem.classList[0];
       } else {
-        this.identifier = elem.className;
-        this.identifier = this.identifier.split(' ')[0];
+        t.identifier = elem.className;
+        t.identifier = t.identifier.split(' ')[0];
       }
     } else if (elem.getAttribute('id')) {
-      this.identifier = elem.getAttribute('id').toLowerCase();;
+      t.identifier = elem.getAttribute('id').toLowerCase();;
     }
-    this.identifier = this.identifier.match(/(\w+)-?/);
-    this.identifier = this.identifier[1];
+    t.identifier = t.identifier.match(/(\w+)-?/);
+    t.identifier = t.identifier[1];
 
     // Process the named breakpoints
-    this.breakpoints = this.queryFactory(queryString);
+    t.breakpoints = t.queryFactory(queryString);
 
     // Prepare element to broadcast resize events
-    this.reflow = new Reflow(elem, continuous);
+    t.reflow = new Reflow(elem, continuous);
 
     // …Listen for those resize events
-    this.element.addEventListener('resizeEnd', function(event){
+    t.element.addEventListener('resizeEnd', function(event){
       t.sizeChange.call(t,event);
     });
-    this.element.addEventListener('debouncedResize', function(event){
+    t.element.addEventListener('debouncedResize', function(event){
       t.sizeChange.call(t,event);
     });
   };
@@ -174,8 +183,8 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
 
       classes.add(t.element, breakpoint.className);
 
-      t.breakpointEvent.active = true;
-      t.breakpointEvent.breakpoint = breakpoint;
+      t.breakpointEvent.detail.active = true;
+      t.breakpointEvent.detail.breakpoint = breakpoint;
       t.element.dispatchEvent(t.breakpointEvent);
     },
 
@@ -188,8 +197,13 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
 
       classes.remove(t.element, breakpoint.className);
 
-      t.breakpointEvent.active = false;
-      t.breakpointEvent.breakpoint = breakpoint;
+      if ( t.breakpointEvent.detail ) {
+        t.breakpointEvent.detail.active = false;
+        t.breakpointEvent.detail.breakpoint = breakpoint;
+      } else {
+        t.breakpointEvent.active = false;
+        t.breakpointEvent.breakpoint = breakpoint;
+      }
       t.element.dispatchEvent(t.breakpointEvent);
     }
   };
