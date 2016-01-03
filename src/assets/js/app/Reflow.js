@@ -1,17 +1,18 @@
 define(function(){
   var Reflow = function(e, c) {
-    this.element = e;
+    var t = this;
+    t.element = e;
 
     // Helpers
-    this.continuous = c || false;
-    this.ticking = false;
+    t.continuous = c || false;
+    t.ticking = false;
 
     // Events
-    this.resizeEnd = new Event('resizeEnd');
-    this.debouncedResize = new Event('debouncedResize');
+    t.resizeEnd = new Event('resizeEnd');
+    t.debouncedResize = new Event('debouncedResize');
 
     // Initialise
-    this.init();
+    t.init();
   };
 
   Reflow.prototype = {
@@ -19,7 +20,7 @@ define(function(){
     // Create an object element inside the element we want to emit reize events
     // from and watch it for resize
     init: function(){
-      var self = this;
+      var t = this;
 
       function onObjLoad() {
         // Not needed outside of init(), so let's keep it anonymous
@@ -33,24 +34,24 @@ define(function(){
         // Context is the object element created below
 
         // The on end event
-        self.endListenerFactory();
+        t.endListenerFactory();
         // If desired, the element can emit an event whilst resizing, off by default
-        if (self.continuous) self.requestTick();
+        if (t.continuous) t.requestTick();
       }
 
       // Make our element relative if it has no position
-      if (getComputedStyle(self.element).position === 'static') {
-        self.element.style.position = 'relative';
+      if (getComputedStyle(t.element).position === 'static') {
+        t.element.style.position = 'relative';
       }
       // Create an object element
-      self.obj = document.createElement('object');
-      self.obj.className = 'reflowObject';
+      t.obj = document.createElement('object');
+      t.obj.className = 'reflowObject';
 
       // Tell the browser this obj is a page, so it emits a resize event
-      self.obj.resizeElement = self.element;
-      self.obj.onload = onObjLoad;
-      self.obj.type = 'text/html';
-      self.obj.data = 'about:blank';
+      t.obj.resizeElement = t.element;
+      t.obj.onload = onObjLoad;
+      t.obj.type = 'text/html';
+      t.obj.data = 'about:blank';
 
       // Create styles for the object, if they don't already exist
       if (!document.getElementById('ReflowStyle')) {
@@ -77,43 +78,43 @@ define(function(){
         document.head.appendChild(style);
       }
       // Append the object element to the queried element
-      self.element.appendChild(self.obj);
+      t.element.appendChild(t.obj);
     },
 
     endListenerFactory: function(){
-      var self = this;
+      var t = this;
       // Cancel the current running timer
-      clearTimeout(self.timer);
+      clearTimeout(t.timer);
       // Starts a timer, so dragEnd will only fire if the timer gets to zero,
       // which will only happen when the user stops resizing their viewport
-      self.timer = setTimeout(function(){
-        self.onResizeEnd.call(self);
+      t.timer = setTimeout(function(){
+        t.onResizeEnd.call(t);
       }, 250);
     },
 
     onResizeEnd: function(){
-      var self = this;
+      var t = this;
 
-      self.resizeEnd.height = self.element.offsetHeight;
-      self.resizeEnd.width = self.element.offsetWidth;
-      self.element.dispatchEvent(self.resizeEnd);
+      t.resizeEnd.height = t.element.offsetHeight;
+      t.resizeEnd.width = t.element.offsetWidth;
+      t.element.dispatchEvent(t.resizeEnd);
     },
 
     requestTick: function(){
-      var self = this;
-      if (!self.ticking) requestAnimationFrame(function(){
-        self.update.call(self);
+      var t = this;
+      if (!t.ticking) requestAnimationFrame(function(){
+        t.update.call(t);
       });
-      self.ticking = true;
+      t.ticking = true;
     },
 
     update: function(){
-      var self = this;
+      var t = this;
 
-      self.ticking = false;
-      self.debouncedResize.height = element.offsetHeight;
-      self.debouncedResize.width = element.offsetWidth;
-      self.element.dispatchEvent(debouncedResize);
+      t.ticking = false;
+      t.debouncedResize.height = element.offsetHeight;
+      t.debouncedResize.width = element.offsetWidth;
+      t.element.dispatchEvent(debouncedResize);
     }
 
   };
