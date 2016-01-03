@@ -3,7 +3,7 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
   // Example value: linear:(min-width:600px) and (max-width:700px),test:(max-height:150px)
 
   var Elementquery = function(elem, queryString, continuous) {
-    var self = this;
+    var t = this;
 
     this.element = elem;
     this.continuous = continuous;
@@ -39,17 +39,17 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
 
     // …Listen for those resize events
     this.element.addEventListener('resizeEnd', function(event){
-      self.sizeChange.call(self,event);
+      t.sizeChange.call(t,event);
     });
     this.element.addEventListener('debouncedResize', function(event){
-      self.sizeChange.call(self,event);
+      t.sizeChange.call(t,event);
     });
   };
 
   Elementquery.prototype = {
 
     queryFactory: function(str) {
-      var self = this;
+      var t = this;
       var obj;
 
       // Wee helper to surround something/anything with quotes
@@ -68,7 +68,7 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
             modifier = 1;
             break;
           case 'em':
-            modifier = parseFloat(getComputedStyle(self.element).fontSize);
+            modifier = parseFloat(getComputedStyle(t.element).fontSize);
             break;
           case 'rem':
             modifier = parseFloat(config.baseFontSize);
@@ -104,13 +104,13 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
         // Set initial state as inactive
         obj[key].active = false;
         // Construct Classname
-        if (self.identifier) {
-          obj[key].className = self.identifier + '--' + key;
+        if (t.identifier) {
+          obj[key].className = t.identifier + '--' + key;
         } else {
           obj[key].className = key;
         }
         // Check breakpoint
-        self.checkBreakpoint(key,obj);
+        t.checkBreakpoint(key,obj);
       }
 
       // Store the breakpoints for later
@@ -118,35 +118,35 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
     },
 
     sizeChange: function(event){
-      var self = this;
+      var t = this;
       var key;
 
       // Update height and width
-      self.height = event.height;
-      self.width = event.width;
+      t.height = event.height;
+      t.width = event.width;
 
       // loop through query
-      for (key in self.breakpoints) {
-        self.checkBreakpoint(key);
+      for (key in t.breakpoints) {
+        t.checkBreakpoint(key);
       }
     },
 
     checkBreakpoint: function(key,obj) {
-      var self = this;
-      var breakpoints = obj || self.breakpoints;
+      var t = this;
+      var breakpoints = obj || t.breakpoints;
       var breakpoint = breakpoints[key];
-      var minWidth = breakpoint['min-width'] || self.width;
-      var maxWidth = breakpoint['max-width'] || self.width;
-      var minHeight = breakpoint['min-height'] || self.height;
-      var maxHeight = breakpoint['max-height'] || self.height;
+      var minWidth = breakpoint['min-width'] || t.width;
+      var maxWidth = breakpoint['max-width'] || t.width;
+      var minHeight = breakpoint['min-height'] || t.height;
+      var maxHeight = breakpoint['max-height'] || t.height;
       var widthFlag = false;
       var heightFlag = false;
       var active = false;
 
-      if (self.width >= minWidth && self.width <= maxWidth) {
+      if (t.width >= minWidth && t.width <= maxWidth) {
         widthFlag = true;
       }
-      if (self.height >= minHeight && self.height <= maxHeight) {
+      if (t.height >= minHeight && t.height <= maxHeight) {
         heightFlag = true;
       }
 
@@ -158,39 +158,39 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
       // Only take any action if the breakpoint's state is changed
       if (active !== breakpoint.active) {
         if (active) {
-          self.activate(key, obj);
+          t.activate(key, obj);
         } else {
-          self.deactivate(key, obj);
+          t.deactivate(key, obj);
         }
       }
     },
 
     activate: function(key,obj) {
-      var self = this;
-      var breakpoints = obj || self.breakpoints;
+      var t = this;
+      var breakpoints = obj || t.breakpoints;
       var breakpoint = breakpoints[key];
 
       breakpoint.active = true;
 
-      classes.add(self.element, breakpoint.className);
+      classes.add(t.element, breakpoint.className);
 
-      self.breakpointEvent.active = true;
-      self.breakpointEvent.breakpoint = breakpoint;
-      self.element.dispatchEvent(self.breakpointEvent);
+      t.breakpointEvent.active = true;
+      t.breakpointEvent.breakpoint = breakpoint;
+      t.element.dispatchEvent(t.breakpointEvent);
     },
 
     deactivate: function(key,obj) {
-      var self = this;
-      var breakpoints = obj || self.breakpoints;
+      var t = this;
+      var breakpoints = obj || t.breakpoints;
       var breakpoint = breakpoints[key];
 
       breakpoint.active = false;
 
-      classes.remove(self.element, breakpoint.className);
+      classes.remove(t.element, breakpoint.className);
 
-      self.breakpointEvent.active = false;
-      self.breakpointEvent.breakpoint = breakpoint;
-      self.element.dispatchEvent(self.breakpointEvent);
+      t.breakpointEvent.active = false;
+      t.breakpointEvent.breakpoint = breakpoint;
+      t.element.dispatchEvent(t.breakpointEvent);
     }
   };
 
