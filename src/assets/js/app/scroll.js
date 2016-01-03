@@ -14,10 +14,10 @@ define(['require'], function(){
     scrollEnd = new CustomEvent('scrollEnd', eventDetail);
     debouncedScroll = new CustomEvent('debouncedScroll', eventDetail);
   } else { // Not good browsers
-    scrollEnd = document.createEvent('Event');
-    debouncedScroll = document.createEvent('Event');
-    scrollEnd.initEvent('scrollEnd', true, true, eventDetail);
-    debouncedScroll.initEvent('debouncedScroll', true, true, eventDetail);
+    scrollEnd = document.createEvent('CustomEvent');
+    debouncedScroll = document.createEvent('CustomEvent');
+    scrollEnd.initCustomEvent('scrollEnd', true, true, eventDetail);
+    debouncedScroll.initCustomEvent('debouncedScroll', true, true, eventDetail);
   }
 
   // Helpers

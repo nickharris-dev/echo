@@ -21,8 +21,8 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
     if (typeof CustomEvent === 'function') { // Good Browsers
       t.breakpointEvent = new CustomEvent('breakpoint', eventDetail);
     } else {
-      t.breakpointEvent = document.createEvent('Event');
-      t.breakpointEvent.initEvent('breakpoint', true, true, eventDetail);
+      t.breakpointEvent = document.createEvent('CustomEvent');
+      t.breakpointEvent.initCustomEvent('breakpoint', true, true, eventDetail);
     }
 
     // An identifier to use in the classname later

@@ -12,10 +12,10 @@ define(function(){
       t.resizeEnd = new CustomEvent('resizeEnd', {detail: {}});
       t.debouncedResize = new CustomEvent('debouncedResize', {detail: {}});
     } else { // IE
-      resizeEnd = document.createEvent('Event');
-      debouncedResize = document.createEvent('Event');
-      resizeEnd.initEvent('resized', true, true, {detail: {}});
-      debouncedResize.initEvent('debouncedResize', true, true, {detail: {}});
+      resizeEnd = document.createEvent('CustomEvent');
+      debouncedResize = document.createEvent('CustomEvent');
+      resizeEnd.initCustomEvent('resized', true, true, {detail: {}});
+      debouncedResize.initCustomEvent('debouncedResize', true, true, {detail: {}});
     }
 
     // Initialise
