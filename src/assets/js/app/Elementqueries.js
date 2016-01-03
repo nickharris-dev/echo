@@ -5,7 +5,9 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
   var Elementquery = function(elem, queryString, continuous) {
     var t = this;
     var eventDetail = {
-      queries: t
+      detail: {
+        queries: t
+      }
     };
 
     t.element = elem;
@@ -17,9 +19,7 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
 
     // Event to be emitted on change of breakpoint
     if (typeof CustomEvent === 'function') { // Good Browsers
-      t.breakpointEvent = new CustomEvent('breakpoint', {
-        detail: eventDetail
-      });
+      t.breakpointEvent = new CustomEvent('breakpoint', eventDetail);
     } else {
       t.breakpointEvent = document.createEvent('CustomEvent');
       t.breakpointEvent.initCustomEvent('breakpoint', true, true, eventDetail);
@@ -197,13 +197,8 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
 
       classes.remove(t.element, breakpoint.className);
 
-      if ( t.breakpointEvent.detail ) {
-        t.breakpointEvent.detail.active = false;
-        t.breakpointEvent.detail.breakpoint = breakpoint;
-      } else {
-        t.breakpointEvent.active = false;
-        t.breakpointEvent.breakpoint = breakpoint;
-      }
+      t.breakpointEvent.detail.active = false;
+      t.breakpointEvent.detail.breakpoint = breakpoint;
       t.element.dispatchEvent(t.breakpointEvent);
     }
   };
