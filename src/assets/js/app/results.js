@@ -1,4 +1,4 @@
-define(['require', 'config', 'Reflow', 'classes', 'InertiaScroll'], function(require, config, Reflow, classes, InertiaScroll){
+define(['require', 'config', 'Reflow', 'InertiaScroll'], function(require, config, Reflow, InertiaScroll){
   var results = document.getElementById('Results');
   var slider = results.querySelectorAll('.results__wrapper')[0];
   var games = results.querySelectorAll('.game');
@@ -9,13 +9,13 @@ define(['require', 'config', 'Reflow', 'classes', 'InertiaScroll'], function(req
 
   function prepareSlider() {
     slider.style.width = reqWidth +'px';
-    classes.add(slider, 'results__wrapper--slide');
+    slider.classList.add('results__wrapper--slide');
     if (config.touchEnabled) inertia = new InertiaScroll(slider);
   }
 
   function destroySlider() {
     slider.setAttribute('style', '');
-    classes.remove(slider, 'results__wrapper--slide');
+    slider.classList.remove('results__wrapper--slide');
     if (inertia) inertia.destroy();
   }
 
