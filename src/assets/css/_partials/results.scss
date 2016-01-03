@@ -23,6 +23,7 @@
       position: absolute;
       right: 0;
       top: 0;
+      transform: matrix(1, 0, 0, 1, 0, 0); // using a matrix here so the javascript makes more sense
     }
   }
 }
