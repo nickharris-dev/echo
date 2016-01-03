@@ -9,6 +9,7 @@ define(['require', 'csssupport'], function(require, csssupport){
   var InertiaScroll = function(elem) {
     var t = this;
     t.element = elem;
+    t.max = t.element.offsetWidth - t.element.parentElement.offsetWidth;
 
     function grab(event) {
       var matrix = getComputedStyle(t.element).getPropertyValue('transform');
@@ -61,6 +62,8 @@ define(['require', 'csssupport'], function(require, csssupport){
 
     if (position < 0) {
       x = 0;
+    } else if (position > this.max) {
+      x = this.max;
     } else {
       x = position;
     }
