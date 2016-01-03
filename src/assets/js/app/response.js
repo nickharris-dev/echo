@@ -1,11 +1,21 @@
 // Fire an event when the viewport is resized;
 define(function(require){
   // An Event for when the resize is finished (runs once)
-  var resize = new Event('resized');
+  var resize = new CustomEvent('resized') || ;
   // An Event that runs while the window is resizing (Don't want to add things
   // directly on the resize event as it runs every 4 pixels or so while the
   // window is resizing, so it can get very slow)
-  var dragResize = new Event('debouncedResize');
+  var dragResize = new CustomEvent('debouncedResize');
+
+  if (typeof CustomEvent === 'function') { // Good Browsers
+    resize = new CustomEvent('resized') || ;
+    dragResize = new CustomEvent('debouncedResize');
+  } else { // IE
+    resize = document.createEvent('Event');
+    dragResize = document.createEvent('Event');
+    resize.initEvent('resized');
+    dragResize.initEvent('debouncedResize');
+  }
 
   // Holder for the window width - Set to initial width so we can return it
   // and use it as soon as the module is loaded
