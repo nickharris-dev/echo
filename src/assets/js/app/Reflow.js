@@ -8,8 +8,15 @@ define(function(){
     t.ticking = false;
 
     // Events
-    t.resizeEnd = new Event('resizeEnd');
-    t.debouncedResize = new Event('debouncedResize');
+    if (typeof CustomEvent === 'function') { // Good Browsers
+      t.resizeEnd = new CustomEvent('resizeEnd', {detail: {}});
+      t.debouncedResize = new CustomEvent('debouncedResize', {detail: {}});
+    } else { // IE
+      resizeEnd = document.createEvent('Event');
+      debouncedResize = document.createEvent('Event');
+      resizeEnd.initEvent('resized', true, true, {detail: {}});
+      debouncedResize.initEvent('debouncedResize', true, true, {detail: {}});
+    }
 
     // Initialise
     t.init();
@@ -95,8 +102,8 @@ define(function(){
     onResizeEnd: function(){
       var t = this;
 
-      t.resizeEnd.height = t.element.offsetHeight;
-      t.resizeEnd.width = t.element.offsetWidth;
+      t.resizeEnd.detail.height = t.element.offsetHeight;
+      t.resizeEnd.detail.width = t.element.offsetWidth;
       t.element.dispatchEvent(t.resizeEnd);
     },
 
@@ -112,8 +119,8 @@ define(function(){
       var t = this;
 
       t.ticking = false;
-      t.debouncedResize.height = element.offsetHeight;
-      t.debouncedResize.width = element.offsetWidth;
+      t.debouncedResize.detail.height = element.offsetHeight;
+      t.debouncedResize.detail.width = element.offsetWidth;
       t.element.dispatchEvent(debouncedResize);
     }
 

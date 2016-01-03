@@ -11,10 +11,10 @@ define(function(require){
     resize = new CustomEvent('resized');
     dragResize = new CustomEvent('debouncedResize');
   } else { // IE
-    resize = document.createEvent('CustomEvent');
-    dragResize = document.createEvent('CustomEvent');
-    resize.initCustomEvent('resized');
-    dragResize.initCustomEvent('debouncedResize');
+    resize = document.createEvent('Event');
+    dragResize = document.createEvent('Event');
+    resize.initEvent('resized');
+    dragResize.initEvent('debouncedResize');
   }
 
   // Holder for the window width - Set to initial width so we can return it
