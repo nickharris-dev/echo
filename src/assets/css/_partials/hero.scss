@@ -3,7 +3,6 @@
   background-position: 50% 0;
   background-size: cover;
   color: palette(icewhite);
-  display: flex;
   height: 100-12vh;
   overflow: hidden;
   padding: 0 $gutter;
@@ -31,11 +30,13 @@
   }
 
   h1 {
-    margin: auto;
+    margin: 0;
     max-width: 100%;
     min-width: 0;
-    position: relative;
+    position: absolute;
     text-shadow: 0 0 15px palette(jetblack);
+    top: 50%;
+    transform: translateY(-50%);
     width: 100%;
     z-index: 1;
   }
