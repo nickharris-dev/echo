@@ -11,6 +11,10 @@ define(['require', 'csssupport'], function(require, csssupport){
     t.element = elem;
     t.max = t.element.offsetWidth - t.element.parentElement.offsetWidth;
 
+    if ( getComputedStyle(t.element).getPropertyValue('transform') === 'none') {
+      t.element.style.transform = 'matrix(1, 0, 0, 1, 0, 0)';
+    }
+
     function grab(event) {
       var matrix = getComputedStyle(t.element).getPropertyValue('transform');
       matrix = matrix.slice(7, -1);
