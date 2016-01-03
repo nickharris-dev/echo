@@ -1,7 +1,7 @@
 define(['require', 'csssupport'], function(require, csssupport){
   // Helpers
   var lastKnownX = 0;
-  var offset = 0;
+  var x = 0;
   var pressed = false;
   var reference = 0;
   var ticking = false;
@@ -10,9 +10,31 @@ define(['require', 'csssupport'], function(require, csssupport){
     var t = this;
     t.element = elem;
     t.max = t.element.offsetWidth - t.element.parentElement.offsetWidth;
+    t.matrix = [];
 
     if ( getComputedStyle(t.element).getPropertyValue('transform') === 'none') {
-      t.element.style.transform = 'matrix(1, 0, 0, 1, 0, 0)';
+      var str = 'matrix(';
+
+      t.matrix[0] = 1;
+      t.matrix[1] = 0;
+      t.matrix[2] = 0;
+      t.matrix[3] = 1;
+      t.matrix[4] = 0;
+      t.matrix[5] = 0;
+
+      str += t.matrix[0];
+      str += ', ' + t.matrix[1];
+      str += ', ' + t.matrix[2];
+      str += ', ' + t.matrix[3];
+      str += ', ' + t.matrix[4];
+      str += ', ' + t.matrix[5];
+      str += ')';
+
+      t.element.style.transform = str;
+    } else {
+      var matrix = getComputedStyle(t.element).getPropertyValue('transform');
+      matrix = matrix.slice(7, -1);
+      t.matrix = matrix.split(',');
     }
 
     function grab(event) {
@@ -21,7 +43,7 @@ define(['require', 'csssupport'], function(require, csssupport){
       matrix = matrix.split(',');
 
       pressed = true;
-      offset = parseFloat(matrix[4]);
+      x = parseFloat(matrix[4]);
       reference = event.touches[0].clientX;
     }
 
@@ -47,7 +69,7 @@ define(['require', 'csssupport'], function(require, csssupport){
       if (pressed) {
         delta = reference - lastKnownX;
         if (delta > 2 || delta < -2) {
-          t.updatePosition(offset - delta);
+          t.updatePosition(x - delta);
         }
       }
       return false;
@@ -62,17 +84,27 @@ define(['require', 'csssupport'], function(require, csssupport){
   };
 
   InertiaScroll.prototype.updatePosition = function (position) {
+    var t = this;
+    var str = 'matrix(';
     var x;
 
     if (position < 0) {
       x = 0;
-    } else if (position > this.max) {
-      x = this.max;
+    } else if (position > t.max) {
+      x = t.max;
     } else {
       x = position;
     }
 
-    this.element.style.transform = 'matrix(1, 0, 0, 1, ' + x + ', 0)';
+    str += t.matrix[0];
+    str += ', ' + t.matrix[1];
+    str += ', ' + t.matrix[2];
+    str += ', ' + t.matrix[3];
+    str += ', ' + x;
+    str += ', ' + t.matrix[5];
+    str += ')';
+
+    t.element.style.transform = str;
   };
 
   return InertiaScroll;
