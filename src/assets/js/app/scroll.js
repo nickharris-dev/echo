@@ -2,9 +2,23 @@ define(['require'], function(){
   // Throttle scroll
 
   // Events
-  var scrollEnd = new Event('scrollEnd');
-  var debouncedScroll = new Event('debouncedScroll');
-  debouncedScroll.position = {};
+  var scrollEnd;
+  var debouncedScroll;
+  var eventDetail = {
+    detail: {
+      position: {}
+    }
+  };
+
+  if (typeof CustomEvent === 'function') { // Good browsers
+    scrollEnd = new CustomEvent('scrollEnd', eventDetail);
+    debouncedScroll = new CustomEvent('debouncedScroll', eventDetail);
+  } else { // Not good browsers
+    scrollEnd = document.createEvent('Event');
+    debouncedScroll = document.createEvent('Event');
+    scrollEnd.initEvent('scrollEnd', true, true, eventDetail);
+    debouncedScroll.initEvent('debouncedScroll', true, true, eventDetail);
+  }
 
   // Helpers
   var lastKnownY = 0;
@@ -25,7 +39,7 @@ define(['require'], function(){
   function update() {
     ticking = false;
 
-    debouncedScroll.position.y = lastKnownY;
+    debouncedScroll.detail.position.y = lastKnownY;
     window.dispatchEvent(debouncedScroll);
   }
 
