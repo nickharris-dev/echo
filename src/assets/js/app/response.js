@@ -13,8 +13,8 @@ define(function(require){
   } else { // IE
     resize = document.createEvent('CustomEvent');
     dragResize = document.createEvent('CustomEvent');
-    resize.initEvent('resized');
-    dragResize.initEvent('debouncedResize');
+    resize.initCustomEvent('resized');
+    dragResize.initCustomEvent('debouncedResize');
   }
 
   // Holder for the window width - Set to initial width so we can return it
