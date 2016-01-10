@@ -34,7 +34,7 @@
 	</section>
 
 	<section class="intro" itemprop="articleBody">
-		<?php the_content();?>
+		<div class="intro__wrapper"><?php the_content();?></div>
 	</section>
 
 <?php endwhile; endif; ?>

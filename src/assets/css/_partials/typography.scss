@@ -300,12 +300,10 @@ a {
 .intro {
   background-color: palette(claret);
   color: palette(icewhite);
-  display: flex;
-  flex-flow: column;
   height: 100-12vh;
-  justify-content: center;
   margin-bottom: rem($baseline);
-  padding: 0 $column;
+  padding: 0;
+  position: relative;
   text-align: center;
 
   @media (min-height: rem(400)) {
@@ -328,6 +326,15 @@ a {
 
   @media (min-width: rem(1000)) {
     @include type-scale(6, 1.5);
+  }
+
+  &__wrapper {
+    left: 50%;
+    max-width: 38em;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 1.5rem);
   }
 
   p {
