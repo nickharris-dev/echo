@@ -22,71 +22,73 @@
 			<h1 class="fixture__title" itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
 		</header>
 
-		<section class="fixture__introduction">
-			<?php the_field('introduction'); ?>
-		</section>
+		<main class="fixture__content">
+			<section class="fixture__introduction">
+				<?php the_field('introduction'); ?>
+			</section>
 
-		<?php if( have_rows('games') ): ?>
-		<section class="fixture__schedule">
-			<h2>Schedule</h2>
-			<table>
-				<thead>
+			<?php if( have_rows('games') ): ?>
+			<section class="fixture__schedule">
+				<h2>Schedule</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Start</th>
+							<th>Home</th>
+							<th>Away</th>
+							<th>Officiating</th>
+						</tr>
+					</thead>
+				<?php while ( have_rows('games') ) : the_row(); ?>
 					<tr>
-						<th>Start Time</th>
-						<th>Home Team</th>
-						<th>Away Team</th>
-						<th>Officiating</th>
+						<td><?php if( get_sub_field('start_time') == 'TBC' ) ?><abbr class="acronym" title="To be confirmed">tbc</abbr></td>
+						<td>
+							<?php if( get_sub_field('responsibility') == 'the Home Team'): ?>
+								<abbr title="Manchester Crows">Crows</abbr>
+							<?php else:
+								$teams = get_sub_field('home_team');
+								if( $teams ):
+									foreach( $teams as $post):
+										setup_postdata($post);?>
+											<abbr title="<?php the_title(); ?>"><?php the_field('team_name'); ?></abbr>
+								<?php endforeach; wp_reset_postdata(); endif; ?>
+							<?php endif; ?>
+						</td>
+						<td>
+							<?php if( get_sub_field('responsibility') == 'the Away Team'): ?>
+								<abbr title="Manchester Crows">Crows</abbr>
+							<?php else:
+								$teams = get_sub_field('away_team');
+								if( $teams ):
+									foreach( $teams as $post):
+										setup_postdata($post);?>
+											<abbr title="<?php the_title(); ?>"><?php the_field('team_name'); ?></abbr>
+								<?php endforeach; wp_reset_postdata(); endif; ?>
+							<?php endif; ?>
+						</td>
+						<td>
+							<?php if( get_sub_field('responsibility') == 'Officiating'): ?>
+								Crows
+							<?php else:
+								 the_sub_field('officiating'); ?>
+							<?php endif; ?>
+						</td>
 					</tr>
-				</thead>
-			<?php while ( have_rows('games') ) : the_row(); ?>
-				<tr>
-					<td><?php if( get_sub_field('start_time') == 'TBC' ) ?><abbr class="acronym" title="To be confirmed">tbc</abbr></td>
-					<td>
-						<?php if( get_sub_field('responsibility') == 'the Home Team'): ?>
-							Manchester Crows
-						<?php else:
-							$teams = get_sub_field('home_team');
-							if( $teams ):
-								foreach( $teams as $post):
-									setup_postdata($post);?>
-										<?php the_title(); ?>
-							<?php endforeach; wp_reset_postdata(); endif; ?>
-						<?php endif; ?>
-					</td>
-					<td>
-						<?php if( get_sub_field('responsibility') == 'the Away Team'): ?>
-							Manchester Crows
-						<?php else:
-							$teams = get_sub_field('away_team');
-							if( $teams ):
-								foreach( $teams as $post):
-									setup_postdata($post);?>
-										<?php the_title(); ?>
-							<?php endforeach; wp_reset_postdata(); endif; ?>
-						<?php endif; ?>
-					</td>
-					<td>
-						<?php if( get_sub_field('responsibility') == 'Officiating'): ?>
-							Crows
-						<?php else:
-							 the_sub_field('officiating'); ?>
-						<?php endif; ?>
-					</td>
-				</tr>
-			<?php endwhile; ?>
-			</table>
-		</section>
-	<?php endif; ?>
+				<?php endwhile; ?>
+				</table>
+			</section>
+		<?php endif; ?>
 
-		<section class="fixture__instructions">
-			<h2>Player Information</h2>
-			<?php the_field('player_instructions'); ?>
-		</section>
+			<section class="fixture__instructions">
+				<h2>Player Information</h2>
+				<?php the_field('player_instructions'); ?>
+			</section>
 
-		<section class="fixture__spectators">
-			<h2>Spectators</h2>
-			<?php the_field('spectators'); ?>
-		</section>
+			<section class="fixture__spectators">
+				<h2>Spectators</h2>
+				<?php the_field('spectators'); ?>
+			</section>
+		</main>
 	</article>
 
 <?php get_footer(); ?>
