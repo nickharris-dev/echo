@@ -1,0 +1,21 @@
+.fixture {
+  &__content {
+    padding: 0 $column;
+  }
+
+  &__instructions {
+    ul {
+      margin-top: rem(-1*$baseline);
+    }
+  }
+
+  &__schedule {
+    table {
+      tr:nth-of-type(odd) {
+        td {
+          background-color: palette(neutral, verylight);
+        }
+      }
+    }
+  }
+}
