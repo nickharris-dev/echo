@@ -82,7 +82,7 @@ nodeLoop(document.querySelectorAll('[data-eq]'), eq, false);
 
 // Training
 // ========
-if (document.getElementById('Training') || document.getElementById('Location')) require(['training']);
+if (document.getElementById('Training') || document.getElementById('Location')) require(['location']);
 
 // Frontpage News
 if (document.getElementById('News') && parseFloat(document.getElementById('News').getAttribute('data-posts')) > 3) require(['frontpagenews']);
