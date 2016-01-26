@@ -2,6 +2,11 @@
   @include clearfix();
   position: relative;
 
+  &--fixture {
+    margin-left: -1*$column;
+    margin-right: -1*$column;
+  }
+
   h1 {
     @include type-scale(8, 2);
     margin: 0 auto;

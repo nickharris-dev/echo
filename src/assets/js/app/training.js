@@ -2,6 +2,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
   var activeClass = 'location__trigger--active';
   var processingClass = 'location__trigger--processing';
   var training = document.getElementById('Training');
+  var location = document.getElementById('Location');
   var directionsService = new google.maps.DirectionsService();
   var maps = {};
 
@@ -400,8 +401,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
     button.setAttribute('data-url', str);
   }
 
-  function init(){
-    var sessions = training.querySelectorAll('.location__detail');
+  function process(sessions){
     var i = 0;
     var n = sessions.length;
 
@@ -411,7 +411,11 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
       googleButtonListener(sessions[i]);
       directionsListeners(sessions[i]);
     }
+  }
 
+  function init(){
+    if (training) process(training.querySelectorAll('.location__detail'));
+    if (location) process(location.querySelectorAll('.location__detail'));
   }
 
   return init();

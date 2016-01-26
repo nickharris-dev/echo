@@ -8,7 +8,7 @@
       $rowis = 'odd';
     }
     $count = 0; ?>
-  <section class="location location--<?php echo $rowis; ?>" id="Training">
+  <section class="location location--<?php echo $rowis; ?> location--training" id="Training">
     <h1 class="location__heading">
       Train with us
     </h1>
