@@ -20,6 +20,12 @@
 	<article id="fixture-<?php the_ID(); ?>" class="fixture">
 		<header class="fixture__header">
 			<h1 class="fixture__title" itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
+			<p class="fixture__date">
+				<?php
+					$date = DateTime::createFromFormat('Ymd', get_field('date'));
+					echo $date->format('D, jS F Y');
+				?>
+			</p>
 		</header>
 
 		<main class="fixture__content">
@@ -30,7 +36,7 @@
 			<?php if( have_rows('games') ): ?>
 			<section class="fixture__schedule">
 				<h2>Schedule</h2>
-				<table>
+				<table cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
 							<th>Start</th>
@@ -82,6 +88,14 @@
 			<section class="fixture__instructions">
 				<h2>Player Information</h2>
 				<?php the_field('player_instructions'); ?>
+				<ul>
+					<li>Your Crows kit</li>
+					<li>Cleats suitable for <?php the_field('surface'); ?></li>
+					<li>Food</li>
+					<li>Plenty of water</li>
+					<li>Something warm and waterproof for the sideline</li>
+					<li>A change of clothes</li>
+				</ul>
 			</section>
 
 			<section class="fixture__spectators">
