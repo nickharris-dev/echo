@@ -8,11 +8,11 @@
       $rowis = 'odd';
     }
     $count = 0; ?>
-  <section class="training training--<?php echo $rowis; ?>" id="Training">
-    <h1 class="training__heading">
+  <section class="location location--<?php echo $rowis; ?>" id="Training">
+    <h1 class="location__heading">
       Train with us
     </h1>
-    <div class="training__wrapper">
+    <div class="location__wrapper">
       <?php while( have_rows('training', $page_id) ): the_row();
         // vars
         $venue_name = get_sub_field('venue_name');
@@ -22,12 +22,12 @@
         $venue_lng = get_sub_field('venue_lng');
       ?>
 
-      <article class="training__session" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="Map<?php echo $count; ?>" data-eq="stacked:(min-width: 45rem)">
-        <div class="training__info">
+      <article class="location__detail" data-lat="<?php echo $venue_lat; ?>" data-lng="<?php echo $venue_lng; ?>" id="Map<?php echo $count; ?>" data-eq="stacked:(min-width: 45rem)">
+        <div class="location__info">
           <?php if (have_rows('team')):
             while( have_rows('team') ): the_row();
           ?>
-            <section class="training__team">
+            <section class="location__team">
               <h1><?php $team = get_sub_field('team'); echo $team->name; ?></h1>
               <?php if (have_rows('sessions')):
                 while( have_rows('sessions') ): the_row();
@@ -52,7 +52,7 @@
                   $next_session = false;
                 }
               ?>
-                <h3 class="training__day"><?php echo $day; ?>s</h3>
+                <h3 class="location__day"><?php echo $day; ?>s</h3>
                 <time><i class="hour"><?php echo $start; ?></i> to <i class="hour"><?php echo $end; ?></i></time><br>
 
                 <?php if ($next_session || $next_start || $next_end) : ?>
@@ -77,15 +77,15 @@
             </section>
             <?php endwhile;
               endif; ?>
-            <section class="training__location">
-          <h1 class="training__venue"><?php echo $venue_name; ?></h1>
+            <section class="location__location">
+          <h1 class="location__venue"><?php echo $venue_name; ?></h1>
           <address>
             <?php echo $venue_address; ?>,
             <i class="postcode"><?php echo $venue_postcode; ?></i>
           </address>
           <h2>Directions</h2>
-          <menu class="training__directions">
-            <li class="training__trigger" data-type="geo">From where you are</li>
+          <menu class="location__directions">
+            <li class="location__trigger" data-type="geo">From where you are</li>
             <?php
               $trams = [];
               $trains = [];
@@ -109,7 +109,7 @@
               endif; ?>
               <?php if (sizeof($trams) > 0): ?>
 
-                <li class="training__trigger" data-locations="
+                <li class="location__trigger" data-locations="
                 <?php for ($i = 0; $i < count($trams); $i++): ?>
                   <?php $tramstop = $trams[$i];
                     if ($i > 0): ?>,<?php endif; ?>
@@ -123,7 +123,7 @@
               <?php endif;
                 if (sizeof($trains) > 0): ?>
 
-                <li class="training__trigger" data-locations="
+                <li class="location__trigger" data-locations="
                 <?php for ($i = 0; $i < count($trains); $i++): ?>
                   <?php $trainstation = $trains[$i];
                     if ($i > 0): ?>,<?php endif; ?>
@@ -137,7 +137,7 @@
               <?php endif;
                 if (sizeof($buses) > 0): ?>
 
-                <li class="training__trigger" data-locations="
+                <li class="location__trigger" data-locations="
                 <?php for ($i = 0; $i < count($buses); $i++): ?>
                   <?php $busstop = $buses[$i];
                     if ($i > 0): ?>,<?php endif; ?>
@@ -149,21 +149,21 @@
                 <?php endfor; ?>" data-type="bus">From the Nearest Bus Stop<?php if (count($buses) > 1): ?>s<?php endif; ?></li>
 
               <?php endif; ?>
-              <li class="training__postcode" data-type="postcode">
+              <li class="location__postcode" data-type="postcode">
                 <form>
                   <input id="PostcodeInput" placeholder="From Postcode" type="text">
                   <button>&gt;</button>
                 </form>
               </li>
             </menu>
-            <button class="training__google">Open in Google Maps</button>
+            <button class="location__google">Open in Google Maps</button>
             </section>
           </div>
-          <div class="training__map"></div>
+          <div class="location__map"></div>
         </article>
         <?php if ($count > 0 && $count % 2 != 0): ?>
           </div>
-          <div class="training__wrapper">
+          <div class="location__wrapper">
         <?php endif; ?>
       <?php $count++; endwhile; ?>
     </div>

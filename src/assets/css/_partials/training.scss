@@ -1,4 +1,4 @@
-.training {
+.location {
   @include clearfix();
   position: relative;
 
@@ -215,7 +215,7 @@
     background: palette(neutral, verylight);
 
     &:first-of-type {
-      .training__session:first-of-type {
+      .location__detail:first-of-type {
         padding-top: rem(4*$baseline);
       }
     }
@@ -225,14 +225,14 @@
       flex-flow: row wrap;
 
       &:first-of-type {
-        .training__session {
+        .location__detail {
           padding-top: rem(4*$baseline);
         }
       }
     }
   }
 
-  &__session {
+  &__detail {
     border-bottom: rem(3) solid palette(icewhite);
     padding: rem(2*$baseline) rem($baseline) rem(15*$baseline);
     position: relative;

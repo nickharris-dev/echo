@@ -1,12 +1,12 @@
 define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRffT8sStG1kBc5v9u0QE10hcEAvK7dk'], function(require, config, idFactory, classes, findAncestor){
-  var activeClass = 'training__trigger--active';
-  var processingClass = 'training__trigger--processing';
+  var activeClass = 'location__trigger--active';
+  var processingClass = 'location__trigger--processing';
   var training = document.getElementById('Training');
   var directionsService = new google.maps.DirectionsService();
   var maps = {};
 
   function mapFactory(session) {
-    var mapDiv = session.querySelectorAll('.training__map')[0];
+    var mapDiv = session.querySelectorAll('.location__map')[0];
     var ID = idFactory(session);
     var lat = parseFloat(session.getAttribute('data-lat'));
     var lng = parseFloat(session.getAttribute('data-lng'));
@@ -48,7 +48,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
 
     // Drop the training marker
     // ===============
-    maps[ID].markers.training = new google.maps.Marker({
+    maps[ID].markers.location = new google.maps.Marker({
       clickable: false,
       position: location,
       map: map
@@ -79,8 +79,8 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
     var paddingBottom = parseFloat(getComputedStyle(session)['padding-bottom']);
     var paddingLeft = parseFloat(getComputedStyle(session)['padding-left']);
     var paddingTop = parseFloat(getComputedStyle(session)['padding-top']);
-    var height = session.querySelectorAll('.training__info')[0].offsetHeight;
-    var width = session.querySelectorAll('.training__info')[0].offsetWidth;
+    var height = session.querySelectorAll('.location__info')[0].offsetHeight;
+    var width = session.querySelectorAll('.location__info')[0].offsetWidth;
 
     function showInfo() {
       var i = 0;
@@ -129,15 +129,15 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
   }
 
   function directionsListeners(session) {
-    var menuItems = session.querySelectorAll('.training__directions li');
-    var postCodeForm = session.querySelectorAll('.training__directions form')[0];
+    var menuItems = session.querySelectorAll('.location__directions li');
+    var postCodeForm = session.querySelectorAll('.location__directions form')[0];
     var i = 0;
     var n = menuItems.length;
 
     // Geo Location Detection
     // ======================
-    if (!navigator.geolocation && session.querySelectorAll('.training__directions [data-type="geo"]').length > 0) {
-      var geo = session.querySelectorAll('.training__directions [data-type="geo"]')[0];
+    if (!navigator.geolocation && session.querySelectorAll('.location__directions [data-type="geo"]').length > 0) {
+      var geo = session.querySelectorAll('.location__directions [data-type="geo"]')[0];
       geo.parentNode.removeChild(geo);
     }
 
@@ -163,7 +163,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
       var label = document.createElement('label');
       label.setAttribute('id', 'PostcodeMessage');
       label.setAttribute('for', 'PostcodeInput');
-      label.setAttribute('class', 'training__message');
+      label.setAttribute('class', 'location__message');
       postCodeForm.appendChild(label);
 
       postCodeForm.addEventListener('submit', function(event){
@@ -174,7 +174,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
   }
 
   function calculateByFoot(menuItem) {
-    var session = findAncestor(menuItem, 'training__session');
+    var session = findAncestor(menuItem, 'location__detail');
     var ID = idFactory(session);
 
     var locationData = menuItem.getAttribute('data-locations').replace(/'/g,'"');
@@ -211,7 +211,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
   }
 
   function calculateGeo(menuItem)  {
-    var session = findAncestor(menuItem, 'training__session');
+    var session = findAncestor(menuItem, 'location__detail');
     var ID = idFactory(session);
 
     classes.add(menuItem, processingClass);
@@ -260,12 +260,12 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
 
     function bad(str) {
       var message = document.createTextNode(str || 'Enter a Valid Postcode');
-      var label = session.querySelectorAll('.training__directions .training__message')[0];
+      var label = session.querySelectorAll('.location__directions .location__message')[0];
 
       label.innerHTML = '';
 
       label.appendChild(message);
-      classes.add(label, 'training__message--error');
+      classes.add(label, 'location__message--error');
       googleLinkFactory(session);
     }
 
@@ -303,7 +303,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
     maps[ID].bounds.extend(maps[ID].location);
 
     function clearClasses() {
-      var menuItems = maps[ID].session.querySelectorAll('.training__directions li');
+      var menuItems = maps[ID].session.querySelectorAll('.location__directions li');
       var i = 0;
       var n = menuItems.length;
 
@@ -376,7 +376,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
   }
 
   function googleButtonListener(session) {
-    var button = session.querySelectorAll('.training__google')[0];
+    var button = session.querySelectorAll('.location__google')[0];
 
     function openGoogle(event) {
       event.preventDefault();
@@ -386,7 +386,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
   }
 
   function googleLinkFactory(session, from, travelMode) {
-    var button = session.querySelectorAll('.training__google')[0];
+    var button = session.querySelectorAll('.location__google')[0];
     var daddrLat = session.getAttribute('data-lat');
     var daddrLng = session.getAttribute('data-lng');
     var daddr = 'daddr=' + daddrLat + ',' + daddrLng;
@@ -401,7 +401,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
   }
 
   function init(){
-    var sessions = training.querySelectorAll('.training__session');
+    var sessions = training.querySelectorAll('.location__detail');
     var i = 0;
     var n = sessions.length;
 
