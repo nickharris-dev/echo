@@ -1,4 +1,45 @@
 .fixture {
+  &__header {
+    position: relative;
+  }
+
+  &__pic {
+    margin: 0;
+  }
+
+  &__hgroup {
+    padding-left: $column;
+    padding-right: $column;
+
+    &--type-break {
+      bottom: 0;
+      color: palette(icewhite);
+      position: absolute;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  &__title {
+    margin-bottom: 0;
+
+    .type-break & {
+      @include type-scale(10, 2);
+      margin-bottom: rem($baseline/2);
+    }
+  }
+
+  &__date {
+    @include type-scale(5, 1);
+    margin-top: 0;
+    max-width: 25.333333333em;
+
+    .type-break & {
+      @include type-scale(6, 1);
+      max-width: 25.333333333em;
+    }
+  }
+
   &__content {
     padding: 0 $column;
   }
