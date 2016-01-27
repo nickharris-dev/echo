@@ -63,7 +63,10 @@ define(function(){
       // Create styles for the object, if they don't already exist
       if (!document.getElementById('ReflowStyle')) {
         var style = document.createElement('style');
-        var css =  '.reflowObject {';
+        var css =  '.reflowContainer {';
+            css += 'overflow:hidden;';
+            css += '}';
+            css += '.reflowObject {';
             css += 'display:block;';
             css += 'height:100%;';
             css += 'left:0;';
@@ -84,6 +87,8 @@ define(function(){
         }
         document.head.appendChild(style);
       }
+      // Add the reflowContainer class to the queried element
+      t.element.classList.add('reflowContainer');
       // Append the object element to the queried element
       t.element.appendChild(t.obj);
     },
