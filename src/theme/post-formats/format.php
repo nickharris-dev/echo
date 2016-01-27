@@ -14,7 +14,7 @@
                 */
               ?>
 
-              <article id="post-<?php the_ID(); ?>" class="post" role="article" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
+              <article id="post-<?php the_ID(); ?>" class="post" role="article" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting" data-type-break="28rem">
 
                 <header class="post__header">
 
