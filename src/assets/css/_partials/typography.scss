@@ -18,10 +18,6 @@ main {
   padding: 0;
 }
 
-.type-break {
-  @include type-scale(4, 1);
-}
-
 // Headings
 // ========
 h1, h2, h3, h4, h5, h6 {
