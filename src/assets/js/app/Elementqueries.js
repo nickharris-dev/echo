@@ -1,4 +1,4 @@
-define(['require', 'config', 'Reflow', 'classes'], function(require, config, Reflow, classes){
+define(['require', 'config', 'Reflow'], function(require, config, Reflow){
   // min-width, max-width, min-height, max-height
   // Example value: linear:(min-width:600px) and (max-width:700px),test:(max-height:150px)
 
@@ -181,7 +181,7 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
 
       breakpoint.active = true;
 
-      classes.add(t.element, breakpoint.className);
+      t.element.classList.add(breakpoint.className);
 
       t.breakpointEvent.detail.active = true;
       t.breakpointEvent.detail.breakpoint = breakpoint;
@@ -195,7 +195,7 @@ define(['require', 'config', 'Reflow', 'classes'], function(require, config, Ref
 
       breakpoint.active = false;
 
-      classes.remove(t.element, breakpoint.className);
+      t.element.classList.remove(breakpoint.className);
 
       t.breakpointEvent.detail.active = false;
       t.breakpointEvent.detail.breakpoint = breakpoint;
