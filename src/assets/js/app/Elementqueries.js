@@ -182,6 +182,7 @@ define(['require', 'config', 'Reflow'], function(require, config, Reflow){
       breakpoint.active = true;
 
       t.element.classList.add(breakpoint.className);
+      if (breakpoint.className.substr(breakpoint.className.length - 10) === 'type-break') t.element.classList.add('type-break');
 
       t.breakpointEvent.detail.active = true;
       t.breakpointEvent.detail.breakpoint = breakpoint;
@@ -196,6 +197,7 @@ define(['require', 'config', 'Reflow'], function(require, config, Reflow){
       breakpoint.active = false;
 
       t.element.classList.remove(breakpoint.className);
+      if (breakpoint.className.substr(breakpoint.className.length - 10) === 'type-break') t.element.classList.remove('type-break');
 
       t.breakpointEvent.detail.active = false;
       t.breakpointEvent.detail.breakpoint = breakpoint;
