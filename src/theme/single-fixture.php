@@ -31,7 +31,7 @@
 			    <?php print_r($pic['news_feature-3000']); ?> <?php print_r($pic['news_feature-3000-width']); ?>w"
 			></figure>
 
-			<div class="fixture__hgroup" data-type-break="28rem">
+			<div class="fixture__hgroup">
 				<h1 class="fixture__title" itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
 				<p class="fixture__date">
 					<?php
@@ -43,89 +43,112 @@
 		</header>
 
 		<main class="fixture__content">
-			<section class="fixture__introduction">
+			<section class="fixture__intro">
 				<?php the_field('introduction'); ?>
 			</section>
 
-			<?php if( have_rows('games') ): ?>
-				<section class="fixture__schedule">
-					<h2>Schedule</h2>
-					<table cellspacing="0" cellpadding="0">
-						<thead>
-							<tr>
-								<th>Start</th>
-								<th>Home</th>
-								<th>Away</th>
-								<th>Officiating</th>
-							</tr>
-						</thead>
-					<?php while ( have_rows('games') ) : the_row(); ?>
-						<tr>
-							<td>
-								<?php if( get_sub_field('start_time') == 'TBC' ): ?>
-									<abbr class="acronym" title="To be confirmed">tbc</abbr></td>
-								<?php else: ?>
-									<?php the_sub_field('start_time'); ?>
-								<?php endif; ?>
-							<td>
-								<?php if( get_sub_field('responsibility') == 'the Home Team'): ?>
-									<abbr title="Manchester Crows">Crows</abbr>
-								<?php else:
-									$teams = get_sub_field('home_team');
-									if( $teams ):
-										foreach( $teams as $post):
-											setup_postdata($post);?>
-												<abbr title="<?php the_title(); ?>"><?php the_field('team_name'); ?></abbr>
-									<?php endforeach; wp_reset_postdata(); endif; ?>
-								<?php endif; ?>
-							</td>
-							<td>
-								<?php if( get_sub_field('responsibility') == 'the Away Team'): ?>
-									<abbr title="Manchester Crows">Crows</abbr>
-								<?php else:
-									$teams = get_sub_field('away_team');
-									if( $teams ):
-										foreach( $teams as $post):
-											setup_postdata($post);?>
-												<abbr title="<?php the_title(); ?>"><?php the_field('team_name'); ?></abbr>
-									<?php endforeach; wp_reset_postdata(); endif; ?>
-								<?php endif; ?>
-							</td>
-							<td>
-								<?php if( get_sub_field('responsibility') == 'Officiating'): ?>
-									Crows
-								<?php else:
-									 the_sub_field('officiating'); ?>
-								<?php endif; ?>
-							</td>
-						</tr>
-					<?php endwhile; ?>
-					</table>
+			<div class="fixture__layout">
+
+				<section class="fixture__information">
+					<h2>Key Information</h2>
+					<dl>
+						<dt>Event Type</dt>
+						<dd><?php the_field('type'); ?></dd>
+						<dt>Indoor / Outdoor</dt>
+						<dd>
+							<?php if (get_field('indooroutdoor')): ?><?php the_field('indooroutdoor'); ?><?php else: ?>Unknown<?php endif; ?>
+						</dd>
+						<dt>Playing Surface</dt>
+						<dd>
+							<?php if (get_field('surface')): ?><?php the_field('surface'); ?><?php else: ?>Unknown<?php endif; ?>
+						</dd>
+						<dt>Parking</dt>
+						<dd>
+							<?php if (get_field('parking')): ?><?php the_field('parking'); ?><?php else: ?>Unknown<?php endif; ?>
+						</dd>
+					</dl>
 				</section>
-			<?php endif; ?>
 
-			<section class="fixture__instructions">
-				<h2>Player Information</h2>
-				<?php the_field('player_instructions'); ?>
-				<ul>
-					<li>Your Crows kit</li>
-					<li>Cleats suitable for <?php the_field('surface'); ?></li>
-					<li>Food</li>
-					<li>Plenty of water</li>
-					<li>Something warm and waterproof for the sideline</li>
-					<li>A change of clothes</li>
-				</ul>
-			</section>
+				<?php if( have_rows('games') ): ?>
+					<section class="fixture__schedule">
+						<h2>Schedule</h2>
+						<table cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<th>Start</th>
+									<th>Home</th>
+									<th>Away</th>
+									<th>Officiating</th>
+								</tr>
+							</thead>
+						<?php while ( have_rows('games') ) : the_row(); ?>
+							<tr>
+								<td>
+									<?php if( get_sub_field('start_time') == 'TBC' ): ?>
+										<abbr class="acronym" title="To be confirmed">tbc</abbr></td>
+									<?php else: ?>
+										<?php the_sub_field('start_time'); ?>
+									<?php endif; ?>
+								<td>
+									<?php if( get_sub_field('responsibility') == 'the Home Team'): ?>
+										<abbr title="Manchester Crows">Crows</abbr>
+									<?php else:
+										$teams = get_sub_field('home_team');
+										if( $teams ):
+											foreach( $teams as $post):
+												setup_postdata($post);?>
+													<abbr title="<?php the_title(); ?>"><?php the_field('team_name'); ?></abbr>
+										<?php endforeach; wp_reset_postdata(); endif; ?>
+									<?php endif; ?>
+								</td>
+								<td>
+									<?php if( get_sub_field('responsibility') == 'the Away Team'): ?>
+										<abbr title="Manchester Crows">Crows</abbr>
+									<?php else:
+										$teams = get_sub_field('away_team');
+										if( $teams ):
+											foreach( $teams as $post):
+												setup_postdata($post);?>
+													<abbr title="<?php the_title(); ?>"><?php the_field('team_name'); ?></abbr>
+										<?php endforeach; wp_reset_postdata(); endif; ?>
+									<?php endif; ?>
+								</td>
+								<td>
+									<?php if( get_sub_field('responsibility') == 'Officiating'): ?>
+										Crows
+									<?php else:
+										 the_sub_field('officiating'); ?>
+									<?php endif; ?>
+								</td>
+							</tr>
+						<?php endwhile; ?>
+						</table>
+					</section>
+				<?php endif; ?>
 
-			<section class="fixture__spectators">
-				<h2>Spectators</h2>
-				<?php the_field('spectators'); ?>
-			</section>
+				<section class="fixture__instructions">
+					<h2>Player Information</h2>
+					<?php the_field('player_instructions'); ?>
+					<ul>
+						<li>Your Crows kit</li>
+						<li>Suitable cleats</li>
+						<li>Food</li>
+						<li>Plenty of water</li>
+						<li>Something warm and waterproof for the sideline</li>
+						<li>A change of clothes</li>
+					</ul>
+				</section>
+
+				<section class="fixture__spectators">
+					<h2>Spectators</h2>
+					<?php the_field('spectators'); ?>
+				</section>
+			</div>
 		</main>
 
 		<?php
 		  if( have_rows('location') ): ?>
-		  <section class="location location--fixture" id="Location">
+		  <section class="fixture__location location" id="Location">
 	      <?php while( have_rows('location') ): the_row();
 	        // vars
 	        $venue_name = get_sub_field('venue_name');

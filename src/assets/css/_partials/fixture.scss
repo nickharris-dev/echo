@@ -4,14 +4,18 @@
   }
 
   &__pic {
-    margin: 0;
+    margin: 0 0 rem($baseline);
+
+    @media (min-width: 38rem) {
+      margin-bottom: rem(3*$baseline);
+    }
   }
 
   &__hgroup {
     padding-left: $column;
     padding-right: $column;
 
-    &--type-break {
+    @media (min-width: 38rem) {
       bottom: 0;
       color: palette(icewhite);
       position: absolute;
@@ -23,7 +27,7 @@
   &__title {
     margin-bottom: 0;
 
-    .type-break & {
+    @media (min-width: 38rem) {
       @include type-scale(10, 2);
       margin-bottom: rem($baseline/2);
     }
@@ -34,7 +38,7 @@
     margin-top: 0;
     max-width: 25.333333333em;
 
-    .type-break & {
+    @media (min-width: 38rem) {
       @include type-scale(6, 1);
       max-width: 25.333333333em;
     }
@@ -44,18 +48,99 @@
     padding: 0 $column;
   }
 
+  &__intro {
+    @media (min-width: 38rem) {
+      @include type-scale(5, 1.5);
+      margin-bottom: rem(4*$baseline);
+    }
+  }
+
+  &__layout {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    @media (min-width: 56rem) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__information {
+    @media (min-width: 56rem) {
+      order: 2;
+      width: calc(45.833333333% - .75rem);
+    }
+
+    dl {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    dt {
+      flex-basis: 40%;
+      font-weight: 400;
+      letter-spacing: 0;
+      padding-right: rem(6);
+      text-transform: none;
+      width: 40%;
+
+      &:nth-of-type(even) {
+        background: palette(neutral, verylight);
+      }
+    }
+
+    dd {
+      flex-basis: 60%;
+      font-weight: 700;
+      margin-left: 0;
+      padding-left: rem(6);
+      width: 60%;
+
+      &:nth-of-type(even) {
+        background: palette(neutral, verylight);
+      }
+    }
+  }
+
   &__instructions {
+    @media (min-width: 56rem) {
+      order: 3;
+      width: calc(45.833333333% - .75rem);
+    }
+
     ul {
       margin-top: rem(-1*$baseline);
     }
   }
 
   &__schedule {
+    @media (min-width: 56rem) {
+      order: 1;
+      width: calc(54.166666667% - .75rem);
+    }
+
     table {
       tr:nth-of-type(odd) {
         td {
           background-color: palette(neutral, verylight);
         }
+      }
+    }
+  }
+
+  &__spectators {
+    @media (min-width: 56rem) {
+      order: 4;
+      width: calc(54.166666667% - .75rem);
+    }
+  }
+
+  &__location {
+    .location {
+      &__detail--stacked {
+        padding-bottom: rem(10*$baseline);
       }
     }
   }
