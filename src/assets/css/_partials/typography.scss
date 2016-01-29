@@ -294,23 +294,11 @@ a {
 // Intro
 // =====
 .intro {
-  background-color: palette(claret);
-  color: palette(icewhite);
-  height: 100-12vh;
+  color: palette(claret);
   margin-bottom: rem($baseline);
-  padding: 0;
+  padding: rem(2*$baseline) 0 rem(3*$baseline);
   position: relative;
   text-align: center;
-
-  @media (min-height: rem(400)) {
-    height: 100-10vh;
-  }
-  @media (min-height: rem(600)) {
-    height: 100-8vh;
-  }
-  @media (min-height: rem(800)) {
-    height: 100-6vh;
-  }
 
   @media (min-width: rem(600)) {
     @include type-scale(4, 1);
@@ -322,20 +310,6 @@ a {
 
   @media (min-width: rem(1000)) {
     @include type-scale(6, 1.5);
-  }
-
-  &__wrapper {
-    left: 50%;
-    max-width: 38em;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: calc(100% - 1.5rem);
-  }
-
-  p {
-    margin: rem($baseline/2) auto;
-    min-width: 0;
   }
 
   &__buttons {
