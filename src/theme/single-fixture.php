@@ -237,6 +237,20 @@
 			              </li>
 			            <?php endif; ?>
 
+									<?php if( have_rows('food') ): ?>
+										<li class="location__trigger" data-locations="
+				              <?php $x = 1; while ( have_rows('food') ) : the_row();
+				              	if ($x != 1) echo(',');
+				              ?>
+												{
+													'name': '<?php the_sub_field("name"); ?>',
+													'lat': '<?php the_sub_field("lat"); ?>',
+													'lng': '<?php the_sub_field("lng"); ?>'
+												}
+					            <?php $x++; endwhile; ?>" data-type="food">To Nearby Food
+				            </li>
+				          <?php endif; ?>
+
 		              <li class="location__postcode" data-type="postcode">
 		                <form>
 		                  <input id="PostcodeInput" placeholder="From Postcode" type="text">

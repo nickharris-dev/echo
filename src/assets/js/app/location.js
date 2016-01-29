@@ -150,7 +150,9 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
       }
 
       if (type === 'tram' || type === 'train' || type === 'bus') {
-        calculateByFoot(this);
+        calculateBy(this, 'WALKING');
+      } else if (type === 'food') {
+        calculateBy(this, 'DRIVING');
       } else if (type === 'geo') {
         calculateGeo(this);
       }
@@ -174,7 +176,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
     }
   }
 
-  function calculateByFoot(menuItem) {
+  function calculateBy(menuItem, travelMethod) {
     var session = findAncestor(menuItem, 'location__detail');
     var ID = idFactory(session);
 
@@ -196,7 +198,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
       var request = {};
       request.origin = origin;
       request.destination = maps[ID].location;
-      request.travelMode = google.maps.TravelMode.WALKING;
+      request.travelMode = google.maps.TravelMode[travelMethod];
 
       routeFinder(maps[ID], location.name, request);
     }
