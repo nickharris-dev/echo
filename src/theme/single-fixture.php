@@ -66,6 +66,10 @@
 						<dd>
 							<?php if (get_field('parking')): ?><?php the_field('parking'); ?><?php else: ?>Unknown<?php endif; ?>
 						</dd>
+						<?php if (get_field('facebook_event')): ?>
+							<dt class="fb-title">More info:</dt>
+							<dd class="fb-link"><a href="<?php the_field('facebook_event'); ?>">Facebook Event</a></dd>
+						<?php endif; ?>
 					</dl>
 				</section>
 
