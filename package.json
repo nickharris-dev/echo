@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.9.10",
+    "browserify": "^13.0.0",
     "del": "^2.0.2",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^3.0.2",
@@ -25,6 +26,7 @@
     "gulp-shell": "^0.5.0",
     "gulp-sourcemaps": "^1.6.0",
     "sprity": "^1.0.7",
-    "sprity-sass": "^1.0.4"
+    "sprity-sass": "^1.0.4",
+    "vinyl-transform": "^1.0.0"
   }
 }
