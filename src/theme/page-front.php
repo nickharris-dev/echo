@@ -34,10 +34,12 @@
 	</section>
 
 	<section class="intro" itemprop="articleBody">
-		<div class="intro__wrapper"><?php the_content();?></div>
+		<?php the_content();?>
 	</section>
 
 <?php endwhile; endif; ?>
+
+<?php include 'fixtures.php'; ?>
 
 <?php include 'results.php'; ?>
 

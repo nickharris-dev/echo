@@ -295,8 +295,8 @@ a {
 // =====
 .intro {
   color: palette(claret);
-  margin-bottom: rem($baseline);
-  padding: rem(2*$baseline) 0 rem(3*$baseline);
+  margin: rem(2*$baseline) 0 rem(3*$baseline);
+  padding: 0 $column;
   position: relative;
   text-align: center;
 
