@@ -5,6 +5,7 @@
   var autoprefixer = require('gulp-autoprefixer');
   var browserify = require('browserify');
   var browserSync = require('browser-sync');
+  var buffer = require('vinyl-buffer');
   var changed = require('gulp-changed');
   var cssmin = require('gulp-cssmin');
   var del = require('del');
@@ -12,14 +13,16 @@
   var filter = require('gulp-filter');
   var gulp = require('gulp');
   var gulpif = require('gulp-if');
+  var gutil = require('gulp-util');
   var imagemin = require('gulp-imagemin');
   var notify = require('gulp-notify');
   var rename = require('gulp-rename');
   var sass = require('gulp-sass');
   var shell = require('gulp-shell');
+  var source = require('vinyl-source-stream');
   var sourcemaps = require('gulp-sourcemaps');
   var sprity = require('sprity');
-  var transform = require('vinyl-transform');
+  var uglify = require('gulp-uglify');
 
 // Universal Settings
 // ==================
@@ -143,23 +146,24 @@
 
 // Javascript
 // ==========
-  gulp.task('browserify', function () {
-    var browserified = transform(function(filename) {
-      var b = browserify(filename);
-      return b.bundle();
+  gulp.task('javascript', function () {
+    // set up the browserify instance on a task basis
+    var b = browserify({
+      entries: paths.src.javascript + 'base.js',
+      debug: true,
+      paths: paths.src.javascript + 'app/'
     });
 
-    return gulp.src(paths.src.javascript + '**/*')
-      .pipe(browserified)
+    return b.bundle()
+      .pipe(source('base.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({loadMaps: true}))
+          // Add transformation tasks to the pipeline here.
+          // .pipe(uglify())
+          .on('error', gutil.log)
+      .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(paths.dest.javascript))
-      .pipe(dev(proxy.stream({match: '**/*'})));
-  });
-
-  gulp.task('javascript', function(){
-    return gulp.src(paths.src.javascript + '**/*')
-      .pipe(changed(paths.dest.javascript))
-      .pipe(gulp.dest(paths.dest.javascript))
-      .pipe(dev(proxy.stream({match: '**/*'})));
+      .pipe(dev(proxy.stream({match: '**/*.js'})));
   });
 
 // Utilities
@@ -168,6 +172,7 @@
     return del([
       paths.dest.images,
       paths.dest.style,
+      paths.dest.javascript,
       './www/wordpress-default/wp-content/themes/*',
       '!./www/wordpress-default/wp-content/themes/index.php'
     ], cb);
@@ -235,11 +240,11 @@
     // Sprite
     gulp.watch(paths.src.sprite + '*.png', gulp.series('theme', 'style'));
     // Javascript
-    gulp.watch(paths.src.javascript + '**/*', gulp.parallel('browserify'));
+    gulp.watch(paths.src.javascript + '**/*', gulp.parallel('javascript'));
   });
 
 gulp.task('theme', gulp.series('sprite', 'criticalstyle', 'templates'), function(){});
-gulp.task('build', gulp.parallel('theme', 'style', 'browserify', 'images'), function(){});
+gulp.task('build', gulp.parallel('theme', 'style', 'javascript', 'images'), function(){});
 gulp.task('serve', gulp.parallel('watch', 'server'), function(){});
 
 gulp.task('default', gulp.series('vagrant', 'clean', 'build', 'serve'), function(){});
