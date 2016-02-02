@@ -1,3 +1,7 @@
-define(['require', 'config'], function(require, config){
+var config = require('config');
+
+function dev(){
   console.log(config);
-});
+}
+
+module.exports = dev();

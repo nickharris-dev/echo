@@ -14,7 +14,7 @@
       <li><a href="/roster">The Team</a></li>
     </nav>
 
-    <script data-main="<?php echo assets_url(); ?>/js/base" id="script" src="<?php echo assets_url(); ?>/js/libs/require.min.js"></script>
+    <script src="<?php echo assets_url(); ?>/js/base.js"></script>
   </body>
 
 </html>

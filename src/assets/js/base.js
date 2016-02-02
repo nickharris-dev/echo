@@ -1,43 +1,14 @@
-var baseUrl = document.getElementById('script').getAttribute('data-main');
-baseUrl = baseUrl.replace(/base/, 'app');
+'use strict';
 
-function baseFontSize(){
-  return parseFloat(getComputedStyle(document.documentElement).fontSize);
+var config = require('config');
+var fancylinks = require('fancylinks');
+
+// Development js
+// ==============
+if (config.isDev) {
+  require('grid');
+  require('dev');
 }
-
-function touchEnabled(){
-  if (typeof window.ontouchstart !== 'undefined') {
-    return true;
-  }
-  return false;
-}
-
-function isDev (){
-  var el = document.querySelector('html');
-  var className = 'dev';
-  var test;
-
-  if (el.classList) {
-    test = el.classList.contains(className);
-  } else {
-    test = new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
-  }
-
-  return test;
-}
-
-requirejs.config({
-  baseUrl: baseUrl,
-  config: {
-    'config': {
-      baseline: 24,
-      baseFontSize: baseFontSize(),
-      elementqueries: {},
-      isDev: isDev(),
-      touchEnabled: touchEnabled()
-    }
-  }
-});
 
 // Helpers
 // =======
@@ -70,22 +41,17 @@ function nodeLoop(nodeList, func, arg1) {
   }
 }
 
-require(['config', 'fancylinks'], function(config){
-  // Development js
-  if (config.isDev) require(['grid','dev']);
-});
-
 // Element Queries
 // ===============
-nodeLoop(document.querySelectorAll('[data-type-break]'), typography);
-nodeLoop(document.querySelectorAll('[data-eq]'), eq, false);
+// nodeLoop(document.querySelectorAll('[data-type-break]'), typography);
+// nodeLoop(document.querySelectorAll('[data-eq]'), eq, false);
 
 // Training
 // ========
-if (document.getElementById('Training') || document.getElementById('Location')) require(['location']);
+// if (document.getElementById('Training') || document.getElementById('Location')) require(['location']);
 
 // Frontpage News
-if (document.getElementById('News') && parseFloat(document.getElementById('News').getAttribute('data-posts')) > 3) require(['frontpagenews']);
+// if (document.getElementById('News') && parseFloat(document.getElementById('News').getAttribute('data-posts')) > 3) require(['frontpagenews']);
 
 // Results
-if (document.getElementById('Results')) require(['results']);
+// if (document.getElementById('Results')) require(['results']);

@@ -1,4 +1,8 @@
-define(['require', 'config', 'response', 'getStyle'], function(require, config, response, getStyle) {
+var config = require('config');
+var response = require('response');
+var getStyle = require('getStyle');
+
+function grid() {
   var identifier = 'Devgrid';
   var windowWidth = response;
   var store = {
@@ -226,4 +230,6 @@ define(['require', 'config', 'response', 'getStyle'], function(require, config, 
       }
     });
   })();
-});
+}
+
+module.exports = grid();

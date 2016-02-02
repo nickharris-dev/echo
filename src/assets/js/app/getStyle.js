@@ -1,4 +1,4 @@
-define(function(require){
+function getStyle() {
   function checkStyle(identifier, property) {
     var elem = elementFactory(identifier);
     var value = getComputedStyle(elem)[property];
@@ -42,4 +42,6 @@ define(function(require){
   }
 
   return checkStyle;
-});
+}
+
+module.exports = getStyle();
