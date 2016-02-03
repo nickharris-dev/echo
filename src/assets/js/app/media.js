@@ -1,4 +1,7 @@
-define(['require', 'pixel-density', 'response'], function(require, pixelDensity){
+var pixelDensity = require('pixel-density');
+var response = require('response');
+
+function media() {
   var processedMessage = 'processed';
   var path = document.getElementById('script').getAttribute('src').split('/js/')[0];
   var mediaElements = getUnprocessed(document.querySelectorAll('[data-media]'));
@@ -240,4 +243,6 @@ define(['require', 'pixel-density', 'response'], function(require, pixelDensity)
 
   window.addEventListener('resized', onWindowResizeEnd);
   // Todo - addEventListener on ajax success
-});
+}
+
+module.exports = media();

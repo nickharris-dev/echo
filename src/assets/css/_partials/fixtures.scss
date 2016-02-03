@@ -1,11 +1,11 @@
 .fixtures {
   display: block;
   flex-direction: column;
-  margin: rem($baseline/2) 0;
   position: relative;
 
   @media (min-width: 40rem) {
     flex-direction: row;
+    margin: rem($baseline/2) 0;
     padding: 0 $gutter;
   }
 
@@ -21,13 +21,13 @@
       color: inherit;
       display: flex;
       flex-direction: row;
-      height: rem(6*$baseline);
       justify-content: space-between;
       padding: rem($baseline/2) $gutter;
       white-space: normal;
 
       @media (min-width: 40rem) {
         flex-direction: column;
+        height: rem(6*$baseline);
       }
     }
 

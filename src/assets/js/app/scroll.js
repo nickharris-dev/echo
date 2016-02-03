@@ -1,6 +1,5 @@
-define(['require'], function(){
-  // Throttle scroll
-
+// Throttle scroll
+function scroll(){
   // Events
   var scrollEnd;
   var debouncedScroll;
@@ -46,4 +45,6 @@ define(['require'], function(){
   window.addEventListener('scroll', onScroll, false);
 
   return document.body.scrollTop;
-});
+}
+
+module.exports = scroll();

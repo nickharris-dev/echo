@@ -1,4 +1,8 @@
-define(['require', 'config', 'classes', 'ajax', 'response'], function(require, config, classes, ajax, response){
+var config = require('config');
+var ajax = require('ajax');
+var response = require('response');
+
+function frontpagenews() {
   var news = document.getElementById('News');
   var numberOfPosts = news.getAttribute('data-posts');
   var moreButton = news.querySelectorAll('.button--more-news')[0]
@@ -87,4 +91,6 @@ define(['require', 'config', 'classes', 'ajax', 'response'], function(require, c
       hereWeGoMagic();
     }
   });
-});
+}
+
+module.exports = frontpagenews();

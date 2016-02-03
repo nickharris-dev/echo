@@ -1,4 +1,9 @@
-define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRffT8sStG1kBc5v9u0QE10hcEAvK7dk'], function(require, config, idFactory, classes, findAncestor){
+var config = require('config');
+var idFactory = require('idFactory');
+var findAncestor = require('findAncestor');
+// async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRffT8sStG1kBc5v9u0QE10hcEAvK7dk
+
+function location(){
   var activeClass = 'location__trigger--active';
   var processingClass = 'location__trigger--processing';
   var training = document.getElementById('Training');
@@ -145,7 +150,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
     function processClick(event) {
       var type = this.getAttribute('data-type');
 
-      if (classes.contains(this, activeClass) || classes.contains(this, processingClass)) {
+      if (this.classList.contains(activeClass) || this.classList.contains(processingClass)) {
         return false;
       }
 
@@ -187,7 +192,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
     clearRoute(ID);
 
     // Set Active
-    classes.add(menuItem, activeClass);
+    menuItem.classList.add(activeClass);
 
     // Draw new Routes
     processLocations();
@@ -217,7 +222,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
     var session = findAncestor(menuItem, 'location__detail');
     var ID = idFactory(session);
 
-    classes.add(menuItem, processingClass);
+    menuItem.classList.add(processingClass);
 
     function requestFactory(origin) {
       var request = {};
@@ -226,12 +231,12 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
       request.travelMode = google.maps.TravelMode.DRIVING;
 
       routeFinder(maps[ID], 'You', request);
-      classes.remove(menuItem, processingClass);
-      classes.add(menuItem, activeClass);
+      menuItem.classList.remove(processingClass);
+      menuItem.classList.add(activeClass);
     }
 
     function bad() {
-      classes.remove(menuItem, processingClass);
+      menuItem.classList.remove(processingClass);
       googleLinkFactory(session);
       throw new Error('Bum');
     }
@@ -268,7 +273,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
       label.innerHTML = '';
 
       label.appendChild(message);
-      classes.add(label, 'location__message--error');
+      label.classList.add('location__message--error');
       googleLinkFactory(session);
     }
 
@@ -311,7 +316,7 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
       var n = menuItems.length;
 
       for (i; i<n; i++) {
-        classes.remove(menuItems[i], activeClass);
+        menuItems[i].classList.remove(activeClass);
       }
     }
 
@@ -415,10 +420,8 @@ define(['require', 'config', 'idFactory', 'classes', 'findAncestor', 'async!http
     }
   }
 
-  function init(){
-    if (training) process(training.querySelectorAll('.location__detail'));
-    if (location) process(location.querySelectorAll('.location__detail'));
-  }
+  if (training) process(training.querySelectorAll('.location__detail'));
+  if (location) process(location.querySelectorAll('.location__detail'));
+}
 
-  return init();
-});
+module.exports = location();
