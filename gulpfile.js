@@ -91,8 +91,8 @@
       ])
       .pipe(changed(paths.dest.style))
       .pipe(dev(sourcemaps.init({loadMaps: true})))
-      .pipe(sass(sassOptions).on('error', function(err){ notify().write(err); }))
-      .pipe(autoprefixer())
+        .pipe(sass(sassOptions).on('error', function(err){ notify().write(err); }))
+        .pipe(autoprefixer())
       .pipe(dev(sourcemaps.write('./')))
       .pipe(production(cssmin()))
       .pipe(gulp.dest(paths.dest.style))
@@ -157,11 +157,10 @@
     return b.bundle()
       .pipe(source('base.js'))
       .pipe(buffer())
-      .pipe(sourcemaps.init({loadMaps: true}))
-          // Add transformation tasks to the pipeline here.
-          // .pipe(uglify())
-          .on('error', gutil.log)
-      .pipe(sourcemaps.write('./'))
+      .pipe(dev(sourcemaps.init({loadMaps: true})))
+        .pipe(production(uglify()))
+        .on('error', gutil.log)
+      .pipe(dev(sourcemaps.write('./')))
       .pipe(gulp.dest(paths.dest.javascript))
       .pipe(dev(proxy.stream({match: '**/*.js'})));
   });
