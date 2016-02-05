@@ -1,38 +1,29 @@
-function config(){
-  var obj = {};
+export default config = {
+  baseline: 24,
+  elementqueries: {}
+};
 
-  obj.baseline = 24;
-  obj.baseFontSize = baseFontSize();
-  obj.elementqueries = {};
-  obj.isDev = isDev();
-  obj.touchEnabled = touchEnabled();
+ config.isDev = function() {
+  var el = document.querySelector('html');
+  var className = 'dev';
+  var test;
 
-  function isDev() {
-    var el = document.querySelector('html');
-    var className = 'dev';
-    var test;
-
-    if (el.classList) {
-      test = el.classList.contains(className);
-    } else {
-      test = new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
-    }
-
-    return test;
+  if (el.classList) {
+    test = el.classList.contains(className);
+  } else {
+    test = new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
   }
 
-  function baseFontSize() {
-    return parseFloat(getComputedStyle(document.documentElement).fontSize);
-  }
-
-  function touchEnabled() {
-    if (typeof window.ontouchstart !== 'undefined') {
-      return true;
-    }
-    return false;
-  }
-
-  return obj;
+  return test;
 }
 
-module.exports = config();
+config.baseFontSize = function() {
+  return parseFloat(getComputedStyle(document.documentElement).fontSize);
+}
+
+config.touchEnabled = function() {
+  if (typeof window.ontouchstart !== 'undefined') {
+    return true;
+  }
+  return false;
+}

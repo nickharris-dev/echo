@@ -1,6 +1,6 @@
-var scrollTo = require('scrollTo');
+import scrollTo from './scrollTo';
 
-function fancylinks(){
+export default function(){
   // Get a list of all links in the page
   var anchors = document.getElementsByTagName('a');
   var i = 0;
@@ -51,4 +51,3 @@ function fancylinks(){
   }
 }
 
-module.exports = fancylinks();

@@ -3,9 +3,7 @@
 // Gulp Packages
 // =============
   var autoprefixer = require('gulp-autoprefixer');
-  var browserify = require('browserify');
   var browserSync = require('browser-sync');
-  var buffer = require('vinyl-buffer');
   var changed = require('gulp-changed');
   var cssmin = require('gulp-cssmin');
   var del = require('del');
@@ -17,9 +15,9 @@
   var imagemin = require('gulp-imagemin');
   var notify = require('gulp-notify');
   var rename = require('gulp-rename');
+  var rollup = require('gulp-rollup');
   var sass = require('gulp-sass');
   var shell = require('gulp-shell');
-  var source = require('vinyl-source-stream');
   var sourcemaps = require('gulp-sourcemaps');
   var sprity = require('sprity');
   var uglify = require('gulp-uglify');
@@ -147,19 +145,12 @@
 // Javascript
 // ==========
   gulp.task('javascript', function () {
-    // set up the browserify instance on a task basis
-    var b = browserify({
-      entries: paths.src.javascript + 'base.js',
-      debug: true,
-      paths: paths.src.javascript + 'app/'
-    });
-
-    return b.bundle()
-      .pipe(source('base.js'))
-      .pipe(buffer())
-      .pipe(dev(sourcemaps.init({loadMaps: true})))
+    return gulp.src(paths.src.javascript + 'base.js')
+      .pipe(rollup({
+        sourceMap: true
+        }))
         .pipe(production(uglify()))
-        .on('error', gutil.log)
+        .on('error', function(err){ notify().write(err); })
       .pipe(dev(sourcemaps.write('./')))
       .pipe(gulp.dest(paths.dest.javascript))
       .pipe(dev(proxy.stream({match: '**/*.js'})));

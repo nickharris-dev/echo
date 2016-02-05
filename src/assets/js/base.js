@@ -1,8 +1,8 @@
-'use strict';
+import config from './app/config';
 
-var config = require('config');
-var fancylinks = require('fancylinks');
-
+import fancylinks from './app/fancylinks';
+fancylinks();
+/*
 // Development js
 // ==============
 if (config.isDev) {
@@ -54,4 +54,4 @@ if (document.getElementById('Training') || document.getElementById('Location')) 
 if (document.getElementById('News') && parseFloat(document.getElementById('News').getAttribute('data-posts')) > 3) require('frontpagenews');
 
 // Results
-if (document.getElementById('Results')) require('results');
+if (document.getElementById('Results')) require('results'); */
