@@ -1,5 +1,5 @@
 // Fire an event when the viewport is resized;
-function response(){
+export default function() {
   // An Event for when the resize is finished (runs once)
   var resize;
   // An Event that runs while the window is resizing (Don't want to add things
@@ -63,5 +63,3 @@ function response(){
   // return the initial width for use immediately
   return w;
 }
-
-module.exports = response();

@@ -1,15 +1,21 @@
+// imports
 import config from './app/config';
-
 import fancylinks from './app/fancylinks';
+import grid from './app/grid';
+import dev from './app/dev';
+
+// Always run
+// ==========
 fancylinks();
-/*
+
 // Development js
 // ==============
 if (config.isDev) {
-  require('grid');
-  require('dev');
+  dev();
+  grid();
 }
 
+/*
 // Helpers
 // =======
 function eq (node, continuous) {

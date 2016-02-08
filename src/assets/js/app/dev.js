@@ -1,7 +1,5 @@
-var config = require('config');
+import config from './config';
 
-function dev(){
+export default function (){
   console.log(config);
 }
-
-module.exports = dev();

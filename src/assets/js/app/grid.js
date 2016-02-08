@@ -1,10 +1,10 @@
-var config = require('config');
-var response = require('response');
-var getStyle = require('getStyle');
+import config from './config';
+import response from './response';
+import getStyle from './getStyle';
 
-function grid() {
+export default function() {
   var identifier = 'Devgrid';
-  var windowWidth = response;
+  var windowWidth = response();
   var store = {
     columns: 'devGrid__columns',
     gutters: 'devGrid__gutters',
@@ -231,5 +231,3 @@ function grid() {
     });
   })();
 }
-
-module.exports = grid();

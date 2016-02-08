@@ -1,4 +1,4 @@
-function getStyle() {
+export default function(i, p) {
   function checkStyle(identifier, property) {
     var elem = elementFactory(identifier);
     var value = getComputedStyle(elem)[property];
@@ -41,7 +41,5 @@ function getStyle() {
     return type;
   }
 
-  return checkStyle;
+  return checkStyle(i, p);
 }
-
-module.exports = getStyle();
