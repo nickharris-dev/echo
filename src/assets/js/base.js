@@ -2,12 +2,13 @@
 // =======
 // Note, these don't get imported until they're actually used
 import config from './app/config';
-import fancylinks from './app/fancylinks';
-import grid from './app/grid';
 import dev from './app/dev';
+import fancylinks from './app/fancylinks';
 import Elementquery from './app/Elementqueries';
+import grid from './app/grid';
 import idFactory from './app/idFactory';
 import merge from './app/merge';
+import results from './app/results';
 
 // Always run
 // ==========
@@ -59,6 +60,6 @@ if (document.getElementById('Training') || document.getElementById('Location')) 
 
 // Frontpage News
 if (document.getElementById('News') && parseFloat(document.getElementById('News').getAttribute('data-posts')) > 3) require('frontpagenews');
-
+*/
 // Results
-if (document.getElementById('Results')) require('results'); */
+if (document.getElementById('Results')) results();
