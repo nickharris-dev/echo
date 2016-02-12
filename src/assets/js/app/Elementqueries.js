@@ -1,64 +1,64 @@
 // min-width, max-width, min-height, max-height
 // Example value: linear:(min-width:600px) and (max-width:700px),test:(max-height:150px)
-var config = require('config');
-var Reflow = require('Reflow');
+import config from './config';
+import Reflow from './Reflow';
 
-var Elementquery = function(elem, queryString, continuous) {
-  var t = this;
-  var eventDetail = {
-    detail: {
-      queries: t
-    }
-  };
+export default class {
+  constructor(elem, queryString, continuous) {
+    var t = this;
+    var eventDetail = {
+      detail: {
+        queries: t
+      }
+    };
 
-  t.element = elem;
-  t.continuous = continuous;
+    t.element = elem;
+    t.continuous = continuous;
 
-  // Starting dimensions
-  t.height = elem.offsetHeight;
-  t.width = elem.offsetWidth;
+    // Starting dimensions
+    t.height = elem.offsetHeight;
+    t.width = elem.offsetWidth;
 
-  // Event to be emitted on change of breakpoint
-  if (typeof CustomEvent === 'function') { // Good Browsers
-    t.breakpointEvent = new CustomEvent('breakpoint', eventDetail);
-  } else {
-    t.breakpointEvent = document.createEvent('CustomEvent');
-    t.breakpointEvent.initCustomEvent('breakpoint', true, true, eventDetail);
-  }
-
-  // An identifier to use in the classname later
-  // Unlike idFactory, use classname by default, for better BEM
-  if (elem.className) {
-    if (elem.classList) {
-      t.identifier = elem.classList[0];
+    // Event to be emitted on change of breakpoint
+    if (typeof CustomEvent === 'function') { // Good Browsers
+      t.breakpointEvent = new CustomEvent('breakpoint', eventDetail);
     } else {
-      t.identifier = elem.className;
-      t.identifier = t.identifier.split(' ')[0];
+      t.breakpointEvent = document.createEvent('CustomEvent');
+      t.breakpointEvent.initCustomEvent('breakpoint', true, true, eventDetail);
     }
-  } else if (elem.getAttribute('id')) {
-    t.identifier = elem.getAttribute('id').toLowerCase();;
+
+    // An identifier to use in the classname later
+    // Unlike idFactory, use classname by default, for better BEM
+    if (elem.className) {
+      if (elem.classList) {
+        t.identifier = elem.classList[0];
+      } else {
+        t.identifier = elem.className;
+        t.identifier = t.identifier.split(' ')[0];
+      }
+    } else if (elem.getAttribute('id')) {
+      t.identifier = elem.getAttribute('id').toLowerCase();;
+    }
+    t.identifier = t.identifier.match(/(\w+)-?/);
+    t.identifier = t.identifier[1];
+
+    // Process the named breakpoints
+    t.breakpoints = t.queryFactory(queryString);
+
+    // Prepare element to broadcast resize events
+    let inst = new Reflow(elem, continuous);
+    t.reflow = inst;
+
+    // …Listen for those resize events
+    t.element.addEventListener('resizeEnd', function(event){
+      t.sizeChange.call(t,event);
+    });
+    t.element.addEventListener('debouncedResize', function(event){
+      t.sizeChange.call(t,event);
+    });
   }
-  t.identifier = t.identifier.match(/(\w+)-?/);
-  t.identifier = t.identifier[1];
 
-  // Process the named breakpoints
-  t.breakpoints = t.queryFactory(queryString);
-
-  // Prepare element to broadcast resize events
-  t.reflow = new Reflow(elem, continuous);
-
-  // …Listen for those resize events
-  t.element.addEventListener('resizeEnd', function(event){
-    t.sizeChange.call(t,event);
-  });
-  t.element.addEventListener('debouncedResize', function(event){
-    t.sizeChange.call(t,event);
-  });
-};
-
-Elementquery.prototype = {
-
-  queryFactory: function(str) {
+  queryFactory(str) {
     var t = this;
     var obj;
 
@@ -125,9 +125,9 @@ Elementquery.prototype = {
 
     // Store the breakpoints for later
     return(obj);
-  },
+  }
 
-  sizeChange: function(event){
+  sizeChange(event){
     var t = this;
     var key;
 
@@ -139,9 +139,9 @@ Elementquery.prototype = {
     for (key in t.breakpoints) {
       t.checkBreakpoint(key);
     }
-  },
+  }
 
-  checkBreakpoint: function(key,obj) {
+  checkBreakpoint(key,obj) {
     var t = this;
     var breakpoints = obj || t.breakpoints;
     var breakpoint = breakpoints[key];
@@ -173,9 +173,9 @@ Elementquery.prototype = {
         t.deactivate(key, obj);
       }
     }
-  },
+  }
 
-  activate: function(key,obj) {
+  activate(key,obj) {
     var t = this;
     var breakpoints = obj || t.breakpoints;
     var breakpoint = breakpoints[key];
@@ -188,9 +188,9 @@ Elementquery.prototype = {
     t.breakpointEvent.detail.active = true;
     t.breakpointEvent.detail.breakpoint = breakpoint;
     t.element.dispatchEvent(t.breakpointEvent);
-  },
+  }
 
-  deactivate: function(key,obj) {
+  deactivate(key,obj) {
     var t = this;
     var breakpoints = obj || t.breakpoints;
     var breakpoint = breakpoints[key];
@@ -204,6 +204,5 @@ Elementquery.prototype = {
     t.breakpointEvent.detail.breakpoint = breakpoint;
     t.element.dispatchEvent(t.breakpointEvent);
   }
-};
+}
 
-module.exports = Elementquery;

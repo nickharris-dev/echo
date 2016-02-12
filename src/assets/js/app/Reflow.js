@@ -1,31 +1,30 @@
-var Reflow = function(e, c) {
-  var t = this;
-  t.element = e;
+export default class {
+  constructor(e, c) {
+    var t = this;
+    t.element = e;
 
-  // Helpers
-  t.continuous = c || false;
-  t.ticking = false;
+    // Helpers
+    t.continuous = c || false;
+    t.ticking = false;
 
-  // Events
-  if (typeof CustomEvent === 'function') { // Good Browsers
-    t.resizeEnd = new CustomEvent('resizeEnd', {detail: {}});
-    t.debouncedResize = new CustomEvent('debouncedResize', {detail: {}});
-  } else { // IE
-    resizeEnd = document.createEvent('CustomEvent');
-    debouncedResize = document.createEvent('CustomEvent');
-    resizeEnd.initCustomEvent('resized', true, true, {detail: {}});
-    debouncedResize.initCustomEvent('debouncedResize', true, true, {detail: {}});
+    // Events
+    if (typeof CustomEvent === 'function') { // Good Browsers
+      t.resizeEnd = new CustomEvent('resizeEnd', {detail: {}});
+      t.debouncedResize = new CustomEvent('debouncedResize', {detail: {}});
+    } else { // IE
+      resizeEnd = document.createEvent('CustomEvent');
+      debouncedResize = document.createEvent('CustomEvent');
+      resizeEnd.initCustomEvent('resized', true, true, {detail: {}});
+      debouncedResize.initCustomEvent('debouncedResize', true, true, {detail: {}});
+    }
+
+    // Initialise
+    t.init();
   }
-
-  // Initialise
-  t.init();
-};
-
-Reflow.prototype = {
 
   // Create an object element inside the element we want to emit reize events
   // from and watch it for resize
-  init: function(){
+  init() {
     var t = this;
 
     function onObjLoad() {
@@ -90,9 +89,9 @@ Reflow.prototype = {
     t.element.classList.add('reflowContainer');
     // Append the object element to the queried element
     t.element.appendChild(t.obj);
-  },
+  }
 
-  endListenerFactory: function(){
+  endListenerFactory(){
     var t = this;
     // Cancel the current running timer
     clearTimeout(t.timer);
@@ -101,25 +100,25 @@ Reflow.prototype = {
     t.timer = setTimeout(function(){
       t.onResizeEnd.call(t);
     }, 250);
-  },
+  }
 
-  onResizeEnd: function(){
+  onResizeEnd(){
     var t = this;
 
     t.resizeEnd.detail.height = t.element.offsetHeight;
     t.resizeEnd.detail.width = t.element.offsetWidth;
     t.element.dispatchEvent(t.resizeEnd);
-  },
+  }
 
-  requestTick: function(){
+  requestTick(){
     var t = this;
     if (!t.ticking) requestAnimationFrame(function(){
       t.update.call(t);
     });
     t.ticking = true;
-  },
+  }
 
-  update: function(){
+  update(){
     var t = this;
 
     t.ticking = false;
@@ -127,7 +126,4 @@ Reflow.prototype = {
     t.debouncedResize.detail.width = element.offsetWidth;
     t.element.dispatchEvent(debouncedResize);
   }
-
-};
-
-module.exports = Reflow;
+}

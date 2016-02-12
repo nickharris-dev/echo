@@ -1,8 +1,13 @@
 // imports
+// =======
+// Note, these don't get imported until they're actually used
 import config from './app/config';
 import fancylinks from './app/fancylinks';
 import grid from './app/grid';
 import dev from './app/dev';
+import Elementquery from './app/Elementqueries';
+import idFactory from './app/idFactory';
+import merge from './app/merge';
 
 // Always run
 // ==========
@@ -15,15 +20,11 @@ if (config.isDev) {
   grid();
 }
 
-/*
 // Helpers
 // =======
 function eq (node, continuous) {
-  var Elementquery = require('Elementqueries');
-  var idFactory = require('idFactory');
-  var merge = require('merge');
   var id = idFactory(node);
-  var query = new Elementquery(node, node.getAttribute('data-eq'), continuous);
+  let query = new Elementquery(node, node.getAttribute('data-eq'), continuous);
   if (config.elementqueries[id]) {
     config.elementqueries[id] = merge(config.elementqueries[id], query);
   } else {
@@ -32,7 +33,6 @@ function eq (node, continuous) {
 }
 
 function typography (node) {
-  var Elementquery = require('Elementqueries');
   var str = 'type-break:(min-width:' + node.getAttribute('data-type-break') + ')';
   config.elementqueries.typography = config.elementqueries.typography || [];
   config.elementqueries.typography.push(new Elementquery(node, str, false));
@@ -52,6 +52,7 @@ function nodeLoop(nodeList, func, arg1) {
 nodeLoop(document.querySelectorAll('[data-type-break]'), typography);
 nodeLoop(document.querySelectorAll('[data-eq]'), eq, false);
 
+/*
 // Training
 // ========
 if (document.getElementById('Training') || document.getElementById('Location')) require('location');

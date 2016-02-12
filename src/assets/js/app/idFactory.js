@@ -1,4 +1,4 @@
-function idFactory(node) {
+export default function(node) {
   var str;
 
   if (node.getAttribute('id')) {
@@ -15,5 +15,3 @@ function idFactory(node) {
 
   return str;
 }
-
-module.exports = idFactory;

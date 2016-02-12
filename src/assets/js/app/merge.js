@@ -1,6 +1,4 @@
-'use strict';
-
-function merge() {
+export default function() {
   var i = 0;
   var n = arguments.length;
   var combined = {};
@@ -12,5 +10,3 @@ function merge() {
   }
   return combined;
 }
-
-module.exports = merge;
