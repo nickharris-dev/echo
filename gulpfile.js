@@ -3,6 +3,7 @@
 // Gulp Packages
 // =============
   var autoprefixer = require('gulp-autoprefixer');
+  var babel = require('rollup-plugin-babel');
   var browserSync = require('browser-sync');
   var changed = require('gulp-changed');
   var cssmin = require('gulp-cssmin');
@@ -147,10 +148,13 @@
   gulp.task('javascript', function () {
     return gulp.src(paths.src.javascript + 'base.js')
       .pipe(rollup({
-        sourceMap: true
+        sourceMap: true,
+        plugins: [
+          babel({ "presets": ["es2015-rollup"] })
+        ]
         }))
-        .pipe(production(uglify()))
-        .on('error', function(err){ notify().write(err); })
+      .pipe(production(uglify()))
+      .on('error', function(err){ notify().write(err); })
       .pipe(dev(sourcemaps.write('./')))
       .pipe(gulp.dest(paths.dest.javascript))
       .pipe(dev(proxy.stream({match: '**/*.js'})));
