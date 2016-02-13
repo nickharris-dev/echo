@@ -16,10 +16,9 @@ export default function(Y, duration, easingFunction, callback) {
     }
 
     function scroll(timestamp) {
-
         var currentTime = Date.now(),
             time = min(1, ((currentTime - start) / duration)),
-            easedT = easingFunction(time);
+            easedT = time*(2-time);
 
         elem.scrollTop = (easedT * (Y - from)) + from;
 
