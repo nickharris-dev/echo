@@ -7,6 +7,7 @@ import fancylinks from './app/fancylinks';
 import Elementquery from './app/Elementqueries';
 import grid from './app/grid';
 import idFactory from './app/idFactory';
+import location from './app/location';
 import merge from './app/merge';
 import results from './app/results';
 
@@ -53,11 +54,11 @@ function nodeLoop(nodeList, func, arg1) {
 nodeLoop(document.querySelectorAll('[data-type-break]'), typography);
 nodeLoop(document.querySelectorAll('[data-eq]'), eq, false);
 
-/*
 // Training
 // ========
-if (document.getElementById('Training') || document.getElementById('Location')) require('location');
+if (document.getElementById('Training') || document.getElementById('Location')) location();
 
+/*
 // Frontpage News
 if (document.getElementById('News') && parseFloat(document.getElementById('News').getAttribute('data-posts')) > 3) require('frontpagenews');
 */

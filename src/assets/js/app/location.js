@@ -1,426 +1,425 @@
-var config = require('config');
-var idFactory = require('idFactory');
-var findAncestor = require('findAncestor');
+import config from './config';
+import idFactory from './idFactory';
+import findAncestor from './findAncestor';
 // async!https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRffT8sStG1kBc5v9u0QE10hcEAvK7dk
 
-var activeClass = 'location__trigger--active';
-var processingClass = 'location__trigger--processing';
-var training = document.getElementById('Training');
-var location = document.getElementById('Location');
-var directionsService = new google.maps.DirectionsService();
-var maps = {};
+export default function(){
+  var activeClass = 'location__trigger--active';
+  var processingClass = 'location__trigger--processing';
+  var training = document.getElementById('Training');
+  var location = document.getElementById('Location');
+  var directionsService = new google.maps.DirectionsService();
+  var maps = {};
 
-function mapFactory(session) {
-  var mapDiv = session.querySelectorAll('.location__map')[0];
-  var ID = idFactory(session);
-  var lat = parseFloat(session.getAttribute('data-lat'));
-  var lng = parseFloat(session.getAttribute('data-lng'));
-  var location = new google.maps.LatLng(lat,lng);
-  var map;
+  function mapFactory(session) {
+    var mapDiv = session.querySelectorAll('.location__map')[0];
+    var ID = idFactory(session);
+    var lat = parseFloat(session.getAttribute('data-lat'));
+    var lng = parseFloat(session.getAttribute('data-lng'));
+    var location = new google.maps.LatLng(lat,lng);
+    var map;
 
-  // Maps configuration
-  var mapOptions = {
-    center: location,
-    zoom: 14,
-    scrollwheel: false,
-    draggable: false,
-    disableDefaultUI: true
-  };
-  var directionsOptions = {
-    polylineOptions: {
-      strokeColor: 'rgba(92, 4, 37, .7)'
-    },
-    preserveViewport: true,
-    suppressMarkers: true
-  };
+    // Maps configuration
+    var mapOptions = {
+      center: location,
+      zoom: 14,
+      scrollwheel: false,
+      draggable: false,
+      disableDefaultUI: true
+    };
+    var directionsOptions = {
+      polylineOptions: {
+        strokeColor: 'rgba(92, 4, 37, .7)'
+      },
+      preserveViewport: true,
+      suppressMarkers: true
+    };
 
-  // Draw the map
-  // ============
-  map = new google.maps.Map(mapDiv, mapOptions);
+    // Draw the map
+    // ============
+    map = new google.maps.Map(mapDiv, mapOptions);
 
-  // Set up the storage for maps data
-  // ==================
-  maps[ID] = {};
-  maps[ID].map = map;
-  maps[ID].markers = {};
-  maps[ID].markers.origins = [];
-  maps[ID].renderers = [];
-  maps[ID].directionsOptions = directionsOptions;
-  maps[ID].session = session;
-  maps[ID].location = location;
-  maps[ID].bounds = new google.maps.LatLngBounds();
-  maps[ID].bounds.extend(location);
+    // Set up the storage for maps data
+    // ==================
+    maps[ID] = {};
+    maps[ID].map = map;
+    maps[ID].markers = {};
+    maps[ID].markers.origins = [];
+    maps[ID].renderers = [];
+    maps[ID].directionsOptions = directionsOptions;
+    maps[ID].session = session;
+    maps[ID].location = location;
+    maps[ID].bounds = new google.maps.LatLngBounds();
+    maps[ID].bounds.extend(location);
 
-  // Drop the training marker
-  // ===============
-  maps[ID].markers.location = new google.maps.Marker({
-    clickable: false,
-    position: location,
-    map: map
-  });
+    // Drop the training marker
+    // ===============
+    maps[ID].markers.location = new google.maps.Marker({
+      clickable: false,
+      position: location,
+      map: map
+    });
 
-  // Re-render map on resize
-  session.addEventListener('resizeEnd', function(){
-    google.maps.event.trigger(map, 'resize');
-  });
-  google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
-    offsetMap(map, session);
-  });
-  google.maps.event.addListener(map, 'resize', function(){
-    offsetMap(map, session);
-  });
-}
-
-function offsetMap(map, session){
-  var ID = idFactory(session);
-  // Holders for offset values, that will depend on other vars
-  var offsetx, offsety;
-
-  // Map position information
-  var center = maps[ID].bounds.getCenter();
-  center = map.getProjection().fromLatLngToPoint(center);
-
-  // Info box info
-  var paddingBottom = parseFloat(getComputedStyle(session)['padding-bottom']);
-  var paddingLeft = parseFloat(getComputedStyle(session)['padding-left']);
-  var paddingTop = parseFloat(getComputedStyle(session)['padding-top']);
-  var height = session.querySelectorAll('.location__info')[0].offsetHeight;
-  var width = session.querySelectorAll('.location__info')[0].offsetWidth;
-
-  function showInfo() {
-    var i = 0;
-    var n = maps[ID].markers.origins.length;
-
-    for (i; i<n; i++) {
-      maps[ID].markers.origins[i].info.open(map,maps[ID].markers.origins[i]);
-    }
-  }
-
-  function afterFit(){
-    var zoom = 14;
-    if (maps[ID].markers.origins.length > 0) {
-      zoom = map.getZoom();
-    }
-    map.setZoom(zoom);
-
-    // Depending on what element query is active
-    if (config.elementqueries[ID].breakpoints.stacked.active) {
-      offsetx = Math.floor((paddingLeft + width)/2);
-      offsety = Math.floor((paddingTop - paddingBottom)/2);
-    } else {
-      offsety = Math.floor((paddingTop + height)/2);
-    }
-
-    var point2 = new google.maps.Point(
-        ( (typeof(offsetx) == 'number' ? offsetx : 0) / Math.pow(2, zoom) ) || 0,
-        ( (typeof(offsety) == 'number' ? offsety : 0) / Math.pow(2, zoom) ) || 0
-    );
-
-    // Position the Map
-    map.panTo(map.getProjection().fromPointToLatLng(new google.maps.Point(
-        center.x - point2.x,
-        center.y - point2.y
-    )));
-
-    // Show any infowindows
-    // (Do this here to enable any autopanning)
-    if (maps[ID].markers.origins.length > 0) {
-      showInfo();
-    }
-  }
-
-  google.maps.event.addListenerOnce(map, 'bounds_changed', afterFit);
-  map.fitBounds(maps[ID].bounds);
-}
-
-function directionsListeners(session) {
-  var menuItems = session.querySelectorAll('.location__directions li');
-  var postCodeForm = session.querySelectorAll('.location__directions form')[0];
-  var i = 0;
-  var n = menuItems.length;
-
-  // Geo Location Detection
-  // ======================
-  if (!navigator.geolocation && session.querySelectorAll('.location__directions [data-type="geo"]').length > 0) {
-    var geo = session.querySelectorAll('.location__directions [data-type="geo"]')[0];
-    geo.parentNode.removeChild(geo);
-  }
-
-  function processClick(event) {
-    var type = this.getAttribute('data-type');
-
-    if (this.classList.contains(activeClass) || this.classList.contains(processingClass)) {
-      return false;
-    }
-
-    if (type === 'tram' || type === 'train' || type === 'bus') {
-      calculateBy(this, 'WALKING');
-    } else if (type === 'food') {
-      calculateBy(this, 'DRIVING');
-    } else if (type === 'geo') {
-      calculateGeo(this);
-    }
-  }
-
-  for (i; i<n; i++) {
-    menuItems[i].addEventListener('click', processClick);
-  }
-
-  if (postCodeForm) {
-    var label = document.createElement('label');
-    label.setAttribute('id', 'PostcodeMessage');
-    label.setAttribute('for', 'PostcodeInput');
-    label.setAttribute('class', 'location__message');
-    postCodeForm.appendChild(label);
-
-    postCodeForm.addEventListener('submit', function(event){
-      event.preventDefault();
-      calculatePostcode(session, postCodeForm.querySelectorAll('input')[0].value);
+    // Re-render map on resize
+    session.addEventListener('resizeEnd', function(){
+      google.maps.event.trigger(map, 'resize');
+    });
+    google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
+      offsetMap(map, session);
+    });
+    google.maps.event.addListener(map, 'resize', function(){
+      offsetMap(map, session);
     });
   }
-}
 
-function calculateBy(menuItem, travelMethod) {
-  var session = findAncestor(menuItem, 'location__detail');
-  var ID = idFactory(session);
+  function offsetMap(map, session){
+    var ID = idFactory(session);
+    // Holders for offset values, that will depend on other vars
+    var offsetx, offsety;
 
-  var locationData = menuItem.getAttribute('data-locations').replace(/'/g,'"');
-  var locations = JSON.parse('[' + locationData + ']');
+    // Map position information
+    var center = maps[ID].bounds.getCenter();
+    center = map.getProjection().fromLatLngToPoint(center);
 
-  // Clear old routes
-  clearRoute(ID);
+    // Info box info
+    var paddingBottom = parseFloat(getComputedStyle(session)['padding-bottom']);
+    var paddingLeft = parseFloat(getComputedStyle(session)['padding-left']);
+    var paddingTop = parseFloat(getComputedStyle(session)['padding-top']);
+    var height = session.querySelectorAll('.location__info')[0].offsetHeight;
+    var width = session.querySelectorAll('.location__info')[0].offsetWidth;
 
-  // Set Active
-  menuItem.classList.add(activeClass);
+    function showInfo() {
+      var i = 0;
+      var n = maps[ID].markers.origins.length;
 
-  // Draw new Routes
-  processLocations();
-
-  function requestFactory(location) {
-    var origin = new google.maps.LatLng(location.lat,location.lng);
-
-    var request = {};
-    request.origin = origin;
-    request.destination = maps[ID].location;
-    request.travelMode = google.maps.TravelMode[travelMethod];
-
-    routeFinder(maps[ID], location.name, request);
-  }
-
-  function processLocations() {
-    var i = 0;
-    var n = locations.length;
-    for (i; i<n; i++) {
-      requestFactory(locations[i]);
-    }
-    googleLinkFactory(session);
-  }
-}
-
-function calculateGeo(menuItem)  {
-  var session = findAncestor(menuItem, 'location__detail');
-  var ID = idFactory(session);
-
-  menuItem.classList.add(processingClass);
-
-  function requestFactory(origin) {
-    var request = {};
-    request.origin = origin;
-    request.destination = maps[ID].location;
-    request.travelMode = google.maps.TravelMode.DRIVING;
-
-    routeFinder(maps[ID], 'You', request);
-    menuItem.classList.remove(processingClass);
-    menuItem.classList.add(activeClass);
-  }
-
-  function bad() {
-    menuItem.classList.remove(processingClass);
-    googleLinkFactory(session);
-    throw new Error('Bum');
-  }
-
-  function good(position) {
-    clearRoute(ID);
-    requestFactory(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-    googleLinkFactory(session, {lat: position.coords.latitude, lng: position.coords.longitude});
-  }
-
-  navigator.geolocation.getCurrentPosition(good, bad);
-}
-
-function calculatePostcode(session, value) {
-  var ID = idFactory(session);
-  var postcode = value.replace(/\s/g, "");
-  var regex = /^([a-zA-Z]){1}([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9]){1}([ ])([0-9][a-zA-z][a-zA-z]){1}$/;
-
-  clearRoute(ID);
-  checkPostcode(value);
-
-  function checkPostcode() {
-    if (value === '' || !regex.test(value)) {
-      bad();
-    } else {
-      good();
-    }
-  }
-
-  function bad(str) {
-    var message = document.createTextNode(str || 'Enter a Valid Postcode');
-    var label = session.querySelectorAll('.location__directions .location__message')[0];
-
-    label.innerHTML = '';
-
-    label.appendChild(message);
-    label.classList.add('location__message--error');
-    googleLinkFactory(session);
-  }
-
-  function good() {
-    var geocoder = new google.maps.Geocoder();
-
-    geocoder.geocode({'address': value}, function(results, status){
-      var location;
-
-      if (status == google.maps.GeocoderStatus.OK) {
-        location = results[0].geometry.location;
-        requestFactory(location);
-        googleLinkFactory(session, {lat: location.lat(), lng: location.lng()} );
-      } else {
-        bad(status);
+      for (i; i<n; i++) {
+        maps[ID].markers.origins[i].info.open(map,maps[ID].markers.origins[i]);
       }
-    });
+    }
+
+    function afterFit(){
+      var zoom = 14;
+      if (maps[ID].markers.origins.length > 0) {
+        zoom = map.getZoom();
+      }
+      map.setZoom(zoom);
+
+      // Depending on what element query is active
+      if (config.elementqueries[ID].breakpoints.stacked.active) {
+        offsetx = Math.floor((paddingLeft + width)/2);
+        offsety = Math.floor((paddingTop - paddingBottom)/2);
+      } else {
+        offsety = Math.floor((paddingTop + height)/2);
+      }
+
+      var point2 = new google.maps.Point(
+          ( (typeof(offsetx) == 'number' ? offsetx : 0) / Math.pow(2, zoom) ) || 0,
+          ( (typeof(offsety) == 'number' ? offsety : 0) / Math.pow(2, zoom) ) || 0
+      );
+
+      // Position the Map
+      map.panTo(map.getProjection().fromPointToLatLng(new google.maps.Point(
+          center.x - point2.x,
+          center.y - point2.y
+      )));
+
+      // Show any infowindows
+      // (Do this here to enable any autopanning)
+      if (maps[ID].markers.origins.length > 0) {
+        showInfo();
+      }
+    }
+
+    google.maps.event.addListenerOnce(map, 'bounds_changed', afterFit);
+    map.fitBounds(maps[ID].bounds);
   }
 
-  function requestFactory(origin) {
-    var request = {};
-    request.origin = origin;
-    request.destination = maps[ID].location;
-    request.travelMode = google.maps.TravelMode.DRIVING;
-
-    routeFinder(maps[ID], value, request);
-  }
-}
-
-function clearRoute(ID) {
-  clearMarkers();
-  clearRoutes();
-  clearClasses();
-  maps[ID].bounds = new google.maps.LatLngBounds();
-  maps[ID].bounds.extend(maps[ID].location);
-
-  function clearClasses() {
-    var menuItems = maps[ID].session.querySelectorAll('.location__directions li');
+  function directionsListeners(session) {
+    var menuItems = session.querySelectorAll('.location__directions li');
+    var postCodeForm = session.querySelectorAll('.location__directions form')[0];
     var i = 0;
     var n = menuItems.length;
 
+    // Geo Location Detection
+    // ======================
+    if (!navigator.geolocation && session.querySelectorAll('.location__directions [data-type="geo"]').length > 0) {
+      var geo = session.querySelectorAll('.location__directions [data-type="geo"]')[0];
+      geo.parentNode.removeChild(geo);
+    }
+
+    function processClick(event) {
+      var type = this.getAttribute('data-type');
+
+      if (this.classList.contains(activeClass) || this.classList.contains(processingClass)) {
+        return false;
+      }
+
+      if (type === 'tram' || type === 'train' || type === 'bus') {
+        calculateBy(this, 'WALKING');
+      } else if (type === 'food') {
+        calculateBy(this, 'DRIVING');
+      } else if (type === 'geo') {
+        calculateGeo(this);
+      }
+    }
+
     for (i; i<n; i++) {
-      menuItems[i].classList.remove(activeClass);
+      menuItems[i].addEventListener('click', processClick);
     }
-  }
 
-  function clearRoutes() {
-    if (maps[ID].renderers.length > 0) {
-      var i = 0;
-      var n = maps[ID].renderers.length;
-      for (i; i<n; i++) {
-        maps[ID].renderers[i].setMap(null);
-      }
-      maps[ID].renderers = [];
-    }
-  }
+    if (postCodeForm) {
+      var label = document.createElement('label');
+      label.setAttribute('id', 'PostcodeMessage');
+      label.setAttribute('for', 'PostcodeInput');
+      label.setAttribute('class', 'location__message');
+      postCodeForm.appendChild(label);
 
-  function clearMarkers() {
-    if (maps[ID].markers.origins.length > 0) {
-      var i = 0;
-      var n = maps[ID].markers.origins.length;
-      for (i; i<n; i++) {
-        maps[ID].markers.origins[i].setMap(null);
-      }
-      maps[ID].markers.origins = [];
-    }
-  }
-}
-
-function routeFinder(storage, str, request) {
-  var map = storage.map;
-  var renderer = new google.maps.DirectionsRenderer(storage.directionsOptions);
-  var miles;
-
-  renderer.setMap(map);
-
-  // Make the request
-  directionsService.route(request, function(response, status) {
-    // Proceed if everything's a-ok
-    if (status == google.maps.DirectionsStatus.OK) {
-      // Put a marker at the route's start point and save it
-      var marker = new google.maps.Marker({
-        clickable: false,
-        position: request.origin,
-        map: map
+      postCodeForm.addEventListener('submit', function(event){
+        event.preventDefault();
+        calculatePostcode(session, postCodeForm.querySelectorAll('input')[0].value);
       });
-      storage.bounds.extend(request.origin);
-
-      // Add distance to the string for the tooltip
-      miles = response.routes[0].legs[0].distance.value/1609.344;
-      miles = Math.round(miles*10)/10;
-      str += ' - ' + miles + ' miles';
-      // Display a tooltip with useful info
-      marker.info = new google.maps.InfoWindow({
-        content: str
-      });
-      storage.markers.origins.push(marker);
-
-      // Do it
-      renderer.setDirections(response);
-      // Store it
-      storage.renderers.push(renderer);
-
-      // Recenter the map
-      offsetMap(map, storage.session);
     }
-  });
-}
-
-function googleButtonListener(session) {
-  var button = session.querySelectorAll('.location__google')[0];
-
-  function openGoogle(event) {
-    event.preventDefault();
-    window.open(this.getAttribute('data-url'));
   }
-  button.addEventListener('click', openGoogle);
-}
 
-function googleLinkFactory(session, from, travelMode) {
-  var button = session.querySelectorAll('.location__google')[0];
-  var daddrLat = session.getAttribute('data-lat');
-  var daddrLng = session.getAttribute('data-lng');
-  var daddr = 'daddr=' + daddrLat + ',' + daddrLng;
-  var url = 'https://maps.google.com?';
-  var saddr = '';
-  var str;
+  function calculateBy(menuItem, travelMethod) {
+    var session = findAncestor(menuItem, 'location__detail');
+    var ID = idFactory(session);
 
-  if (from) saddr = 'saddr=' + from.lat + ',' + from.lng + '&';
-  str = url + saddr + daddr;
+    var locationData = menuItem.getAttribute('data-locations').replace(/'/g,'"');
+    var locations = JSON.parse('[' + locationData + ']');
 
-  button.setAttribute('data-url', str);
-}
+    // Clear old routes
+    clearRoute(ID);
 
-function process(sessions){
-  var i = 0;
-  var n = sessions.length;
+    // Set Active
+    menuItem.classList.add(activeClass);
 
-  for (i; i<n; i++) {
-    mapFactory(sessions[i]);
-    googleLinkFactory(sessions[i]);
-    googleButtonListener(sessions[i]);
-    directionsListeners(sessions[i]);
+    // Draw new Routes
+    processLocations();
+
+    function requestFactory(location) {
+      var origin = new google.maps.LatLng(location.lat,location.lng);
+
+      var request = {};
+      request.origin = origin;
+      request.destination = maps[ID].location;
+      request.travelMode = google.maps.TravelMode[travelMethod];
+
+      routeFinder(maps[ID], location.name, request);
+    }
+
+    function processLocations() {
+      var i = 0;
+      var n = locations.length;
+      for (i; i<n; i++) {
+        requestFactory(locations[i]);
+      }
+      googleLinkFactory(session);
+    }
   }
-}
 
-function init(){
+  function calculateGeo(menuItem)  {
+    var session = findAncestor(menuItem, 'location__detail');
+    var ID = idFactory(session);
+
+    menuItem.classList.add(processingClass);
+
+    function requestFactory(origin) {
+      var request = {};
+      request.origin = origin;
+      request.destination = maps[ID].location;
+      request.travelMode = google.maps.TravelMode.DRIVING;
+
+      routeFinder(maps[ID], 'You', request);
+      menuItem.classList.remove(processingClass);
+      menuItem.classList.add(activeClass);
+    }
+
+    function bad() {
+      menuItem.classList.remove(processingClass);
+      googleLinkFactory(session);
+      throw new Error('Bum');
+    }
+
+    function good(position) {
+      clearRoute(ID);
+      requestFactory(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+      googleLinkFactory(session, {lat: position.coords.latitude, lng: position.coords.longitude});
+    }
+
+    navigator.geolocation.getCurrentPosition(good, bad);
+  }
+
+  function calculatePostcode(session, value) {
+    var ID = idFactory(session);
+    var postcode = value.replace(/\s/g, "");
+    var regex = /^([a-zA-Z]){1}([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9]){1}([ ])([0-9][a-zA-z][a-zA-z]){1}$/;
+
+    clearRoute(ID);
+    checkPostcode(value);
+
+    function checkPostcode() {
+      if (value === '' || !regex.test(value)) {
+        bad();
+      } else {
+        good();
+      }
+    }
+
+    function bad(str) {
+      var message = document.createTextNode(str || 'Enter a Valid Postcode');
+      var label = session.querySelectorAll('.location__directions .location__message')[0];
+
+      label.innerHTML = '';
+
+      label.appendChild(message);
+      label.classList.add('location__message--error');
+      googleLinkFactory(session);
+    }
+
+    function good() {
+      var geocoder = new google.maps.Geocoder();
+
+      geocoder.geocode({'address': value}, function(results, status){
+        var location;
+
+        if (status == google.maps.GeocoderStatus.OK) {
+          location = results[0].geometry.location;
+          requestFactory(location);
+          googleLinkFactory(session, {lat: location.lat(), lng: location.lng()} );
+        } else {
+          bad(status);
+        }
+      });
+    }
+
+    function requestFactory(origin) {
+      var request = {};
+      request.origin = origin;
+      request.destination = maps[ID].location;
+      request.travelMode = google.maps.TravelMode.DRIVING;
+
+      routeFinder(maps[ID], value, request);
+    }
+  }
+
+  function clearRoute(ID) {
+    clearMarkers();
+    clearRoutes();
+    clearClasses();
+    maps[ID].bounds = new google.maps.LatLngBounds();
+    maps[ID].bounds.extend(maps[ID].location);
+
+    function clearClasses() {
+      var menuItems = maps[ID].session.querySelectorAll('.location__directions li');
+      var i = 0;
+      var n = menuItems.length;
+
+      for (i; i<n; i++) {
+        menuItems[i].classList.remove(activeClass);
+      }
+    }
+
+    function clearRoutes() {
+      if (maps[ID].renderers.length > 0) {
+        var i = 0;
+        var n = maps[ID].renderers.length;
+        for (i; i<n; i++) {
+          maps[ID].renderers[i].setMap(null);
+        }
+        maps[ID].renderers = [];
+      }
+    }
+
+    function clearMarkers() {
+      if (maps[ID].markers.origins.length > 0) {
+        var i = 0;
+        var n = maps[ID].markers.origins.length;
+        for (i; i<n; i++) {
+          maps[ID].markers.origins[i].setMap(null);
+        }
+        maps[ID].markers.origins = [];
+      }
+    }
+  }
+
+  function routeFinder(storage, str, request) {
+    var map = storage.map;
+    var renderer = new google.maps.DirectionsRenderer(storage.directionsOptions);
+    var miles;
+
+    renderer.setMap(map);
+
+    // Make the request
+    directionsService.route(request, function(response, status) {
+      // Proceed if everything's a-ok
+      if (status == google.maps.DirectionsStatus.OK) {
+        // Put a marker at the route's start point and save it
+        var marker = new google.maps.Marker({
+          clickable: false,
+          position: request.origin,
+          map: map
+        });
+        storage.bounds.extend(request.origin);
+
+        // Add distance to the string for the tooltip
+        miles = response.routes[0].legs[0].distance.value/1609.344;
+        miles = Math.round(miles*10)/10;
+        str += ' - ' + miles + ' miles';
+        // Display a tooltip with useful info
+        marker.info = new google.maps.InfoWindow({
+          content: str
+        });
+        storage.markers.origins.push(marker);
+
+        // Do it
+        renderer.setDirections(response);
+        // Store it
+        storage.renderers.push(renderer);
+
+        // Recenter the map
+        offsetMap(map, storage.session);
+      }
+    });
+  }
+
+  function googleButtonListener(session) {
+    var button = session.querySelectorAll('.location__google')[0];
+
+    function openGoogle(event) {
+      event.preventDefault();
+      window.open(this.getAttribute('data-url'));
+    }
+    button.addEventListener('click', openGoogle);
+  }
+
+  function googleLinkFactory(session, from, travelMode) {
+    var button = session.querySelectorAll('.location__google')[0];
+    var daddrLat = session.getAttribute('data-lat');
+    var daddrLng = session.getAttribute('data-lng');
+    var daddr = 'daddr=' + daddrLat + ',' + daddrLng;
+    var url = 'https://maps.google.com?';
+    var saddr = '';
+    var str;
+
+    if (from) saddr = 'saddr=' + from.lat + ',' + from.lng + '&';
+    str = url + saddr + daddr;
+
+    button.setAttribute('data-url', str);
+  }
+
+  function process(sessions){
+    var i = 0;
+    var n = sessions.length;
+
+    for (i; i<n; i++) {
+      mapFactory(sessions[i]);
+      googleLinkFactory(sessions[i]);
+      googleButtonListener(sessions[i]);
+      directionsListeners(sessions[i]);
+    }
+  }
+
   if (training) process(training.querySelectorAll('.location__detail'));
   if (location) process(location.querySelectorAll('.location__detail'));
 }
-module.exports = init();

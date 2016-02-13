@@ -14,6 +14,7 @@
       <li><a href="/roster">The Team</a></li>
     </nav>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRffT8sStG1kBc5v9u0QE10hcEAvK7dk"></script>
     <script src="<?php echo assets_url(); ?>/js/base.js"></script>
   </body>
 
