@@ -238,8 +238,8 @@
   });
 
 gulp.task('theme', gulp.series('sprite', 'criticalstyle', 'templates'), function(){});
-gulp.task('build', gulp.parallel('theme', 'style', 'javascript', 'images'), function(){});
+gulp.task('build', gulp.parallel('clean', 'theme', 'style', 'javascript', 'images'), function(){});
 gulp.task('serve', gulp.parallel('watch', 'server'), function(){});
 
-gulp.task('default', gulp.series('vagrant', 'clean', 'build', 'serve'), function(){});
+gulp.task('default', gulp.series('vagrant', 'build', 'serve'), function(){});
 
