@@ -5,61 +5,61 @@ import Reflow from './Reflow';
 
 export default class {
   constructor(elem, queryString, continuous) {
-    var t = this;
+    var self = this;
     var eventDetail = {
       detail: {
-        queries: t
+        queries: self
       }
     };
 
-    t.element = elem;
-    t.continuous = continuous;
+    self.element = elem;
+    self.continuous = continuous;
 
     // Starting dimensions
-    t.height = elem.offsetHeight;
-    t.width = elem.offsetWidth;
+    self.height = elem.offsetHeight;
+    self.width = elem.offsetWidth;
 
     // Event to be emitted on change of breakpoint
     if (typeof CustomEvent === 'function') { // Good Browsers
-      t.breakpointEvent = new CustomEvent('breakpoint', eventDetail);
+      self.breakpointEvent = new CustomEvent('breakpoint', eventDetail);
     } else {
-      t.breakpointEvent = document.createEvent('CustomEvent');
-      t.breakpointEvent.initCustomEvent('breakpoint', true, true, eventDetail);
+      self.breakpointEvent = document.createEvent('CustomEvent');
+      self.breakpointEvent.initCustomEvent('breakpoint', true, true, eventDetail);
     }
 
     // An identifier to use in the classname later
     // Unlike idFactory, use classname by default, for better BEM
     if (elem.className) {
       if (elem.classList) {
-        t.identifier = elem.classList[0];
+        self.identifier = elem.classList[0];
       } else {
-        t.identifier = elem.className;
-        t.identifier = t.identifier.split(' ')[0];
+        self.identifier = elem.className;
+        self.identifier = self.identifier.split(' ')[0];
       }
     } else if (elem.getAttribute('id')) {
-      t.identifier = elem.getAttribute('id').toLowerCase();;
+      self.identifier = elem.getAttribute('id').toLowerCase();;
     }
-    t.identifier = t.identifier.match(/(\w+)-?/);
-    t.identifier = t.identifier[1];
+    self.identifier = self.identifier.match(/(\w+)-?/);
+    self.identifier = self.identifier[1];
 
     // Process the named breakpoints
-    t.breakpoints = t.queryFactory(queryString);
+    self.breakpoints = self.queryFactory(queryString);
 
     // Prepare element to broadcast resize events
     let inst = new Reflow(elem, continuous);
-    t.reflow = inst;
+    self.reflow = inst;
 
     // …Listen for those resize events
-    t.element.addEventListener('resizeEnd', function(event){
-      t.sizeChange.call(t,event);
+    self.element.addEventListener('resizeEnd', function(event){
+      self.sizeChange.call(self,event);
     });
-    t.element.addEventListener('debouncedResize', function(event){
-      t.sizeChange.call(t,event);
+    self.element.addEventListener('debouncedResize', function(event){
+      self.sizeChange.call(self,event);
     });
   }
 
   queryFactory(str) {
-    var t = this;
+    var self = this;
     var obj;
 
     // Wee helper to surround something/anything with quotes
@@ -78,7 +78,7 @@ export default class {
           modifier = 1;
           break;
         case 'em':
-          modifier = parseFloat(getComputedStyle(t.element).fontSize);
+          modifier = parseFloat(getComputedStyle(self.element).fontSize);
           break;
         case 'rem':
           modifier = parseFloat(config.baseFontSize);
@@ -114,13 +114,13 @@ export default class {
       // Set initial state as inactive
       obj[key].active = false;
       // Construct Classname
-      if (t.identifier) {
-        obj[key].className = t.identifier + '--' + key;
+      if (self.identifier) {
+        obj[key].className = self.identifier + '--' + key;
       } else {
         obj[key].className = key;
       }
       // Check breakpoint
-      t.checkBreakpoint(key,obj);
+      self.checkBreakpoint(key,obj);
     }
 
     // Store the breakpoints for later
@@ -128,35 +128,35 @@ export default class {
   }
 
   sizeChange(event){
-    var t = this;
+    var self = this;
     var key;
 
     // Update height and width
-    t.height = event.detail.height;
-    t.width = event.detail.width;
+    self.height = event.detail.height;
+    self.width = event.detail.width;
 
     // loop through query
-    for (key in t.breakpoints) {
-      t.checkBreakpoint(key);
+    for (key in self.breakpoints) {
+      self.checkBreakpoint(key);
     }
   }
 
   checkBreakpoint(key,obj) {
-    var t = this;
-    var breakpoints = obj || t.breakpoints;
+    var self = this;
+    var breakpoints = obj || self.breakpoints;
     var breakpoint = breakpoints[key];
-    var minWidth = breakpoint['min-width'] || t.width;
-    var maxWidth = breakpoint['max-width'] || t.width;
-    var minHeight = breakpoint['min-height'] || t.height;
-    var maxHeight = breakpoint['max-height'] || t.height;
+    var minWidth = breakpoint['min-width'] || self.width;
+    var maxWidth = breakpoint['max-width'] || self.width;
+    var minHeight = breakpoint['min-height'] || self.height;
+    var maxHeight = breakpoint['max-height'] || self.height;
     var widthFlag = false;
     var heightFlag = false;
     var active = false;
 
-    if (t.width >= minWidth && t.width <= maxWidth) {
+    if (self.width >= minWidth && self.width <= maxWidth) {
       widthFlag = true;
     }
-    if (t.height >= minHeight && t.height <= maxHeight) {
+    if (self.height >= minHeight && self.height <= maxHeight) {
       heightFlag = true;
     }
 
@@ -168,41 +168,41 @@ export default class {
     // Only take any action if the breakpoint's state is changed
     if (active !== breakpoint.active) {
       if (active) {
-        t.activate(key, obj);
+        self.activate(key, obj);
       } else {
-        t.deactivate(key, obj);
+        self.deactivate(key, obj);
       }
     }
   }
 
   activate(key,obj) {
-    var t = this;
-    var breakpoints = obj || t.breakpoints;
+    var self = this;
+    var breakpoints = obj || self.breakpoints;
     var breakpoint = breakpoints[key];
 
     breakpoint.active = true;
 
-    t.element.classList.add(breakpoint.className);
-    if (breakpoint.className.substr(breakpoint.className.length - 10) === 'type-break') t.element.classList.add('type-break');
+    self.element.classList.add(breakpoint.className);
+    if (breakpoint.className.substr(breakpoint.className.length - 10) === 'type-break') self.element.classList.add('type-break');
 
-    t.breakpointEvent.detail.active = true;
-    t.breakpointEvent.detail.breakpoint = breakpoint;
-    t.element.dispatchEvent(t.breakpointEvent);
+    self.breakpointEvent.detail.active = true;
+    self.breakpointEvent.detail.breakpoint = breakpoint;
+    self.element.dispatchEvent(self.breakpointEvent);
   }
 
   deactivate(key,obj) {
-    var t = this;
-    var breakpoints = obj || t.breakpoints;
+    var self = this;
+    var breakpoints = obj || self.breakpoints;
     var breakpoint = breakpoints[key];
 
     breakpoint.active = false;
 
-    t.element.classList.remove(breakpoint.className);
-    if (breakpoint.className.substr(breakpoint.className.length - 10) === 'type-break') t.element.classList.remove('type-break');
+    self.element.classList.remove(breakpoint.className);
+    if (breakpoint.className.substr(breakpoint.className.length - 10) === 'type-break') self.element.classList.remove('type-break');
 
-    t.breakpointEvent.detail.active = false;
-    t.breakpointEvent.detail.breakpoint = breakpoint;
-    t.element.dispatchEvent(t.breakpointEvent);
+    self.breakpointEvent.detail.active = false;
+    self.breakpointEvent.detail.breakpoint = breakpoint;
+    self.element.dispatchEvent(self.breakpointEvent);
   }
 }
 
