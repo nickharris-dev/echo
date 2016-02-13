@@ -50,10 +50,10 @@ export default class {
     self.reflow = inst;
 
     // …Listen for those resize events
-    self.element.addEventListener('resizeEnd', function(event){
+    elem.addEventListener('resizeEnd', function(event){
       self.sizeChange.call(self,event);
     });
-    self.element.addEventListener('debouncedResize', function(event){
+    elem.addEventListener('debouncedResize', function(event){
       self.sizeChange.call(self,event);
     });
   }
