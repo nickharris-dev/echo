@@ -3,6 +3,7 @@
 // Gulp Packages
 // =============
   var autoprefixer = require('gulp-autoprefixer');
+  var babel = require('rollup-plugin-babel');
   var browserSync = require('browser-sync');
   var changed = require('gulp-changed');
   var cssmin = require('gulp-cssmin');
@@ -11,13 +12,16 @@
   var filter = require('gulp-filter');
   var gulp = require('gulp');
   var gulpif = require('gulp-if');
+  var gutil = require('gulp-util');
   var imagemin = require('gulp-imagemin');
   var notify = require('gulp-notify');
   var rename = require('gulp-rename');
+  var rollup = require('gulp-rollup');
   var sass = require('gulp-sass');
   var shell = require('gulp-shell');
   var sourcemaps = require('gulp-sourcemaps');
   var sprity = require('sprity');
+  var uglify = require('gulp-uglify');
 
 // Universal Settings
 // ==================
@@ -86,8 +90,8 @@
       ])
       .pipe(changed(paths.dest.style))
       .pipe(dev(sourcemaps.init({loadMaps: true})))
-      .pipe(sass(sassOptions).on('error', function(err){ notify().write(err); }))
-      .pipe(autoprefixer())
+        .pipe(sass(sassOptions).on('error', function(err){ notify().write(err); }))
+        .pipe(autoprefixer())
       .pipe(dev(sourcemaps.write('./')))
       .pipe(production(cssmin()))
       .pipe(gulp.dest(paths.dest.style))
@@ -141,11 +145,19 @@
 
 // Javascript
 // ==========
-  gulp.task('javascript', function(){
-    return gulp.src(paths.src.javascript + '**/*')
-      .pipe(changed(paths.dest.javascript))
+  gulp.task('javascript', function () {
+    return gulp.src(paths.src.javascript + 'base.js')
+      .pipe(rollup({
+        sourceMap: true,
+        plugins: [
+          babel({ "presets": ["es2015-rollup"] })
+        ]
+        }))
+      .pipe(production(uglify()))
+      .on('error', function(err){ notify().write(err); })
+      .pipe(dev(sourcemaps.write('./')))
       .pipe(gulp.dest(paths.dest.javascript))
-      .pipe(dev(proxy.stream({match: '**/*'})));;
+      .pipe(dev(proxy.stream({match: '**/*.js'})));
   });
 
 // Utilities
@@ -154,6 +166,7 @@
     return del([
       paths.dest.images,
       paths.dest.style,
+      paths.dest.javascript,
       './www/wordpress-default/wp-content/themes/*',
       '!./www/wordpress-default/wp-content/themes/index.php'
     ], cb);
@@ -225,8 +238,8 @@
   });
 
 gulp.task('theme', gulp.series('sprite', 'criticalstyle', 'templates'), function(){});
-gulp.task('build', gulp.parallel('theme', 'style', 'javascript', 'images'), function(){});
+gulp.task('build', gulp.parallel('clean', 'theme', 'style', 'javascript', 'images'), function(){});
 gulp.task('serve', gulp.parallel('watch', 'server'), function(){});
 
-gulp.task('default', gulp.series('vagrant', 'clean', 'build', 'serve'), function(){});
+gulp.task('default', gulp.series('vagrant', 'build', 'serve'), function(){});
 

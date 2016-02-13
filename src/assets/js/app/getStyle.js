@@ -1,4 +1,4 @@
-define(function(require){
+export default function(i, p) {
   function checkStyle(identifier, property) {
     var elem = elementFactory(identifier);
     var value = getComputedStyle(elem)[property];
@@ -41,5 +41,5 @@ define(function(require){
     return type;
   }
 
-  return checkStyle;
-});
+  return checkStyle(i, p);
+}

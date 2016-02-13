@@ -1,6 +1,10 @@
-define(['require', 'config', 'response', 'getStyle'], function(require, config, response, getStyle) {
+import config from './config';
+import response from './response';
+import getStyle from './getStyle';
+
+export default function() {
   var identifier = 'Devgrid';
-  var windowWidth = response;
+  var windowWidth = response();
   var store = {
     columns: 'devGrid__columns',
     gutters: 'devGrid__gutters',
@@ -226,4 +230,4 @@ define(['require', 'config', 'response', 'getStyle'], function(require, config, 
       }
     });
   })();
-});
+}

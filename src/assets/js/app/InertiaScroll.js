@@ -1,12 +1,14 @@
-define(['require', 'csssupport'], function(require, csssupport){
-  // Helpers
-  var lastKnownX = 0;
-  var x = 0;
-  var pressed = false;
-  var reference = 0;
-  var ticking = false;
+import csssupport from './csssupport';
 
-  var InertiaScroll = function(elem) {
+export default class {
+  constructor(elem) {
+    // Helpers
+    var lastKnownX = 0;
+    var x = 0;
+    var pressed = false;
+    var reference = 0;
+    var ticking = false;
+
     var t = this;
     t.element = elem;
     t.max = t.element.offsetWidth - t.element.parentElement.offsetWidth;
@@ -77,13 +79,13 @@ define(['require', 'csssupport'], function(require, csssupport){
 
     t.element.addEventListener('touchstart', grab);
     t.element.addEventListener('touchmove', drag);
-  };
+  }
 
-  InertiaScroll.prototype.destroy = function() {
+  destroy () {
+    // Todo
+  }
 
-  };
-
-  InertiaScroll.prototype.updatePosition = function (position) {
+  updatePosition (position) {
     var t = this;
     var str = 'matrix(';
     var x;
@@ -105,7 +107,6 @@ define(['require', 'csssupport'], function(require, csssupport){
     str += ')';
 
     t.element.style.transform = str;
-  };
+  }
+}
 
-  return InertiaScroll;
-})

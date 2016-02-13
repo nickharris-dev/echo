@@ -1,4 +1,6 @@
-define(['require', 'scrollTo'], function(require, scrollTo){
+import scrollTo from './scrollTo';
+
+export default function(){
   // Get a list of all links in the page
   var anchors = document.getElementsByTagName('a');
   var i = 0;
@@ -47,4 +49,5 @@ define(['require', 'scrollTo'], function(require, scrollTo){
     var target = document.getElementById(targetStr);
     scrollTo(target.offsetTop, 1000, ease);
   }
-});
+}
+
