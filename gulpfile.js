@@ -94,6 +94,9 @@
         .pipe(autoprefixer())
       .pipe(dev(sourcemaps.write('./')))
       .pipe(production(cssmin()))
+      .pipe(rename({
+        suffix: '.' + pkg.version
+      }))
       .pipe(gulp.dest(paths.dest.style))
       .pipe(dev(proxy.stream({match: '**/*.css'})));
   });
@@ -156,6 +159,9 @@
       .pipe(production(uglify()))
       .on('error', function(err){ notify().write(err); })
       .pipe(dev(sourcemaps.write('./')))
+      .pipe(rename({
+        suffix: '.' + pkg.version
+      }))
       .pipe(gulp.dest(paths.dest.javascript))
       .pipe(dev(proxy.stream({match: '**/*.js'})));
   });

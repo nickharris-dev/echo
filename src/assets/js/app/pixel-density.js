@@ -3,5 +3,3 @@ export default function() {
   // later I can make this more elegant
   return window.devicePixelRatio || 1;
 }
-
-module.exports = pixelDensity();

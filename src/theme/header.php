@@ -39,8 +39,8 @@
     <style>
       <?php include 'critical.php'; ?>
     </style>
-    <link href="<?php echo assets_url(); ?>/css/global.css?v=2.0.0" rel="stylesheet">
-    <?php if ($is_dev): ?><link href="<?php echo assets_url(); ?>/css/dev.css" rel="stylesheet"><?php endif; ?>
+    <link href="<?php echo assets_url(); ?>/css/global.2.0.1.css" rel="stylesheet">
+    <?php if ($is_dev): ?><link href="<?php echo assets_url(); ?>/css/dev.2.0.1.css" rel="stylesheet"><?php endif; ?>
 	</head>
 
 	<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
