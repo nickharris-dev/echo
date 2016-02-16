@@ -1,7 +1,7 @@
-var pixelDensity = require('pixel-density');
-var response = require('response');
+import pixelDensity from './pixel-density';
+import response from './response';
 
-function media() {
+export default function() {
   var processedMessage = 'processed';
   var path = document.getElementById('script').getAttribute('src').split('/js/')[0];
   var mediaElements = getUnprocessed(document.querySelectorAll('[data-media]'));
@@ -216,7 +216,6 @@ function media() {
     }
   }
 
-
   function onWindowResizeEnd(e) {
     var i = 0;
     var len = mediaElements.length;
@@ -244,5 +243,3 @@ function media() {
   window.addEventListener('resized', onWindowResizeEnd);
   // Todo - addEventListener on ajax success
 }
-
-module.exports = media();

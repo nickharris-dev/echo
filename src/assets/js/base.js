@@ -8,6 +8,7 @@ import Elementquery from './app/Elementqueries';
 import grid from './app/grid';
 import idFactory from './app/idFactory';
 import location from './app/location';
+import media from './app/media';
 import merge from './app/merge';
 import results from './app/results';
 
@@ -53,6 +54,10 @@ function nodeLoop(nodeList, func, arg1) {
 // ===============
 nodeLoop(document.querySelectorAll('[data-type-break]'), typography);
 nodeLoop(document.querySelectorAll('[data-eq]'), eq, false);
+
+// Media
+// =====
+if (document.querySelectorAll('[data-media]').length > 0) media();
 
 // Training
 // ========
