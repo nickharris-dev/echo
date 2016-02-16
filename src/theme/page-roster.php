@@ -7,35 +7,34 @@
 
 <?php get_header(); ?>
 
-<?php if ( have_rows('hero') ) :
-  while ( have_rows('hero') ) : the_row(); ?>
-	<section class="hero hero--roster" id="Hero">
+	<section class="post__header">
+		<?php if ( have_rows('hero') ) :
+	    while ( have_rows('hero') ) : the_row(); ?>
 
-    <?php if( get_row_layout() === 'image'):
-      $pic = get_sub_field('image')['sizes']; ?>
-        <img
-          alt=""
-          class="hero__pic"
-          src="<?php print_r($pic['hero-1000']); ?>"
-          srcset="
-            <?php print_r($pic['hero-640']); ?> <?php print_r($pic['hero-640-width']); ?>w,
-            <?php print_r($pic['hero-1000']); ?> <?php print_r($pic['hero-1000-width']); ?>w,
-            <?php print_r($pic['hero-1500']); ?> <?php print_r($pic['hero-1500-width']); ?>w,
-            <?php print_r($pic['hero-2000']); ?> <?php print_r($pic['hero-2000-width']); ?>w,
-            <?php print_r($pic['hero-3000']); ?> <?php print_r($pic['hero-3000-width']); ?>w"
-        >
-    <?php endif; ?>
+	    <?php if( get_row_layout() === 'image'):
+	      $pic = get_sub_field('image')['sizes']; ?>
+	      <figure class="post__pic"><img
+	        alt="<?php print_r(get_sub_field('image')['alt']); ?>"
+	        src="<?php print_r($pic['news_feature-1000']); ?>"
+	        srcset="
+	          <?php print_r($pic['news_feature-640']); ?> <?php print_r($pic['news_feature-640-width']); ?>w,
+	          <?php print_r($pic['news_feature-1000']); ?> <?php print_r($pic['news_feature-1000-width']); ?>w,
+	          <?php print_r($pic['news_feature-1500']); ?> <?php print_r($pic['news_feature-1500-width']); ?>w,
+	          <?php print_r($pic['news_feature-2000']); ?> <?php print_r($pic['news_feature-2000-width']); ?>w,
+	          <?php print_r($pic['news_feature-3000']); ?> <?php print_r($pic['news_feature-3000-width']); ?>w"
+	      ></figure>
 
-    <h1>
-      <?php the_title(); ?>
-    </h1>
-	</section>
-<?php endwhile;
- else: ?>
- 	<h1 class="no-hero">
-    <?php the_title(); ?>
-  </h1>
-<?php endif; ?>
+				<div class="post__hgroup post__hgroup--roster">
+		      <h1 itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
+		    </div>
+	    <?php endif; ?>
+
+	  <?php endwhile; else: ?>
+	  	<div class="post__hgroup post__hgroup--roster">
+		    <h1 class="no-hero" itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
+		  </div>
+	  <?php endif; ?>
+ 	</section>
 
 	<?php
 		$terms = get_terms( 'Team' );

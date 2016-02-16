@@ -229,12 +229,31 @@ $layoutbreak2: rem(900);
 }
 
 .post {
+  &__header {
+    position: relative;
+  }
+
   &__pic {
     margin-top: 0;
   }
 
   &__hgroup {
     padding: 0 $column;
+
+    &--roster {
+      bottom: 0;
+      position: absolute;
+      width: 100%;
+
+      h1 {
+        color: palette(icewhite);
+        font-size: 15vw;
+        line-height: 1;
+        max-width: 100%;
+        text-align: center;
+        text-shadow: 0 0 15px palette(jetblack);
+      }
+    }
   }
 
   &__content {
