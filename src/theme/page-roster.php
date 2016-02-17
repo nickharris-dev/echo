@@ -133,10 +133,6 @@
 									<th scope="row">Age</th>
 									<td><?php echo $age; ?></td>
 								</tr>
-								<tr>
-									<th scope="row"><abbr title="Experience">Exp.</abbr></th>
-									<td><?php echo $experience; ?></td>
-								</tr>
 							</table>
 							<!--
 							<h2 class="player__stats__heading">Stats</h2>
