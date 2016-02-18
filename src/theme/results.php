@@ -21,7 +21,8 @@
       $video = null;
       $role = null;
       $flag = false;
-      if ($date < $today && $date > $aYearAgo) :
+
+      if ($date < $today) :
         if ( have_rows('games') ) :
           while ( have_rows('games') ) : the_row();
             $weare = get_sub_field('responsibility');
@@ -36,14 +37,14 @@
                     global $away;
                     $away = '<abbr title="' . get_the_title($o->ID) . '">' . get_field('abbreviation', $o->ID) . '</abbr>';
                   endforeach; // $opponents as $o
-                endif; // $opponent
+                endif; // $opponents
                 if ( have_rows('post_game') ) :
                   while (have_rows('post_game')) : the_row();
                     global $flag, $home_score, $away_score, $video;
-                    $flag = true;
                     $home_score = get_sub_field('our_score');
                     $away_score = get_sub_field('opponents_score');
                     $video = get_sub_field('video_link');
+                    $flag = true;
                   endwhile; // have_rows('post_game')
                 endif; // have_rows('post_game')
 
@@ -70,7 +71,9 @@
                 endif; // have_rows('post_game')
 
               endif; // $weare
-              if ( $flag ): ?>
+
+              if ( $flag ):
+                if ( $weare == 'the Home Team' || $weare == 'the Away Team' ): ?>
 
                 <article class="game game--<?php echo $role; ?>">
                   <?php if ($video) {
@@ -91,7 +94,7 @@
                   } ?>
                 </article>
 
-    <?php endif; // $home_score && $away_score
+    <?php endif; endif; // $weare - $home_score && $away_score
           endwhile; // have_rows('games')
         endif; // have_rows('games')
       endif; // Date < Today
