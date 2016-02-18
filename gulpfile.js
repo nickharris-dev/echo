@@ -80,6 +80,9 @@
 // Styles
 // ======
   gulp.task('style', function(){
+    var renameOptions = {
+      suffix: '.' + pkg.version
+    };
     var sassOptions = {
       style: 'expanded'
     };
@@ -94,12 +97,11 @@
         .pipe(autoprefixer())
       .pipe(dev(sourcemaps.write('./')))
       .pipe(production(cssmin()))
-      .pipe(rename({
-        suffix: '.' + pkg.version
-      }))
+      .pipe(rename(renameOptions))
       .pipe(gulp.dest(paths.dest.style))
       .pipe(dev(proxy.stream({match: '**/*.css'})));
   });
+
   gulp.task('criticalstyle', function(){
     var renameOptions = {
       extname: '.php'
@@ -213,7 +215,10 @@
 
   gulp.task('watch', function() {
     // Theme files
-    gulp.watch(paths.src.theme + '**/*', gulp.parallel('templates'));
+    gulp.watch([
+      paths.src.theme + '**/*',
+      '!' + paths.src.theme + 'critical.php',
+    ], gulp.parallel('templates'));
     // Styles
     gulp.watch([
       paths.src.style + '**/*.scss',
@@ -234,7 +239,7 @@
       srcfiles.navstyles,
       srcfiles.herostyles,
       srcfiles.resultsstyles
-    ], gulp.parallel('theme', 'style'));
+    ], gulp.parallel('criticalstyle'));
     // Images
     gulp.watch(paths.src.images + '**/*', gulp.parallel('images'));
     // Sprite
