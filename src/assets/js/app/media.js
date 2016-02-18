@@ -1,27 +1,45 @@
 import pixelDensity from './pixel-density';
 import response from './response';
+import ElementResize from './ElementResize';
 
 export default function(){
   var processedMessage = 'processed';
-  var mediaElements = getUnprocessed(document.querySelectorAll('[data-media]'));
+  var mediaElements = {};
 
-  // Basically a container for a loop that will give me all the media elements
+  getUnprocessed(document.querySelectorAll('[data-media]'));
+
+  function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 5; i++ )
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  }
+
+  // Basically a container for a loop that will return all the media elements
   // that haven't yet been processed
   function getUnprocessed(nodelist) {
     // Set up for the for loop, define them here and the loop is quicker (it
     // doesn't have to keep calculating the values)
     var i = 0;
     var len = nodelist.length;
-    // New array that I'll populate and return to the variable
-    var tempArray = [];
 
     for (i; i<len; i++) {
       node = nodelist[i];
       // Check if the data attribute is already populated
       if (node.getAttribute('data-media') !== processedMessage) {
-        // If not, create an object with lots of lovely details
+        // If not, create the reflow (if it doesn't exist)
+        if (!node.classList.contains('resizing')) {
+          let inst = new ElementResize(node);
+        }
+        // Generate an identifier
+        var ident = makeid();
+        // Store that identifier on the node
+        node.setAttribute('data-ident', ident);
+        // and create another object with lots of lovely details
         var elem = {};
-        elem.container = buildContainerObject(node);
         elem.media = {};
 
         elem.media.widths = node.getAttribute('data-media-widths').split(',');
@@ -32,32 +50,19 @@ export default function(){
         elem.media.type = node.getAttribute('data-media-type');
         elem.media.file = node.getAttribute('data-media-file').split(',');
         elem.media.ext = divineExtension(elem);
+        elem.media.size = getSize(elem, node.offsetHeight, node.offsetWidth);
 
-        elem.media.size = getSize(elem);
-
-        // Process the element
-        process(elem);
-        // Add to the end of my temp array
-        tempArray.push(elem);
-        // Mark the element as processed so if I need to run this all again
+        // Add to the object
+        mediaElements[ident] = elem;
+        // Add a listener
+        node.addEventListener('resizeEnd', calculate);
+        // Mark the node as processed so if I need to run this all again
         // after an AJAX call, I won't be doubling my efforts
         node.setAttribute('data-media', processedMessage);
+        // Fire the initial calculation
+        calculate.call(node);
       }
     }
-
-    // Return to the variable
-    return tempArray;
-  }
-
-  function buildContainerObject(node) {
-    var container = {};
-
-    container.node = node;
-    container.height = node.offsetHeight;
-    container.width = node.offsetWidth;
-    container.aspectRatio = container.width/container.height;
-
-    return container;
   }
 
   // Used in getUnprocessed()
@@ -82,26 +87,27 @@ export default function(){
     } else {
       // If the media is an image, create the new node
       elem.media.node = document.createElement('img');
-      // and return the media-type attribute
-      ext = '.' + elem.type;
+      ext = elem.media.file[0].split('.');
+      ext = ext[ext.length-1];
     }
+    elem.media.node.classList.add('smart-media');
     return ext;
   }
 
-  function getSize(elem) {
+  function getSize(elem, h, w) {
     var i = 0;
-    var len = elem.media.widths.length;
+    var n = elem.media.file.length;
     var density = pixelDensity();
-    var desirableWidth = elem.container.width * density;
-    var desirableHeight = elem.container.height * density;
+    var desirableHeight = h * density;
+    var desirableWidth = w * density;
     // Use the biggest one by default, it's safe to do it this way as
     // the options are looped and the first one big enough is used. This
     // value is only used if there's only one value (so it'll be 0) or if
     // none of the options is big enough, in which case we want the
     // biggest anyway
-    var size = elem.media.widths.length-1;
+    var size = elem.media.file.length-1;
 
-    for (i; i<len; i++) {
+    for (i; i<n; i++) {
       if (elem.media.widths[i] >= desirableWidth && elem.media.heights[i] >= desirableHeight) {
         size = i;
         break;
@@ -119,7 +125,8 @@ export default function(){
   }
 
   // Used in process()
-  function position(elem) {
+  function position(node, h, w) {
+    var elem = mediaElements[node.getAttribute('data-ident')];
     var focalPoint, height, centrePoint, reset, startPoint, width;
 
     // If the container's width divided by the media's aspect ration is greater
@@ -127,7 +134,7 @@ export default function(){
     // container at 100% width, so setting the width style to 100% will ensure
     // total coverage. Otherwise, setting the height style to 100% will ensure
     // total coverage. Make sense? good.
-    if (elem.container.width/elem.media.aspectRatio > elem.container.height) {
+    if (w/elem.media.aspectRatio > h) {
       // Set the absolutes
       elem.media.node.style.width = '100%';
       elem.media.node.style.left = '0';
@@ -140,9 +147,9 @@ export default function(){
       focalPoint = parseFloat(elem.media.focalPointY);
 
       // Calculate the height of the media node
-      height = elem.container.width/elem.media.aspectRatio;
+      height = w/elem.media.aspectRatio;
       // Calculate the vertical centre of the container
-      centrePoint = elem.container.height/2;
+      centrePoint = h/2;
       // Calculate the reset amount
       reset = focalPoint*(height/100);
       // Calculate the start Point
@@ -159,7 +166,7 @@ export default function(){
       // Else if the height of the media minus the amount of it that's hidden is
       // still greater than the height of the container, the container is
       // covered and the focal point is central
-      } else if (height+startPoint > elem.container.height) {
+      } else if (height+startPoint > h) {
         elem.media.node.style.top = startPoint + 'px';
         elem.media.node.style.bottom = '';
 
@@ -180,15 +187,15 @@ export default function(){
 
       focalPoint = parseFloat(elem.media.focalPointX);
 
-      width = elem.container.height*elem.media.aspectRatio;
-      centrePoint = elem.container.width/2;
+      width = h*elem.media.aspectRatio;
+      centrePoint = w/2;
       reset = focalPoint*(width/100);
       startPoint = centrePoint-reset;
 
       if (startPoint >= 0) {
         elem.media.node.style.left = '0';
         elem.media.node.style.right = '';
-      } else if (width+startPoint > elem.container.width) {
+      } else if (width+startPoint > w) {
         elem.media.node.style.left = startPoint + 'px';
         elem.media.node.style.right = '';
       } else {
@@ -198,20 +205,19 @@ export default function(){
     }
   }
 
-  function process(elem) {
+  function process(node, h, w) {
+    var elem = mediaElements[node.getAttribute('data-ident')];
     // Position the media element appropriately
-    position(elem);
+    position(node, h, w);
 
     if (elem.media.type === 'image') {
       elem.media.node.onload = function(){
-        elem.container.node.appendChild(elem.media.node);
+        node.appendChild(elem.media.node);
       }
-      elem.media.node.classList.add('smart-media');
       elem.media.node.src = buildSrc(elem);
     } else if (elem.media.type === 'video') {
       elem.media.node.src = buildSrc(elem);
-      elem.media.node.classList.add('smart-media');
-      elem.container.node.appendChild(elem.media.node);
+      node.appendChild(elem.media.node);
 
       // If it's a video, we want it to play automagically and loop
       var loop = document.createAttribute('loop');
@@ -220,31 +226,33 @@ export default function(){
     }
   }
 
+  function calculate(event) {
+    var elem = mediaElements[this.getAttribute('data-ident')];
+    var h, w;
 
-  function onWindowResizeEnd(e) {
-    var i = 0;
-    var len = mediaElements.length;
+    if (event && event.detail) {
+      h = event.detail.height;
+      w = event.detail.width;
+    } else {
+      h = this.offsetHeight;
+      w = this.offsetWidth;
+    }
 
-    // Loop through media elements
-    for (i; i<len; i++) {
-      var elem = mediaElements[i];
-      // Rebuild the container object
-      elem.container = buildContainerObject(elem.container.node);
-      // Conditions where we want to fetch a new file:
-      if (
-        // 1. There's more than one file specified
-        // 2. New size is bigger than current one
-        elem.media.file.length > 1 && getSize(elem) > elem.media.size
-      ) {
-        // There's no need to remove the element before processing, as the
-        // existing element is just updated with the new src
-        process(elem);
-      }
-      // Reposition the node
-      position(elem);
+    // Conditions where we want to fetch a new file:
+    if (
+      // 1. There is no current one
+      // 2. There's more than one file specified and
+      // 3. New size is bigger than current one
+      !elem.media.node.src ||
+      (elem.media.file.length > 1 && getSize(elem, h, w) > elem.media.size)
+    ) {
+      // There's no need to remove the element before processing, as the
+      // existing element is just updated with the new src
+      process(node, h, w);
+    } else {
+      position(node, h, w);
     }
   }
 
-  window.addEventListener('resized', onWindowResizeEnd);
   // Todo - addEventListener on ajax success
 };
