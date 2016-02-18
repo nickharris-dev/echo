@@ -1,7 +1,7 @@
 // min-width, max-width, min-height, max-height
 // Example value: linear:(min-width:600px) and (max-width:700px),test:(max-height:150px)
 import config from './config';
-import Reflow from './Reflow';
+import ElementResize from './ElementResize';
 
 export default class {
   constructor(elem, queryString, continuous) {
@@ -46,7 +46,7 @@ export default class {
     self.breakpoints = self.queryFactory(queryString);
 
     // Prepare element to broadcast resize events
-    let inst = new Reflow(elem, continuous);
+    let inst = new ElementResize(elem, continuous);
     self.reflow = inst;
 
     // …Listen for those resize events
