@@ -40,7 +40,7 @@
       <?php include 'critical.php'; ?>
     </style>
     <link href="<?php echo assets_url(); ?>/css/global.1.0.2.css" rel="stylesheet">
-    <?php if ($is_dev): ?><link href="<?php echo assets_url(); ?>/css/dev.2.0.1.css" rel="stylesheet"><?php endif; ?>
+    <?php if ($is_dev): ?><link href="<?php echo assets_url(); ?>/css/dev.1.0.2.css" rel="stylesheet"><?php endif; ?>
 	</head>
 
 	<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
