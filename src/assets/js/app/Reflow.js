@@ -65,15 +65,16 @@ export default class {
           css += 'overflow:hidden;';
           css += '}';
           css += '.reflowObject {';
+          css += 'background:transparent;';
           css += 'display:block;';
           css += 'height:100%;';
           css += 'left:0;';
           css += 'overflow:hidden;';
           css += 'pointer-events:none;';
           css += 'position:absolute;';
-          css += 'top:100%;';
+          css += 'top:0%;';
           css += 'width:100%;';
-          css += 'z-index:-1;';
+          css += 'z-index:-999;';
           css += '}';
 
       style.setAttribute('id', 'ReflowStyle');
