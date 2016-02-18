@@ -1,9 +1,8 @@
 import pixelDensity from './pixel-density';
 import response from './response';
 
-export default function() {
+export default function(){
   var processedMessage = 'processed';
-  var path = document.getElementById('script').getAttribute('src').split('/js/')[0];
   var mediaElements = getUnprocessed(document.querySelectorAll('[data-media]'));
 
   // Basically a container for a loop that will give me all the media elements
@@ -31,7 +30,7 @@ export default function() {
         elem.media.focalPointY = node.getAttribute('data-focalpoint-y');
         elem.media.focalPointX = node.getAttribute('data-focalpoint-x');
         elem.media.type = node.getAttribute('data-media-type');
-        elem.media.file = node.getAttribute('data-media-file');
+        elem.media.file = node.getAttribute('data-media-file').split(',');
         elem.media.ext = divineExtension(elem);
 
         elem.media.size = getSize(elem);
@@ -82,7 +81,7 @@ export default function() {
       }
     } else {
       // If the media is an image, create the new node
-      elem.media.node = document.createElement('image');
+      elem.media.node = document.createElement('img');
       // and return the media-type attribute
       ext = '.' + elem.type;
     }
@@ -92,8 +91,9 @@ export default function() {
   function getSize(elem) {
     var i = 0;
     var len = elem.media.widths.length;
-    var desirableWidth = elem.container.width * pixelDensity;
-    var desirableHeight = elem.container.height * pixelDensity;
+    var density = pixelDensity();
+    var desirableWidth = elem.container.width * density;
+    var desirableHeight = elem.container.height * density;
     // Use the biggest one by default, it's safe to do it this way as
     // the options are looped and the first one big enough is used. This
     // value is only used if there's only one value (so it'll be 0) or if
@@ -102,7 +102,7 @@ export default function() {
     var size = elem.media.widths.length-1;
 
     for (i; i<len; i++) {
-      if (elem.media.widths[i] > desirableWidth && elem.media.heights[i] > desirableHeight) {
+      if (elem.media.widths[i] >= desirableWidth && elem.media.heights[i] >= desirableHeight) {
         size = i;
         break;
       }
@@ -113,11 +113,8 @@ export default function() {
 
   // Used in process()
   function buildSrc(elem) {
-    var dir = elem.media.type === 'video' ? '/videos/' : '/images/';
-    var src;
-
     // Return the file that fits best
-    src = path + dir + elem.media.file + '-' + elem.media.size + elem.media.ext;
+    src = elem.media.file[elem.media.size];
     return src;
   }
 
@@ -205,16 +202,24 @@ export default function() {
     // Position the media element appropriately
     position(elem);
 
-    elem.media.node.src = buildSrc(elem);
-    elem.container.node.insertBefore(elem.media.node, elem.container.node.children[0]);
+    if (elem.media.type === 'image') {
+      elem.media.node.onload = function(){
+        elem.container.node.appendChild(elem.media.node);
+      }
+      elem.media.node.classList.add('smart-media');
+      elem.media.node.src = buildSrc(elem);
+    } else if (elem.media.type === 'video') {
+      elem.media.node.src = buildSrc(elem);
+      elem.media.node.classList.add('smart-media');
+      elem.container.node.appendChild(elem.media.node);
 
-    // If it's a video, we want it to play automagically and loop
-    if (elem.media.type === 'video') {
+      // If it's a video, we want it to play automagically and loop
       var loop = document.createAttribute('loop');
       elem.media.node.setAttributeNode(loop);
       elem.media.node.play();
     }
   }
+
 
   function onWindowResizeEnd(e) {
     var i = 0;
@@ -229,7 +234,7 @@ export default function() {
       if (
         // 1. There's more than one file specified
         // 2. New size is bigger than current one
-        elem.media.widths.length > 1 && getSize(elem) > elem.media.size
+        elem.media.file.length > 1 && getSize(elem) > elem.media.size
       ) {
         // There's no need to remove the element before processing, as the
         // existing element is just updated with the new src
@@ -242,4 +247,4 @@ export default function() {
 
   window.addEventListener('resized', onWindowResizeEnd);
   // Todo - addEventListener on ajax success
-}
+};
