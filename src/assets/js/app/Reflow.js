@@ -50,7 +50,7 @@ export default class {
     }
     // Create an object element
     t.obj = document.createElement('object');
-    t.obj.className = 'reflowObject';
+    t.obj.className = 'resizing__object';
 
     // Tell the browser this obj is a page, so it emits a resize event
     t.obj.resizeElement = t.element;
@@ -59,12 +59,12 @@ export default class {
     t.obj.data = 'about:blank';
 
     // Create styles for the object, if they don't already exist
-    if (!document.getElementById('ReflowStyle')) {
+    if (!document.getElementById('ResizingElementStyle')) {
       var style = document.createElement('style');
-      var css =  '.reflowContainer {';
+      var css =  '.resizing {';
           css += 'overflow:hidden;';
           css += '}';
-          css += '.reflowObject {';
+          css += '.resizing__object {';
           css += 'background:transparent;';
           css += 'display:block;';
           css += 'height:100%;';
@@ -77,7 +77,7 @@ export default class {
           css += 'z-index:-999;';
           css += '}';
 
-      style.setAttribute('id', 'ReflowStyle');
+      style.setAttribute('id', 'ResizingElementStyle');
       style.type = 'text/css';
       if (style.styleSheet){
         style.styleSheet.cssText = css;
@@ -86,8 +86,8 @@ export default class {
       }
       document.head.appendChild(style);
     }
-    // Add the reflowContainer class to the queried element
-    t.element.classList.add('reflowContainer');
+    // Add the resizing class to the queried element
+    t.element.classList.add('resizing');
     // Append the object element to the queried element
     t.element.appendChild(t.obj);
   }
