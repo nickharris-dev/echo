@@ -61,10 +61,7 @@ export default class {
     // Create styles for the object, if they don't already exist
     if (!document.getElementById('ResizingElementStyle')) {
       var style = document.createElement('style');
-      var css =  '.resizing {';
-          css += 'overflow:hidden;';
-          css += '}';
-          css += '.resizing__object {';
+      var css =  '.resizing__object {';
           css += 'background:transparent;';
           css += 'display:block;';
           css += 'height:100%;';
