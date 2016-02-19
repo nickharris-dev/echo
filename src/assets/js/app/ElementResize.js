@@ -47,6 +47,7 @@ export default class {
     // Make our element relative if it has no position
     if (getComputedStyle(t.element).position === 'static') {
       t.element.style.position = 'relative';
+      t.element.style.overflow = 'hidden';
     }
     // Create an object element
     t.obj = document.createElement('object');
@@ -65,7 +66,7 @@ export default class {
           css += 'background:transparent;';
           css += 'display:block;';
           css += 'height:100%;';
-          css += 'left:0;';
+          css += 'left:-100%;';
           css += 'overflow:hidden;';
           css += 'pointer-events:none;';
           css += 'position:absolute;';

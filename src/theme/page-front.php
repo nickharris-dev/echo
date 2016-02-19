@@ -22,7 +22,7 @@
     </h1>
 	</section>
 
-	<section class="intro" itemprop="articleBody">
+ 	<section class="intro" itemprop="articleBody">
 		<?php the_content();?>
 	</section>
 

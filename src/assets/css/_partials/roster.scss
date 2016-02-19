@@ -1,6 +1,7 @@
 .roster {
   background-color: palette(neutral, copy);
   display: block;
+  overflow: hidden;
   position: relative;
 
   &__pic {

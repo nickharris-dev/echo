@@ -260,7 +260,7 @@ function bones_comments( $comment, $args, $depth ) {
 function assets_url() {
   $url = site_url();
   if ($url == 'http://local.wordpress.dev') {
-    return '//sirius.local:3002';
+    return '//192.168.1.7:3002';
   } else {
     return '//d19ka18jwobvla.cloudfront.net';
   }
