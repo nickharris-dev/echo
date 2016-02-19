@@ -260,16 +260,16 @@ function bones_comments( $comment, $args, $depth ) {
 function assets_url() {
   $url = site_url();
   if ($url == 'http://local.wordpress.dev') {
-    return '//192.168.1.7:3002';
+    return '//sirius.local:3002';
   } else {
     return '//d19ka18jwobvla.cloudfront.net';
   }
 }
 
-function full_size_image($image, $x, $y) {
+function smart_media_image($image, $x, $y) {
   if ( !empty($image) ) {
     $url = $image['url'];
-    $size = 'artwork';
+    $size = 'hero';
     $imgs = [];
     $heights = [];
     $widths = [];
