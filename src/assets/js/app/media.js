@@ -94,7 +94,7 @@ export default function(){
     return ext;
   }
 
-  function getSize(elem, h, w) {
+  function getSize(elem, w, h) {
     var i = 0;
     var n = elem.media.file.length;
     var density = pixelDensity();
@@ -125,7 +125,7 @@ export default function(){
   }
 
   // Used in process()
-  function position(node, h, w) {
+  function position(node, w, h) {
     var elem = mediaElements[node.getAttribute('data-ident')];
     var focalPoint, height, centrePoint, reset, startPoint, width;
 
@@ -205,10 +205,10 @@ export default function(){
     }
   }
 
-  function process(node, h, w) {
+  function process(node, w, h) {
     var elem = mediaElements[node.getAttribute('data-ident')];
     // Position the media element appropriately
-    position(node, h, w);
+    position(node, w, h);
 
     if (elem.media.type === 'image') {
       elem.media.node.onload = function(){
@@ -228,7 +228,8 @@ export default function(){
 
   function calculate(event) {
     var elem = mediaElements[this.getAttribute('data-ident')];
-    var h, w;
+    var oldSize = elem.media.size || 0;
+    var newSize, w, h;
 
     if (event && event.detail) {
       h = event.detail.height;
@@ -238,19 +239,22 @@ export default function(){
       w = this.offsetWidth;
     }
 
+    newSize = getSize(elem, w, h);
+
     // Conditions where we want to fetch a new file:
     if (
       // 1. There is no current one
       // 2. There's more than one file specified and
       // 3. New size is bigger than current one
       !elem.media.node.src ||
-      (elem.media.file.length > 1 && getSize(elem, h, w) > elem.media.size)
+      (elem.media.file.length > 1 && newSize > oldSize)
     ) {
+      elem.media.size = newSize;
       // There's no need to remove the element before processing, as the
       // existing element is just updated with the new src
-      process(node, h, w);
+      process(node, w, h);
     } else {
-      position(node, h, w);
+      position(node, w, h);
     }
   }
 
