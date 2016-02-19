@@ -91,7 +91,7 @@
         paths.src.style + '*.scss',
         '!' + srcfiles.criticalstyles
       ])
-      .pipe(changed(paths.dest.style))
+      .pipe(dev(changed(paths.dest.style)))
       .pipe(dev(sourcemaps.init({loadMaps: true})))
         .pipe(sass(sassOptions).on('error', function(err){ notify().write(err); }))
         .pipe(autoprefixer())
@@ -158,8 +158,8 @@
           babel({ "presets": ["es2015-rollup"] })
         ]
         }))
-      .pipe(production(uglify()))
       .on('error', function(err){ notify().write(err); })
+      .pipe(production(uglify()))
       .pipe(dev(sourcemaps.write('./')))
       .pipe(rename({
         suffix: '.' + pkg.version
