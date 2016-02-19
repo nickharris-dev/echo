@@ -5,15 +5,18 @@ import ElementResize from './ElementResize';
 export default function(){
   var processedMessage = 'processed';
   var mediaElements = {};
+  var resizeObject;
 
   getUnprocessed(document.querySelectorAll('[data-media]'));
 
   function makeid() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var i = 0;
 
-    for( var i=0; i < 5; i++ )
+    for (i; i<5; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
 
     return text;
   }
@@ -33,6 +36,7 @@ export default function(){
         // If not, create the reflow (if it doesn't exist)
         if (!node.classList.contains('resizing')) {
           let inst = new ElementResize(node);
+          resizeObject = node.querySelectorAll('.resizing__object')[0];
         }
         // Generate an identifier
         var ident = makeid();
@@ -212,12 +216,12 @@ export default function(){
 
     if (elem.media.type === 'image') {
       elem.media.node.onload = function(){
-        node.appendChild(elem.media.node);
+        node.insertBefore(elem.media.node, resizeObject);
       }
       elem.media.node.src = buildSrc(elem);
     } else if (elem.media.type === 'video') {
       elem.media.node.src = buildSrc(elem);
-      node.appendChild(elem.media.node);
+      node.insertBefore(elem.media.node, resizeObject);
 
       // If it's a video, we want it to play automagically and loop
       var loop = document.createAttribute('loop');
