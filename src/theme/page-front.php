@@ -12,7 +12,7 @@
     while ( have_rows('hero') ) : the_row(); ?>
   <section class="hero hero--front" id="Hero"
     <?php if( get_row_layout() === 'image'):
-      smart_media_image(get_sub_field('image'), get_sub_field('focal_point_x'), get_sub_field('focal_point_y'));
+      smart_media_image(get_sub_field('image'), get_sub_field('focal_point_x'), get_sub_field('focal_point_y'), 'hero');
     endif; ?>>
   <?php endwhile; else: ?>
   <section class="hero hero--front" id="Hero"
@@ -100,7 +100,7 @@
 	    	<a class="button button--more-news" href="/news">More news</a>
 	    <?php endif; ?>
     </section>
-<?php endif; wp_reset_query(); */?>
+<?php endif; wp_reset_query(); */ ?>
 
 <?php if( get_field('roster_image') ):
   $pic = get_field('roster_image')['sizes']; ?>

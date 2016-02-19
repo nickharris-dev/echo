@@ -266,10 +266,9 @@ function assets_url() {
   }
 }
 
-function smart_media_image($image, $x, $y) {
+function smart_media_image($image, $x, $y, $size) {
   if ( !empty($image) ) {
     $url = $image['url'];
-    $size = 'hero';
     $imgs = [];
     $heights = [];
     $widths = [];
