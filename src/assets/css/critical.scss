@@ -37,6 +37,12 @@ body {
   @include type-scale(4, 1);
 }
 
+.smart-media {
+  max-height: 1000%;
+  max-width: 1000%;
+  position: absolute;
+}
+
 // Headings
 // ========
 h1, h2, h3, h4, h5, h6 {

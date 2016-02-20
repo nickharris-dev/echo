@@ -17,27 +17,22 @@
               <article id="post-<?php the_ID(); ?>" class="post" role="article" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting" data-type-break="28rem">
 
                 <header class="post__header">
-
-                  <figure class="post__pic"><img
-                    <?php $pic = get_field('image')['sizes']; ?>
-                    alt="<?php print_r(get_field('image')['alt']); ?>"
-                    src="<?php print_r($pic['news_feature-1000']); ?>"
-                    srcset="
-                      <?php print_r($pic['news_feature-640']); ?> <?php print_r($pic['news_feature-640-width']); ?>w,
-                      <?php print_r($pic['news_feature-1000']); ?> <?php print_r($pic['news_feature-1000-width']); ?>w,
-                      <?php print_r($pic['news_feature-1500']); ?> <?php print_r($pic['news_feature-1500-width']); ?>w,
-                      <?php print_r($pic['news_feature-2000']); ?> <?php print_r($pic['news_feature-2000-width']); ?>w,
-                      <?php print_r($pic['news_feature-3000']); ?> <?php print_r($pic['news_feature-3000-width']); ?>w"
-                  ></figure>
+                  <?php if ( have_rows('hero') ) :
+                    while ( have_rows('hero') ) : the_row(); ?>
+                    <figure class="hero hero--post" <?php if( get_row_layout() === 'image'):
+                      smart_media_image(get_sub_field('image'), get_sub_field('focal_point_x'), get_sub_field('focal_point_y'), 'hero');
+                    endif; ?>></figure>
+                  <?php endwhile; endif; ?>
 
                   <div class="post__hgroup">
                     <h1 class="post__title" itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
-                    <p class="post__date"><time datetime="<?php the_time('Y-m-d'); ?>" itemprop="datePublished"><?php the_time(get_option('date_format')); ?></time></p>
+                    <p class="post__subtitle"><?php the_field('excerpt'); ?></p>
                   </div>
 
                 </header> <?php // end article header ?>
 
                 <section class="post__content" itemprop="articleBody">
+                  <p class="post__date"><time datetime="<?php the_time('Y-m-d'); ?>" itemprop="datePublished"><?php the_time(get_option('date_format')); ?></time></p>
                   <?php
                     // the content (pretty self explanatory huh)
                     the_content();

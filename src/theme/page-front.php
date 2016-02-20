@@ -57,20 +57,6 @@
           </p>
         </div>
         <figure class="posts__post__pic">
-          <?php if($counter < 1) : ?>
-            <img
-              alt="<?php print_r(get_field('image')['alt']); ?>"
-              src="<?php print_r($pic['news_feature-1000']); ?>"
-              srcset="
-                <?php print_r($pic['news_feature-640']); ?> <?php print_r($pic['news_feature-640-width']); ?>w,
-                <?php print_r($pic['news_feature-1000']); ?> <?php print_r($pic['news_feature-1000-width']); ?>w,
-                <?php print_r($pic['news_feature-1500']); ?> <?php print_r($pic['news_feature-1500-width']); ?>w,
-                <?php print_r($pic['news_feature-2000']); ?> <?php print_r($pic['news_feature-2000-width']); ?>w,
-                <?php print_r($pic['news_feature-3000']); ?> <?php print_r($pic['news_feature-3000-width']); ?>w"
-              sizes="(min-width: 56.25em) 66.666vw,
-                     100vw"
-            >
-           <?php else: ?>
             <a href="<?php the_permalink(); ?>"><img
               alt="<?php print_r(get_field('image')['alt']); ?>"
               src="<?php print_r($pic['square-300']); ?>"
@@ -88,7 +74,6 @@
                      (min-width: 37.5em) 16.65vw,
                      33.333vw"
             ></a>
-           <?php endif; ?>
          </figure>
       </article>
       <?php if ($counter == 2) :?>
@@ -100,7 +85,7 @@
 	    	<a class="button button--more-news" href="/news">More news</a>
 	    <?php endif; ?>
     </section>
-<?php endif; wp_reset_query(); */ ?>
+<?php endif; wp_reset_query(); */?>
 
 <?php if( get_field('roster_image') ):
   $pic = get_field('roster_image')['sizes']; ?>
