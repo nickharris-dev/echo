@@ -5,6 +5,10 @@
     display: flex;
     margin: 0 auto;
     max-width: 38em;
+
+    @media (min-width: 48rem) {
+      max-width: 43.428571429em;
+    }
   }
 }
 
