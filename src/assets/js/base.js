@@ -63,9 +63,8 @@ if (document.querySelectorAll('[data-media]').length > 0) media();
 // ========
 if (document.getElementById('Training') || document.getElementById('Location')) location();
 
-/*
 // Frontpage News
 if (document.getElementById('News') && parseFloat(document.getElementById('News').getAttribute('data-posts')) > 3) require('frontpagenews');
-*/
+
 // Results
 if (document.getElementById('Results')) results();

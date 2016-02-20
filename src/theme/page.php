@@ -1,11 +1,11 @@
 <?php get_header(); ?>
 
 
-	<main id="main" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+	<main id="main" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog" data-type-break="28rem">
 
 		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-		<article id="post-<?php the_ID(); ?>" class="post" role="article" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting" data-type-break="28rem">
+		<article id="post-<?php the_ID(); ?>" class="post" role="article" itemscope itemprop="blogPost" itemtype="http://schema.org/BlogPosting">
 
       <header class="page__header">
 

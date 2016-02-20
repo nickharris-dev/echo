@@ -1,12 +1,59 @@
 $layoutbreak1: rem(600);
 $layoutbreak2: rem(900);
 
+// Homepage
+.posts {
+  border-top: rem(1) solid palette(neutral, light);
+  margin: 0 $column;
+  padding-top: rem($baseline);
+
+  &__post {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: rem($baseline);
+
+    &__heading {
+      @include type-scale(5, 1);
+      margin: 0;
+    }
+
+    &__excerpt {
+      margin: 0;
+      min-width: 0;
+    }
+
+    &__copy {
+      flex: 2;
+      margin-left: rem(24);
+      order: 2;
+    }
+
+    &__pic {
+      flex: 1;
+      margin: 0;
+      order: 1;
+    }
+  }
+}
+
+// Post Page
 .post {
-  &__content {
-    padding: 0 $column;
+  &__date {
+    font-weight: 700;
+    margin-bottom: 0;
   }
 
-  &__footer {
+  &__byline {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  &__photo-credit {
+    @include type-scale(2, 1);
+    margin-top: 0;
+  }
+
+  &__content {
     padding: 0 $column;
   }
 }

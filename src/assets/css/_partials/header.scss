@@ -10,7 +10,7 @@
   text-align: center;
   top: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 3;
 
   @media (min-height: rem(400)) {
     height: 10vh;
@@ -28,7 +28,7 @@
     position: absolute;
     top: 12%;
     transform: translateX(-50%);
-    z-index: 4;
+    z-index: 5;
   }
 
   &__jump {

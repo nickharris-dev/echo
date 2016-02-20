@@ -32,7 +32,7 @@
 
 <?php include 'results.php'; ?>
 
-<?php /*
+<?php
   $the_array = array(
     'post_type' => 'post',
     'posts_per_page' => 3
@@ -42,50 +42,32 @@
   	$counter = 0; ?>
     <section class="posts posts--front" id="News" data-posts="<?php echo $posts->found_posts; ?>">
     <?php while( $posts->have_posts() ):
-      $posts->the_post();
-      $pic = get_field('image')['sizes']; ?>
-      <?php if ($counter == 1) :?>
-      	<div class="posts__wrapper">
-      <?php endif; ?>
+      $posts->the_post(); ?>
       <article class="posts__post">
         <div class="posts__post__copy">
           <h1 class="posts__post__heading">
             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
           </h1>
-          <p>
+          <p class="posts__post__excerpt">
           	<?php the_field('excerpt'); ?>
           </p>
         </div>
-        <figure class="posts__post__pic">
-            <a href="<?php the_permalink(); ?>"><img
-              alt="<?php print_r(get_field('image')['alt']); ?>"
-              src="<?php print_r($pic['square-300']); ?>"
-              srcset="
-                <?php print_r($pic['square-150']); ?> <?php print_r($pic['square-150-width']); ?>w,
-                <?php print_r($pic['square-300']); ?> <?php print_r($pic['square-300-width']); ?>w,
-                <?php print_r($pic['square-450']); ?> <?php print_r($pic['square-450-width']); ?>w,
-                <?php print_r($pic['square-600']); ?> <?php print_r($pic['square-600-width']); ?>w,
-                <?php print_r($pic['square-750']); ?> <?php print_r($pic['square-750-width']); ?>w,
-                <?php print_r($pic['square-900']); ?> <?php print_r($pic['square-900-width']); ?>w,
-                <?php print_r($pic['square-1050']); ?> <?php print_r($pic['square-1050-width']); ?>w,
-                <?php print_r($pic['square-1200']); ?> <?php print_r($pic['square-1200-width']); ?>w
-                "
-              sizes="(min-width: 56.25em) 11.111vw,
-                     (min-width: 37.5em) 16.65vw,
-                     33.333vw"
-            ></a>
-         </figure>
+        <?php if ( have_rows('hero') ) :
+          while ( have_rows('hero') ) : the_row(); ?>
+        <figure class="posts__post__pic"
+          <?php if( get_row_layout() === 'image'):
+            smart_media_image(get_sub_field('image'), get_sub_field('focal_point_x'), get_sub_field('focal_point_y'), 'hero');
+          endif; ?>>
+        </figure>
+        <?php endwhile; endif; ?>
       </article>
-      <?php if ($counter == 2) :?>
-      	</div>
-      <?php endif; ?>
     <?php $counter++;
     	endwhile; ?>
     	<?php if ($posts->found_posts > 3): ?>
 	    	<a class="button button--more-news" href="/news">More news</a>
 	    <?php endif; ?>
     </section>
-<?php endif; wp_reset_query(); */?>
+<?php endif; wp_reset_query(); ?>
 
 <?php if( get_field('roster_image') ):
   $pic = get_field('roster_image')['sizes']; ?>
