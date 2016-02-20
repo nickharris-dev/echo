@@ -33,14 +33,16 @@
 
                 <section class="post__content" itemprop="articleBody">
                   <p class="post__date"><time datetime="<?php the_time('Y-m-d'); ?>" itemprop="datePublished"><?php the_time(get_option('date_format')); ?></time></p>
+                  <p class="post__byline"><?php the_author(); ?> in <?php the_category( ', ', 'single' ); ?> </p>
+                  <?php if ( have_rows('hero') ) :
+                    while ( have_rows('hero') ) : the_row();
+                      if (get_sub_field('image_credit')): ?>
+                    <p class="post__photo-credit">Photo by <?php the_sub_field('image_credit'); ?></p>
+                  <?php endif; endwhile; endif; ?>
                   <?php
                     // the content (pretty self explanatory huh)
                     the_content();
                   ?>
                 </section>
-
-                <footer class="post__footer">
-                  <p class="post__byline"><?php the_author(); ?> in <?php the_category( ', ', 'single' ); ?> </p>
-                </footer>
 
               </article>
