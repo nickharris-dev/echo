@@ -30,5 +30,6 @@ export default {
   baseline: 24,
   elementqueries: {},
   isDev : configHelpers.isDev(),
+  smartMedia : {},
   touchEnabled : configHelpers.touchEnabled()
 };

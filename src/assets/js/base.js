@@ -8,7 +8,7 @@ import Elementquery from './app/Elementqueries';
 import grid from './app/grid';
 import idFactory from './app/idFactory';
 import location from './app/location';
-import media from './app/media';
+import Media from './app/media';
 import merge from './app/merge';
 import results from './app/results';
 
@@ -41,6 +41,12 @@ function typography (node) {
   config.elementqueries.typography.push(new Elementquery(node, str, false));
 }
 
+function m (node) {
+  var id = idFactory(node);
+  let smart = new Media(node);
+  config.smartMedia[id] = smart;
+}
+
 function nodeLoop(nodeList, func, arg1) {
   var i = 0;
   var n = nodeList.length;
@@ -54,10 +60,9 @@ function nodeLoop(nodeList, func, arg1) {
 // ===============
 nodeLoop(document.querySelectorAll('[data-type-break]'), typography);
 nodeLoop(document.querySelectorAll('[data-eq]'), eq, false);
-
-// Media
-// =====
-if (document.querySelectorAll('[data-media]').length > 0) media();
+// Smart Media
+// ===========
+nodeLoop(document.querySelectorAll('[data-media]'), m);
 
 // Training
 // ========

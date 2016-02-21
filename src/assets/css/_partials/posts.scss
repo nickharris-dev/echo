@@ -15,6 +15,10 @@ $layoutbreak2: rem(900);
     &__heading {
       @include type-scale(5, 1);
       margin: 0;
+
+      a {
+        white-space: normal;
+      }
     }
 
     &__excerpt {
@@ -23,15 +27,14 @@ $layoutbreak2: rem(900);
     }
 
     &__copy {
-      flex: 2;
-      margin-left: rem(24);
       order: 2;
+      width: calc(#{16*$column} - #{$gutter});
     }
 
     &__pic {
-      flex: 1;
       margin: 0;
       order: 1;
+      width: calc(#{8*$column} - #{$gutter});
     }
   }
 }
