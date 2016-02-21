@@ -54,11 +54,11 @@
         </div>
         <?php if ( have_rows('hero') ) :
           while ( have_rows('hero') ) : the_row(); ?>
-        <figure class="posts__post__pic"
+          <a class="posts__post__pic" href="<?php the_permalink(); ?>"
           <?php if( get_row_layout() === 'image'):
             smart_media_image(get_sub_field('image'), get_sub_field('focal_point_x'), get_sub_field('focal_point_y'), 'hero');
           endif; ?>>
-        </figure>
+          </a>
         <?php endwhile; endif; ?>
       </article>
     <?php $counter++;

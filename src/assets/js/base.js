@@ -8,7 +8,7 @@ import Elementquery from './app/Elementqueries';
 import grid from './app/grid';
 import idFactory from './app/idFactory';
 import location from './app/location';
-import Media from './app/media';
+import Media from './app/Media';
 import merge from './app/merge';
 import results from './app/results';
 
@@ -42,9 +42,7 @@ function typography (node) {
 }
 
 function m (node) {
-  var id = idFactory(node);
   let smart = new Media(node);
-  config.smartMedia[id] = smart;
 }
 
 function nodeLoop(nodeList, func, arg1) {

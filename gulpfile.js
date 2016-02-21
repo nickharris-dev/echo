@@ -107,7 +107,7 @@
       extname: '.php'
     };
     var sassOptions = {
-      style: 'expanded'
+      style: 'compressed'
     };
 
     return gulp.src(srcfiles.criticalstyles)
