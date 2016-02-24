@@ -96,6 +96,9 @@ add_image_size( 'page-head-1500', 1500, 735, true );
 add_image_size( 'page-head-2000', 2000, 981, true );
 add_image_size( 'page-head-3000', 3000, 1471, true );
 // hero image sizes (2.127659574:1)
+add_image_size( 'hero-150', 150 );
+add_image_size( 'hero-300', 300 );
+add_image_size( 'hero-450', 450 );
 add_image_size( 'hero-640', 640 );
 add_image_size( 'hero-1000', 1000 );
 add_image_size( 'hero-1500', 1500 );
@@ -260,7 +263,7 @@ function bones_comments( $comment, $args, $depth ) {
 function assets_url() {
   $url = site_url();
   if ($url == 'http://local.wordpress.dev') {
-    return '//192.168.1.7:3002';
+    return '//sirius.local:3002';
   } else {
     return '//d19ka18jwobvla.cloudfront.net';
   }

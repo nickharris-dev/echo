@@ -43,9 +43,21 @@ $layoutbreak2: rem(900);
     }
 
     &__pic {
+      box-shadow: none;
       margin: 0;
       order: 1;
+      overflow: hidden;
+      position: relative;
       width: calc(#{8*$column} - #{$gutter});
+
+      img {
+        height: 100%;
+        left: 50%;
+        max-width: 1000%;
+        position: absolute;
+        top: 0;
+        transform: translate(-50%, 0);
+      }
     }
   }
 }
