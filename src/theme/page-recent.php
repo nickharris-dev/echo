@@ -14,7 +14,7 @@
   );
   $posts = new WP_Query( $the_array );
   if( $posts->have_posts() ): ?>
-    <main class="posts posts--recent">
+    <main class="posts posts--archive">
     <?php while( $posts->have_posts() ):
       $posts->the_post(); ?>
       <article class="posts__post">
