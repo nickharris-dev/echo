@@ -53,23 +53,10 @@
           </p>
         </div>
         <?php if ( have_rows('hero') ) :
-          while ( have_rows('hero') ) : the_row();
-          $pic = get_sub_field('image')['sizes']; ?>
-          <a class="posts__post__pic" href="<?php the_permalink(); ?>"><img
-              alt="<?php print_r(get_field('image')['alt']); ?>"
-              src="<?php print_r($pic['hero-300']); ?>"
-              srcset="
-                <?php print_r($pic['hero-150']); ?> <?php print_r($pic['hero-150-width']); ?>w,
-                <?php print_r($pic['hero-300']); ?> <?php print_r($pic['hero-300-width']); ?>w,
-                <?php print_r($pic['hero-450']); ?> <?php print_r($pic['hero-450-width']); ?>w,
-                <?php print_r($pic['hero-640']); ?> <?php print_r($pic['hero-640-width']); ?>w,
-                <?php print_r($pic['hero-1000']); ?> <?php print_r($pic['hero-1000-width']); ?>w
-                "
-              sizes="(min-width: 56.25em) 11.111vw,
-                     (min-width: 37.5em) 16.65vw,
-                     33.333vw"
-            >
-          </a>
+          while ( have_rows('hero') ) : the_row(); ?>
+          <a href="<?php the_permalink(); ?>" class="posts__post__pic" <?php if( get_row_layout() === 'image'):
+            smart_media_image(get_sub_field('image'), get_sub_field('focal_point_x'), get_sub_field('focal_point_y'), 'hero');
+          endif; ?>></a>
         <?php endwhile; endif; ?>
       </article>
     <?php $counter++;

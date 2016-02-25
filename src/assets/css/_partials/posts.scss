@@ -7,10 +7,23 @@ $layoutbreak2: rem(900);
   margin: 0 $column;
   padding-top: rem($baseline);
 
-  &__post {
+  @media (min-width: 38rem) {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__post {
     margin-bottom: rem($baseline);
+    position: relative;
+
+    @media (min-width: 38rem) {
+      width: calc(#{12*$column} - #{$gutter});
+    }
+
+    @media (min-width: 68.75rem) {
+      width: calc(#{8*$column} - #{$gutter});
+    }
 
     &__heading {
       @include type-scale(5, 1);
@@ -38,26 +51,19 @@ $layoutbreak2: rem(900);
     }
 
     &__copy {
-      order: 2;
+      margin-left: calc(#{8*$column} + #{$gutter});
       width: calc(#{16*$column} - #{$gutter});
     }
 
     &__pic {
       box-shadow: none;
-      margin: 0;
-      order: 1;
+      display: block;
+      height: 100%;
+      left: 0;
       overflow: hidden;
-      position: relative;
+      position: absolute;
+      top: 0;
       width: calc(#{8*$column} - #{$gutter});
-
-      img {
-        height: 100%;
-        left: 50%;
-        max-width: 1000%;
-        position: absolute;
-        top: 0;
-        transform: translate(-50%, 0);
-      }
     }
   }
 }
