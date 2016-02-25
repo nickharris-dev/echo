@@ -39,10 +39,12 @@
   );
   $posts = new WP_Query( $the_array );
   if( $posts->have_posts() ):
-  	$counter = 0; ?>
+  	$counter = 0;
+    ?>
     <section class="posts posts--front" id="News" data-posts="<?php echo $posts->found_posts; ?>">
     <?php while( $posts->have_posts() ):
-      $posts->the_post(); ?>
+      $posts->the_post();
+      if ($counter < 3): ?>
       <article class="posts__post">
         <div class="posts__post__copy">
           <h1 class="posts__post__heading">
@@ -60,7 +62,7 @@
         <?php endwhile; endif; ?>
       </article>
     <?php $counter++;
-    	endwhile; ?>
+    	endif; endwhile; ?>
     	<?php if ($posts->found_posts > 3): ?>
         <footer class="posts__footer">
   	    	<a class="button button--more-news" href="/news">More news</a>
