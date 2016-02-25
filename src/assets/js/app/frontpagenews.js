@@ -2,13 +2,13 @@ import config from './config';
 import ajax from './ajax';
 import response from './response';
 
-function frontpagenews() {
+export default function() {
   var news = document.getElementById('News');
   var numberOfPosts = news.getAttribute('data-posts');
   var moreButton = news.querySelectorAll('.button--more-news')[0]
   var moreLink = moreButton.getAttribute('href');
   var existingWrapper = news.querySelectorAll('.posts__wrapper')[0];
-  var breakPoint = 56.25*config.baseFontSize;
+  var breakpoint = 56.25*config.baseFontSize;
   var dummyPosts = [];
   var newWrapper, remotePosts;
 
@@ -30,7 +30,7 @@ function frontpagenews() {
           html += '</div>\n';
           html += '<figure class="posts__post__pic posts__post__pic--dummy"><div></div></figure>';
 
-      classes.add(article, 'posts__post');
+      article.classList.add('posts__post');
       article.innerHTML = html;
 
       dummyPosts.push(article);
@@ -43,7 +43,7 @@ function frontpagenews() {
 
     existingWrapper.appendChild(dummyPosts[0]);
     newWrapper = document.createElement('div');
-    classes.add(newWrapper, 'posts__wrapper');
+    newWrapper.classList.add('posts__wrapper');
 
     for (i; i<n; i++) {
       newWrapper.appendChild(dummyPosts[i]);
@@ -81,16 +81,13 @@ function frontpagenews() {
     populateDummyPosts();
     ajax(moreLink, success);
   }
-
-  if (response >= breakPoint) hereWeGoMagic();
+  if (response() >= breakpoint) hereWeGoMagic();
 
   window.addEventListener('resized', function(event){
-    if (newWrapper || event.viewportSize < breakPoint) {
+    if (newWrapper || event.viewportSize < breakpoint) {
       return false;
     } else {
       hereWeGoMagic();
     }
   });
 }
-
-module.exports = frontpagenews();

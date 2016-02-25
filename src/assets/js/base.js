@@ -11,6 +11,7 @@ import location from './app/location';
 import Media from './app/Media';
 import merge from './app/merge';
 import results from './app/results';
+import frontpagenews from './app/frontpagenews'
 
 // Always run
 // ==========
@@ -67,7 +68,7 @@ nodeLoop(document.querySelectorAll('[data-media]'), m);
 if (document.getElementById('Training') || document.getElementById('Location')) location();
 
 // Frontpage News
-if (document.getElementById('News') && parseFloat(document.getElementById('News').getAttribute('data-posts')) > 3) require('frontpagenews');
+if (document.getElementById('News') && parseFloat(document.getElementById('News').getAttribute('data-posts')) > 3) frontpagenews();
 
 // Results
 if (document.getElementById('Results')) results();
