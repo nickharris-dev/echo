@@ -14,11 +14,11 @@
       alt="<?php print_r(get_field('image')['alt']); ?>"
       src="<?php print_r($pic['page-head-1000']); ?>"
       srcset="
-        <?php print_r($pic['page-head-640']); ?> <?php print_r($pic['page_head-640-width']); ?>w,
-        <?php print_r($pic['page-head-1000']); ?> <?php print_r($pic['page_head-1000-width']); ?>w,
-        <?php print_r($pic['page-head-1500']); ?> <?php print_r($pic['page_head-1500-width']); ?>w,
-        <?php print_r($pic['page-head-2000']); ?> <?php print_r($pic['page_head-2000-width']); ?>w,
-        <?php print_r($pic['page-head-3000']); ?> <?php print_r($pic['page_head-3000-width']); ?>w"
+        <?php print_r($pic['page-head-640']); ?> <?php print_r($pic['page-head-640-width']); ?>w,
+        <?php print_r($pic['page-head-1000']); ?> <?php print_r($pic['page-head-1000-width']); ?>w,
+        <?php print_r($pic['page-head-1500']); ?> <?php print_r($pic['page-head-1500-width']); ?>w,
+        <?php print_r($pic['page-head-2000']); ?> <?php print_r($pic['page-head-2000-width']); ?>w,
+        <?php print_r($pic['page-head-3000']); ?> <?php print_r($pic['page-head-3000-width']); ?>w"
     ></figure>
 
     <div class="page__hgroup page__hgroup--roster">
