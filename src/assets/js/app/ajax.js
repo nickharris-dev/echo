@@ -1,10 +1,9 @@
-var merge = require('merge');
+import merge from './merge';
 
 // Ajax Requests
 // =============
 // 1st argument: url to fetch, 2nd argument: optional prefs object, 3rd argument: callback
-// Depends on PXLNV.mergeObjects()
-function ajax (arg1, arg2, arg3) {
+export default function (arg1, arg2, arg3) {
   'use strict';
 
   // Declare Variables
@@ -55,5 +54,3 @@ function ajax (arg1, arg2, arg3) {
     throw new Error ('Sorry, only GET supported at the moment');
   }
 };
-
-module.exports = ajax;
