@@ -62,7 +62,9 @@
     <?php $counter++;
     	endwhile; ?>
     	<?php if ($posts->found_posts > 3): ?>
-	    	<a class="button button--more-news" href="/news">More news</a>
+        <footer class="posts__footer">
+  	    	<a class="button button--more-news" href="/news">More news</a>
+        </footer>
 	    <?php endif; ?>
     </section>
 <?php endif; wp_reset_query(); ?>

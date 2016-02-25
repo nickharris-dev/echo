@@ -66,6 +66,18 @@ $layoutbreak2: rem(900);
       width: calc(#{8*$column} - #{$gutter});
     }
   }
+
+  &__footer {
+    margin-bottom: rem($baseline);
+    width: 100%;
+  }
+
+  .button {
+    margin: 0 auto;
+    @media (min-width: 38rem) {
+      width: calc(#{12*$column} - #{rem(24)});
+    }
+  }
 }
 
 // Post Page

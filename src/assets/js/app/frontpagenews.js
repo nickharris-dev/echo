@@ -1,6 +1,6 @@
-var config = require('config');
-var ajax = require('ajax');
-var response = require('response');
+import config from './config';
+import ajax from './ajax';
+import response from './response';
 
 function frontpagenews() {
   var news = document.getElementById('News');
