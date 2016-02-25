@@ -1,5 +1,6 @@
 .archives {
-  margin: 0 $column;
+  background: palette(neutral, verylight);
+  padding: 0 $column;
 
   &__wrapper {
     display: flex;
@@ -14,8 +15,8 @@
 
 .archive {
   flex: 1 auto;
-  margin-top: rem($baseline/2);
-  margin-bottom: rem(2.5*$baseline);
+  margin-top: rem($baseline);
+  margin-bottom: rem($baseline);
 
   &__title {
     font-size: 10vw;
