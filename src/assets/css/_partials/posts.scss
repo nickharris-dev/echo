@@ -17,11 +17,11 @@ $layoutbreak2: rem(900);
     position: relative;
 
     @media (min-width: 38rem) {
-      width: calc(#{12*$column} - #{$gutter});
+      width: calc(50% - #{$gutter});
     }
 
     @media (min-width: 68.75rem) {
-      width: calc(#{8*$column} - #{$gutter});
+      width: calc(33.3333% - #{$gutter});
     }
 
     &__heading {
@@ -42,16 +42,26 @@ $layoutbreak2: rem(900);
           box-shadow: inset 0 -1.2em 0 palette(claret);
         }
       }
+
+      &--dummy {
+        background-color: palette(neutral, verylight);
+      }
     }
 
     &__excerpt {
       margin: 0;
       min-width: 0;
+
+      &--dummy {
+        span {
+          background-color: palette(neutral, verylight);
+        }
+      }
     }
 
     &__copy {
-      margin-left: calc(#{8*$column} + #{$gutter});
-      width: calc(#{16*$column} - #{$gutter});
+      margin-left: calc(33.3333% + #{$gutter});
+      width: calc(66.6667% - #{$gutter});
     }
 
     &__pic {
@@ -62,7 +72,11 @@ $layoutbreak2: rem(900);
       overflow: hidden;
       position: absolute;
       top: 0;
-      width: calc(#{8*$column} - #{$gutter});
+      width: calc(33.3333% - #{$gutter});
+
+      &--dummy {
+        background-color: palette(neutral, verylight);
+      }
     }
 
   }
@@ -80,7 +94,7 @@ $layoutbreak2: rem(900);
         height: rem(8*$baseline);
 
         @media (min-width: 68.75rem) {
-          width: calc(#{12*$column} - #{$gutter});
+          width: calc(50% - #{$gutter});
         }
 
         .posts__post {
@@ -96,8 +110,8 @@ $layoutbreak2: rem(900);
             left: 0;
             margin-left: 0;
             padding-bottom: rem($baseline/2);
-            padding-left: $column;
-            padding-right: $column;
+            padding-left: $gutter;
+            padding-right: $gutter;
             padding-top: rem($baseline/2);
             position: absolute;
             width: 100%;
