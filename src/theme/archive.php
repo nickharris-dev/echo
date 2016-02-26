@@ -9,46 +9,26 @@
 	$countPosts = $wp_the_query->post_count;
 	$counter = 0; ?>
 
-	<section class="posts posts--archive">
-    <div class="posts__wrapper">
-		<?php while (have_posts()) : the_post();
-			$pic = get_field('image')['sizes'];?>
-
+	<main class="posts posts--archive">
+    <?php while (have_posts()) : the_post(); ?>
       <article class="posts__post">
         <div class="posts__post__copy">
-          <p class="posts__post__date">
-          	<time datetime="<?php the_time('Y-m-d'); ?>" itemprop="datePublished"><?php the_time('jS F'); ?></time>
-          </p>
           <h1 class="posts__post__heading">
             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
           </h1>
-          <p>
+          <p class="posts__post__excerpt">
             <?php the_field('excerpt'); ?>
           </p>
         </div>
-        <figure class="posts__post__pic">
-          <a href="<?php the_permalink(); ?>"><img
-              alt="<?php print_r(get_field('image')['alt']); ?>"
-              src="<?php print_r($pic['square-300']); ?>"
-              srcset="
-                <?php print_r($pic['square-150']); ?> <?php print_r($pic['square-150-width']); ?>w,
-                <?php print_r($pic['square-300']); ?> <?php print_r($pic['square-300-width']); ?>w,
-                <?php print_r($pic['square-450']); ?> <?php print_r($pic['square-450-width']); ?>w,
-                <?php print_r($pic['square-600']); ?> <?php print_r($pic['square-600-width']); ?>w,
-                <?php print_r($pic['square-750']); ?> <?php print_r($pic['square-750-width']); ?>w,
-                <?php print_r($pic['square-900']); ?> <?php print_r($pic['square-900-width']); ?>w,
-                <?php print_r($pic['square-1050']); ?> <?php print_r($pic['square-1050-width']); ?>w,
-                <?php print_r($pic['square-1200']); ?> <?php print_r($pic['square-1200-width']); ?>w
-                "
-              sizes="(min-width: 56.25em) 11.111vw,
-                     (min-width: 37.5em) 16.65vw,
-                     33.333vw"
-            ></a>
-         </figure>
+        <?php if ( have_rows('hero') ) :
+          while ( have_rows('hero') ) : the_row(); ?>
+          <a href="<?php the_permalink(); ?>" class="posts__post__pic" <?php if( get_row_layout() === 'image'):
+            smart_media_image(get_sub_field('image'), get_sub_field('focal_point_x'), get_sub_field('focal_point_y'), 'hero');
+          endif; ?>></a>
+        <?php endwhile; endif; ?>
       </article>
-		<?php endwhile; ?>
-		</div>
-	</section>
+    <?php endwhile; ?>
+  </main>
 
 <?php else : ?>
 
@@ -65,6 +45,8 @@
 		</article>
 
 <?php endif; ?>
+
+<?php include 'mini-archives.php'; ?>
 
 <?php include 'training.php'; ?>
 

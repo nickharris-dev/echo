@@ -1,5 +1,3 @@
-import csssupport from './csssupport';
-
 export default class {
   constructor(elem) {
     // Helpers

@@ -175,9 +175,16 @@ $layoutbreak2: rem(900);
   &__photo-credit {
     @include type-scale(2, 1);
     margin-top: 0;
+    max-width: 100%;
+    text-align: right;
   }
 
-  &__content {
+  &__content,
+  &__footer {
     padding: 0 $column;
+  }
+
+  &__author {
+    font-weight: 700;
   }
 }
