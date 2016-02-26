@@ -16,6 +16,9 @@
           <h1 class="posts__post__heading">
             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
           </h1>
+          <p class="posts__post__date">
+            <time datetime="<?php the_time('Y-m-d'); ?>"><?php the_time(get_option('date_format')); ?></time>
+          </p>
           <p class="posts__post__excerpt">
             <?php the_field('excerpt'); ?>
           </p>

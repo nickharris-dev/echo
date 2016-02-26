@@ -48,6 +48,11 @@ $layoutbreak2: rem(900);
       }
     }
 
+    &__date {
+      @include type-scale(2, 1);
+      margin: 0;
+    }
+
     &__excerpt {
       margin: 0;
       min-width: 0;
