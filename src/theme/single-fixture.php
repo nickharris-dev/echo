@@ -19,28 +19,30 @@
 
 	<article id="fixture-<?php the_ID(); ?>" class="fixture">
 		<header class="fixture__header">
-			<figure class="fixture__pic"><img
-			  <?php $pic = get_field('image')['sizes']; ?>
-			  alt="<?php print_r(get_field('image')['alt']); ?>"
-			  src="<?php print_r($pic['news_feature-1000']); ?>"
-			  srcset="
-			    <?php print_r($pic['news_feature-640']); ?> <?php print_r($pic['news_feature-640-width']); ?>w,
-			    <?php print_r($pic['news_feature-1000']); ?> <?php print_r($pic['news_feature-1000-width']); ?>w,
-			    <?php print_r($pic['news_feature-1500']); ?> <?php print_r($pic['news_feature-1500-width']); ?>w,
-			    <?php print_r($pic['news_feature-2000']); ?> <?php print_r($pic['news_feature-2000-width']); ?>w,
-			    <?php print_r($pic['news_feature-3000']); ?> <?php print_r($pic['news_feature-3000-width']); ?>w"
-			></figure>
 
-			<div class="fixture__hgroup">
-				<h1 class="fixture__title" itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
-				<p class="fixture__date">
-					<?php
-						$date = DateTime::createFromFormat('Ymd', get_field('date'));
-						echo $date->format('D, jS F Y');
-					?>
-				</p>
-			</div>
-		</header>
+	    <figure class="fixture__pic"><img
+	      <?php $pic = get_field('image')['sizes']; ?>
+	      alt="<?php print_r(get_field('image')['alt']); ?>"
+	      src="<?php print_r($pic['page-head-1000']); ?>"
+	      srcset="
+	        <?php print_r($pic['page-head-640']); ?> <?php print_r($pic['page-head-640-width']); ?>w,
+	        <?php print_r($pic['page-head-1000']); ?> <?php print_r($pic['page-head-1000-width']); ?>w,
+	        <?php print_r($pic['page-head-1500']); ?> <?php print_r($pic['page-head-1500-width']); ?>w,
+	        <?php print_r($pic['page-head-2000']); ?> <?php print_r($pic['page-head-2000-width']); ?>w,
+	        <?php print_r($pic['page-head-3000']); ?> <?php print_r($pic['page-head-3000-width']); ?>w"
+	    ></figure>
+
+	    <div class="fixture__hgroup">
+	    	<h1 class="fixture__title" itemprop="headline" rel="bookmark"><?php the_title(); ?></h1>
+	    	<p class="fixture__date">
+	    		<?php
+	    			$date = DateTime::createFromFormat('Ymd', get_field('date'));
+	    			echo $date->format('D, jS F Y');
+	    		?>
+	    	</p>
+	    </div>
+
+	  </header>
 
 		<main class="fixture__content">
 			<section class="fixture__intro">

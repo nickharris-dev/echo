@@ -1,32 +1,38 @@
 .fixtures {
   display: block;
-  flex-direction: column;
+  overflow: hidden;
   position: relative;
 
-  @media (min-width: 40rem) {
-    flex-direction: row;
-    margin: rem($baseline/2) 0;
-    padding: 0 $gutter;
+  &__wrapper {
+    display: flex;
+    justify-content: flex-start;
+    width: 200%;
   }
 
   &__fixture {
+    margin: $gutter;
     position: relative;
+    width: 12.5rem;
 
     &__link {
-      background-position: 90% 50%;
+      background-position: 110% 110%;
       background-repeat: no-repeat;
-      background-size: auto rem(4*$baseline);
-      box-shadow: none;
+      background-size: auto rem(3*$baseline);
       box-sizing: border-box;
       color: inherit;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding: rem($baseline/2) $gutter;
+      display: block;
+      padding: rem($baseline/2) $gutter rem(3*$baseline);
       white-space: normal;
 
+      &:active,
+      &:focus,
+      &:hover,
+      &:link,
+      &:visited {
+        box-shadow: none;
+      }
+
       @media (min-width: 40rem) {
-        flex-direction: column;
         height: rem(6*$baseline);
       }
     }
@@ -34,26 +40,12 @@
   }
 
   &__date {
-    @include type-scale(5, 1.5);
-    order: 2;
-
-    @media (min-width: 40rem) {
-      order: 1;
-      text-align: center;
-      width: 100%;
-    }
+    @include type-scale(3, 1);
   }
 
   &__title {
+    @include type-scale(5, 1);
     margin: 0;
     max-width: 100%;
-    order: 1;
-    text-align: right;
-
-    @media (min-width: 40rem) {
-      order: 2;
-      text-align: center;
-      width: 100%;
-    }
   }
 }
