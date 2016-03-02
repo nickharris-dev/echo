@@ -1,5 +1,6 @@
 .fixtures {
   display: block;
+  margin: 0 $column;
   overflow: hidden;
   position: relative;
 
@@ -14,14 +15,44 @@
     position: relative;
     width: 12.5rem;
 
+    &:before,
+    &:after {
+      border-radius: 100px / 10px;
+      bottom: 0;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 10px;
+      right: 10px;
+    }
+
+    &:after {
+      left: auto;
+      right: 10px;
+      transform: skew(8deg) rotate(3deg);
+    }
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
     &__link {
-      background-position: 110% 110%;
+      background-position: 105% 105%;
       background-repeat: no-repeat;
-      background-size: auto rem(3*$baseline);
+      background-size: auto rem(2.5*$baseline);
+      border-radius: 3px;
       box-sizing: border-box;
       color: inherit;
       display: block;
-      padding: rem($baseline/2) $gutter rem(3*$baseline);
+      padding: rem($baseline/2) $gutter rem(1.5*$baseline);
+      text-shadow: 0 0 10px rgba(palette(jetblack), .5),
+                   0 0 2px rgba(palette(jetblack), .5);
       white-space: normal;
 
       &:active,
@@ -30,10 +61,6 @@
       &:link,
       &:visited {
         box-shadow: none;
-      }
-
-      @media (min-width: 40rem) {
-        height: rem(6*$baseline);
       }
     }
 
