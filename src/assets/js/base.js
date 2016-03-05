@@ -10,7 +10,7 @@ import idFactory from './app/idFactory';
 import location from './app/location';
 import Media from './app/Media';
 import merge from './app/merge';
-import results from './app/results';
+import Slider from './app/Slider';
 import frontpagenews from './app/frontpagenews'
 
 // Always run
@@ -73,5 +73,5 @@ if (document.getElementById('News') && parseFloat(document.getElementById('News'
 // Results
 if (document.getElementById('Results')) {
   config.sliders = config.sliders || [];
-  config.sliders.push(new results(document.getElementById('Results')));
+  config.sliders.push(new Slider(document.getElementById('Results')));
 }
