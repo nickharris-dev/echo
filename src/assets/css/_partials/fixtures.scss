@@ -1,12 +1,13 @@
 .fixtures {
   display: block;
-  margin: 0 $column;
+  margin: 0;
   overflow: hidden;
   position: relative;
 
   &__wrapper {
     display: flex;
     justify-content: flex-start;
+    margin: 0 $column;
     width: 200%;
   }
 

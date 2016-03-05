@@ -1,42 +1,43 @@
 import config from './config';
 import InertiaScroll from './InertiaScroll';
 
-export default function() {
-  var results = document.getElementById('Results');
-  var slider = results.querySelectorAll('.results__wrapper')[0];
-  var games = results.querySelectorAll('.game');
-  var gameWidth = games[0].offsetWidth;
-  var reqWidth = gameWidth * games.length;
-  var inertia;
+export default class {
+  constructor(element) {
+    var self = this;
 
-  function prepareSlider() {
-    slider.style.width = reqWidth +'px';
-    slider.classList.add('results__wrapper--slide');
-    inertia = config.touchEnabled ? new InertiaScroll(slider) : false;
+    self.element = element;
+    self.slider = self.element.querySelectorAll('.slider')[0];
+    self.slides = self.element.querySelectorAll('.slide');
+    self.slideWidth = self.slides[0].offsetWidth;
+    self.reqWidth = self.slideWidth * self.slides.length;
+
+    self.runCheck();
+    self.element.addEventListener('resizeEnd', self.runCheck);
   }
 
-  function destroySlider() {
-    slider.setAttribute('style', '');
-    slider.classList.remove('results__wrapper--slide');
-    if (inertia) inertia.destroy();
+  prepare() {
+    var self = this;
+
+    self.slider.style.width = self.reqWidth +'px';
+    self.slider.classList.add('results__wrapper--slide');
+    self.inertia = config.touchEnabled ? new InertiaScroll(self.slider) : false;
   }
 
-  function carouselFactory() {
-    prepareSlider();
+  destroy() {
+    var self = this;
+
+    self.slider.setAttribute('style', '');
+    self.slider.classList.remove('results__wrapper--slide');
+    if (self.inertia) inertia.destroy();
   }
 
-  function carouselBomb() {
-    destroySlider();
-  }
+  runCheck(event) {
+    var self = this;
 
-  function runCheck(event) {
-    if (results.offsetWidth < reqWidth) {
-      carouselFactory();
+    if (self.element.offsetWidth < self.reqWidth) {
+      self.prepare();
     } else {
-      carouselBomb();
+      self.destroy();
     }
   }
-
-  runCheck();
-  results.addEventListener('resizeEnd', runCheck);
 }

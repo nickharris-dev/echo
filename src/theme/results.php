@@ -7,7 +7,7 @@
     );
   $posts = new WP_Query( $the_array );
   if( $posts->have_posts() ): ?>
-  <section class="results" id="Results"><div class="results__wrapper">
+  <section class="results" id="Results"><div class="results__wrapper slider">
     <?php while( $posts->have_posts() ):
       $posts->the_post();
       $today = strtotime('now');
@@ -75,7 +75,7 @@
               if ( $flag ):
                 if ( $weare == 'the Home Team' || $weare == 'the Away Team' ): ?>
 
-                <article class="game game--<?php echo $role; ?>">
+                <article class="game game--<?php echo $role; ?> slide">
                   <?php if ($video) {
                     echo '<a class="game__video-link" href="'. $video .'">';
                   } ?>

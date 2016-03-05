@@ -16,18 +16,18 @@
   $fixtures = new WP_Query( $the_array );
   if( $fixtures->have_posts() ):
 ?>
-  <section class="fixtures" id="Fixtures"><div class="fixtures__wrapper">
+  <section class="fixtures" id="Fixtures"><div class="fixtures__wrapper slider">
     <?php while( $fixtures->have_posts() ):
       $fixtures->the_post();
       $date = DateTime::createFromFormat('Ymd', get_field('date')); ?>
-        <article class="fixtures__fixture">
+        <article class="fixtures__fixture slide">
           <a class="fixtures__fixture__link" href="<?php the_permalink(); ?>" style="background-color:<?php the_field('bgcolor'); ?>;background-image:url(<?php the_field('thumb'); ?>);color:<?php the_field('color'); ?>;">
             <?php if (get_field('date')): ?>
               <time class="fixtures__date"><?php echo $date->format('jS M'); ?></time>
             <?php else: ?>
               <abbr title="To Be Confirmed" class="acronym fixtures__date">TBC</abbr>
             <?php endif; ?>
-            <h1 class="fixtures__title">@ Honey Badgers</h1>
+            <h1 class="fixtures__title"><?php the_title(); ?></h1>
           </a>
         </article>
     <?php endwhile; ?>

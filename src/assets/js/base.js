@@ -71,4 +71,7 @@ if (document.getElementById('Training') || document.getElementById('Location')) 
 if (document.getElementById('News') && parseFloat(document.getElementById('News').getAttribute('data-posts')) > 3) frontpagenews();
 
 // Results
-if (document.getElementById('Results')) results();
+if (document.getElementById('Results')) {
+  config.sliders = config.sliders || [];
+  config.sliders.push(new results(document.getElementById('Results')));
+}
