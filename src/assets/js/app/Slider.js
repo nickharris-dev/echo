@@ -1,4 +1,5 @@
 import config from './config';
+import ElementResize from './ElementResize';
 import InertiaScroll from './InertiaScroll';
 
 export default class {
@@ -10,6 +11,7 @@ export default class {
     self.slides = self.element.querySelectorAll('.slide');
     self.slideWidth = self.slides[0].offsetWidth;
     self.reqWidth = self.slideWidth * self.slides.length;
+    self.reflow = new ElementResize(element);
 
     self.runCheck();
     self.element.addEventListener('resizeEnd', self.runCheck);

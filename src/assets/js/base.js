@@ -75,3 +75,9 @@ if (document.getElementById('Results')) {
   config.sliders = config.sliders || [];
   config.sliders.push(new Slider(document.getElementById('Results')));
 }
+
+// Fixtures
+if (document.getElementById('Results')) {
+  config.sliders = config.sliders || [];
+  config.sliders.push(new Slider(document.getElementById('Fixtures')));
+}
