@@ -7,6 +7,7 @@ export default class {
     var self = this;
 
     self.element = element;
+    self.direction = self.element.getAttribute('data-direction') || 'ltr';
     self.slider = self.element.querySelectorAll('.slider')[0];
     self.slides = self.element.querySelectorAll('.slide');
     self.slideWidth = self.slides[0].offsetWidth;
@@ -14,15 +15,28 @@ export default class {
     self.reflow = new ElementResize(element);
 
     self.runCheck();
-    self.element.addEventListener('resizeEnd', self.runCheck);
+    self.element.addEventListener('resizeEnd', function() {
+      self.runCheck();
+    });
   }
 
   prepare() {
     var self = this;
 
+    self.slider.style.position = 'absolute';
+    self.slider.style.top = '0';
     self.slider.style.width = self.reqWidth +'px';
-    self.slider.classList.add('results__wrapper--slide');
     self.inertia = config.touchEnabled ? new InertiaScroll(self.slider) : false;
+
+    if (self.direction === 'ltr') {
+      self.slider.style.left = 0;
+      self.slider.style.right = 'auto';
+    } else if (self.direction === 'rtl') {
+      self.slider.style.left = 'auto';
+      self.slider.style.right = 0;
+    } else {
+      throw new Error('What direction is ' + self.direction + '?');
+    }
   }
 
   destroy() {

@@ -7,7 +7,7 @@
     );
   $posts = new WP_Query( $the_array );
   if( $posts->have_posts() ): ?>
-  <section class="results" id="Results"><div class="results__wrapper slider">
+  <section class="results" id="Results" data-direction="rtl"><div class="results__wrapper slider">
     <?php while( $posts->have_posts() ):
       $posts->the_post();
       $today = strtotime('now');
