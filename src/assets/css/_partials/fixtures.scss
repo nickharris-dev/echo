@@ -17,25 +17,6 @@
     position: relative;
     width: 12.5rem;
 
-    // &:before,
-    // &:after {
-    //   border-radius: 100px / 10px;
-    //   bottom: 0;
-    //   box-shadow: 0 0 20px rgba(0,0,0,0.8);
-    //   content: '';
-    //   position: absolute;
-    //   z-index: -1;
-    //   top: 50%;
-    //   left: 10px;
-    //   right: 10px;
-    // }
-
-    // &:after {
-    //   left: auto;
-    //   right: 10px;
-    //   transform: skew(8deg) rotate(3deg);
-    // }
-
     &:first-of-type {
       margin-left: 0;
     }
@@ -48,7 +29,6 @@
       background-position: 105% 105%;
       background-repeat: no-repeat;
       background-size: auto rem(2.5*$baseline);
-      // border-radius: 3px;
       box-sizing: border-box;
       color: inherit;
       display: block;
