@@ -39,7 +39,7 @@
     <style>
       <?php include 'critical.php'; ?>
     </style>
-    <link href="<?php echo assets_url(); ?>/css/global.1.0.3.css" rel="stylesheet">
+    <link href="<?php echo assets_url(); ?>/css/global.1.0.4.css" rel="stylesheet">
     <?php if ($is_dev): ?><link href="<?php echo assets_url(); ?>/css/dev.1.0.3.css" rel="stylesheet"><?php endif; ?>
 	</head>
 
