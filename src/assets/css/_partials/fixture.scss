@@ -132,6 +132,10 @@
       width: calc(54.166666667% - .75rem);
     }
 
+    table {
+      max-width: 100%;
+    }
+
     tr:nth-of-type(odd) {
       td {
         background-color: palette(neutral, verylight);
