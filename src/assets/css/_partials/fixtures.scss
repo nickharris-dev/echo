@@ -8,7 +8,7 @@
   &__wrapper {
     display: flex;
     justify-content: flex-start;
-    padding: 0 $column;
+    padding: 0;
     width: 200%;
   }
 
@@ -18,7 +18,7 @@
     width: 12.5rem;
 
     &:first-of-type {
-      margin-left: 0;
+      margin-left: rem(24);
     }
 
     &:last-of-type {
