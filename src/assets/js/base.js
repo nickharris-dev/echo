@@ -77,7 +77,7 @@ if (document.getElementById('Results')) {
 }
 
 // Fixtures
-if (document.getElementById('Results')) {
+if (document.getElementById('Fixtures')) {
   config.sliders = config.sliders || [];
   config.sliders.push(new Slider(document.getElementById('Fixtures')));
 }

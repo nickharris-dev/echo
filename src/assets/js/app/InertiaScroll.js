@@ -1,5 +1,5 @@
 export default class {
-  constructor(elem) {
+  constructor(elem, direction) {
     // Helpers
     var lastKnownX = 0;
     var x = 0;
@@ -9,8 +9,14 @@ export default class {
 
     var t = this;
     t.element = elem;
-    t.max = t.element.offsetWidth - t.element.parentElement.offsetWidth;
+    t.direction = direction || 'ltr';
     t.matrix = [];
+
+    if (direction === 'ltr') {
+      t.max = -1 * (t.element.offsetWidth - t.element.parentElement.offsetWidth);
+    } else {
+      t.max = t.element.offsetWidth - t.element.parentElement.offsetWidth;
+    }
 
     if ( getComputedStyle(t.element).getPropertyValue('transform') === 'none') {
       var str = 'matrix(';
@@ -88,9 +94,15 @@ export default class {
     var str = 'matrix(';
     var x;
 
-    if (position < 0) {
+    if (
+      (t.direction === 'ltr' && position > 0) ||
+      (t.direction === 'rtl' && position < 0)
+    ) {
       x = 0;
-    } else if (position > t.max) {
+    } else if (
+      (t.direction === 'ltr' && position < t.max) ||
+      (t.direction === 'rtl' && position > t.max)
+    ) {
       x = t.max;
     } else {
       x = position;

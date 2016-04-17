@@ -14,6 +14,8 @@ export default class {
     self.reqWidth = self.slideWidth * self.slides.length;
     self.reflow = new ElementResize(element);
 
+    if (self.direction !== 'ltr' && self.direction !== 'rtl') throw new Error('What direction is ' + self.direction + '?');
+
     self.runCheck();
     self.element.addEventListener('resizeEnd', function() {
       self.runCheck();
@@ -23,20 +25,40 @@ export default class {
   prepare() {
     var self = this;
 
-    self.slider.style.position = 'absolute';
-    self.slider.style.top = '0';
-    self.slider.style.width = self.reqWidth +'px';
-    self.inertia = config.touchEnabled ? new InertiaScroll(self.slider) : false;
+    function addStyles() {
+      self.slider.style.position = 'absolute';
+      self.slider.style.top = '0';
+      self.slider.style.width = self.reqWidth +'px';
 
-    if (self.direction === 'ltr') {
-      self.slider.style.left = 0;
-      self.slider.style.right = 'auto';
-    } else if (self.direction === 'rtl') {
-      self.slider.style.left = 'auto';
-      self.slider.style.right = 0;
-    } else {
-      throw new Error('What direction is ' + self.direction + '?');
+      if (self.direction === 'ltr') {
+        self.slider.style.left = 0;
+        self.slider.style.right = 'auto';
+      } else if (self.direction === 'rtl') {
+        self.slider.style.left = 'auto';
+        self.slider.style.right = 0;
+      }
     }
+
+    function addButtons() {
+      var right = document.createElement('button');
+      var left = document.createElement('button');
+
+      right.classList.add('slider__button', 'slider__button--right');
+      left.classList.add('slider__button', 'slider__button--left');
+
+      if (self.direction === 'ltr') {
+        left.disabled = 'disabled';
+      } else if (self.direction === 'rtl') {
+        right.disabled = 'disabled';
+      }
+
+      self.element.appendChild(left);
+      self.element.appendChild(right);
+    }
+
+    addButtons();
+    addStyles();
+    self.inertia = config.touchEnabled ? new InertiaScroll(self.slider, self.direction) : false;
   }
 
   destroy() {

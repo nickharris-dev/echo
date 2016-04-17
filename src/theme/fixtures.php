@@ -16,7 +16,7 @@
   $fixtures = new WP_Query( $the_array );
   if( $fixtures->have_posts() ):
 ?>
-  <section class="fixtures" id="Fixtures"><div class="fixtures__wrapper slider">
+  <section class="fixtures" id="Fixtures" data-direction="ltr"><div class="fixtures__wrapper slider">
     <?php while( $fixtures->have_posts() ):
       $fixtures->the_post();
       $date = DateTime::createFromFormat('Ymd', get_field('date')); ?>
