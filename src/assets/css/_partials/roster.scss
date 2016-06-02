@@ -1,5 +1,5 @@
 .roster {
-  background-color: palette(neutral, copy);
+  background-color: palette(copy);
   display: block;
   overflow: hidden;
   position: relative;
@@ -179,7 +179,7 @@
     }
 
     &__tab {
-      background-color: palette(neutral, light);
+      background-color: palette(light);
       color: palette(claret);
       cursor: pointer;
       flex: 1 auto;

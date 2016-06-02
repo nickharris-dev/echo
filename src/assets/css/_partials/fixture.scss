@@ -88,7 +88,7 @@
       width: 40%;
 
       &:nth-of-type(even) {
-        background: palette(neutral, verylight);
+        background: palette(verylight);
       }
 
       &.fb-title {
@@ -105,7 +105,7 @@
       width: 60%;
 
       &:nth-of-type(even) {
-        background: palette(neutral, verylight);
+        background: palette(verylight);
       }
 
       &.fb-link {
@@ -138,7 +138,7 @@
 
     tr:nth-of-type(odd) {
       td {
-        background-color: palette(neutral, verylight);
+        background-color: palette(verylight);
       }
     }
 

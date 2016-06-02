@@ -17,7 +17,7 @@ html {
 
 body {
   @include type-scale(3, 1);
-  color: palette(neutral, copy);
+  color: palette(copy);
   margin: 0;
   padding: 12vh 0 rem(11*$baseline) 0;
   position: relative;

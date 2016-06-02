@@ -2,7 +2,7 @@ $layoutbreak1: rem(600);
 $layoutbreak2: rem(900);
 
 .posts {
-  border-top: rem(1) solid palette(neutral, light);
+  border-top: rem(1) solid palette(light);
   margin: 0 $column;
   padding-top: rem($baseline);
 
@@ -44,7 +44,7 @@ $layoutbreak2: rem(900);
       }
 
       &--dummy {
-        background-color: palette(neutral, verylight);
+        background-color: palette(verylight);
       }
     }
 
@@ -59,7 +59,7 @@ $layoutbreak2: rem(900);
 
       &--dummy {
         span {
-          background-color: palette(neutral, verylight);
+          background-color: palette(verylight);
         }
       }
     }
@@ -80,7 +80,7 @@ $layoutbreak2: rem(900);
       width: calc(33.3333% - #{$gutter});
 
       &--dummy {
-        background-color: palette(neutral, verylight);
+        background-color: palette(verylight);
       }
     }
 
