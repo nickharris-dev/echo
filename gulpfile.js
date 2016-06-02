@@ -16,6 +16,7 @@
   var imagemin = require('gulp-imagemin');
   var notify = require('gulp-notify');
   var rename = require('gulp-rename');
+  var replace = require('gulp-replace');
   var rollup = require('gulp-rollup');
   var sass = require('gulp-sass');
   var shell = require('gulp-shell');
@@ -72,6 +73,7 @@
   gulp.task('templates', function(){
     return gulp.src(paths.src.theme + '**/*')
       .pipe(changed(paths.dest.theme))
+      .pipe(replace('{{pkg.version}}', pkg.version))
       .pipe(gulp.dest(paths.dest.theme))
       .pipe(dev(proxy.stream({match: '**/*'})));
   });
