@@ -49,11 +49,14 @@
   }
 
   &__date {
-    @include type-scale(3, 1);
+    @include type-scale(5, 1);
+    font-family: $heading;
+    letter-spacing: .1em;
+    text-transform: uppercase;
   }
 
   &__title {
-    @include type-scale(5, 1);
+    @include type-scale(3, 1);
     margin: 0;
     max-width: 100%;
   }
