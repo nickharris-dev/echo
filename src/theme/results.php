@@ -1,6 +1,7 @@
 <?php
   $the_array = array(
     'post_type' => 'fixture',
+    'posts_per_page'  => -1,
     'meta_key' => 'date',
     'orderby' => 'meta_value_num',
     'order' => 'ASC'
