@@ -41,6 +41,7 @@
 				<?php
 					$players = array(
 						'post_type' => 'player',
+						'posts_per_page'  => -1,
 						'meta_key' => 'shirt_number',
 						'orderby' => 'meta_value_num',
 						'order' => 'ASC',

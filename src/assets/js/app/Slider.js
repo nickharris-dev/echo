@@ -56,7 +56,7 @@ export default class {
       self.element.appendChild(right);
     }
 
-    addButtons();
+    // addButtons();
     addStyles();
     self.inertia = config.touchEnabled ? new InertiaScroll(self.slider, self.direction) : false;
   }
