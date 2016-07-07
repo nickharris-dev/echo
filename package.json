@@ -1,12 +1,12 @@
 {
-  "name": "crows",
+  "name": "echo",
   "author": "Nick Harris",
-  "shortname": "crowsfootball",
-  "description": "Manchester Crows Website",
-  "version": "1.0.6",
+  "shortname": "Echo Project Start",
+  "description": "Project Start Point from Nick Harris",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git@github.com:pixelenvy/Crows.git"
+    "url": "git@github.com:pixelenvy/echo.git"
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.1.1",

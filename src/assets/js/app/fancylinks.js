@@ -34,7 +34,7 @@ export default function(){
     event.stopPropagation();
     event.preventDefault();
 
-    window.open(this.href, 'fromCrows');
+    window.open(this.href, 'fromEcho');
   }
 
   function ease(t) {
